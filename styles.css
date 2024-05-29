@@ -72,13 +72,13 @@ body{
 }
 
 
+
 #portfolio {
     background-image: url("europeana-5TK1F5VfdIk-unsplash.jpg");
     background-color: #f8f9fa; 
     color: #495057; 
     padding: 40px 0; 
 }
-
 
 
 .specialsauce {
@@ -126,15 +126,7 @@ body{
     transform: scale(1.1);
 }
 
-footer{
-    display: inline;
-    align-items: baseline;
-    margin-top:5px;
-    margin-bottom: 2px;
-    font-size: 14px;
-    color: #000000;
-    padding: 10px;
-}
+
 
 .social-icons{
     margin-top: 12px;
