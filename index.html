@@ -5,27 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css'>
-
-    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <title>Nahiyan's Portfolio</title>
 </head>
 <body>
 
-    
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#">Nahiyan's Portfolio
-            </a>
+            <a class="navbar-brand" href="index.html">Nahiyan's Portfolio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#cardcontainer">Home</a>
+                        <a class="nav-link" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#cardcontainer">About</a>
+                        <a class="nav-link" href="#about">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#portfolio">Portfolio</a>
@@ -38,109 +36,139 @@
         </div>
     </nav>
 
+    <!-- Home Section -->
     <section id="home" class="py-5 text-center">
         <div class="container">
-            <h1 class="display-4" style= "color:#00506B">Nahiyan Ibn Ershad</h1>
-            <p class="lead">Content Writer | Producer | Full Stack Developer </p>
+            <h1 class="display-4">Nahiyan Ibn Ershad</h1>
+            <p class="lead">Content Writer | Producer | Full Stack Developer</p>
         </div>
     </section>
-    <section id="cardcontainer">
-        <h1>Who am I?</h1>
-        <div class="card-group">
-            <div class="card" style="background-color: rgb(180, 232, 245);">
-              <img src="279319532_10227566776458844_5881156872990526932_n.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title"><strong>ABOUT ME:</strong></h5>
-                <p class="card-text">
-                    Hello, I'm Nahiyan, a dynamic individual with commendable real-world skills.<br><br>
-                    I bring to the table creativity, quick learning, and professional communication skills, 
-                    complemented by effective leadership.<br><br>
-                    Since 2007, I've been actively involved in organizing and conducting mass media events through my artist name <strong>Box The Third [Box |||]</strong>.
-                </p>
-              </div>
-              <div class="card-footer">
-              </div>
-            </div>
-            <div class="card" style="background-color: rgb(165, 221, 236);">
-              <img src="education.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title"><strong>MY EDUCATION:</strong></h5>
-                <p class="card-text"><em>Computer Science and Engineering<br>
-                    <strong>Independent University, Bangladesh</strong>
-                    03/2018 - Present, Dhaka, Bangladesh
-                    <br>
-                    <br>
-                    Networking and Cybersecurity Engineering<br>
-                    <strong>Al-Yamamah University</strong>
-                    12/2015 - 01/2017, Riyadh, Saudi Arabia</em></p>
-                </p>
-              </div>
-              <div class="card-footer">
-              </div>
-            </div>
-            <div class="card" style="background-color: rgb(139, 222, 236);">
-              <img src="work.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <br>
-                <br>
-                <h5 class="card-title"><strong>WORK EXPERIENCE:</strong></h5>
-                <p class="card-text">
-                    English Language Instructor<br>
-                    <strong>Mentors'</strong><br>
-                    12/2018 - 12/2019, Dhaka, Bangladesh<br>
-                    <br>
-                    Official Contributor<br>
-                    <strong>The Business Standard</strong><br>
-                    01/2021 - Present, Dhaka, Bangladesh<br>
-                    <br>
-                    Appointment Setter<br>
-                    <strong>Soleil Energy</strong><br>
-                    01/2022 - 03/2022, Crofton, Maryland
-                </p>   
-                <a href="Nahiyan's Resume.pdf" target="_blank" class="btn btn-primary">My CV</a>
-              </div>
-              <div class="card-footer">
-                <p>References are readily available upon request</p>
-              </div>
-            </div>
-          </div>
 
-          <h1>My GitHub Projects</h1>
+<!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Who Am I?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="279319532_10227566776458844_5881156872990526932_n.jpg" class="card-img-top" alt="About Me">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>About Me:</strong></h5>
+                            <p class="card-text">Hello, I'm Nahiyan, a dynamic individual with creativity, quick learning, and professional communication skills. I have experience organizing mass media events since 2007 under the artist name <strong>Box The Third</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="iub.png" class="card-img-top" alt="My Education">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>My Education:</strong></h5>
+                            <p class="card-text"><em>Computer Science and Engineering<br><strong>Independent University, Bangladesh</strong></em><br><br><em>Networking and Cybersecurity Engineering<br><strong>Al-Yamamah University</strong></em></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="work.png" class="card-img-top" alt="Work Experience">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>Work Experience:</strong></h5>
+                            <p class="card-text">
+                                English Language Instructor<br>
+                                <strong>Mentors'</strong><br>
+                                12/2018 - 12/2019, Dhaka, Bangladesh<br>
+                                <br>
+                                Official Contributor<br>
+                                <strong>The Business Standard</strong><br>
+                                01/2021 - Present, Dhaka, Bangladesh<br>
+                                <br>
+                                Appointment Setter<br>
+                                <strong>Soleil Energy</strong><br>
+                                01/2022 - 03/2022, <br>
+                                Crofton, Maryland
+                                <br><br>
+                                Front-End Engineer (Intern)<br>
+                                <strong>Belaface</strong><br>
+                                06/2024 - Present, Dhaka, Bangladesh
+
+                            </p>   
+                            <a href="1830022_CV.pdf" target="_blank" class="btn btn-primary">My CV</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="projects" class="py-5">
+        <div class="container">
+            <h1 class="text-center mb-4">My GitHub Projects</h1>
+            
+            <div class="row">
+                <!-- Project 1 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="daniel-ramirez-q4TfWtnz_xw-unsplash.jpg" class="card-img-top" alt="5 day Forecast DHK">
+                        <div class="card-body">
+                            <h5 class="card-title">5 Day Forecast DHK</h5>
+                            <p class="card-text">A webpage using OpenWeather API to show 5-day weather forecasts for any city.</p>
+                            <a href="https://box-the-third.github.io/5dayweather/" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="takerlogo.jpeg" class="card-img-top" alt="Taker Inc Project">
+                        <div class="card-body">
+                            <h5 class="card-title">Taker Inc</h5>
+                            <p class="card-text">A platform that connects Non-Emergency Wheelchair Accessible Vehicle (WAV) providers to patients and drivers.</p>
+                            <a href="https://box-the-third.github.io/TakerInc/" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="BelaCosmetics.png" class="card-img-top" alt="BelaCosmetics">
+                        <div class="card-body">
+                            <h5 class="card-title">BelaCosmetics</h5>
+                            <p class="card-text">An E-commerce platform developed as part of an internship project.</p>
+                            <a href="https://jibon969.github.io/eBusiness-frontend/" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
     
-          <div class="card-group">
-            <div class="card" style="background-color: rgb(180, 232, 245);">
-              <img src="daniel-ramirez-q4TfWtnz_xw-unsplash.jpg" class="card-img-top" alt="..." >
-              <div class="card-body">
-                <h5 class="card-title">5 day Forecast DHK
-                </h5>
-                <p class="card-text">A webpage built user OpenWeather API, in HTML/CSS/JS that tells the 5 day weather of any city in the world.</p>
-                <p class="card-text"><small class="text-body-secondary">
-                    <a href="https://box-the-third.github.io/5dayweather/">Check it out here!</a>
-                </small></p>
-              </div>
+                <!-- Project 4 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="city_background.png" class="card-img-top" alt="Weather App">
+                        <div class="card-body">
+                            <h5 class="card-title">Weather App</h5>
+                            <p class="card-text">A mobile app using Flutter and Dart to display real-time weather updates.</p>
+                            <a href="https://github.com/box-the-third/FinalProjectWeatherApp_Flutter" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--Project 5-->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <img src="SuperDrib.png" class="card-img-top" alt="SuperDrib">
+                        <div class="card-body">
+                            <h5 class="card-title">SuperDrib</h5>
+                            <p class="card-text">Front-End Design Project</p>
+                            <a href="https://box-the-third.github.io/SuperDrib/" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
-            <div class="card" style="background-color: rgb(165, 221, 236);">
-              <img src="takerlogo.jpeg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Taker Inc</h5>
-                <p class="card-text">An ongoing project based in New York that connects providers of Non-Emergency Wheelchair Accessible Vehicles and cars to drivers, hospitals and patients.</p>
-                <p class="card-text"><small class="text-body-secondary">
-                    <a href="https://box-the-third.github.io/TakerInc/">Check it out here!</a>
-                </small></p>
-              </div>
-            </div>
-            <div class="card" style="background-color:rgb(139, 222, 236);">
-              <img src="city_background.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Weather App</h5>
-                <p class="card-text">A mobile application built using Flutter, Dart and Android Studio for both Android and iOS, that shows the current weather in any city.</p>
-                <p class="card-text"><small class="text-body-secondary">
-                    <a href="https://box-the-third.github.io/5dayweather/">Link to my repository</a>
-                </small></p>
-              </div>
-            </div>
-          </div>
-        </section>
+        </div>
+    </section>
 
     <section id="portfolio">
         <div class="specialsauce">
@@ -159,36 +187,32 @@
         </div>
     </section>
 
+    <section id="contact">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="social-icons">
+                <a href="https://web.facebook.com/thesevenupguy2020" title="facebook">
+                    <i class="fab fa-facebook-square"></i>
+                </a>
+                <a href="https://www.instagram.com/box_the_third/" title="instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/channel/UCU1xLoQygr9ECtEmQtnFfZw" title="youtube">
+                    <i class="fab fa-youtube-square"></i>
+                </a>
+            </div>
+            <footer class="text-white">
+                <p>&copy; 2024 Nahiyan Ibn Ershad | Contact: <a href="mailto:nahiyanibnershad@gmail.com">nahiyanibnershad@gmail.com</a></p>
+            </footer>
+        </div>
+    </section>
+
+
+    </body>
+    </html>
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
-<section id="contact">
-    <div class="social-icons">
-        <a href="https://web.facebook.com/thesevenupguy2020" title="facebook">
-            <i class="fab fa-facebook-square"></i>
-        </a>
-        <a href="https://twitter.com/BoxTheThird" title="twitter">
-            <i class="fab fa-twitter-square"></i>
-        </a>
-        <a href="https://www.instagram.com/box_the_third/" title="instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.youtube.com/channel/UCU1xLoQygr9ECtEmQtnFfZw" title="youtube">
-            <i class="fab fa-youtube-square"></i>
-        </a>
-        <a href="#" title="pinterest">
-            <i class="fab fa-pinterest-p"></i>
-        </a>
-        <a href="#" title="camera">
-            <i class="fas fa-camera-retro"></i>
-        </a>
-    </div>
-</section>
-<footer style="background-color: aliceblue; margin-bottom: -15px; justify-content: center;">
-    <p>&copy; 2023 Nahiyan Ibn Ershad | Contact: <a href="nahiyanibnershad@gmail.com">nahiyanibnershad@gmail.com</a></p>
-</footer>
-
 </body>
 </html>

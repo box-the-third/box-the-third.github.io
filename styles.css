@@ -1,76 +1,119 @@
-
 @font-face {
-        font-family: 'GloriaHallelujah';
-        src: url('https://box-the-third.github.io/GloriaHallelujah-Regular.ttf') format('truetype');
-    }
-    
+    font-family: 'GloriaHallelujah';
+    src: url('https://box-the-third.github.io/GloriaHallelujah-Regular.ttf') format('truetype');
+}
 
-.navbar {
-    background-size: cover;
+body {
     font-family: 'GloriaHallelujah', sans-serif;
-    padding: 10px;
+    background-color: #000000;
+    color: #39b0b9; /* Cyan */
+    transition: background-color 0.5s ease;
 }
 
-.navbar-light .navbar-brand,
-.navbar-light .navbar-nav .nav-link {
-    color:#00506B;
-    font-size: 18px;
-   
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: #39b0b9;
+    animation: fadeInDown 1s ease-in-out;
 }
 
-a.nav-link{
-    color:#00506B;
+.navbar{
+    position: fixed;
 }
 
-p.lead{
-    color:#000000;
+.navbar-brand, .navbar-nav .nav-link {
+    color: #39b0b9;
+    transition: color 0.3s ease-in-out;
 }
 
-
-#home {
-    background-color: rgb(226, 188, 75); 
-    color: #2e5a3b;
-    padding: 40px 0; 
+.navbar-nav .nav-link:hover {
+    color: #ffffff; /* White hover effect */
 }
 
-#cardcontainer{
-    display: flex;
-    flex-wrap:wrap;
-    justify-content:space-around;
-    margin: 20px;
-    padding: 15px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+#projects, #portfolio, #home {
+    background-color: #000000; /* Black background for all sections */
+    padding: 60px 0;
+    color: #39b0b9; /* Cyan text color */
 }
 
-.card {
-    transition: box-shadow 0.4s ease-in-out;
+#cardcontainer, .card {
+    background-color: #111111;
+    padding: 40px 20px;
+    color: #39b0b9;
+    transition: transform 0.5s, box-shadow 0.5s;
+    animation: fadeInUp 2s ease;
 }
 
 .card:hover {
-    box-shadow: 0 0 20px rgba(0, 13, 255, 0.251);
-    border-radius: 0cqmax;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(57, 176, 185, 0.5);
+}
+
+.btn-primary {
+    background-color: #39b0b9;
+    border-color: #39b0b9;
+    color: #000000;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #1f6d71;
+    border-color: #1f6d71;
+    transform: translateY(-3px);
 }
 
 
-
-@media (max-width: 768px) {
-    .cardcontainer {
-        flex-direction: column;
-        align-items: center;
-    }
+#about {
+    background-color: #000000; /* Black background for consistency */
+    padding: 60px 0;
+    color: #39b0b9; /* Cyan font color */
 }
 
-
-body{
-    font-family: 'GloriaHallelujah', sans-serif;
-    background-color:#00506b;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+#about h2 {
+    font-size: 3rem;
+    color: #39b0b9; /* Cyan text */
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 1s ease-in-out;
 }
 
+#about .card {
+    background-color: #111111; /* Dark background for cards */
+    color: #39b0b9; /* Cyan text inside the cards */
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: fadeInUp 2s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+#about  .card:hover {
+    transform: scale(1.05); /* Hover effect */
+    box-shadow: 0 10px 20px rgba(57, 176, 185, 0.5); /* Cyan hover shadow */
+}
+
+#about .card-title {
+    color: #39b0b9;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#about .card-text {
+    color: #39b0b9;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+#about .btn-primary {
+    background-color: #39b0b9;
+    border-color: #39b0b9;
+    color: #000000;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#about .btn-primary:hover {
+    background-color: #1f6d71;
+    border-color: #1f6d71;
+    transform: translateY(-3px);
+}
 
 
 #portfolio {
@@ -79,6 +122,12 @@ body{
     color: #495057; 
     padding: 40px 0; 
 }
+
+#contact {
+    background-color: #111111; /* Matches the footer and overall design */
+    padding: 20px 0;
+}
+
 
 
 .specialsauce {
@@ -94,6 +143,8 @@ body{
     font-variant: small-caps;
     animation: glow 2s ease-in-out infinite;
 }
+
+
 
 @keyframes glow {
 
@@ -128,20 +179,17 @@ body{
 
 
 
-.social-icons{
-    margin-top: 12px;
-	padding:10px;
-	background-color:#00506b;
-    text-align: center;
+.social-icons {
+    display: flex;
+    gap: 15px;
 }
-.social-icons a{
-	color:#fff;
-    line-height:30px;
-    font-size:24px;
-    margin: 5px;
-    text-decoration:none;
-  
+
+.social-icons a {
+    font-size: 2rem;
+    color: #39b0b9; /* Cyan */
+    transition: color 0.3s ease;
 }
+
 .social-icons a i{
 	line-height:30px;
     font-size:24px;
@@ -165,4 +213,55 @@ body{
   -moz-transform: scale(1.5);
   transition: all 200ms ease-in;
   transform: scale(1.5);
+}
+
+
+footer {
+    display: flex;
+    justify-content: flex-end; /* Aligns the email text to the right */
+    color: #39b0b9; /* Cyan text */
+    font-size: 1rem;
+}
+
+footer a {
+    color: #39b0b9; /* Link color matches the theme */
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #ffffff; /* Hover effect for email link */
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
