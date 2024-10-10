@@ -59,15 +59,7 @@ p.lead {
 .navbar-collapse {
     text-align: center;
 }
-.social-icons {
-    display: flex;
-    justify-content: flex-start; /* Align social icons to the left */
-}
 
-footer {
-    background-color: #111111;
-    color: #39b0b9;
-}
 #projects, #portfolio, #home {
     background-color: #000000; /* Black background for all sections */
     padding: 60px 0;
@@ -220,6 +212,9 @@ footer {
 
 .social-icons {
     display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
     gap: 15px;
 }
 
@@ -255,20 +250,23 @@ footer {
 }
 
 
+
+
 footer {
     display: flex;
-    justify-content: flex-end; /* Aligns the email text to the right */
-    color: #39b0b9; /* Cyan text */
-    font-size: 1rem;
+    justify-content: space-around; 
+    background-color: #111111;
+    color: #39b0b9; 
+    font-size: 0.8rem;
 }
 
 footer a {
-    color: #39b0b9; /* Link color matches the theme */
+    color: #39b0b9; 
     text-decoration: none;
 }
 
 footer a:hover {
-    color: #ffffff; /* Hover effect for email link */
+    color: #ffffff; 
 }
 
 /* Animations */
@@ -308,7 +306,7 @@ footer a:hover {
 
 @media (max-width: 1200px) {
     #about h2 {
-        font-size: 2.5rem; /* Adjusting for smaller screen */
+        font-size: 2.5rem; 
     }
 }
 
@@ -319,33 +317,41 @@ footer a:hover {
         text-align: center;
     }
     .navbar-nav .nav-link {
-        padding: 10px; /* Reduce padding on smaller screens */
+        padding: 10px; 
     }
 
     .navbar-nav .nav-link {
         font-size: 0.9rem;
     }
     .social-icons a {
-        font-size: 1.5rem; /* Smaller icon size */
+        font-size: 1.5rem; 
     }
     .card {
         padding: 15px;
-        font-size: 0.9rem; /* Smaller font */
+        font-size: 0.9rem; 
     }
     .specialsauce img {
-        max-width: 250px; /* Smaller image */
+        max-width: 250px; 
+    }
+
+    footer{
+        font-size: 0.7rem;
     }
 }
 
 @media (max-width: 768px) {
     #about h2 {
-        font-size: 2rem; /* Further reduction */
+        font-size: 2rem; 
     }
     .navbar-brand {
-        font-size: 1.2rem; /* Smaller logo */
+        font-size: 1.2rem; 
     }
     .social-icons {
-        gap: 10px; /* Less spacing between icons */
+        gap: 10px; 
+    }
+
+    footer {
+        font-size: 0.5rem;
     }
 }
 
@@ -359,5 +365,9 @@ footer a:hover {
     }
     .specialsauce img {
         max-width: 200px;
+    }
+
+    footer{
+        font-size: 0.5rem;
     }
 }
