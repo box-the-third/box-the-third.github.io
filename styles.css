@@ -16,19 +16,58 @@ h1, h2, h3, h4, h5, h6 {
     animation: fadeInDown 1s ease-in-out;
 }
 
-.navbar{
+
+p.lead {
+    color: #4eb9b9; /* Keep your existing styles */
+}
+/* Navbar styling */
+.navbar {
+    background-color: #000000 !important; /* Black background */
+    padding: 2px;
     position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
-.navbar-brand, .navbar-nav .nav-link {
-    color: #39b0b9;
-    transition: color 0.3s ease-in-out;
+.navbar-brand {
+    color: #39b0b9 !important; /* Cyan text for brand */
+    font-size: 1.8rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link {
+    color: #39b0b9 !important; /* Cyan text for links */
+    padding: 10px 15px;
+    transition: color 0.3s ease;
 }
 
 .navbar-nav .nav-link:hover {
-    color: #ffffff; /* White hover effect */
+    color: #ffffff !important; /* White hover effect */
 }
 
+/* Hamburger Menu Icon */
+.navbar-toggler {
+    border: none;
+    color: #39b0b9; /* Cyan color for toggler icon */
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=UTF8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(57, 176, 185, 1)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22" /%3E%3C/svg%3E');
+    /* Custom cyan hamburger icon */
+}
+
+.navbar-collapse {
+    text-align: center;
+}
+.social-icons {
+    display: flex;
+    justify-content: flex-start; /* Align social icons to the left */
+}
+
+footer {
+    background-color: #111111;
+    color: #39b0b9;
+}
 #projects, #portfolio, #home {
     background-color: #000000; /* Black background for all sections */
     padding: 60px 0;
@@ -263,5 +302,62 @@ footer a:hover {
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+
+@media (max-width: 1200px) {
+    #about h2 {
+        font-size: 2.5rem; /* Adjusting for smaller screen */
+    }
+}
+
+
+
+@media (max-width: 992px) {
+    .navbar-nav {
+        text-align: center;
+    }
+    .navbar-nav .nav-link {
+        padding: 10px; /* Reduce padding on smaller screens */
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.9rem;
+    }
+    .social-icons a {
+        font-size: 1.5rem; /* Smaller icon size */
+    }
+    .card {
+        padding: 15px;
+        font-size: 0.9rem; /* Smaller font */
+    }
+    .specialsauce img {
+        max-width: 250px; /* Smaller image */
+    }
+}
+
+@media (max-width: 768px) {
+    #about h2 {
+        font-size: 2rem; /* Further reduction */
+    }
+    .navbar-brand {
+        font-size: 1.2rem; /* Smaller logo */
+    }
+    .social-icons {
+        gap: 10px; /* Less spacing between icons */
+    }
+}
+
+@media (max-width: 576px) {
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 1.5rem;
+    }
+    .card {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+    .specialsauce img {
+        max-width: 200px;
     }
 }
