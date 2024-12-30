@@ -22,6 +22,7 @@ body {
     transition: background-color 0.5s ease;
 }
 
+
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     color: #39b0b9;
@@ -34,7 +35,7 @@ p.lead {
 }
 /* Navbar styling */
 .navbar {
-    background-color: #000000 !important; /* Black background */
+    background-color: #000000; /* Black background */
     padding: 2px;
     position: fixed;
     width: 100%;
