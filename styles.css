@@ -17,9 +17,21 @@ html, body {
 
 body {
     font-family: 'GloriaHallelujah', sans-serif;
+    cursor: url('pixel_cursor.png'), auto;
     background-color: #000000;
     color: #39b0b9; /* Cyan */
     transition: background-color 0.5s ease;
+}
+
+.cursor-trail {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: url('pixel_cursor.png') no-repeat center center;
+    background-size: cover;
+    pointer-events: none; /* Allow clicking through the trails */
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.2s ease;
 }
 
 
