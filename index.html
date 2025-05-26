@@ -1,362 +1,472 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <title>Nahiyan's Portfolio</title>
-    
-    <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "qs62c4rqyn");
-    </script>
-      
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nahiyan's modern portfolio - Web Developer, Content Creator & Artist" />
+  <meta name="keywords" content="Nahiyan, portfolio, web developer, designer, projects, artwork" />
+  <meta name="author" content="Nahiyan" />
+
+  <title>Nahiyan's Portfolio</title>
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" as="style">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Belleza&family=Comfortaa:wght@300..700&family=Gloria+Hallelujah&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" as="style">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" as="style">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!---Font--->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Belleza&family=Comfortaa:wght@300..700&family=Gloria+Hallelujah&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Pressure-sensitive background canvas -->
+  <canvas id="luxuryCanvas"></canvas>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Nahiyan's Portfolio</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="#home">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#about">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#projects">Projects</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#contact">Contact</a>
-              </li>
+  <!-- Rain effect overlay -->
+  <div class="rain-overlay"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <span class="brand-name">Nahiyan</span>
+        <span class="brand-ornament"></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav gap-3">
+          <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#portfolio">Artwork</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero text-center text-light py-5">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="display-4">Nahiyan's Portfolio</h1>
+        <p class="lead">Content Creator | Producer | Web-Developer | Education Counsellor</p>
+        <div class="spirit-of-ecstasy">
+          <div class="ornament-line"></div>
+          <div class="ornament-icon">✧</div>
+          <div class="ornament-line"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="py-5 text-light">
+    <div class="container">
+      <h2 class="text-center mb-4">About Me</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <p class="luxury-text">I'm Nahiyan. I am dangerously creative to be doing the same thing everyday. Ask my boss. <br> Hey Nahiyan, is this true?<br> Yes. It's true.</p>
+        </div>
+        <div class="col-md-6">
+          <p class="luxury-text">I love to create art and experiment with new ways to connect with like-minded people.<br> This portfolio showcases my projects, tells you what I care about, and lets you know who you're working with.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education & Experience Section -->
+<section id="education" class="py-5 text-light">
+  <div class="container">
+    <h2 class="text-center mb-4">Education & Experience</h2>
+    <div class="row g-4">
+      <!-- Education Card -->
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow">
+          <img src="assets/grad.jpg" class="card-img-top" alt="My Education" style="object-fit: cover; height: 250px;">
+          <div class="card-body">
+            <h5 class="card-title luxury-heading">My Education</h5>
+            <div class="luxury-divider"></div>
+            <p class="luxury-text">
+              <span class="luxury-accent">Computer Science and Engineering</span><br>
+              <strong>Independent University, Bangladesh</strong>
+              <br><br>
+              <span class="luxury-accent">Networking and Cybersecurity Engineering</span><br>
+              <strong>Al-Yamamah University</strong>
+              <br><br>
+              <h6 class="luxury-heading">Certifications</h6>
+              <div class="luxury-divider-small"></div>
+              <span class="luxury-accent">Certified UK Agent Counselor</span><br>
+              British Council
+              <br><br>
+              <span class="luxury-accent">IELTS Band 7.5</span>
+              <br><br>
+              <span class="luxury-accent">Oracle Academy Java Fundamentals</span>
+              <br><br>
+              <span class="luxury-accent">Teaching Online Webinars</span><br>
+              British Council
+              <br><br>
+              <span class="luxury-accent">Guinness World Records</span><br>
+              Most Virtual 5km Runs in a Day
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Experience Card -->
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow">
+          <img src="assets/work.png" class="card-img-top" alt="Work Experience" style="object-fit: cover; height: 250px;">
+          <div class="card-body">
+            <h5 class="card-title luxury-heading">Work Experience</h5>
+            <div class="luxury-divider"></div>
+            <p class="luxury-text">
+              <span class="luxury-accent">English Language Instructor</span><br>
+              <strong>Mentors'</strong><br>
+              12/2018 - 12/2019, Dhaka
+              <br><br>
+              <span class="luxury-accent">Official Contributor</span><br>
+              <strong>The Business Standard</strong><br>
+              01/2021 - Present
+              <br><br>
+              <span class="luxury-accent">Appointment Setter</span><br>
+              <strong>Soleil Energy</strong><br>
+              01/2022 - 03/2022, Maryland
+              <br><br>
+              <span class="luxury-accent">Voice-Over Artist</span><br>
+              <strong>Staff Asia</strong><br>
+              03/2023 - 06/2023 [Remote]
+              <br><br>
+              <span class="luxury-accent">Front-End Engineer (Intern)</span><br>
+              <strong>Belaface</strong><br>
+              06/2024 - 10/2024
+              <br><br>
+              <span class="luxury-accent">Education Counsellor (Team Lead)</span><br>
+              <strong>Global Pathway Experts LTD.</strong><br>
+              10/2024- Present
+            </p>
+            <div class="d-flex flex-column gap-3 mt-4">
+              <a href="assets/NahiyanResume2025ELT.pdf" target="_blank" class="btn btn-outline">My Current CV</a>
+              <a href="assets/Nahiyan-IbnErshad-1730667985914-Psychometric.pdf" target="_blank" class="btn btn-outline">My Psychometrics</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="py-5 text-light">
+  <div class="container">
+    <h2 class="text-center mb-4">Skills & Expertise</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow">
+          <div class="card-body">
+            <h5 class="luxury-heading text-center">Programming</h5>
+            <div class="luxury-divider-small mx-auto"></div>
+            <ul class="luxury-list">
+              <li><span class="luxury-accent">JavaScript</span></li>
+              <li><span class="luxury-accent">Python</span></li>
+              <li><span class="luxury-accent">Dart</span></li>
+              <li><span class="luxury-accent">Java</span></li>
             </ul>
           </div>
         </div>
-      </nav>
-
-    <!-- Home Section -->
-    <section id="home" class="py-5 text-center">
-        <div class="container">
-            <h1 class="display-4">Nahiyan Ibn Ershad</h1>
-            <p class="lead">Content Creator | Producer | Web-Developer | Education Counsellor</p>
-        </div>
-    </section>
-
-<!-- About Section -->
-    <section id="about" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Who Am I?</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="463667181_10233767372469869_2164056520743523555_n.jpg" class="card-img-top" alt="About Me">
-                        <div class="card-body">
-                            <h5 class="card-title"><strong>About Me:</strong></h5>
-                            <p class="card-text">Hello, I'm Nahiyan, a passionate student counselor, web developer, and creative professional with expertise in content writing, production, and voice-over artistry. Known by my artist name <strong>Box The Third</strong>, I have been organizing and contributing to mass media events since 2007. I thrive in dynamic environments, leveraging my skills in technology, communication, and training to create impactful experiences and innovative solutions.</p>
-                        </div>                        
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="grad.jpg" class="card-img-top" alt="My Education">
-                        <div class="card-body">
-                            <h5 class="card-title"><strong>My Education:</strong></h5>
-                            <p class="card-text">
-                                <em>Computer Science and Engineering<br>
-                                <strong>Independent University, Bangladesh</strong>
-                                </em>
-                                <br><br>
-                                <em>Networking and Cybersecurity Engineering<br>
-                                <strong>Al-Yamamah University</strong>
-                                </em>
-                                <br><br>
-                                <strong>Certifications and Trainings:</strong>
-                                <br><br>
-                                <strong>Certified UK Agent Counselor</strong><br>
-                                British Council
-                                <br><br>
-                                <strong>IELTS</strong><br>
-                                Band Score: 7.5
-                                <br><br>
-                                <strong>Oracle Academy</strong><br>
-                                Java Fundamentals
-                                <br><br>
-                                <strong>Teaching Online - Alternative Platforms, Lesson Structure, and Task-Types</strong><br>
-                                British Council Webinar conducted by Helen Strong and Anne Fox
-                                <br><br>
-                                <strong>Teaching Online - Using the Coursebook and Using Breakout Rooms</strong><br>
-                                British Council Webinar by Lindsay Clandfield and Carol Rainbow
-                                <br><br>
-                                <strong>Supporting and Mentoring Teachers Remotely</strong><br>
-                                British Council Webinar conducted by Beth Caldwell and Neenaz Ichaporia
-                                <br><br>
-                                <strong>Guinness World Records</strong><br>
-                                <em>Vitality Running World Cup</em><br>
-                                Most Virtual 5km Runs in a Day
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="work.png" class="card-img-top" alt="Work Experience">
-                        <div class="card-body">
-                            <h5 class="card-title"><strong>Work Experience:</strong></h5>
-                            <p class="card-text">
-                                English Language Instructor<br>
-                                <strong>Mentors'</strong><br>
-                                12/2018 - 12/2019, Dhaka, Bangladesh<br>
-                                <br>
-                                Official Contributor<br>
-                                <strong>The Business Standard</strong><br>
-                                01/2021 - Present, Dhaka, Bangladesh<br>
-                                <br>
-                                Appointment Setter<br>
-                                <strong>Soleil Energy</strong><br>
-                                01/2022 - 03/2022, <br>
-                                Crofton, Maryland
-                                <br><br>
-                                Voice-Over-Artist<br>
-                                <strong>Staff Asia</strong><br>
-                                03/2023 -  6/2023, <br>
-                                [Remote]
-                                <br><br>
-                                Front-End Engineer (Intern)<br>
-                                <strong>Belaface</strong><br>
-                                06/2024 - 10/2024
-                                <br><br>
-                                Education Counsellor (Team Lead)<br>
-                                <strong>Global Pathway Experts LTD.</strong><br>
-                                10/2024- Present, Dhaka, Bangladesh
-
-                            </p>   
-                            <a href="NahiyanResume2025ELT.pdf" target="_blank" class="btn btn-primary">My Current CV</a>
-                            <br><br>
-                            <a href="Nahiyan-IbnErshad-1730667985914-Psychometric.pdf" target="_blank" class="btn btn-primary">Delve into my Psychometrics</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Skills</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>Programming Languages</h5>
-                    <ul>
-                        <li>JavaScript</li>
-                        <li>Python</li>
-                        <li>Dart</li>
-                        <li>Java</li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5>Web Technologies</h5>
-                    <ul>
-                        <li>HTML/CSS</li>
-                        <li>React.js</li>
-                        <li>Node.js</li>
-                        <li>Bootstrap</li>
-                        <li>Vue.js</li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5>Tools & Platforms</h5>
-                    <ul>
-                        <li>GitHub</li>
-                        <li>Figma</li>
-                        <li>Visual Studio Code</li>
-                        <li>Postman</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-
-    <!-- Portfolio Section -->
-    <section id="projects" class="py-5">
-        <div class="container">
-            <h1 class="text-center mb-4">My GitHub Projects</h1>
-            
-            <div class="row">
-                <!-- Project 1 -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100">
-                        <img src="daniel-ramirez-q4TfWtnz_xw-unsplash.jpg" class="card-img-top" alt="5 day Forecast DHK">
-                        <div class="card-body">
-                            <h5 class="card-title">5 Day Forecast DHK</h5>
-                            <p class="card-text">A webpage using OpenWeather API to show 5-day weather forecasts for any city.</p>
-                            <a href="https://box-the-third.github.io/5dayweather/" class="btn btn-primary">View Project</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 2 -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100">
-                        <img src="takerlogo.jpeg" class="card-img-top" alt="Taker Inc Project">
-                        <div class="card-body">
-                            <h5 class="card-title">Taker Inc</h5>
-                            <p class="card-text">A platform that connects Non-Emergency Wheelchair Accessible Vehicle (WAV) providers to patients and drivers in New York.</p>
-                            <a href="https://box-the-third.github.io/TakerInc/" class="btn btn-primary">View Project</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 3 -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100">
-                        <img src="BelaCosmetics.png" class="card-img-top" alt="BelaCosmetics">
-                        <div class="card-body">
-                            <h5 class="card-title">BelaCosmetics</h5>
-                            <p class="card-text">An E-commerce platform developed for a Korean Beauty Product Brand [COSRX]</p>
-                            <a href="https://box-the-third.github.io/eCommerce-frontend/" class="btn btn-primary">View Project</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <!-- Project 4 -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100">
-                        <img src="city_background.png" class="card-img-top" alt="Weather App">
-                        <div class="card-body">
-                            <h5 class="card-title">Weather App</h5>
-                            <p class="card-text">A mobile app using Flutter and Dart to display real-time weather updates.</p>
-                            <a href="https://github.com/box-the-third/FinalProjectWeatherApp_Flutter" class="btn btn-primary">View Project</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!--Project 5-->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100">
-                        <img src="SuperDrib.png" class="card-img-top" alt="SuperDrib">
-                        <div class="card-body">
-                            <h5 class="card-title">SuperDrib</h5>
-                            <p class="card-text">Front-End Design Project</p>
-                            <a href="https://box-the-third.github.io/SuperDrib/" class="btn btn-primary">View Project</a>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </section>
-    <section id="Social-Presence" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Am I on the Internet?</h2>
-            <div class="row">
-                <!-- Video 1 -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <a href="https://www.youtube.com/watch?v=eQmgAuPeBKA" target="_blank">
-                            <img src="video1-thumbnail.jpg" class="card-img-top" alt="Video 1 Thumbnail">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Academic Preparation & Required Documents for Studying Abroad</h5>
-                            <p class="card-text">
-                                ✅ GPA, IELTS, SOP,How to build a strong academic profile<br>
-                                ✅ Full list of documents needed for university applications<br>
-                                ✅ How to write an impactful SOP for Australia<br>
-                                ✅ Visa document checklist & tips<br>
-                                ✅ Common mistakes to avoid during the process<br>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Video 2 -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <a href="https://www.youtube.com/watch?v=EyQnvjdegbc&list=PLGelZefJcknH8hKyBbtioqfu2xxlzSW_u" target="_blank">
-                            <img src="video2-thumbnail.jpg" class="card-img-top" alt="Video 2 Thumbnail">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">LG UHD TV AI ThinQ</h5>
-                            <p class="card-text">I played this broken dude watching TV</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Video 3 -->
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <a href="https://www.youtube.com/watch?v=2HP6hwdBweE&list=PLGelZefJcknH8hKyBbtioqfu2xxlzSW_u&index=2" target="_blank">
-                            <img src="video3-thumbnail.jpg" class="card-img-top" alt="Video 3 Thumbnail">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Polar Ice Cream</h5>
-                            <p class="card-text">I played this confused guy because I didn't have ice-cream</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Add more videos as needed -->
-            </div>
-        </div>
-    </section>
-
-
-    <section id="portfolio">
-        <div class="specialsauce">
-            <h2><strong>Some of my artworks:</strong></h2>
-            <img src="underwater.png" class="rounded" style="border-radius: 50%;" alt="...">
-            <img src="ssssssamuraiiibb.png" class="rounded" alt="...">
-            <img src="bruce Leee.png" class="rounded" alt="...">
-            <img src="inbound2421744976924578198.jpg" class="rounded" alt="...">
-            <img src="BARYONN.png" class="rounded" alt="...">
-            <img src="Naruto and Sasuke.png" class="rounded" alt="...">
-            <img src="space.png" class="rounded" alt="...">
-            <img src="Boxthethirddd.png" class="rounded" alt="...">
-            <img src="newnewmf.png" class="rounded" style="border-radius: 50%;" alt="...">
-            <img src="DAMNNNNNSHEFINE.png" class="rounded" alt="...">
-            <img src="MadaraUchihaFinale.png" class="rounded" style="border-radius: 50%;" alt="...">
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="row">
-            <div class="col-md-12">
-              <div class="social-icons">
-                    <a href="https://web.facebook.com/thesevenupguy2020" title="facebook">
-                        <i class="fab fa-facebook-square"></i>
-                    </a>
-                    <a href="https://www.instagram.com/box_the_third/" title="instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCU1xLoQygr9ECtEmQtnFfZw" title="youtube">
-                        <i class="fab fa-youtube-square"></i>
-                    </a>
-              </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow">
+          <div class="card-body">
+            <h5 class="luxury-heading text-center">Web Technologies</h5>
+            <div class="luxury-divider-small mx-auto"></div>
+            <ul class="luxury-list">
+              <li><span class="luxury-accent">HTML/CSS</span></li>
+              <li><span class="luxury-accent">React.js</span></li>
+              <li><span class="luxury-accent">Node.js</span></li>
+              <li><span class="luxury-accent">Bootstrap</span></li>
+              <li><span class="luxury-accent">Vue.js</span></li>
+            </ul>
           </div>
         </div>
-    </section>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow">
+          <div class="card-body">
+            <h5 class="luxury-heading text-center">Tools & Platforms</h5>
+            <div class="luxury-divider-small mx-auto"></div>
+            <ul class="luxury-list">
+              <li><span class="luxury-accent">GitHub</span></li>
+              <li><span class="luxury-accent">Figma</span></li>
+              <li><span class="luxury-accent">VS Code</span></li>
+              <li><span class="luxury-accent">Postman</span></li>
+              <li><span class="luxury-accent">Adobe Suite</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <footer>
-        <p>&copy; 2025 Nahiyan Ibn Ershad | Contact: <a href="mailto:nahiyanibnershad@gmail.com">nahiyanibnershad@gmail.com</a></p>
-    </footer>
+  <!-- Projects Section -->
+  <section id="projects" class="py-5 text-light">
+    <div class="container">
+      <h2 class="text-center mb-4">My Github Projects</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow">
+            <div class="card-body">
+              <h5 class="card-title">5 day Forecast DHK</h5>
+              <p class="card-text">A cool frontend UI project made with Bootstrap and JS.</p>
+              <a href="https://box-the-third.github.io/5dayweather/" class="btn btn-outline">View on GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow">
+            <div class="card-body">
+              <h5 class="card-title">Taker Inc.</h5>
+              <p class="card-text">A platform that connects Non-Emergency Wheelchair Accessible Vehicle (WAV) providers to patients and drivers in New York.</p>
+              <a href="https://box-the-third.github.io/TakerInc/" class="btn btn-outline">View on GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow">
+            <div class="card-body">
+              <h5 class="card-title">BelaCosmetics</h5>
+              <p class="card-text">An E-commerce platform developed for a Korean Beauty Product Brand [COSRX]</p>
+              <a href="https://box-the-third.github.io/5dayweather/" class="btn btn-outline">View on GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow">
+            <div class="card-body">
+              <h5 class="card-title">Weather App</h5>
+              <p class="card-text">A mobile app using Flutter and Dart to display real-time weather updates.</p>
+              <a href="https://github.com/box-the-third/FinalProjectWeatherApp_Flutter" class="btn btn-outline">View on GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow">
+            <div class="card-body">
+              <h5 class="card-title">SuperDrib</h5>
+              <p class="card-text">A cool frontend Design UI project made with Bootstrap and JS.</p>
+              <a href="https://box-the-third.github.io/SuperDrib/" class="btn btn-outline">View on GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    </body>
-    </html>
+  <section id="Socials" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Am I on the Internet?</h2>
+      <p class="text-center luxury-text">Yes, I am. Click away! Have a go!</p>
+      <div class="row">
+        <!-- Video 1 -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card">
+            <a href="https://www.youtube.com/watch?v=eQmgAuPeBKA" target="_blank">
+              <img src="assets/video1-thumbnail.jpg" class="card-img-top" alt="Video 1 Thumbnail">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">Academic Preparation & Required Documents for Studying Abroad</h5>
+              <p class="card-text luxury-text">
+                ✅ GPA, IELTS, SOP, <br> How to build a strong academic profile<br>
+                ✅ Full list of documents needed for university applications<br>
+                ✅ How to write an impactful SOP for Australia<br>
+                ✅ Visa document checklist & tips<br>
+                ✅ Common mistakes to avoid during the process<br>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Video 2 -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card">
+            <a href="https://www.youtube.com/watch?v=EyQnvjdegbc&list=PLGelZefJcknH8hKyBbtioqfu2xxlzSW_u" target="_blank">
+              <img src="assets/video2-thumbnail.jpg" class="card-img-top" alt="Video 2 Thumbnail">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">LG UHD TV AI ThinQ</h5>
+              <p class="card-text luxury-text">I played this broken dude watching TV</p>
+            </div>
+          </div>
+        </div>
+        <!-- Video 3 -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card">
+            <a href="https://www.youtube.com/watch?v=2HP6hwdBweE&list=PLGelZefJcknH8hKyBbtioqfu2xxlzSW_u&index=2" target="_blank">
+              <img src="assets/video3-thumbnail.jpg" class="card-img-top" alt="Video 3 Thumbnail">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">Polar Ice Cream</h5>
+              <p class="card-text luxury-text">I played this confused guy because I didn't have ice-cream</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Artwork Section -->
+  <section id="portfolio">
+    <div class="specialsauce">
+      <h2><strong>Some of my artworks:</strong></h2>
+      <div class="gallery-grid">
+        <img src="assets/underwater.png" class="rounded" style="border-radius: 50%;" alt="Underwater artwork">
+        <img src="assets/ssssssamuraiiibb.png" class="rounded" alt="Samurai artwork">
+        <img src="assets/bruce Leee.png" class="rounded" alt="Bruce Lee artwork">
+        <img src="assets/inbound2421744976924578198.jpg" class="rounded" alt="Artwork">
+        <img src="assets/BARYONN.png" class="rounded" alt="Baryon artwork">
+        <img src="assets/Naruto and Sasuke.png" class="rounded" alt="Naruto and Sasuke artwork">
+        <img src="assets/space.png" class="rounded" alt="Space artwork">
+        <img src="assets/Boxthethirddd.png" class="rounded" alt="Box the third artwork">
+        <img src="assets/newnewmf.png" class="rounded" style="border-radius: 50%;" alt="Artwork">
+        <img src="assets/DAMNNNNNSHEFINE.png" class="rounded" alt="Portrait artwork">
+        <img src="assets/MadaraUchihaFinale.png" class="rounded" style="border-radius: 50%;" alt="Madara Uchiha artwork">
+      </div>
+    </div>
+  </section>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="cursorTrail.js"></script>
+  <!-- Contact Section -->
+<section id="contact" class="py-5 text-light">
+  <div class="container">
+    <h2 class="text-center mb-4">Get in Touch</h2> 
+    <p class="text-center luxury-text">Feel free to reach out for collaborations, inquiries, or just to say hello!</p>
+    <p class="text-center luxury-text"> nahiyanibnershad@gmail.com</p>
+    <div class="d-flex justify-content-center gap-4 fs-4">
+      <a href="nahiyanibnershad@gmail.com" class="social-icon"><i class="fab fa-google"></i></a>
+      <a href="https://www.linkedin.com/in/nahiyanibnershad/" class="social-icon"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.youtube.com/channel/UCU1xLoQygr9ECtEmQtnFfZw" class="social-icon"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/box_the_third/" class="social-icon"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+</section>
 
+  <!-- Footer -->
+  <footer class="text-center text-light py-3">
+    <small>&copy; 2025 Nahiyan. All rights reserved.</small>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="cursor.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <!-- Luxury Canvas Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('luxuryCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Set canvas to full window
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      // Luxury color palette
+      const colors = ['#0a0a0a', '#1a1a1a', '#2a2a2a', '#3a3a3a'];
+      const particles = [];
+      const particleCount = Math.floor(window.innerWidth / 10);
+      
+      // Create particles
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 3 + 1,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          baseX: Math.random() * canvas.width,
+          baseY: Math.random() * canvas.height,
+          density: Math.random() * 30 + 1
+        });
+      }
+      
+      // Mouse position
+      let mouse = {
+        x: null,
+        y: null,
+        radius: 100
+      };
+      
+      window.addEventListener('mousemove', function(event) {
+        mouse.x = event.x;
+        mouse.y = event.y;
+      });
+      
+      // Animation loop
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for (let i = 0; i < particles.length; i++) {
+          // Calculate distance between particle and mouse
+          let dx = mouse.x - particles[i].x;
+          let dy = mouse.y - particles[i].y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          let forceDirectionX = dx / distance;
+          let forceDirectionY = dy / distance;
+          let maxDistance = mouse.radius;
+          let force = (maxDistance - distance) / maxDistance;
+          let directionX = forceDirectionX * force * particles[i].density;
+          let directionY = forceDirectionY * force * particles[i].density;
+          
+          if (distance < mouse.radius) {
+            particles[i].x -= directionX;
+            particles[i].y -= directionY;
+          } else {
+            if (particles[i].x !== particles[i].baseX) {
+              let dx = particles[i].x - particles[i].baseX;
+              particles[i].x -= dx / 10;
+            }
+            if (particles[i].y !== particles[i].baseY) {
+              let dy = particles[i].y - particles[i].baseY;
+              particles[i].y -= dy / 10;
+            }
+          }
+          
+          // Draw particle
+          ctx.beginPath();
+          ctx.arc(particles[i].x, particles[i].y, particles[i].size, 0, Math.PI * 2);
+          ctx.closePath();
+          ctx.fillStyle = particles[i].color;
+          ctx.fill();
+        }
+        
+        requestAnimationFrame(animate);
+      }
+      
+      animate();
+      
+      // Handle window resize
+      window.addEventListener('resize', function() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    });
+  </script>
 </body>
 </html>

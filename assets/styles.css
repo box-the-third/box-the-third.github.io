@@ -1,0 +1,398 @@
+@font-face {
+    font-family: 'GloriaHallelujah';
+    src: url('https://box-the-third.github.io/GloriaHallelujah-Regular.ttf') format('truetype');
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+
+*{
+    margin:0;
+    padding:0;
+}
+
+
+body {
+    font-family: 'GloriaHallelujah', sans-serif;
+    cursor: url('pixel_cursor.png'), auto;
+    background-color: #000000;
+    color: #39b0b9; /* Cyan */
+    transition: background-color 0.5s ease;
+}
+
+.cursor-trail {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: url('pixel_cursor.png') no-repeat center center;
+    background-size: cover;
+    pointer-events: none; /* Allow clicking through the trails */
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.2s ease;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: #39b0b9;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+
+p.lead {
+    color: #4eb9b9; /* Keep your existing styles */
+}
+/* Navbar styling */
+.navbar {
+    background-color: #000000; /* Black background */
+    padding: 2px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    color: #39b0b9 !important; /* Cyan text for brand */
+    font-size: 1.8rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link {
+    color: #39b0b9 !important; /* Cyan text for links */
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffffff !important; /* White hover effect */
+}
+
+/* Hamburger Menu Icon */
+.navbar-toggler {
+    border: none;
+    color: #39b0b9; /* Cyan color for toggler icon */
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=UTF8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(57, 176, 185, 1)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22" /%3E%3C/svg%3E');
+    /* Custom cyan hamburger icon */
+}
+
+.navbar-collapse {
+    text-align: center;
+}
+
+#projects, #portfolio, #home {
+    background-color: #000000; /* Black background for all sections */
+    padding: 60px 0;
+    color: #39b0b9; /* Cyan text color */
+}
+
+#cardcontainer, .card {
+    background-color: #111111;
+    padding: 40px 20px;
+    color: #39b0b9;
+    transition: transform 0.5s, box-shadow 0.5s;
+    animation: fadeInUp 2s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(57, 176, 185, 0.5);
+}
+
+.btn-primary {
+    background-color: #39b0b9;
+    border-color: #39b0b9;
+    color: #000000;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #1f6d71;
+    border-color: #1f6d71;
+    transform: translateY(-3px);
+}
+
+
+#about {
+    background-color: #000000; /* Black background for consistency */
+    padding: 60px 0;
+    color: #39b0b9; /* Cyan font color */
+}
+
+#about h2 {
+    font-size: 3rem;
+    color: #39b0b9; /* Cyan text */
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+#about .card {
+    background-color: #111111; /* Dark background for cards */
+    color: #39b0b9; /* Cyan text inside the cards */
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: fadeInUp 2s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+#about  .card:hover {
+    transform: scale(1.05); /* Hover effect */
+    box-shadow: 0 10px 20px rgba(57, 176, 185, 0.5); /* Cyan hover shadow */
+}
+
+#about .card-title {
+    color: #39b0b9;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#about .card-text {
+    color: #39b0b9;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+#about .btn-primary {
+    background-color: #39b0b9;
+    border-color: #39b0b9;
+    color: #000000;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#about .btn-primary:hover {
+    background-color: #1f6d71;
+    border-color: #1f6d71;
+    transform: translateY(-3px);
+}
+
+
+#portfolio {
+    background-image: url("europeana-5TK1F5VfdIk-unsplash.jpg");
+    background-color: #f8f9fa; 
+    color: #495057; 
+    padding: 40px 0; 
+}
+
+#contact {
+    background-color: #111111; /* Matches the footer and overall design */
+    padding: 20px 0;
+}
+
+
+
+.specialsauce {
+    text-align: center;
+    
+}
+
+.specialsauce h2 {
+    color: #ffdd76;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px; 
+    margin-bottom: 20px;
+    font-variant: small-caps;
+    animation: glow 2s ease-in-out infinite;
+}
+
+
+
+@keyframes glow {
+
+    0%{
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff;
+    }
+    50% {
+        text-shadow: 0 0 20px #ff9900, 0 0 30px #ff9900, 0 0 40px #ff9900; /* Adjust the shadow size and color */
+    }
+    100% {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff; /* Adjust the shadow size and color */
+    }
+
+
+
+}
+
+.specialsauce img {
+    width: 100%;
+    max-width: 300px; 
+    margin-bottom: 20px; 
+}
+
+.specialsauce img {
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.specialsauce img:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+}
+
+
+
+.social-icons {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-icons a {
+    font-size: 2rem;
+    color: #39b0b9; /* Cyan */
+    transition: color 0.3s ease;
+}
+
+.social-icons a i{
+	line-height:30px;
+    font-size:24px;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1); 
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1); 
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+     transition: all 200ms ease-in;
+     transform: scale(1);
+}
+.social-icons a:hover i{
+  box-shadow: 0px 0px 150px #000000;
+  z-index: 2;
+  -webkit-transition: all 200ms ease-in;
+  -webkit-transform: scale(1.5);
+  -ms-transition: all 200ms ease-in;
+  -ms-transform: scale(1.5);   
+  -moz-transition: all 200ms ease-in;
+  -moz-transform: scale(1.5);
+  transition: all 200ms ease-in;
+  transform: scale(1.5);
+}
+
+
+
+
+footer {
+    display: flex;
+    justify-content: space-around; 
+    background-color: #111111;
+    color: #39b0b9; 
+    font-size: 0.8rem;
+}
+
+footer a {
+    color: #39b0b9; 
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #ffffff; 
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+@media (max-width: 1200px) {
+    #about h2 {
+        font-size: 2.5rem; 
+    }
+}
+
+
+
+@media (max-width: 992px) {
+    .navbar-nav {
+        text-align: center;
+    }
+    .navbar-nav .nav-link {
+        padding: 10px; 
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.9rem;
+    }
+    .social-icons a {
+        font-size: 1.5rem; 
+    }
+    .card {
+        padding: 15px;
+        font-size: 0.9rem; 
+    }
+    .specialsauce img {
+        max-width: 250px; 
+    }
+
+    footer{
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #about h2 {
+        font-size: 2rem; 
+    }
+    .navbar-brand {
+        font-size: 1.2rem; 
+    }
+    .social-icons {
+        gap: 10px; 
+    }
+
+    footer {
+        font-size: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 1.5rem;
+    }
+    .card {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+    .specialsauce img {
+        max-width: 200px;
+    }
+
+    footer{
+        font-size: 0.5rem;
+    }
+}
