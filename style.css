@@ -1,11 +1,11 @@
 /* Base Styles */
 :root {
-  --luxury-black: #0a0a0a;
+  --luxury-black:rgb(0, 0, 0);
   --luxury-dark: #1a1a1a;
   --luxury-mid: #2a2a2a;
   --luxury-light: #3a3a3a;
-  --luxury-accent: #c0a062;
-  --luxury-highlight: #e8d9b5;
+  --luxury-accent: #ffc30f;
+  --luxury-highlight: #ffffff;
   --rain-opacity: 0.03;
 }
 
