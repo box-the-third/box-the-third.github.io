@@ -29,6 +29,26 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    AOS.init({
+      duration: 1000,  // smooth animation time
+      once: true       // animate only once
+    });
+  });
+</script>
+  <!-- Vanilla-Tilt -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+
+<!--ChatBot-->
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="v1NU2ywoo25ZYj2cWXVxv";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+
 </head>
 <body>
   <!-- Pressure-sensitive background canvas -->
@@ -67,7 +87,9 @@
     <div class="container">
       <div class="hero-content">
         <h1 class="display-4">Nahiyan's Portfolio</h1>
-        <p class="lead">Content Creator | Producer | Web-Developer | Education Counsellor</p>
+        <h1 id="hero-title">
+        I am <span id = "typed-text"></span>
+        </h1>
         <div class="spirit-of-ecstasy">
           <div class="ornament-line"></div>
           <div class="ornament-icon">✧</div>
@@ -79,15 +101,17 @@
 
   <!-- About Section -->
   <section id="about" class="py-5 text-light">
-    <div class="container">
-      <h2 class="text-center mb-4">About Me</h2>
+    <div class="container">      
+      <h2 class="text-center mb-4" data-aos="fade-up">About Me</h2>
+      <div data-aos="zoom-in">
       <div class="row">
         <div class="col-md-6">
-          <p class="luxury-text">I'm Nahiyan. I will forever be a student of life, learning and growing every day.<br> I am a certified engineer, education counselor, and I'm also an artist based in Dhaka, Bangladesh.
+          <p class="luxury-text">I'm Nahiyan. I will forever be a student of life, learning and growing every day.<br> I am a certified engineer, education counselor. <br> When I'm not working I think of myself as an artist, a storyteller, and a curious explorer of new ideas.</p>
         </div>
         <div class="col-md-6">
           <p class="luxury-text">I love to experiment with new ways to connect with like-minded people.<br> This portfolio showcases my projects, tells you what I care about, and lets you know who you're working with.</p>
         </div>
+      </div>
       </div>
     </div>
   </section>
@@ -95,7 +119,12 @@
   <!-- Education & Experience Section -->
 <section id="education" class="py-5 text-light">
   <div class="container">
-    <h2 class="text-center mb-4">Education & Experience</h2>
+    <div class=" project-card" data-tilt>
+    <h2 class="text-center mb-4" data-aos="fade-up">Education and Experience</h2>
+      <div data-aos="zoom-in">
+      <p>Everything that I've learnt so far, I have always tried to apply in real life. I am grateful.</p>
+      </div>
+    </div> 
     <div class="row g-4">
       <!-- Education Card -->
       <div class="col-md-6">
@@ -105,10 +134,10 @@
             <h5 class="card-title luxury-heading">My Education</h5>
             <div class="luxury-divider"></div>
             <p class="luxury-text">
-              <span class="luxury-accent">Computer Science and Engineering</span><br>
+              <span class="luxury-accent">Bsc. Computer Science and Engineering</span><br>
               <strong>Independent University, Bangladesh</strong>
               <br><br>
-              <span class="luxury-accent">Networking and Cybersecurity Engineering</span><br>
+              <span class="luxury-accent">Bsc. Networking and Cybersecurity Engineering</span><br>
               <strong>Al-Yamamah University</strong>
               <br><br>
               <h6 class="luxury-heading">Certifications</h6>
@@ -120,7 +149,7 @@
               <br><br>
               <span class="luxury-accent">Oracle Academy</span></br> Java Fundamentals
               <br><br>
-              <span class="luxury-accent">Teaching Online Webinars</span><br>
+              <span class="luxury-accent">Teaching Online Webinar</span><br>
               British Council
               <br><br>
               <span class="luxury-accent">Guinness World Records</span><br>
@@ -176,7 +205,12 @@
 <!-- Skills Section -->
 <section id="skills" class="py-5 text-light">
   <div class="container">
-    <h2 class="text-center mb-4">Skills & Expertise</h2>
+    <div class=" project-card" data-tilt>
+    <h2 class="text-center mb-4" data-aos="fade-up">Skills & Expertise</h2>
+      <div data-aos="zoom-in">
+      <p>I'm good at making things easy to understand through visuals, and auditory senses.</p>
+      </div> 
+    </div>
     <div class="row g-4">
       <div class="col-md-4">
         <div class="card h-100 border-0 shadow">
@@ -231,7 +265,12 @@
   <!-- Projects Section -->
   <section id="projects" class="py-5 text-light">
     <div class="container">
-      <h2 class="text-center mb-4">My Github Projects</h2>
+     <div class=" project-card" data-tilt>
+      <h2 class="text-center mb-4" data-aos="fade-up"> My Projects</h2>
+       <div data-aos="zoom-in">
+         <p>Take a look at the projects I've done so far!</p>
+       </div> 
+     </div> 
       <div class="row g-4">
         <div class="col-md-4">
           <div class="card h-100 border-0 shadow">
@@ -284,8 +323,11 @@
 
   <section id="Socials" class="py-5">
     <div class="container">
-      <h2 class="text-center mb-4">Am I on the Internet?</h2>
-      <p class="text-center luxury-text">Yes, I am. Click away! Have a go!</p>
+      <div class="project-card" data-tilt>
+      <h2 class="text-center mb-4" data-aos="fade-up">Am I on the Internet?</h2>
+      <div data-aos="zoom-in">
+      <p class="text-center luxury-text">Click to play on YouTube!</p>
+      </div>
       <div class="row">
         <!-- Video 1 -->
         <div class="col-md-6 col-lg-4 mb-4">
@@ -296,7 +338,7 @@
             <div class="card-body">
               <h5 class="card-title">Academic Preparation & Required Documents for Studying Abroad</h5>
               <p class="card-text luxury-text">
-                ✅ GPA, IELTS, SOP, <br> How to build a strong academic profile<br>
+                ✅ Essays, CGPA, IELTS, SOP, Interview <br> How to build a strong academic profile<br>
                 ✅ Full list of documents needed for university applications<br>
                 ✅ How to write an impactful SOP for Australia<br>
                 ✅ Visa document checklist & tips<br>
@@ -333,25 +375,373 @@
     </div>
   </section>
 
-  <!-- Artwork Section -->
+  <!-- Artwork Section 
   <section id="portfolio">
     <div class="specialsauce">
-      <h2><strong>Some of my artworks:</strong></h2>
+  
+      <h2 class="text-center mb-4" data-aos="fade-up"><strong>Some of my artworks:</strong></h2>
+      <div data-aos="zoom-in">
+        <div class="project-card" data-tilt>
+          <p class="text-center luxury-text">Each of these artworks reflect a point in my journey through life.<br>
+          Hover to bring them to life.</p>
+        </div>
+      </div>
       <div class="gallery-grid">
         <img src="assets/underwater.png" class="rounded" style="border-radius: 50%;" alt="Underwater artwork">
+        <div data-aos="zoom-in">
+          <div class="project-card" data-tilt>
+            <p class="luxury-text"><strong>Freedom.</strong></p>
+          </div>
+        </div>
         <img src="assets/ssssssamuraiiibb.png" class="rounded" alt="Samurai artwork">
+        <div data-aos="zoom-in">
+          <div class="project-card" data-tilt>
+            <p class="luxury-text"><strong>Redemption</strong></p>
+          </div>
+        </div>
         <img src="assets/bruce Leee.png" class="rounded" alt="Bruce Lee artwork">
+        <div data-aos="zoom-in">
+          <div class="project-card" data-tilt>
+            <p class="luxury-text"><strong>Strength</strong></p>
+          </div>
+        </div> 
         <img src="assets/inbound2421744976924578198.jpg" class="rounded" alt="Artwork">
+        <div data-aos="zoom-in">
+          <div class="project-card" data-tilt>
+            <p class="luxury-text"><strong>Solitude</strong></p>
+          </div>
+        </div>
         <img src="assets/BARYONN.png" class="rounded" alt="Baryon artwork">
+        <div data-aos="zoom-in">
+          <div class="project-card" data-tilt>
+            <p class="luxury-text"><strong>Passion</strong></p>
+          </div>
+        </div>
         <img src="assets/Naruto and Sasuke.png" class="rounded" alt="Naruto and Sasuke artwork">
+        <div data-aos="zoom-in">
+          <div class="project-card" data-tilt>
+            <p class="luxury-text"><strong>War</strong></p>
+          </div>
+        </div>
         <img src="assets/space.png" class="rounded" alt="Space artwork">
+        <div data-aos="zoom-in">
+          <div class="project-card" data-tilt>
+            <p class="luxury-text"><strong>Space</strong></p>
+          </div>
+        </div>
         <img src="assets/Boxthethirddd.png" class="rounded" alt="Box the third artwork">
+        <div data-aos="zoom-in">
+          <div class="project-card" data-tilt>
+            <p class="luxury-text"><strong>Self</strong></p>
+          </div>
+        </div>
         <img src="assets/newnewmf.png" class="rounded" style="border-radius: 50%;" alt="Artwork">
+        <div data-aos="zoom-in">
+          <div class="project-card" data-tilt>
+            <p class="luxury-text"><strong>Awakening</strong></p>
+          </div>
+        </div>
         <img src="assets/DAMNNNNNSHEFINE.png" class="rounded" alt="Portrait artwork">
+        <div data-aos="zoom-in">
+          <div class="project-card" data-tilt>
+            <p class="luxury-text"><strong>Visualization</strong></p>
+          </div>
+        </div>
         <img src="assets/MadaraUchihaFinale.png" class="rounded" style="border-radius: 50%;" alt="Madara Uchiha artwork">
+        <div data-aos="zoom-in">
+          <div class="project-card" data-tilt>
+            <p class="luxury-text"><strong>I see you</strong></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+-->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+  <div id="lightbox-caption"></div>
+  <a class="prev">&#10094;</a>
+  <a class="next">&#10095;</a>
+</div>
+
+
+<section id="portfolio">
+  <div class="specialsauce">
+    <h2 class="text-center mb-4" data-aos="fade-up">
+      <strong>Some of my artworks:</strong>
+    </h2>
+
+    <p class="text-center luxury-text" data-aos="zoom-in">
+      Each of these artworks reflect a point in my journey through life.<br>
+      Hover to bring them to life. Click to expand.
+    </p>
+
+    <!-- View All Button -->
+    <div class="text-center mb-4">
+      <button id="view-all-btn" class="luxury-btn">View All Artworks</button>
+    </div>
+
+    <!-- Gallery -->
+    <div class="gallery-grid">
+      <img src="assets/underwater.png" alt="Freedom" data-title="Freedom">
+      <img src="assets/ssssssamuraiiibb.png" alt="Redemption" data-title="Redemption">
+      <img src="assets/bruce Leee.png" alt="Strength" data-title="Strength">
+      <img src="assets/inbound2421744976924578198.jpg" alt="Solitude" data-title="Solitude">
+      <img src="assets/BARYONN.png" alt="Passion" data-title="Passion">
+      <img src="assets/Naruto and Sasuke.png" alt="War" data-title="War">
+      <img src="assets/space.png" alt="Space" data-title="Space">
+      <img src="assets/Boxthethirddd.png" alt="Self" data-title="Self">
+      <img src="assets/newnewmf.png" alt="Awakening" data-title="Awakening">
+      <img src="assets/DAMNNNNNSHEFINE.png" alt="Visualization" data-title="Visualization">
+      <img src="assets/MadaraUchihaFinale.png" alt="I see you" data-title="I see you">
+    </div>
+  </div>
+</section>
+
+
+<!--Services-->
+<!-- Premium Services Section -->
+<section id="services" class="py-5 bg-dark text-light">
+  <div class="container">
+    <h2 class="text-center mb-4 luxury-text" data-aos="fade-up"><strong>Premium Services</strong></h2>
+    <div class="row g-4">
+     
+      <!-- Digital Literacy Training -->
+      <div class="col-md-4" data-aos="zoom-in">
+        <div class="card h-100 shadow-lg border-0">
+          <div class="card-body text-center">
+            <h5 class="card-title luxury-text">Digital Literacy Training <br>
+            5000 BDT</h5>
+            <p class="card-text">All ages inclusive. Learn the Basics of G-Suite, prompt engineering & more.</p>
+            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#service1Modal">Request Service</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOP Writing -->
+      <div class="col-md-4" data-aos="zoom-in">
+        <div class="card h-100 shadow-lg border-0">
+          <div class="card-body text-center">
+            <h5 class="card-title luxury-text">SOP Writing Services<br>
+            5000 BDT/ SOP </h5>
+            <p class="card-text">Craft a winning essay that makes your application stand out.</p>
+            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#service2Modal">Request Service</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CV Writing -->
+      <div class="col-md-4" data-aos="zoom-in">
+        <div class="card h-100 shadow-lg border-0">
+          <div class="card-body text-center">
+            <h5 class="card-title luxury-text">CV Writing Services<br>
+            Basic: 1000 BDT/CV <br>
+            Mid: 1500 BDT/CV + LinkedIn Optimization <br>
+            Top-tier: 2000 BDT/CV ATS CV with Cover Letter 
+            </h5>
+            <p class="card-text">Send me your old CV + academics, I’ll tailor a brand-new professional ATS Friendly CV for you.</p>
+            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#service3Modal">Request Service</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- IELTS Training -->
+      <div class="col-md-4" data-aos="zoom-in">
+        <div class="card h-100 shadow-lg border-0">
+          <div class="card-body text-center">
+            <h5 class="card-title luxury-text">IELTS Training<br>
+               Minimum: 500 BDT/Hour  |  3 days a week
+            </h5>
+            <p class="card-text">Boost your English skills. First two classes are free!</p>
+            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#service4Modal">Request Service</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Portfolio Website -->
+      <div class="col-md-4" data-aos="zoom-in">
+        <div class="card h-100 shadow-lg border-0">
+          <div class="card-body text-center">
+            <h5 class="card-title luxury-text">Portfolio Website + Hosting<br>
+            Basic: 5000 BDT <br>
+            Creative: 10000 BDT<br>
+            Luxury: 12000 BDT
+          </h5>
+            <p class="card-text">A custom website hosted on GitHub/Netlify + QR Code for easy sharing.</p>
+            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#service5Modal">Request Service</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business Card -->
+      <div class="col-md-4" data-aos="zoom-in">
+        <div class="card h-100 shadow-lg border-0">
+          <div class="card-body text-center">
+            <h5 class="card-title luxury-text">Digital Business Card + QR
+             <br>1500 BDT <br>
+             Custom Designed Business Card + QR Code<br>
+            2000 BDT
+            </h5>
+            <p class="card-text">A scannable QR code with your LinkedIn, email & all contact info.</p>
+            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#service6Modal">Request Service</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-5" data-aos="fade-up">
+      <a href="#services" class="btn btn-lg btn-warning luxury-text">Let’s Work Together ✦</a>
+    </div>
+  </div>
+</section>
+
+<!-- Modals -->
+<!-- Service 1 Modal -->
+<div class="modal fade" id="service1Modal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Digital Literacy Training</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>For companies with a diverse group. 
+        I'll take you through unique modules built on G-Suite, Prompt engineering, and its use cases.<br>
+        <br>
+        It can also include Google and Microsoft Apps, Internet Safety, Portfolio Buildup, Presentation Skills and more. 
+        <br>
+        Floats your boat? Let's talk.
+        </p>
+        <form action="https://formspree.io/f/mjkarwza" method="POST">
+          <input type="hidden" name="service" value="Digital Literacy Training">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Message</label>
+            <textarea name="message" class="form-control" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Submit Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Clone the above modal for each service -->
+<div class="modal fade" id="service2Modal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header"><h5 class="modal-title">SOP Writing Services</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <p>Write a winning SOP & craft essays that secure admissions for top universities worldwide. <br><br>
+        I’ll help you brainstorm, draft, and polish your statement of purpose to make it truly stand out.<br><br>
+        Let's make your application unforgettable!
+        </p>
+        <form action="https://formspree.io/f/mjkarwza" method="POST">
+          <input type="hidden" name="service" value="SOP Writing Services">
+          <div class="mb-3"><label class="form-label">Name</label><input type="text" name="name" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Message</label><textarea name="message" class="form-control" rows="3"></textarea></div>
+          <button type="submit" class="btn btn-success w-100">Submit Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Service 3 Modal -->
+<div class="modal fade" id="service3Modal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header"><h5 class="modal-title">CV Writing Services</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <p>Send me your old CV and details. I’ll craft a tailored, professional ATS- Friendly CV for you along with a FREE Cover Letter for your chosen job!.</p>
+        <form action="https://formspree.io/f/mjkarwza" method="POST">
+          <input type="hidden" name="service" value="CV Writing Services">
+          <div class="mb-3"><label class="form-label">Name</label><input type="text" name="name" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Message</label><textarea name="message" class="form-control" rows="3"></textarea></div>
+          <button type="submit" class="btn btn-success w-100">Submit Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Service 4 Modal -->
+<div class="modal fade" id="service4Modal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header"><h5 class="modal-title">IELTS Training</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <p>Learn from the best. First two classes are free! <br><br>
+        I’ll help you boost your English skills with personalized lessons, practice tests, and feedback.<br><br>
+        Let's get you that band score!
+        </p>
+        <form action="https://formspree.io/f/mjkarwza" method="POST">
+          <input type="hidden" name="service" value="IELTS Training">
+          <div class="mb-3"><label class="form-label">Name</label><input type="text" name="name" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Message</label><textarea name="message" class="form-control" rows="3"></textarea></div>
+          <button type="submit" class="btn btn-success w-100">Submit Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Service 5 Modal -->
+<div class="modal fade" id="service5Modal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header"><h5 class="modal-title">Portfolio Website + Hosting</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <p>Like my style? I’ll build your portfolio from scratch, host it, and give you a QR Code to share with anyone.<br><br>
+        Perfect for creatives, freelancers, and professionals looking to showcase their work online.<br><br>
+
+        Let's create something amazing together!
+        </p>
+        <form action="https://formspree.io/f/mjkarwza" method="POST">
+          <input type="hidden" name="service" value="Portfolio Website + Hosting">
+          <div class="mb-3"><label class="form-label">Name</label><input type="text" name="name" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Message</label><textarea name="message" class="form-control" rows="3"></textarea></div>
+          <button type="submit" class="btn btn-success w-100">Submit Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Service 6 Modal -->
+<div class="modal fade" id="service6Modal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header"><h5 class="modal-title">Digital Business Card + QR</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <p>Get a scannable QR Code embedded on your backpack or keyring that contains your LinkedIn, email, and key contact details. No more running out of cards.</p>
+        <form action="https://formspree.io/f/mjkarwza" method="POST">
+          <input type="hidden" name="service" value="Digital Business Card + QR">
+          <div class="mb-3"><label class="form-label">Name</label><input type="text" name="name" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
+          <div class="mb-3"><label class="form-label">Message</label><textarea name="message" class="form-control" rows="3"></textarea></div>
+          <button type="submit" class="btn btn-success w-100">Submit Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   <!-- Contact Section -->
 <section id="contact" class="py-5 text-light">
@@ -468,5 +858,71 @@
       });
     });
   </script>
+
+<!-- Typing Effect Script -->
+  <script>
+  const words = ["a Content Creator", "an Engineer", "an Education Counselor", "an Artist"];
+let i = 0, j = 0, currentWord = "", isDeleting = false;
+
+function type() {
+  currentWord = words[i];
+  document.getElementById("typed-text").textContent = currentWord.substring(0, j);
+
+  if (!isDeleting && j < currentWord.length) {
+    j++;
+    setTimeout(type, 120);
+  } else if (isDeleting && j > 0) {
+    j--;
+    setTimeout(type, 60);
+  } else {
+    isDeleting = !isDeleting;
+    if (!isDeleting) i = (i + 1) % words.length;
+    setTimeout(type, 1000);
+  }
+}
+type();
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const gallery = document.querySelector(".gallery-grid");
+  const viewAllBtn = document.getElementById("view-all-btn");
+
+  // Reveal gallery on button click
+  viewAllBtn.addEventListener("click", () => {
+    gallery.classList.add("show");
+    viewAllBtn.style.display = "none";
+  });
+
+  // Lightbox
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const caption = document.getElementById("lightbox-caption");
+  const images = document.querySelectorAll(".gallery-grid img");
+  let currentIndex = 0;
+
+  images.forEach((img, index) => {
+    img.addEventListener("click", () => {
+      currentIndex = index;
+      showImage();
+    });
+  });
+
+  function showImage() {
+    lightbox.style.display = "block";
+    lightboxImg.src = images[currentIndex].src;
+    caption.textContent = images[currentIndex].dataset.title;
+  }
+
+  // Controls
+  document.querySelector(".close").onclick = () => (lightbox.style.display = "none");
+  document.querySelector(".prev").onclick = () => { currentIndex = (currentIndex - 1 + images.length) % images.length; showImage(); };
+  document.querySelector(".next").onclick = () => { currentIndex = (currentIndex + 1) % images.length; showImage(); };
+
+  // Close on click outside
+  lightbox.onclick = (e) => { if (e.target === lightbox) lightbox.style.display = "none"; };
+});
+</script>
+
 </body>
 </html>
