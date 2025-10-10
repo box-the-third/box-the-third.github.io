@@ -153,10 +153,13 @@ p.services {
 
 /* Hero Section */
 .hero {
-  padding: 150px 0;
+  padding: 50px;
   position: relative;
   overflow: hidden;
+  margin-bottom: -4rem;
 }
+
+
 
 .hero-content {
   position: relative;
@@ -177,8 +180,8 @@ p.services {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2rem auto;
-  max-width: 300px;
+  margin: 0.5rem auto;
+  max-width: 600px;
 }
 
 .ornament-line {
@@ -195,7 +198,7 @@ p.services {
 
 /* Sections */
 section {
-  padding: 1rem 0;
+  padding: 1rem ;
   position: relative;
 }
 
@@ -291,18 +294,18 @@ section::before {
 /* Cards */
 .project-card {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255,195,15,0.2);
+  border: 1px solid rgba(14, 219, 255, 0.507);
   border-radius: 15px;
   padding: 20px;
   transition: transform 0.3s ease;
   backdrop-filter: blur(10px);
+  margin-bottom: 1rem;
 }
-
 
 .card {
   background: rgba(26, 26, 26, 0.7) !important;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(192, 160, 98, 0.1) !important;
+  border: 1px solid rgba(98, 159, 192, 0.578) !important;
   border-radius: 0 !important;
   transition: all 0.3s ease;
   overflow: hidden;
@@ -587,6 +590,7 @@ section::before {
   align-items: center;
   gap: 4rem;
   animation: scroll-logos 25s linear infinite;
+  will-change: transform;
 }
 
 .logos img {
@@ -620,6 +624,12 @@ section::before {
   animation: scroll-logos 55s linear infinite;
 }
 
+/* Ensure animation runs on all screens */
+@media (max-width: 768px) {
+  .logos {
+    animation: scroll-logos 25s linear infinite;
+  }
+}
 
 /* Footer */
 footer {
