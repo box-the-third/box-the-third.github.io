@@ -162,7 +162,9 @@ p.services {
   font-size: 1.3rem;
   background: linear-gradient(90deg, #a4ffb6, #00d9ff);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
   background-size: 400% 100%;
   animation: shimmer 3s linear infinite;
   position: relative;
