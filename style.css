@@ -80,6 +80,7 @@ h2::after {
   width: 100%;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--luxury-olive), transparent);
+  
 }
 
 p.services {
@@ -88,12 +89,125 @@ p.services {
   font-size: 1.1rem;
   color: var(--luxury-highlight);
 }
-
 .luxury-text {
   font-family: "Belleza", sans-serif;
   line-height: 1.8;
   font-size: 1.1rem;
   color: var(--luxury-highlight);
+}
+
+/* Services section enhancements */
+#services {
+  background: radial-gradient(circle at top left, rgba(0, 217, 255, 0.15), rgba(10, 10, 10, 0.85));
+  padding: 5rem 1rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#services::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 180deg, #00d9ff40, #ffffff10, #ffd70030, #00d9ff40);
+  animation: rotateGlow 15s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Premium Cards */
+#services .card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 217, 255, 0.25);
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 20px !important;
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#services .card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(0,217,255,0.15), rgba(255,255,255,0.03));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+#services .card:hover::before {
+  opacity: 1;
+}
+
+#services .card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 0 30px rgba(0, 217, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.1);
+  border-color: rgba(0,217,255,0.6);
+}
+
+/* Card Title Glow */
+#services .card-title {
+  font-size: 1.3rem;
+  background: linear-gradient(90deg, #a4ffb6, #00d9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 400% 100%;
+  animation: shimmer 3s linear infinite;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes shimmer {
+  0% { background-position: -100px 0; }
+  100% { background-position: 300px 0; }
+}
+
+/* Button refinement */
+#services .btn {
+  border: 1px solid #00d9ff;
+  color: #00d9ff;
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+  z-index: 2;
+}
+
+#services .btn:hover {
+  background: linear-gradient(90deg, #00d9ff, #ffffff);
+  color: #000;
+  box-shadow: 0 0 15px rgba(0,217,255,0.6);
+}
+
+/* Subtle shimmer behind each card */
+#services .card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0,217,255,0.2), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#services .card:hover::after {
+  opacity: 1;
 }
 
 /* Navbar */
