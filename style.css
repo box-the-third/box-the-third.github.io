@@ -226,6 +226,7 @@ p.services {
 }
 
 .brand-name {
+  font-family: 'Times New Roman', Times, serif !important;
   font-size: 1.5rem;
   letter-spacing: 2px;
   position: relative;
@@ -650,7 +651,7 @@ section::before {
 .cursor {
   width: 20px;
   height: 20px;
-  border: 2px solid var(--luxury-accent);
+  border: 2px solid var(--luxury-olive);
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -658,6 +659,24 @@ section::before {
   transform: translate(-50%, -50%);
   transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease;
   mix-blend-mode: difference;
+  animation: cursorGlow 1.5s ease-in-out infinite;
+  display: none;
+}
+
+@keyframes cursorGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--luxury-olive), 0 0 20px rgba(0, 217, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--luxury-olive), 0 0 30px rgb(0, 217, 255);
+  }
+}
+
+/* Show cursor on desktop only */
+@media (min-width: 769px) {
+  .cursor {
+    display: block;
+  }
 }
 
 .cursor-follower {
@@ -671,6 +690,14 @@ section::before {
   transform: translate(-50%, -50%);
   transition: transform 0.4s ease-out, width 0.4s ease, height 0.4s ease;
   mix-blend-mode: difference;
+  display: none;
+}
+
+/* Show cursor-follower on desktop only */
+@media (min-width: 769px) {
+  .cursor-follower {
+    display: block;
+  }
 }
 .modal-body {
     font-family: "Tahoma", sans-serif;
