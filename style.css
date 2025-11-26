@@ -828,3 +828,40 @@ footer {
     padding-left: 1.2rem;
   }
 }
+
+/* New section styles: badges, micro-CTAs, testimonial and book CTA */
+.is-right h3 {
+  color: var(--luxury-olive);
+  letter-spacing: 0.6px;
+}
+
+.is-right .badge {
+  background: rgba(255,255,255,0.03);
+  color: var(--luxury-highlight);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 0.45rem 0.7rem;
+  font-size: 0.95rem;
+}
+
+#services .small.text-muted {
+  color: rgba(245,245,220,0.9) !important;
+  opacity: 0.95;
+}
+
+.testimonial .blockquote {
+  background: rgba(255,255,255,0.02);
+  border-left: 4px solid rgba(255,215,0,0.12);
+  padding: 1rem 1.2rem;
+  color: var(--luxury-highlight);
+}
+
+#book {
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+  border-top: 1px solid rgba(255,255,255,0.03);
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+#book h2 { color: #ffd700; }
+
+#book a { color: #00d9ff; text-decoration: underline; }
