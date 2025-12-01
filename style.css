@@ -6,6 +6,7 @@
   --luxury-olive: #00d9ff; /* Olive green */
   --luxury-highlight: #F5F5DC; /* Beige text */
   --rain-opacity: 0.04;
+  font-size: 12.8px; /* 80% of default 16px */
 }
 
 body {
@@ -98,7 +99,7 @@ p.services {
 
 /* Services section enhancements */
 #services {
-  background: radial-gradient(circle at top left, rgba(0, 217, 255, 0.15), rgba(10, 10, 10, 0.85));
+  background: rgba(30, 31, 28, 0.3);
   padding: 5rem 1rem;
   position: relative;
   overflow: hidden;
@@ -112,24 +113,19 @@ p.services {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: conic-gradient(from 180deg, #00d9ff40, #ffffff10, #ffd70030, #00d9ff40);
-  animation: rotateGlow 15s linear infinite;
+  background: transparent;
+  animation: none;
   z-index: 0;
   pointer-events: none;
 }
 
-@keyframes rotateGlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 /* Premium Cards */
 #services .card {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(0, 217, 255, 0.25);
-  box-shadow: 0 0 15px rgba(0, 217, 255, 0.1);
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(13, 79, 108, 0.772);
   backdrop-filter: blur(20px);
-  border-radius: 20px !important;
+  border-radius: 30px !important;
   transition: all 0.5s ease;
   position: relative;
   overflow: hidden;
@@ -140,8 +136,8 @@ p.services {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 20px;
-  background: linear-gradient(145deg, rgba(0,217,255,0.15), rgba(255,255,255,0.03));
+  border-radius: 30px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.5), rgba(12, 114, 161, 0.555));
   opacity: 0;
   transition: opacity 0.5s ease;
   pointer-events: none;
@@ -153,22 +149,21 @@ p.services {
 
 #services .card:hover {
   transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 0 30px rgba(0, 217, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.1);
-  border-color: rgba(0,217,255,0.6);
+  box-shadow: 0 8px 20px rgba(189, 189, 189, 0.667);
+  border-color: #d0d0d0;
 }
 
 /* Card Title Glow */
 #services .card-title {
   font-size: 1.3rem;
-  background: linear-gradient(90deg, #a4ffb6, #00d9ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  background-size: 400% 100%;
-  animation: shimmer 3s linear infinite;
+  color: var(--luxury-black);
+  font-weight: 600;
   position: relative;
   z-index: 2;
+}
+
+#services .card-text {
+  color: var(--luxury-black);
 }
 
 @keyframes shimmer {
@@ -176,12 +171,12 @@ p.services {
   100% { background-position: 300px 0; }
 }
 
-/* Button refinement */
+/* Button refinement - keeping Request Service Button CSS */
 #services .btn {
   border: 1px solid #00d9ff;
   color: #00d9ff;
   border-radius: 25px;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(41, 106, 123, 0.4);
   backdrop-filter: blur(10px);
   transition: all 0.4s ease;
   z-index: 2;
@@ -201,7 +196,7 @@ p.services {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(0,217,255,0.2), transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 70%);
   opacity: 0;
   transition: opacity 0.6s ease;
   pointer-events: none;
@@ -276,8 +271,6 @@ p.services {
   margin-bottom: -4rem;
 }
 
-
-
 .hero-content {
   position: relative;
   z-index: 1;
@@ -291,6 +284,45 @@ p.services {
   width: 100%;
   height: 100%;
   background: radial-gradient(ellipse at center, rgba(192, 160, 98, 0.1) 0%, rgba(10, 10, 10, 0) 70%);
+}
+
+#more-info {
+  background: rgba(30, 31, 28, 0.3);
+  padding: 3rem 1rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  font-size: small;
+}
+
+
+/* Mobile adjustments for hero */
+@media (max-width: 768px) {
+  .hero {
+    padding: 40px 20px;
+    margin-bottom: -2rem;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero {
+    padding: 30px 15px;
+    margin-bottom: -1.5rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.15;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
 }
 
 .spirit-of-ecstasy {
@@ -817,6 +849,18 @@ footer {
   .gallery-grid {
     grid-template-columns: 1fr;
   }
+  
+  .is-right .d-flex.flex-wrap {
+    flex-direction: column;
+    gap: 0.5rem !important;
+  }
+  
+  .is-right .badge {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.85rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -862,6 +906,101 @@ footer {
   padding-bottom: 2.5rem;
 }
 
-#book h2 { color: #ffd700; }
+#book h2 { color: #00d7e6; }
 
 #book a { color: #00d9ff; text-decoration: underline; }
+
+/* Services Accordion Styling */
+.accordion-services {
+  max-width: 960px; /* constrain accordion to a consistent column */
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.accordion {
+  --bs-accordion-bg: rgba(255, 255, 255, 0.02);
+  --bs-accordion-border-color: rgba(0, 217, 255, 0.2);
+  --bs-accordion-btn-active-bg: rgba(0, 217, 255, 0.1);
+  --bs-accordion-btn-active-color: #00b2bf;
+}
+
+.accordion-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(0, 217, 255, 0.15);
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  width: 100% !important;
+  display: block;
+  box-sizing: border-box;
+}
+
+.accordion-button {
+  background: rgba(26, 26, 26, 0.8);
+  color: var(--luxury-highlight);
+  border: none;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .accordion-button {
+    padding: 0.875rem 1rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+  }
+}
+
+@media (max-width: 576px) {
+  .accordion-button {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.2px;
+  }
+}
+
+.accordion-button:not(.collapsed) {
+  background: rgba(0, 217, 255, 0.1);
+  color: #00b9ce;
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  border-color: rgba(0, 217, 255, 0.3);
+  box-shadow: 0 0 0 0.25rem rgba(0, 217, 255, 0.25);
+}
+
+.accordion-button::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffd700' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-size: 1.5rem;
+}
+
+.accordion-body {
+  background: rgba(26, 26, 26, 0.6);
+  padding: 1.5rem;
+  color: var(--luxury-highlight);
+  border-top: 1px solid rgba(0, 217, 255, 0.1);
+}
+
+.accordion-body ul {
+  max-width: 100% !important;
+  margin: 0;
+  padding-left: 0.75rem;
+}
+
+.accordion-body { padding-left: 1.25rem; padding-right: 1.25rem; }
+
+.accordion-body .card-text {
+  color: #00d9ff;
+  font-weight: 500;
+  margin-bottom: 1rem !important;
+}
