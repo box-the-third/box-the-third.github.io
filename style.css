@@ -288,12 +288,18 @@ input:focus, select:focus, textarea:focus { outline: none; background: #fff; bor
 }
 
 @media (max-width: 768px) {
+
   .hero { padding-top: 100px; padding-bottom: 40px; }
   .display-title { font-size: 2.5rem; }
   .typing-container { font-size: 1.25rem; height: 2rem; margin-bottom: 1.5rem; }
+  .cursor{opacity: 0;}
+  .cursor-trail{opacity: 0;}
+
   
   .bento-grid { grid-template-columns: 1fr; gap: 16px; }
-  .card-about, .card-section-title, .service-card, .card-education, .card-gallery, .card-contact {
+  
+  .card-about, .card-section-title, .service-card, .card-education, .card-gallery, .card-contact 
+  {
     grid-column: span 1; padding: 24px;
   }
   
@@ -305,4 +311,5 @@ input:focus, select:focus, textarea:focus { outline: none; background: #fff; bor
   /* Logo Slider Adjustments for Mobile */
   .logos { gap: 2rem; }
   .logos img { height: 40px; }
+  
 }
