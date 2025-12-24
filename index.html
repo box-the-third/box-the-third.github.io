@@ -3,996 +3,229 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="YAS-beyond education" />
-  <meta name="keywords" content="Nahiyan, portfolio, web developer, designer, projects, artwork" />
-  <meta name="author" content="Nahiyan" />
-
-  <title>YesEdu</title>
-
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" as="style">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Belleza&family=Comfortaa:wght@300..700&family=Gloria+Hallelujah&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" as="style">
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" as="style">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="description" content="YAS - Beyond Education. Portfolio by Nahiyan." />
+  <title>YAS-beyond education</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Belleza&family=Comfortaa:wght@300..700&family=Gloria+Hallelujah&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-  <!-- Custom CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Times+New+Roman&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-
-  <!-- AOS Animation Library -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    AOS.init({
-      duration: 1000,  // smooth animation time
-      once: true       // animate only once
-    });
-  });
-</script>
-  <!-- Vanilla-Tilt -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
-
-<!--ChatBot-->
-<script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="v1NU2ywoo25ZYj2cWXVxv";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
-
+  <script>
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="v1NU2ywoo25ZYj2cWXVxv";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+  </script>
 </head>
 <body>
-  <!-- Pressure-sensitive background canvas -->
-  <canvas id="luxuryCanvas"></canvas>
-  <!-- Rain effect overlay -->
-  <div class="rain-overlay"></div>
-  <!-- Custom Cursor -->
-  <div class="cursor"></div>
-  <div class="cursor-follower"></div>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <span class="brand-name">YAS</span>
-        <span class="brand-ornament">beyond education</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav gap-3">
-          <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#services">My Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="assets/Nahiyan_One_Page_CV_2026.pdf">Download my CV</a></li>
-        </ul>
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo">
+        <img src="assets/yasnav.png" alt="YAS Logo" class="logo-img" style="max-width: 100px; height: auto;">
+      </div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="assets/Nahiyan_One_Page_CV_2026.pdf" class="btn-sm" target="_blank">Check my CV</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero text-center text-light" style="overflow: hidden; position: relative;">
+  <header class="hero">
     <div class="container">
-      <div class="hero-content">
-        <h1 class="display-4">Who is Nahiyan?</h1>
-        <h1 id="hero-title" style="white-space: nowrap;"></h1>
-          He is <span id="typed-text"></span>
-        </h1>
-        <div class="spirit-of-ecstasy">
-          <div class="ornament-line"></div>
-          <div class="ornament-icon">✧</div>
-          <div class="ornament-line"></div>
-        </div>
+      <h1 class="display-title">Who is Nahiyan?</h1>
+      <h2 class="typing-container">
+        He is <span id="typed-text"></span><span class="cursor-blink">|</span>
+      </h2>
+
+      <div class="cta-group">
+        <a href="#services" class="btn btn-primary">How can I help?</a>
+        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
       </div>
     </div>
   </header>
 
-  <!-- About Section -->
-<section id="about" class="about-section py-5">
-  <div class="container">
-    <div class="row align-items-center">
+  <main class="container">
+    <div class="bento-grid"> 
+    <video autoplay muted loop id="video-background">
+    <source src="https://www.pexels.com/download/video/35294037/" type="video/mp4" />
+      </video>
+      <div class="card card-about" id="about">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>About Me</h2>
+            <p>I’m <strong>Nahiyan</strong>, a certified Comp-Sci engineer and your friendly neighborhood's education counselor. I enjoy creating content, art, and exploring new ideas that connect creativity with impact.</p>
+            <p>I connect best with people through collaborative projects and tend to blend empathy with design. This website reflects what I care about: <strong>Continuous learning, sustainable growth, and helping others succeed.</strong></p>
+          </div>
+          <div class="about-image">
+             <img src="assets/meman.png" alt="Nahiyan">
+          </div>
+        </div>
       
-  <!-- Left Image / Visual -->
-      <div class="col-md-5 mb-4 mb-md-0" data-aos="fade-right">
-        <div class="about-frame d-flex justify-content-center align-items-center">
-          <img src="assets/Gemini_Generated_Image_byg91tbyg91tbyg9.png" alt="Nahiyan Ibn Ershad" class="img-fluid shadow-lg" style="width: 320px; height: 390px; object-fit: cover;">
+        <div class="d-flex flex-column gap-2 mt-4">
+          <a href="assets/Nahiyan-IbnErshad-1730667985914-Psychometric.pdf" class="btn-sm" style="color:black;">My Psychometrics</a>
         </div>
       </div>
 
-      <!-- Right Content -->
-      <div class="col-md-7" data-aos="fade-left">
-        <h2 class="fw-bold mb-3 text-center text-md-start">About Me</h2>
-        <div class="luxury-divider-small"></div>
-        <p class="about-text">
-          I’m <span class="highlight-name">Nahiyan, </span>a certified Comp-Sci engineer and your friendly neighborhood's education counselor.  
-          I enjoy creating content, art and exploring new ideas that connect creativity with impact.
+      <div class="card card-about" id="about">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>My Mission</h2>
+            <p>At YAS, the mission is to empower individuals through education and digital skills. I believe that with the right guidance and resources, anyone can unlock their potential and achieve their dreams.</p>
+            <p>Whether you're looking to enhance your study abroad journey, be more proficient digitally, or build a standout portfolio website, I'm here to help you every step of the way.</p>
+          </div>
+          <div class="about-image">
+             <img src="assets/unnamed.jpg" alt="Mission Image">
+        </div>
+      </div>
+      </div>
+
+      <div class="card-section-title" id="services">
+        <h2>My Services</h2>
+        <p>Practical, hands-on help to build your skills and digital presence.</p>
+      </div>
+
+      <div class="card service-card">
+        <h3>Digital Literacy</h3>
+        <p>I'll train your team in Google Suite, prompt engineering, and more with hands-on modules.
+          The training has an option to include Google and Microsoft Apps, Internet Safety, Portfolio Buildup, Presentation Skills and more.
+         <br> Floats your boat? Let's talk.</p>
+        <div class="pricing-list">
+          <div class="price-item"><span class="p-name">Starter</span><span class="p-cost">500 BDT</span></div>
+          <div class="price-item"><span class="p-name">Standard(Most Popular)</span><span class="p-cost">1,250 BDT</span></div>
+          <div class="price-item"><span class="p-name">Comp.</span><span class="p-cost">2,500 BDT</span></div>
+        </div>
+        <a href="#contact" class="btn-link">Request</a>
+      </div>
+
+      <div class="card service-card">
+        <h3>University Application and SOP</h3>
+        <p>Applying for your dream university requires a winning SOP (Statement of Purpose). <br>
+          We'll brainstorm your academics, create a draft, and polish your statement of purpose to make it truly stand out.
+        <br>Let's make your application unforgettable!
         </p>
-        <p class="about-text">
-          I connect best with people through collaborative projects,  
-          and tend to blend empathy with design. I use the tech at my disposal to solve real-world problems.  
-          This website reflects what I care about. Continuous learning, sustainable growth, creativity, and helping others succeed.
-        </p>
-        <a href="#services" class="btn btn-outline mt-3">Explore My Work</a>
-        <a href="assets/Nahiyan_One_Page_CV_2026.pdf" class="btn btn-outline mt-3">Download my CV</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Services Section -->
-<section id="services" class="py-5 text-light">
-  <div class="container">
-    <h2 class="text-center mb-4" data-aos="fade-up"><strong>How can I help?</strong></h2>
-    <p class="mb-3">I'm the kind of person who can help you with these things.</p>
-    
-    <div class="row g-4">
-      <!-- Digital Literacy Training -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up">
-        <div class="service-card h-100 shadow-lg" style="background: linear-gradient(135deg, #000000 0%, #2e647f 100%); border: 1px solid #3a7fa3; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-          <div class="card-body d-flex flex-column p-4">
-            <h5 class="card-title text-white mb-3 fw-bold">Digital Literacy Training</h5>
-            <p class="card-text" style="color: #e9e9e9; font-size: 0.95rem; flex-grow: 1; line-height: 1.6;">Practical, hands-on modules to build everyday digital skills.</p>
-            
-            <div class="mt-4">
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #4ab5ff; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Starter</h6>
-                <p class="mb-1 small fw-bold" style="color: #4ab5ff;">500 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">1 session: G‑Suite basics, email & file management.</p>
-              </div>
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #4ab5ff; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Standard</h6>
-                <p class="mb-1 small fw-bold" style="color: #4ab5ff;">1,250 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">3 sessions: G‑Suite + prompt engineering + safety.</p>
-              </div>
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #4ab5ff; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Comprehensive</h6>
-                <p class="mb-1 small fw-bold" style="color: #4ab5ff;">2,500 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">6 sessions with assessments & post-training support.</p>
-              </div>
-            </div>
-            
-            <button class="btn btn-outline-light w-100 mt-3" data-bs-toggle="modal" data-bs-target="#service1Modal" style="border-width: 2px;">Request Service</button>
-          </div>
+        <div class="pricing-list">
+          <div class="price-item"><span class="p-name">Draft</span><span class="p-cost">1,500 BDT</span></div>
+          <div class="price-item"><span class="p-name">Standard</span><span class="p-cost">2,500 BDT</span></div>
+          <div class="price-item"><span class="p-name">Premium</span><span class="p-cost">4,500 BDT</span></div>
         </div>
+        <a href="#contact" class="btn-link">Request</a>
       </div>
 
-      <!-- SOP Writing -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up">
-        <div class="service-card h-100 shadow-lg" style="background: linear-gradient(135deg, #000000 0%, #2e647f 100%); border: 1px solid #3a7fa3; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-          <div class="card-body d-flex flex-column p-4">
-            <h5 class="card-title text-white mb-3 fw-bold">University Applications and SOP Writing Assistance</h5>
-            <p class="card-text" style="color: #e9e9e9; font-size: 0.95rem; flex-grow: 1; line-height: 1.6;">Craft a compelling statement of purpose for university applications.</p>
-            
-            <div class="mt-4">
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #ff6b9d; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Draft</h6>
-                <p class="mb-1 small fw-bold" style="color: #ff6b9d;">1,500 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">Brainstorm + 1 draft with basic edits.</p>
-              </div>
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #ff6b9d; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Standard</h6>
-                <p class="mb-1 small fw-bold" style="color: #ff6b9d;">2,500 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">Tailored draft + 2 revisions & program alignment.</p>
-              </div>
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #ff6b9d; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Premium</h6>
-                <p class="mb-1 small fw-bold" style="color: #ff6b9d;">4,500 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">Deep edit + mock interview prep included.</p>
-              </div>
-            </div>
-            
-            <button class="btn btn-outline-light w-100 mt-3" data-bs-toggle="modal" data-bs-target="#service2Modal" style="border-width: 2px;">Request Service</button>
-          </div>
+      <div class="card service-card">
+        <h3>CV Writing</h3>
+        <p>You might already have a good CV, but are you struggling with getting interviews?<br>
+          Try our ATS-friendly approach to CV's done for you, I'll of course, consult with you before we add quantifiable metrics and get you recruiter ready for 2026</p>
+        <div class="pricing-list">
+          <div class="price-item"><span class="p-name">Basic</span><span class="p-cost">150 BDT</span></div>
+          <div class="price-item"><span class="p-name">Standard</span><span class="p-cost">350 BDT</span></div>
+          <div class="price-item"><span class="p-name">Premium</span><span class="p-cost">750 BDT</span></div>
         </div>
+        <a href="#contact" class="btn-link">Request</a>
       </div>
 
-      <!-- CV Writing -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up">
-        <div class="service-card h-100 shadow-lg" style="background: linear-gradient(135deg, #000000 0%, #2e647f 100%); border: 1px solid #3a7fa3; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-          <div class="card-body d-flex flex-column p-4">
-            <h5 class="card-title text-white mb-3 fw-bold">CV Writing Services</h5>
-            <p class="card-text" style="color: #e9e9e9; font-size: 0.95rem; flex-grow: 1; line-height: 1.6;">ATS‑friendly CVs that present your strengths clearly.</p>
-            
-            <div class="mt-4">
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #ffc857; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Basic</h6>
-                <p class="mb-1 small fw-bold" style="color: #ffc857;">150 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">Format refresh + 2 revisions for readability.</p>
-              </div>
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #ffc857; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Standard</h6>
-                <p class="mb-1 small fw-bold" style="color: #ffc857;">350 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">Rewritten CV + cover letter with ATS check.</p>
-              </div>
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #ffc857; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Premium</h6>
-                <p class="mb-1 small fw-bold" style="color: #ffc857;">750 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">Full rewrite + 3 role versions & LinkedIn tips.</p>
-              </div>
-            </div>
-            
-            <button class="btn btn-outline-light w-100 mt-3" data-bs-toggle="modal" data-bs-target="#service3Modal" style="border-width: 2px;">Request Service</button>
-          </div>
+      <div class="card service-card">
+        <h3>IELTS Training</h3>
+        <p>Strategies to hit your target band.</p>
+        <div class="pricing-list">
+          <div class="price-item"><span class="p-name">Dip your Toes</span><span class="p-cost">800 BDT</span></div>
+          <div class="price-item"><span class="p-name">I'm Serious</span><span class="p-cost">1,600 BDT</span></div>
+          <div class="price-item"><span class="p-name">Dreamer</span><span class="p-cost">3,000 BDT</span></div>
         </div>
+        <a href="#contact" class="btn-link">Request</a>
       </div>
 
-      <!-- IELTS Training -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up">
-        <div class="service-card h-100 shadow-lg" style="background: linear-gradient(135deg, #000000 0%, #2e647f 100%); border: 1px solid #3a7fa3; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-          <div class="card-body d-flex flex-column p-4">
-            <h5 class="card-title text-white mb-3 fw-bold">IELTS Training</h5>
-            <p class="card-text" style="color: #e9e9e9; font-size: 0.95rem; flex-grow: 1; line-height: 1.6;">Focused practice & strategies to hit your target band.</p>
-            
-            <div class="mt-4">
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #52d126; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Dip Your Toes</h6>
-                <p class="mb-1 small fw-bold" style="color: #52d126;">800 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">2 FREE sessions + personalized study plan.</p>
-              </div>
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #52d126; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">I'm Serious</h6>
-                <p class="mb-1 small fw-bold" style="color: #52d126;">1,600 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">6 classes with speaking & writing feedback.</p>
-              </div>
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #52d126; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Dreamer</h6>
-                <p class="mb-1 small fw-bold" style="color: #52d126;">3,000 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">Intensive 10 sessions with mock tests.</p>
-              </div>
-            </div>
-            
-            <button class="btn btn-outline-light w-100 mt-3" data-bs-toggle="modal" data-bs-target="#service4Modal" style="border-width: 2px;">Request Service</button>
-          </div>
+      <div class="card service-card">
+        <h3>Portfolio Site</h3>
+        <p>Your polished online showcase.</p>
+        <div class="pricing-list">
+          <div class="price-item"><span class="p-name">Novice</span><span class="p-cost">1-2K BDT</span></div>
+          <div class="price-item"><span class="p-name">Holei-Hobe</span><span class="p-cost">5-8K BDT</span></div>
+          <div class="price-item"><span class="p-name">Premium</span><span class="p-cost">10K+ BDT</span></div>
         </div>
+        <a href="#contact" class="btn-link">Request</a>
       </div>
 
-      <!-- Portfolio Website -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up">
-        <div class="service-card h-100 shadow-lg" style="background: linear-gradient(135deg, #000000 0%, #2e647f 100%); border: 1px solid #3a7fa3; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-          <div class="card-body d-flex flex-column p-4">
-            <h5 class="card-title text-white mb-3 fw-bold">Portfolio Website + Hosting</h5>
-            <p class="card-text" style="color: #e9e9e9; font-size: 0.95rem; flex-grow: 1; line-height: 1.6;">A polished online showcase with hosting & QR code.</p>
-            
-            <div class="mt-4">
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #a78bfa; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Novice</h6>
-                <p class="mb-1 small fw-bold" style="color: #a78bfa;">1-2K BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">Single‑page portfolio, GitHub hosting & QR code.</p>
-              </div>
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #a78bfa; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Holei-Hobe</h6>
-                <p class="mb-1 small fw-bold" style="color: #a78bfa;">5-8K BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">Multi‑section site, custom domain & analytics.</p>
-              </div>
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #a78bfa; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Premium</h6>
-                <p class="mb-1 small fw-bold" style="color: #a78bfa;">10-50K BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">Custom design, CMS & 1 month support.</p>
-              </div>
-            </div>
-            
-            <button class="btn btn-outline-light w-100 mt-3" data-bs-toggle="modal" data-bs-target="#service5Modal" style="border-width: 2px;">Request Service</button>
-          </div>
+      <div class="card service-card">
+        <h3>Digital Card</h3>
+        <p>Scannable contact cards.</p>
+        <div class="pricing-list">
+          <div class="price-item"><span class="p-name">Digital</span><span class="p-cost">1,200 BDT</span></div>
+          <div class="price-item"><span class="p-name">Print</span><span class="p-cost">2,000 BDT</span></div>
         </div>
+        <a href="#contact" class="btn-link">Request</a>
       </div>
 
-      <!-- Digital Business Card -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up">
-        <div class="service-card h-100 shadow-lg" style="background: linear-gradient(135deg, #000000 0%, #2e647f 100%); border: 1px solid #3a7fa3; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-          <div class="card-body d-flex flex-column p-4">
-            <h5 class="card-title text-white mb-3 fw-bold">Digital Business Card + QR</h5>
-            <p class="card-text" style="color: #e9e9e9; font-size: 0.95rem; flex-grow: 1; line-height: 1.6;">Scannable contact cards with instant social profile sharing.</p>
-            
-            <div class="mt-4">
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #f472b6; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Digital</h6>
-                <p class="mb-1 small fw-bold" style="color: #f472b6;">1,200 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">Online card + QR & shareable link.</p>
-              </div>
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #f472b6; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">Print‑Ready</h6>
-                <p class="mb-1 small fw-bold" style="color: #f472b6;">2,000 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">Custom design + high‑res printable files.</p>
-              </div>
-              <div class="pricing-tier mb-3 p-3" style="background: rgba(255,255,255, 0.08); border-left: 3px solid #f472b6; border-radius: 6px;">
-                <h6 class="text-white mb-1 small">NFC + Premium</h6>
-                <p class="mb-1 small fw-bold" style="color: #f472b6;">3,000 BDT</p>
-                <p class="small mb-0" style="color: #d0d0d0; line-height: 1.5;">NFC setup + premium multi‑link landing page.</p>
-              </div>
-            </div>
-            
-            <button class="btn btn-outline-light w-100 mt-3" data-bs-toggle="modal" data-bs-target="#service6Modal" style="border-width: 2px;">Request Service</button>
-          </div>
-        </div>
+         <div class="card-section-title" id="projects">
+        <h2>My Projects</h2>
+        <p>Take a look at the projects I've done so far!</p>
       </div>
-    </div>
-  </div>
-</section>
 
-<section id="more-info" class="py-5 text-light">
-  <div class="container">
-    <div class="text-center mt-5 is-right" data-aos="fade-up">
-      <h3 class="fw-bold">Is This Right for You?</h3>
-      <p class="mx-auto" style="max-width:720px;">If you want clarity, confidence, and practical help, YAS goes beyond education. I can help you if you are:</p>
-      <div class="d-flex flex-wrap justify-content-center gap-2 gap-md-3 mt-3">
-      <span class="badge bg-dark border">Applying to universities</span>
-      <span class="badge bg-dark border">Looking to improve your CV</span>
-      <span class="badge bg-dark border">Writing a top‑notch SOP (Statement of Purpose) </span>
-      <span class="badge bg-dark border">New to Learning AI or digital tools</span>
-      <span class="badge bg-dark border">Preparing for IELTS</span>
-      <span class="badge bg-dark border">Building your personal or business brand</span>
-      <span class="badge bg-dark border">Creating a portfolio or digital identity</span>
-      <span class="badge bg-dark border">Student • Job seeker • Freelancer • Professional</span>
+      <div class="card service-card">
+        <h3>5 day Forecast DHK</h3>
+        <p>A cool frontend UI project made with Bootstrap and JS.</p>
+        <a href="https://box-the-third.github.io/5dayweather/" class="btn-link">View Project →</a>
       </div>
-    </div>
-  </div>
 
-    <!-- Proof of Credibility -->
-    <div class="text-center mt-5 is-right" data-aos="fade-up">
-      <h3 class="fw-bold">Why you can trust me</h3>
-      <p class="mx-auto" style="max-width:720px;">Microsoft Certified AI Prompt Engineer<br>
-      Certified Education Counselor<br>
-      Published researcher on AI‑based solutions for Software Engineering (ResearchGate) <br>
-      Completed 50+ successful SOP & CV projects for students worldwide <br>
-      100+ hours of IELTS tutoring with proven score improvements
-      <br></p>
-    </div>
+      <div class="card service-card">
+        <h3>Taker Inc.</h3>
+        <p>A platform that connects Non-Emergency Wheelchair Accessible Vehicle (WAV) providers to patients and drivers in New York.</p>
+        <a href="https://box-the-third.github.io/TakerInc/" class="btn-link">View Project →</a>
+      </div>
 
-    <!-- Testimonial -->
-    <div class="text-center mt-5 is-right" data-aos="fade-up">
-      <h3 class="fw-bold">What Clients Say</h3>
-      <blockquote class="blockquote mx-auto" style="max-width:720px;">
-        <p>“Thank you so much. I honestly did not expect my IELTS score to reach 7! Alhamdulillah, I am happy and I am so grateful to Nahiyan. He really helped me a lot !”</p>
-        <footer class="blockquote-footer">Rownak Mohammad Siraj (NSU, Bangladesh)</footer>
-      </blockquote>
-    </div>
-  </div>
-</section>
+      <div class="card service-card">
+        <h3>BelaCosmetics</h3>
+        <p>An E-commerce platform developed for a Korean Beauty Product Brand [COSRX]</p>
+        <a href="https://box-the-third.github.io/eCommerce-frontend/" class="btn-link">View Project →</a>
+      </div>
 
-<!-- Modals -->
-<!-- Service 1 Modal -->
-<div class="modal fade" id="service1Modal" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content text-dark">
-      <div class="modal-header">
-        <h5 class="modal-title">Digital Literacy Training</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <p>I'll train your team in Google Suite, prompt engineering, and more with hands-on modules.<br>
-        <br>
-       The training has an option to include Google and Microsoft Apps, Internet Safety, Portfolio Buildup, Presentation Skills and more. 
-        <br>
-        Floats your boat? Let's talk.
-        </p>
-        <form action="https://formspree.io/f/mjkarwza" method="POST">
-          <input type="hidden" name="service" value="Digital Literacy Training">
-          <div class="mb-3">
-            <label for="name1" class="form-label">Name</label>
-            <input type="text" name="name" id="name1" class="form-control" required autocomplete="name">
-          </div>
-          <div class="mb-3">
-            <label for="email1" class="form-label">Email</label>
-            <input type="email" name="email" id="email1" class="form-control" required autocomplete="email">
-          </div>
-          <div class="mb-3">
-            <label for="org1" class="form-label">Organization (optional)</label>
-            <input type="text" name="organization" id="org1" class="form-control" autocomplete="organization">
-          </div>
-          <div class="mb-3">
-            <label for="interest1" class="form-label">Area of Interest</label>
-            <select name="interest" id="interest1" class="form-select" required>
-              <option value="">Select...</option>
-              <option value="Google Suite">Google Suite</option>
-              <option value="Microsoft Apps">Microsoft Apps</option>
-              <option value="Prompt Engineering">Prompt Engineering</option>
-              <option value="Internet Safety">Internet Safety</option>
-              <option value="Portfolio Buildup">Portfolio Buildup</option>
-              <option value="Presentation Skills">Presentation Skills</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="message1" class="form-label">Message</label>
-            <textarea name="message" id="message1" class="form-control" rows="3" placeholder="Tell me more about your needs..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-success w-100">Submit Request</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="modal fade" id="service2Modal" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content text-dark">
-      <div class="modal-header">
-        <h5 class="modal-title">SOP Writing Services</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <p>I'll help you craft a winning SOP that will help you apply for your dream university.<br><br>
-        We'll brainstorm, draft, and polish your statement of purpose to make it truly stand out.<br><br>
-        Let's make your application unforgettable!
-        </p>
-        <form action="https://formspree.io/f/mjkarwza" method="POST">
-          <input type="hidden" name="service" value="SOP Writing Services">
-          <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input type="text" name="name" class="form-control" required>
-          </div>
-          <div class="mb-3"></div>
-            <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" required>
-         
-          <div class="mb-3">
-            <label class="form-label">University or Course</label>
-            <input type="text" name="university" class="form-control" placeholder="University or Course">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Urgency</label>
-            <select name="urgency" class="form-select" required>
-              <option value="">Urgency</option>
-              <option>Normal (3-4 days)</option>
-              <option>Express (24 hours)</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Approx. Word Count</label>
-            <input type="number" name="word_count" class="form-control" placeholder="Approx. Word Count">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Message</label>
-            <textarea name="message" class="form-control" rows="3"></textarea>
-          </div>
-          <button type="submit" class="btn btn-success w-100">Submit Request</button>
-        </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Service 3 Modal -->
-<div class="modal fade" id="service3Modal" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content text-dark">
-      <div class="modal-header">
-        <h5 class="modal-title">CV Writing Services</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <p>Send me your old CV and details. I’ll craft a tailored, professional ATS- Friendly CV for you along with a FREE Cover Letter for your chosen job!.</p>
-        <form action="https://formspree.io/f/mjkarwza" method="POST" enctype="multipart/form-data">
-          <input type="hidden" name="service" value="CV Writing Services">
-          <div class="mb-3"><label class="form-label">Name</label><input type="text" name="name" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
-          <div class="mb-3">
-            <label class="form-label">Experience Level</label>
-            <select name="experience" class="form-select" required>
-              <option value="">Experience Level</option>
-              <option>Fresher/Student</option>
-              <option>Entry/Mid-Level</option>
-              <option>Senior</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">CV Type</label>
-            <select name="cv_type" class="form-select" required>
-              <option value="">CV Type</option>
-              <option>Academic</option>
-              <option>Creative</option>
-              <option>Corporate</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Field or Industry</label>
-            <input type="text" name="industry" class="form-control" placeholder="Field or Industry (e.g., IT, Marketing)">
-          </div>
-          <div class="mb-3"><label class="form-label">Message</label><textarea name="message" class="form-control" rows="3"></textarea></div>
-          <button type="submit" class="btn btn-success w-100">Submit Request</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Service 4 Modal -->
-<div class="modal fade" id="service4Modal" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content text-dark">
-      <div class="modal-header">
-        <h5 class="modal-title">IELTS Training</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <p>Learn from the best. First two classes are free! <br><br>
-        I’ll help you boost your English skills with personalized lessons, practice tests, and feedback.<br><br>
-        Let's get you that band score!
-        </p>
-        <form action="https://formspree.io/f/mjkarwza" method="POST">
-          <input type="hidden" name="service" value="IELTS Training">
-          <div class="mb-3"><label class="form-label">Name</label><input type="text" name="name" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
-          <div class="mb-3">
-            <label class="form-label">IELTS Module</label>
-            <select name="module" class="form-select" required>
-              <option value="">IELTS Module</option>
-              <option>Academic</option>
-              <option>General</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Target Band</label>
-            <input type="text" name="target_band" class="form-control" placeholder="Target Band (e.g. 7.5)">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Preferred Schedule or Time</label>
-            <input type="text" name="schedule" class="form-control" placeholder="Preferred Schedule or Time">
-          </div>
-          <div class="mb-3"><label class="form-label">Message</label><textarea name="message" class="form-control" rows="3"></textarea></div>
-          <button type="submit" class="btn btn-success w-100">Submit Request</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Service 5 Modal -->
-<div class="modal fade" id="service5Modal" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content text-dark">
-      <div class="modal-header">
-        <h5 class="modal-title">Portfolio Website + Hosting</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <p>Like my style? I’ll build your portfolio from scratch, host it, and give you a QR Code to share with anyone.<br><br>
-        Perfect for creatives, freelancers, and professionals looking to showcase their work online.<br><br>
-        Let's create something amazing together!
-        </p>
-        <form action="https://formspree.io/f/mjkarwza" method="POST">
-          <input type="hidden" name="service" value="Portfolio Website + Hosting">
-          <div class="mb-3"><label class="form-label">Name</label><input type="text" name="name" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
-          <div class="mb-3">
-            <label class="form-label">Profession or Purpose</label>
-            <input type="text" name="profession" class="form-control" placeholder="What's your line of work?">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Preferred Style</label>
-            <select name="style" class="form-select" required>
-              <option value="">No Preference[Prefer to talk and find out]</option>
-              <option>Minimal</option>
-              <option>Bold</option>
-              <option>Elegant</option>
-              <option>Modern</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Reference Website (optional)</label>
-            <input type="url" name="reference_link" class="form-control" placeholder="Reference Website (optional)">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Budget Range</label>
-            <select name="budget" class="form-select" required>
-              <option value="">Budget Range</option>
-              <option>Under 5,000 BDT</option>
-              <option>5,000 – 10,000 BDT</option>
-              <option>10,000 – 50,000 BDT</option>
-              <option>Custom Quote</option>
-            </select>
-          </div>
-          <div class="mb-3"><label class="form-label">Message</label><textarea name="message" class="form-control" rows="3"></textarea></div>
-          <button type="submit" class="btn btn-success w-100">Submit Request</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Service 6 Modal -->
-<div class="modal fade" id="service6Modal" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content text-dark">
-      <div class="modal-header"><h5 class="modal-title">Digital Business Card + QR</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-      <div class="modal-body">
-        <p>Get a scannable QR Code embedded on your backpack or keyring that contains your LinkedIn, email, and key contact details. No more running out of cards.</p>
-        <form action="https://formspree.io/f/mjkarwza" method="POST">
-          <input type="hidden" name="service" value="Digital Business Card + QR">
-          <div class="mb-3">
-            <label class="form-label">Brand or Business Name</label>
-            <input type="text" name="brand_name" class="form-control" placeholder="Brand or Business Name">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Card Type</label>
-            <select name="card_type" class="form-select" required>
-              <option value="">Card Type</option>
-              <option>Static</option>
-              <option>NFC Enabled</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Preferred Color or Theme</label>
-            <input type="text" name="color_theme" class="form-control" placeholder="Preferred Color or Theme">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Delivery Format</label>
-            <select name="delivery_format" class="form-select" required>
-              <option value="">Delivery Format</option>
-              <option>Digital</option>
-              <option>Print-Ready</option>
-            </select>
-          </div>
-          <div class="mb-3"><label class="form-label">Name</label><input type="text" name="name" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Message</label><textarea name="message" class="form-control" rows="3"></textarea></div>
-          <button type="submit" class="btn btn-success w-100">Submit Request</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-  <!-- Education & Experience Section -->
-<section id="education" class="py-5 text-light">
-  <div class="container">
-    <h2 class="text-center mb-4" data-aos="fade-up"><strong>Education & Experience</strong></h2>
-    <p class="mb-3">Everything that I've learnt so far, I have always tried to apply in real life. I am grateful.</p>
-    
-    <div class="row g-4">
-      <!-- Education Card -->
-      <div class="col-md-6 col-lg-6" data-aos="fade-up">
-        <div class="service-card h-100 shadow-lg" style="background: linear-gradient(135deg, #000000 0%, #2e647f 100%); border: 1px solid #3a7fa3; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-          <div class="card-body d-flex flex-column p-4">
-            <h5 class="card-title text-white mb-3 fw-bold">My Education</h5>
-            
-            <p class="mb-3" style="color: #e9e9e9; font-size: 0.95rem; line-height: 1.6;">
-              <span style="color: #4ab5ff; font-weight: 600;">Bsc. Computer Science and Engineering</span><br>
-              <span style="color: #d0d0d0;">Independent University, Bangladesh</span>
-            </p>
-            
-            <p class="mb-3" style="color: #e9e9e9; font-size: 0.95rem; line-height: 1.6;">
-              <span style="color: #4ab5ff; font-weight: 600;">Bsc. Networking and Cybersecurity Engineering</span><br>
-              <span style="color: #d0d0d0;">Al-Yamamah University</span>
-            </p>
-
-            <h6 class="text-white fw-bold mt-3 mb-2">Certifications</h6>
-                        
-            <div style="color: #e9e9e9; font-size: 0.9rem; line-height: 1.8;">
-              <p class="mb-2"><span style="color: #4ab5ff; font-weight: 600;">AI Prompt Engineer (Co-pilot)</span><br><small style="color: #d0d0d0;">Microsoft</small></p>
-              <p class="mb-2"><span style="color: #4ab5ff; font-weight: 600;">Certified UK Agent Counselor</span><br><small style="color: #d0d0d0;">British Council</small></p>
-              <p class="mb-2"><span style="color: #4ab5ff; font-weight: 600;">IELTS Band Score</span><br><small style="color: #d0d0d0;">7.5</small></p>
-              <p class="mb-2"><span style="color: #4ab5ff; font-weight: 600;">Java Fundamentals</span></p><small style="color: #d0d0d0;">Oracle Academy</small></p>
-              <p class="mb-2"><span style="color: #4ab5ff; font-weight: 600;">Teaching Online Webinar</span><br><small style="color: #d0d0d0;">British Council</small></p>
-              <p><span style="color: #4ab5ff; font-weight: 600;">Guinness World Records</span><br><small style="color: #d0d0d0;">Most Virtual 5km Runs in 24 Hours</small></p>
-            </div>
-          </div>
-        </div>
-      </div>
       
-      <!-- Experience Card -->
-      <div class="col-md-6 col-lg-6" data-aos="fade-up">
-        <div class="service-card h-100 shadow-lg" style="background: linear-gradient(135deg, #000000 0%, #2e647f 100%); border: 1px solid #3a7fa3; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-          <div class="card-body d-flex flex-column p-4">
-            <h5 class="card-title text-white mb-3 fw-bold">Work Experience</h5>
-            
-            <div style="color: #e9e9e9; font-size: 0.9rem; line-height: 1.8; flex-grow: 1;">
-              <p class="mb-2"><span style="color: #4ab5ff; font-weight: 600;">Education Counsellor (Team Lead)</span><br><strong style="color: #d0d0d0;">Global Pathway Experts LTD.</strong><br><small style="color: #a0a0a0;">10/2024 - 11/2025</small></p>
-              <p class="mb-2"><span style="color: #4ab5ff; font-weight: 600;">Front-End Engineer (Intern)</span><br><strong style="color: #d0d0d0;">Belaface</strong><br><small style="color: #a0a0a0;">06/2024 - 10/2024</small></p>
-              <p class="mb-2"><span style="color: #4ab5ff; font-weight: 600;">Voice-Over Artist</span><br><strong style="color: #d0d0d0;">Staff Asia</strong><br><small style="color: #a0a0a0;">03/2023 - 06/2023 [Remote]</small></p>
-              <p class="mb-2"><span style="color: #4ab5ff; font-weight: 600;">Appointment Setter</span><br><strong style="color: #d0d0d0;">Soleil Energy</strong><br><small style="color: #a0a0a0;">01/2022 - 03/2022, Maryland</small></p>
-              <p class="mb-2"><span style="color: #4ab5ff; font-weight: 600;">Official Contributor</span><br><strong style="color: #d0d0d0;">The Business Standard</strong><br><small style="color: #a0a0a0;">01/2021 - 12/2021, Dhaka</small></p>
-              <p><span style="color: #4ab5ff; font-weight: 600;">English Language Instructor</span><br><strong style="color: #d0d0d0;">Mentors'</strong><br><small style="color: #a0a0a0;">12/2018 - 12/2019, Dhaka</small></p>
-            </div>
-
-            <div class="d-flex flex-column gap-2 mt-4">
-              <a href="assets/Nahiyan_One_Page_CV_2026.pdf" target="_blank" class="btn btn-outline-light w-100" style="border-width: 2px;">My Current CV</a>
-              <a href="assets/Nahiyan-IbnErshad-1730667985914-Psychometric.pdf" target="_blank" class="btn btn-outline-light w-100" style="border-width: 2px;">My Psychometrics</a>
-            </div>
+      <div class="card card-contact" id="contact">
+        <h2>Get in Touch</h2>
+        <p>Ready to start? Fill out the form below.</p>
+        
+        <form action="https://formspree.io/f/mjkarwza" method="POST">
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" name="email" id="email" placeholder="name@example.com" required>
           </div>
+          <div class="form-group">
+            <label for="service-select">Interested In</label>
+            <select name="service" id="service-select">
+                <option value="General Inquiry">booking a Free Consultation?</option>
+                <option value="Digital Literacy">Digital Literacy Training</option>
+                <option value="SOP Writing">SOP Writing</option>
+                <option value="CV Writing">CV Writing</option>
+                <option value="IELTS">IELTS Training</option>
+                <option value="Portfolio Website">Portfolio Website</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea name="message" id="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
+        </form>
+         <div class="social-media">
+          <a href="https://www.linkedin.com/in/nahiyanibnershad/" class="social-icon" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/channel/UCU1xLoQygr9ECtEmQtnFfZw" class="social-icon" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.instagram.com/yasbeyondedu/?g=5" class="social-icon" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61584417686122" class="social-icon" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
         </div>
+
       </div>
     </div>
-  </div>
-</section>
+  
 
-<!-- Skills Section -->
-<section id="skills" class="py-5 text-light">
-  <div class="container">
-    <div class="project-card" data-tilt>
-      <h2 class="text-center mb-4" data-aos="fade-up">Skills & Impact</h2>
-      <div data-aos="zoom-in">
-        <p>You'll find my core skills mapped to real projects and measurable outcomes, so you see not just what I can do, but the impact it delivered.</p>
-      </div>
-    </div>
+  </main>
 
-    <div class="row g-4 mt-4">
-      <!-- Programming -->
-      <div class="col-md-4">
-        <div class="card h-100 border-0 shadow">
-          <div class="card-body">
-            <h5 class="luxury-heading text-center">Programming</h5>
-            <div class="luxury-divider-small mx-auto"></div>
-            <ul class="luxury-list mt-3">
-              <li>
-                <strong>JavaScript</strong> — Interactive UI & client-side logic for
-                <a href="https://box-the-third.github.io/5dayweather/" class="text-decoration-none">5 day Forecast DHK</a>.
-                Result: reduced perceived load by 40% with lazy rendering and improved UX engagement by 25%.
-              </li>
-              <li>
-                <strong>Python</strong> — backend data processing prototypes and CSV ETL used for analytics; enabled fast batch processing for project reporting (cut processing time by ~60% in tests).
-              </li>
-              <li>
-                <strong>Dart / Flutter</strong> — cross-platform Weather App (mobile) delivering 60fps animations and offline caching; improved startup time and decreased data usage with smart caching.
-              </li>
-              <li>
-                <strong>Java</strong> — core algorithms and utility tools used in automation and local tooling for testing workflows across projects.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Web Technologies -->
-      <div class="col-md-4">
-        <div class="card h-100 border-0 shadow">
-          <div class="card-body">
-            <h5 class="luxury-heading text-center">Web Technologies</h5>
-            <div class="luxury-divider-small mx-auto"></div>
-            <ul class="luxury-list mt-3">
-              <li>
-                <strong>HTML / CSS / Bootstrap</strong> — Responsive, accessible layouts for
-                <a href="https://box-the-third.github.io/eCommerce-frontend/" class="text-decoration-none">BelaCosmetics</a> and
-                <a href="https://box-the-third.github.io/SuperDrib/" class="text-decoration-none">SuperDrib</a>.
-                Result: consistent mobile experience across 3 breakpoints and <em>~15% improvement</em> in conversion-like interactions in prototypes.
-              </li>
-              <li>
-                <strong>React.js</strong> — component-driven UI patterns and state management (used in prototypes to reduce re-rendering costs, improving UI responsiveness by ~30% in tests).
-              </li>
-              <li>
-                <strong>Node.js</strong> — lightweight server endpoints and API proxies for
-                <a href="https://box-the-third.github.io/TakerInc/" class="text-decoration-none">Taker Inc.</a>, reducing round-trip overhead and improving form submission reliability.
-              </li>
-              <li>
-                <strong>Vue.js</strong> — quick interactive widgets and dashboards for admin mockups and client demos.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tools & Platforms -->
-      <div class="col-md-4">
-        <div class="card h-100 border-0 shadow">
-          <div class="card-body">
-            <h5 class="luxury-heading text-center">Tools & Platforms</h5>
-            <div class="luxury-divider-small mx-auto"></div>
-            <ul class="luxury-list mt-3">
-              <li>
-                <strong>GitHub</strong> — repo + CI workflows for automated deploys to GitHub Pages; decreased manual deploy time from minutes to seconds.
-              </li>
-              <li>
-                <strong>Figma</strong> — high-fidelity prototypes for BelaCosmetics and Taker Inc., cutting UI iteration cycles by ~50% and enabling stakeholder sign-off before dev.
-              </li>
-              <li>
-                <strong>VS Code</strong> — standardized editor setup, linting and formatting that reduced code-review churn and sped up onboarding.
-              </li>
-              <li>
-                <strong>Postman</strong> — API testing & contract validation for backend endpoints used in Taker Inc. and Weather App, preventing regressions and ensuring reliable integrations.
-              </li>
-              <li>
-                <strong>Adobe Suite</strong> — asset production (thumbnails, banners, mockups) used across Socials and project pages; improved visual polish and click-through appeal.
-              </li>
-            </ul>
-
-            <div class="mt-4">
-              <a href="#projects" class="btn btn-outline w-100">See Projects that Demonstrate These Skills</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Quick project-skill matrix -->
-    <div class="row g-4 mt-5">
-      <div class="col-12">
-        <div class="card border-0 shadow">
-          <div class="card-body">
-            <h6 class="fw-bold">Project → Key Skills & Outcomes</h6>
-            <div class="luxury-divider-small"></div>
-            <div class="row g-3 mt-3">
-              <div class="col-md-4">
-                <strong>5 day Forecast DHK</strong>
-                <p class="mb-0 small">JS, Bootstrap — interactive forecast UI, lazy loading, ~40% faster perceived load.</p>
-              </div>
-              <div class="col-md-4">
-                <strong>Taker Inc.</strong>
-                <p class="mb-0 small">React/Node — prototype routing & booking flows, improved form reliability and reduced onboarding friction.</p>
-              </div>
-              <div class="col-md-4">
-                <strong>BelaCosmetics</strong>
-                <p class="mb-0 small">HTML/CSS, Figma, Adobe — responsive e‑commerce front-end and polished assets; faster design→dev handoff.</p>
-              </div>
-              <div class="col-md-4 mt-3">
-                <strong>Weather App (Flutter)</strong>
-                <p class="mb-0 small">Dart/Flutter — cross-platform mobile with offline caching, smooth 60fps UI, reduced data use.</p>
-              </div>
-              <div class="col-md-4 mt-3">
-                <strong>SuperDrib</strong>
-                <p class="mb-0 small">Bootstrap, JS — prototype UI interactions and micro-animations to improve engagement in demos.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-  <!-- Projects Section -->
-  <section id="projects" class="py-5 text-light">
-    <div class="container">
-     <div class=" project-card" data-tilt>
-      <h2 class="text-center mb-4" data-aos="fade-up"> My Projects</h2>
-       <div data-aos="zoom-in">
-         <p>Take a look at the projects I've done so far!</p>
-       </div> 
-     </div> 
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-body">
-              <h5 class="card-title">5 day Forecast DHK</h5>
-              <p class="card-text">A cool frontend UI project made with Bootstrap and JS.</p>
-              <a href="https://box-the-third.github.io/5dayweather/" class="btn btn-outline">View Website</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-body">
-              <h5 class="card-title">Taker Inc.</h5>
-              <p class="card-text">A platform that connects Non-Emergency Wheelchair Accessible Vehicle (WAV) providers to patients and drivers in New York.</p>
-              <a href="https://box-the-third.github.io/TakerInc/" class="btn btn-outline">View Website</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-body">
-              <h5 class="card-title">BelaCosmetics</h5>
-              <p class="card-text">An E-commerce platform developed for a Korean Beauty Product Brand [COSRX]</p>
-              <a href="https://box-the-third.github.io/eCommerce-frontend/" class="btn btn-outline">View Website</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-body">
-              <h5 class="card-title">Weather App</h5>
-              <p class="card-text">A mobile app using Flutter and Dart to display real-time weather updates.</p>
-              <a href="https://github.com/box-the-third/FinalProjectWeatherApp_Flutter" class="btn btn-outline">View Website</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-body">
-              <h5 class="card-title">SuperDrib</h5>
-              <p class="card-text">A cool frontend Design UI project made with Bootstrap and JS.</p>
-              <a href="https://box-the-third.github.io/SuperDrib/" class="btn btn-outline">View Website</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="Socials" class="py-5">
-    <div class="container">
-      <div class="project-card" data-tilt>
-        <h2 class="text-center mb-4" data-aos="fade-up">Am I on the Internet?</h2>
-        <div data-aos="zoom-in">
-          <p class="text-center luxury-text">Click on the image to play on YouTube!</p>
-        </div>
-        <div class="row">
-          <!-- Video 1 -->
-          <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card">
-              <a href="https://www.youtube.com/watch?v=eQmgAuPeBKA" target="_blank" class="video-thumbnail-wrapper">
-                <img src="assets/video1-thumbnail.jpg" class="card-img-top" alt="Video 1 Thumbnail">
-                <div class="play-icon-custom" style="position: absolute; top: 25%; left: 50%; transform: translate(-50%, -50%);">
-                  <i class="fas fa-play" style="font-size: 2rem; color: red;"></i>
-                </div>
-              </a>
-              <div class="card-body text-center">
-                <h5 class="card-title">Academic Preparation & Required Documents for Studying Abroad</h5>
-                <p class="card-text luxury-text">
-                  ✅ Essays, CGPA, IELTS, SOP, Interview <br> How to build a strong academic profile<br>
-                  ✅ Full list of documents needed for university applications<br>
-                  ✅ How to write an impactful SOP for Australia<br>
-                  ✅ Visa document checklist & tips<br>
-                  ✅ Common mistakes to avoid during the process<br>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- Video 2 -->
-          <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card">
-              <a href="https://www.youtube.com/watch?v=EyQnvjdegbc&list=PLGelZefJcknH8hKyBbtioqfu2xxlzSW_u" target="_blank" class="video-thumbnail-wrapper">
-                <img src="assets/video2-thumbnail.jpg" class="card-img-top" alt="Video 2 Thumbnail">
-                <div class="play-icon" style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">
-                  <i class="fas fa-play" style="font-size: 2rem; color: red;"></i>
-                </div>
-              </a>
-              <div class="card-body">
-                <h5 class="card-title">LG UHD TV AI ThinQ</h5>
-                <p class="card-text luxury-text">I played this broken dude watching TV</p>
-              </div>
-            </div>
-          </div>
-          <!-- Video 3 -->
-          <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card">
-              <a href="https://www.youtube.com/watch?v=2HP6hwdBweE&list=PLGelZefJcknH8hKyBbtioqfu2xxlzSW_u&index=2" target="_blank" class="video-thumbnail-wrapper">
-                <img src="assets/video3-thumbnail.jpg" class="card-img-top" alt="Video 3 Thumbnail">
-                <div class="play-icon" style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">
-                  <i class="fas fa-play" style="font-size: 2rem; color: red;"></i>
-                </div>
-              </a>
-              <div class="card-body">
-                <h5 class="card-title">Polar Ice Cream</h5>
-                <p class="card-text luxury-text">I played this confused guy because I didn't have ice-cream</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Book Your Session CTA -->
-  <section id="book" class="py-5 text-light">
-    <div class="container text-center" data-aos="fade-up">
-      <h2 class="mb-3">📞 Book Your Session Today</h2>
-      <p class="mb-2"> Pay via bKash or DM me for bank details</p>
-      <p class="mb-3">Tap to message on WhatsApp: <a href="https://wa.me/8801300984267" class="text-decoration-none">wa.me/8801300984267</a></p>
-      <p class="small">Fast replies • Clear pricing • No hidden fees • Clear Communication</p>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-<section id="contact" class="py-5 text-light">
-  <div class="container">
-    <h2 class="text-center mb-4">Get in Touch</h2> 
-      <div class="col-md-1col-lg-4 mb-1">
-          <div class="card">
-             <p class="text-center luxury-text">Feel free to reach out for collaborations, inquiries, or just to say hello!</p>
-             <p class="text-center luxury-text"> nahiyanibnershad@gmail.com</p>
-         </div>
-      </div>
-    <div class="d-flex justify-content-center gap-4 fs-4">
-
-      <a href="https://www.linkedin.com/in/nahiyanibnershad/" class="social-icon"><i class="fab fa-linkedin"></i></a>
-      <a href="https://www.youtube.com/channel/UCU1xLoQygr9ECtEmQtnFfZw" class="social-icon"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.instagram.com/yasbeyondedu/?g=5" class="social-icon"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.facebook.com/profile.php?id=61584417686122" class="social-icon"><i class="fab fa-facebook"></i></a>
-    </div>
-  </div>
-</section>
-
-
-
-<!--Affiliations-->
-<section id="affiliations" class="py-5">
-  <div class="container text-center">
-    <h2 class="fw-bold mb-4">Trusted by & Collaborated with</h2>
-    <div class="logo-slider">
+    <!--Affiliations-->
+  <section id="affiliations" class="py-5">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-4">Trusted by & Collaborated with</h2>
+      <div class="logo-slider">
       <div class="logos">
         <img src="assets/global_pathways.webp" alt="Global Pathway Experts" />
         <img src="assets/british_council.png" alt="British Council" />
@@ -1024,177 +257,87 @@
         <img src="assets/belaface.png" alt="Belaface" />
         <img src="assets/youthbees.jpg" alt="YouthBees" />
         <img src="assets/mentors.jpg" alt="Mentors" />
+       </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
-  <!-- Footer -->
-  <footer class="text-center text-light py-3">
-    <small>&copy; 2025 Nahiyan. All rights reserved.</small>
+  <footer style="text-align:center; padding: 40px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-subtle);">
+    <p>&copy; 2025 YasEdu. All rights reserved.</p>
   </footer>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <div id="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+    <div id="lightbox-caption" style="color:#fff; text-align:center; margin-top:10px;"></div>
+  </div>
+
   <script src="cursor.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  
-  <!-- Luxury Canvas Script -->
+  <script src="cursorTrail.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const canvas = document.getElementById('luxuryCanvas');
-      const ctx = canvas.getContext('2d');
-      
-      // Set canvas to full window
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      
-      // Luxury color palette
-      const colors = ['#0a0a0a', '#1a1a1a', '#2a2a2a', '#3a3a3a'];
-      const particles = [];
-      const particleCount = Math.floor(window.innerWidth / 10);
-      
-      // Create particles
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 3 + 1,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          baseX: Math.random() * canvas.width,
-          baseY: Math.random() * canvas.height,
-          density: Math.random() * 30 + 1
-        });
-      }
-      
-      // Mouse position
-      let mouse = {
-        x: null,
-        y: null,
-        radius: 100
-      };
-      
-      window.addEventListener('mousemove', function(event) {
-        mouse.x = event.x;
-        mouse.y = event.y;
-      });
-      
-      // Animation loop
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        for (let i = 0; i < particles.length; i++) {
-          // Calculate distance between particle and mouse
-          let dx = mouse.x - particles[i].x;
-          let dy = mouse.y - particles[i].y;
-          let distance = Math.sqrt(dx * dx + dy * dy);
-          let forceDirectionX = dx / distance;
-          let forceDirectionY = dy / distance;
-          let maxDistance = mouse.radius;
-          let force = (maxDistance - distance) / maxDistance;
-          let directionX = forceDirectionX * force * particles[i].density;
-          let directionY = forceDirectionY * force * particles[i].density;
-          
-          if (distance < mouse.radius) {
-            particles[i].x -= directionX;
-            particles[i].y -= directionY;
-          } else {
-            if (particles[i].x !== particles[i].baseX) {
-              let dx = particles[i].x - particles[i].baseX;
-              particles[i].x -= dx / 10;
-            }
-            if (particles[i].y !== particles[i].baseY) {
-              let dy = particles[i].y - particles[i].baseY;
-              particles[i].y -= dy / 10;
-            }
-          }
-          
-          // Draw particle
-          ctx.beginPath();
-          ctx.arc(particles[i].x, particles[i].y, particles[i].size, 0, Math.PI * 2);
-          ctx.closePath();
-          ctx.fillStyle = particles[i].color;
-          ctx.fill();
+    // 1. Typing Effect Logic
+    const words = ["an Education Counselor.", "a Web Developer.", "a Designer.", "a Creative Thinker."];
+    let i = 0;
+    let timer;
+
+    function typingEffect() {
+      let word = words[i].split("");
+      var loopTyping = function() {
+        if (word.length > 0) {
+          document.getElementById('typed-text').innerHTML += word.shift();
+        } else {
+          setTimeout(deletingEffect, 2000); // Wait before deleting
+          return false;
         }
-        
-        requestAnimationFrame(animate);
-      }
-      
-      animate();
-      
-      // Handle window resize
-      window.addEventListener('resize', function() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        timer = setTimeout(loopTyping, 100);
+      };
+      loopTyping();
+    }
+
+    function deletingEffect() {
+      let word = words[i].split("");
+      var loopDeleting = function() {
+        if (word.length > 0) {
+          word.pop();
+          document.getElementById('typed-text').innerHTML = word.join("");
+        } else {
+          if (words.length > (i + 1)) { i++; } else { i = 0; }
+          typingEffect();
+          return false;
+        }
+        timer = setTimeout(loopDeleting, 50);
+      };
+      loopDeleting();
+    }
+    
+    // Start typing on load
+    typingEffect();
+
+    // 2. Lightbox Logic
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const imgs = document.querySelectorAll(".gallery-grid img");
+    const closeBtn = document.querySelector(".close-lightbox");
+    const caption = document.getElementById("lightbox-caption");
+
+    imgs.forEach(img => {
+      img.addEventListener("click", () => {
+        lightbox.style.display = "block";
+        lightboxImg.src = img.src;
+        caption.innerText = img.dataset.title || "";
       });
+    });
+    
+    if(closeBtn) {
+        closeBtn.addEventListener("click", () => {
+          lightbox.style.display = "none";
+        });
+    }
+
+    lightbox.addEventListener("click", (e) => {
+      if(e.target === lightbox) lightbox.style.display = "none";
     });
   </script>
-
-<!-- Typing Effect Script -->
-  <script>
-  const words = ["a Content Creator", "an Engineer", "an Education Counselor", "an Artist", "the CEO and Founder of YAS-beyond education"];
-let i = 0, j = 0, currentWord = "", isDeleting = false;
-
-function type() {
-  currentWord = words[i];
-  document.getElementById("typed-text").textContent = currentWord.substring(0, j);
-
-  if (!isDeleting && j < currentWord.length) {
-    j++;
-    setTimeout(type, 120);
-  } else if (isDeleting && j > 0) {
-    j--;
-    setTimeout(type, 60);
-  } else {
-    isDeleting = !isDeleting;
-    if (!isDeleting) i = (i + 1) % words.length;
-    setTimeout(type, 1000);
-  }
-}
-type();
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const gallery = document.querySelector(".gallery-grid");
-  const viewAllBtn = document.getElementById("view-all-btn");
-
-  // Reveal gallery on button click
-  viewAllBtn.addEventListener("click", () => {
-    gallery.classList.add("show");
-    viewAllBtn.style.display = "none";
-  });
-
-  // Lightbox
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
-  const caption = document.getElementById("lightbox-caption");
-  const images = document.querySelectorAll(".gallery-grid img");
-  let currentIndex = 0;
-
-  images.forEach((img, index) => {
-    img.addEventListener("click", () => {
-      currentIndex = index;
-      showImage();
-    });
-  });
-
-  function showImage() {
-    lightbox.style.display = "block";
-    lightboxImg.src = images[currentIndex].src;
-    caption.textContent = images[currentIndex].dataset.title;
-  }
-
-  // Controls
-  document.querySelector(".close").onclick = () => (lightbox.style.display = "none");
-  document.querySelector(".prev").onclick = () => { currentIndex = (currentIndex - 1 + images.length) % images.length; showImage(); };
-  document.querySelector(".next").onclick = () => { currentIndex = (currentIndex + 1) % images.length; showImage(); };
-
-  // Close on click outside
-  lightbox.onclick = (e) => { if (e.target === lightbox) lightbox.style.display = "none"; };
-});
-</script>
-
 </body>
 </html>
