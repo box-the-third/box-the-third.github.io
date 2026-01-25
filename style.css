@@ -48,20 +48,6 @@ body {
   }
 
 
-/* --- CUSTOM CURSOR --- */
-.cursor {
-  position: fixed; top: 0; left: 0; width: 30px; height: 30px;
-  border: 1.5px solid var(--text-main);
-  border-radius: 50%; pointer-events: none; z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease;
-}
-.cursor-trail {
-  position: fixed; width: 8px; height: 8px;
-  background-color: rgba(0,0,0,0.1);
-  border-radius: 50%; pointer-events: none; z-index: 9998;
-}
-
 /* --- Navigation --- */
 .navbar {
   position: fixed; top: 0; width: 100%; z-index: 1000;

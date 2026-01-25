@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Check if the device is likely a mobile/touch device or has a small screen
+    const isSmallDevice = window.innerWidth <= 768;
+    const isTouchOnly = window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches;
+
+    if (isSmallDevice || isTouchOnly) {
+        return; // Don't initialize trail on small or touch-only devices
+    }
+
     const trailCount = 50; // Number of trail elements
     const trails = [];
     let mouseX = 0, mouseY = 0;
