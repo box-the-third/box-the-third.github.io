@@ -18,6 +18,27 @@
     (function () { if (!window.chatbase || window.chatbase("getState") !== "initialized") { window.chatbase = (...arguments) => { if (!window.chatbase.q) { window.chatbase.q = [] } window.chatbase.q.push(arguments) }; window.chatbase = new Proxy(window.chatbase, { get(target, prop) { if (prop === "q") { return target.q } return (...args) => target(prop, ...args) } }) } const onLoad = function () { const script = document.createElement("script"); script.src = "https://www.chatbase.co/embed.min.js"; script.id = "v1NU2ywoo25ZYj2cWXVxv"; script.domain = "www.chatbase.co"; document.body.appendChild(script) }; if (document.readyState === "complete") { onLoad() } else { window.addEventListener("load", onLoad) } })();
   </script>
   <meta name='impact-site-verification' value='77232650-48bc-4076-a1fb-93c4b2cb9e0b'>
+  <!-- Primary SEO -->
+<title>YAS</title>
+<meta name="description" content="SOPs, CVs, digital literacy, and portfolio websites." />
+
+<!-- Open Graph -->
+<meta property="og:title" content="YAS – Beyond Education" />
+<meta property="og:description" content="Education counseling, SOP writing, CVs, and web development services." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://box-the-third.github.io" />
+<meta property="og:image" content="https://box-the-third.github.io/assets/preview.jpg" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="YAS – Beyond Education" />
+<meta name="twitter:description" content="Helping students succeed globally through education and digital skills." />
+
+<!-- AEO / AI Search -->
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<meta name="google-site-verification" content="YOUR_CODE" />
+
+
 </head>
 
 <body>
@@ -28,7 +49,12 @@
       <div class="logo">
         <img src="assets/yasnav.png" alt="YAS Logo" class="logo-img" style="max-width: 100px; height: auto;">
       </div>
-      <div class="nav-links">
+      <div class="nav-toggle" id="nav-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      <div class="nav-links" id="nav-links">
         <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#projects">Projects</a>
@@ -38,9 +64,18 @@
     </div>
   </nav>
 
+  <script>
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
   <header class="hero">
     <div class="container">
-      <h1 class="display-title">Who is Nahiyan?</h1>
+      <h1 class="display-title">Meet the Founder</h1>
       <h2 class="typing-container">
         He is <span id="typed-text"></span><span class="cursor-blink">|</span>
       </h2>
@@ -54,17 +89,13 @@
 
   <main class="container">
     <div class="bento-grid">
-      <video autoplay muted loop id="video-background">
-        <source src="https://www.pexels.com/download/video/35294037/" type="video/mp4" />
-      </video>
       <div class="card card-about" id="about">
         <div class="about-content">
           <div class="about-text">
             <h2>About Me</h2>
-            <p>I’m <strong>Nahiyan</strong>, a certified Comp-Sci engineer and your friendly neighborhood's education
-              counselor. I enjoy creating content, art, and exploring new ideas that connect creativity with impact.</p>
-            <p>I connect best with people through collaborative projects and tend to blend empathy with design. This
-              website reflects what I care about: <strong>Continuous learning, sustainable growth, and helping others
+            <p>I’m <strong>Nahiyan</strong>, a certified Comp-Sci engineer, certified AI-Powered Instructional Design Professional and 
+              your friendly neighborhood's education counselor. I enjoy creating content, and exploring new ideas that connect creativity with impact.</p>
+            <p>I connect best with people through collaborative projects and tend to blend empathy with design. I care about: <strong>Continuous learning, sustainable growth, and helping others
                 succeed.</strong></p>
           </div>
           <div class="about-image">
@@ -73,11 +104,12 @@
         </div>
 
         <div class="d-flex flex-column gap-2 mt-4">
-          <a href="assets/Nahiyan-IbnErshad-1730667985914-Psychometric.pdf" class="btn-sm" style="color:black;">My
+          <a href="assets/Nahiyan-IbnErshad-1730667985914-Psychometric.pdf" class="btn-link" style="color:black;">My
             Psychometrics</a>
         </div>
+        <br>
         <div class="d-flex flex-column gap-2 mt-4">
-          <a href="assets/Nahiyan_Ibn_Ershad_CV_2026_Riyadh.pdf" class="btn-sm" style="color:black;">My CV</a>
+          <a href="assets/Nahiyan_Ibn_Ershad_CV_2026_Riyadh.pdf" class="btn-link" style="color:black;">My CV</a>
         </div>
       </div>
 
@@ -96,111 +128,127 @@
         </div>
       </div>
 
-      <div class="card-section-title" id="services">
-        <h2>My Services</h2>
-        <p>Practical, hands-on help to build your skills and digital presence.</p>
-      </div>
 
-      <div class="card service-card">
+  
+  <div class="card-section-title" id="services">
+    <h2 class="display-title">My Services</h2>
+    <p>Practical, hands-on help to build your skills and digital presence.</p>
+  </div>
+
+    <div class="service-card">
+      <div class="card-top-content">
         <h3>Digital Literacy</h3>
-        <p>I'll train your team in Google Suite, prompt engineering, and more with hands-on modules.
-          The training has an option to include Google and Microsoft Apps, Internet Safety, Portfolio Buildup,
-          Presentation Skills and more.
-          <br> Floats your boat? Let's talk.
-        </p>
-        <div class="pricing-list">
-          <div class="price-item"><span class="p-name">Starter</span><span class="p-cost">500 BDT</span></div>
-          <div class="price-item"><span class="p-name">Standard(Most Popular)</span><span class="p-cost">1,250
-              BDT</span></div>
-          <div class="price-item"><span class="p-name">Comp.</span><span class="p-cost">2,500 BDT</span></div>
-        </div>
-        <a href="#contact" class="btn-link">Request</a>
+        <p>I'll train your team in Google Suite, prompt engineering, and more with hands-on modules. The training has an option to include Google and Microsoft Apps, Internet Safety, Portfolio Buildup, Presentation Skills and more.
+Floats your boat? Let's talk.</p>
       </div>
-
-      <div class="card service-card">
-        <h3>University Application and SOP</h3>
-        <p>Applying for your dream university requires a winning SOP (Statement of Purpose). <br>
-          We'll brainstorm your academics, create a draft, and polish your statement of purpose to make it truly stand
-          out.
-          <br>Let's make your application unforgettable!
-        </p>
-        <div class="pricing-list">
-          <div class="price-item"><span class="p-name">Draft</span><span class="p-cost">1,500 BDT</span></div>
-          <div class="price-item"><span class="p-name">Standard</span><span class="p-cost">2,500 BDT</span></div>
-          <div class="price-item"><span class="p-name">Premium</span><span class="p-cost">4,500 BDT</span></div>
-        </div>
-        <a href="#contact" class="btn-link">Request</a>
+      <div class="pricing-list">
+        <div class="price-item"><span class="p-name">Starter</span><span class="p-cost" data-bdt="500">500 BDT</span></div>
+        <div class="price-item"><span class="p-name">Standard</span><span class="p-cost" data-bdt="1250">1,250 BDT</span></div>
+        <div class="price-item"><span class="p-name">Comp.</span><span class="p-cost" data-bdt="2500">2,500 BDT</span></div>
       </div>
+      <a href="#contact" class="btn-link">Request Service</a>
+    </div>
 
-      <div class="card service-card">
+    <div class="service-card">
+      <div class="card-top-content">
+        <h3>University App & SOP</h3>
+        <p>Applying for your dream university requires a winning SOP (Statement of Purpose).
+We'll brainstorm your academics, create a draft, and polish your statement of purpose to make it truly stand out.
+Let's make your application unforgettable!</p>
+      </div>
+      <div class="pricing-list">
+        <div class="price-item"><span class="p-name">Draft</span><span class="p-cost" data-bdt="1500">1,500 BDT</span></div>
+        <div class="price-item"><span class="p-name">Standard</span><span class="p-cost" data-bdt="2500">2,500 BDT</span></div>
+        <div class="price-item"><span class="p-name">Premium</span><span class="p-cost" data-bdt="4500">4,500 BDT</span></div>
+      </div>
+      <a href="#contact" class="btn-link">Request Service</a>
+    </div>
+
+    <div class="service-card">
+      <div class="card-top-content">
         <h3>CV Writing</h3>
-        <p>You might already have a good CV, but are you struggling with getting interviews?<br>
-          Try our ATS-friendly approach to CV's done for you, I'll of course, consult with you before we add
-          quantifiable metrics and get you recruiter ready for 2026</p>
-        <div class="pricing-list">
-          <div class="price-item"><span class="p-name">Basic</span><span class="p-cost">150 BDT</span></div>
-          <div class="price-item"><span class="p-name">Standard</span><span class="p-cost">350 BDT</span></div>
-          <div class="price-item"><span class="p-name">Premium</span><span class="p-cost">750 BDT</span></div>
-        </div>
-        <a href="#contact" class="btn-link">Request</a>
+        <p>You might already have a good CV, but are you struggling with getting interviews?
+Try our ATS-friendly approach to CV's done for you, I'll of course, consult with you before we add quantifiable metrics and get you recruiter ready for 2026</p>
       </div>
-
-      <div class="card service-card">
-        <h3>IELTS Training</h3>
-        <p>Strategies to hit your target band.</p>
-        <div class="pricing-list">
-          <div class="price-item"><span class="p-name">Dip your Toes</span><span class="p-cost">800 BDT</span></div>
-          <div class="price-item"><span class="p-name">I'm Serious</span><span class="p-cost">1,600 BDT</span></div>
-          <div class="price-item"><span class="p-name">Dreamer</span><span class="p-cost">3,000 BDT</span></div>
-        </div>
-        <a href="#contact" class="btn-link">Request</a>
+      <div class="pricing-list">
+        <div class="price-item"><span class="p-name">Basic</span><span class="p-cost" data-bdt="150">150 BDT</span></div>
+        <div class="price-item"><span class="p-name">Standard</span><span class="p-cost" data-bdt="350">350 BDT</span></div>
+        <div class="price-item"><span class="p-name">Premium</span><span class="p-cost" data-bdt="750">750 BDT</span></div>
       </div>
+      <a href="#contact" class="btn-link">Request Service</a>
+    </div>
 
-      <div class="card service-card">
-        <h3>Portfolio Site</h3>
-        <p>Your polished online showcase.</p>
-        <div class="pricing-list">
-          <div class="price-item"><span class="p-name">Novice</span><span class="p-cost">1-2K BDT</span></div>
-          <div class="price-item"><span class="p-name">Holei-Hobe</span><span class="p-cost">5-8K BDT</span></div>
-          <div class="price-item"><span class="p-name">Premium</span><span class="p-cost">10K+ BDT</span></div>
-        </div>
-        <a href="#contact" class="btn-link">Request</a>
-      </div>
+  <div class="service-card">
+    <div class="card-top-content">
+      <h3>IELTS Training</h3>
+      <p>Comprehensive preparation for IELTS with focused strategies on listening, reading, writing, and speaking. Get expert feedback and personalized study plans to achieve your target band score.</p>
+    </div>
+    <div class="pricing-list">
+      <div class="price-item"><span class="p-name">Dip your toes package</span><span class="p-cost" data-bdt="2000">2,000 BDT</span></div>
+      <div class="price-item"><span class="p-name">I'm serious package</span><span class="p-cost" data-bdt="4000">4,000 BDT</span></div>
+      <div class="price-item"><span class="p-name">Premium Package</span><span class="p-cost" data-bdt="7000">7,000 BDT</span></div>
+    </div>
+    <a href="#contact" class="btn-link">Request Service</a>
+  </div>
 
-      <div class="card service-card">
-        <h3>Digital Card</h3>
-        <p>Scannable contact cards.</p>
-        <div class="pricing-list">
-          <div class="price-item"><span class="p-name">Digital</span><span class="p-cost">1,200 BDT</span></div>
-          <div class="price-item"><span class="p-name">Print</span><span class="p-cost">2,000 BDT</span></div>
-        </div>
-        <a href="#contact" class="btn-link">Request</a>
-      </div>
+  <div class="service-card">
+    <div class="card-top-content">
+      <h3>Portfolio Website</h3>
+      <p>Stand out with a custom-built portfolio website. I'll design and develop a responsive, modern site that showcases your work and attracts opportunities.</p>
+    </div>
+    <div class="pricing-list">
+      <div class="price-item"><span class="p-name">Basic</span><span class="p-cost" data-bdt="5000">5,000 BDT</span></div>
+      <div class="price-item"><span class="p-name">Standard</span><span class="p-cost" data-bdt="10000">10,000 BDT</span></div>
+      <div class="price-item"><span class="p-name">Premium</span><span class="p-cost" data-bdt="15000">15,000 BDT</span></div>
+    </div>
+    <a href="#contact" class="btn-link">Request Service</a>
+  </div>
 
-      <div class="card-section-title" id="projects">
-        <h2>My Projects</h2>
-        <p>Take a look at the projects I've done so far!</p>
-      </div>
+  <div class="service-card">
+    <div class="card-top-content">
+      <h3>Digital Cards</h3>
+      <p>Professional digital business cards and online presence setup. Share your info instantly with QR codes, NFC-enabled cards, and linked digital profiles.</p>
+    </div>
+    <div class="pricing-list">
+      <div class="price-item"><span class="p-name">Basic</span><span class="p-cost" data-bdt="500">500 BDT</span></div>
+      <div class="price-item"><span class="p-name">Standard</span><span class="p-cost" data-bdt="1200">1,200 BDT</span></div>
+      <div class="price-item"><span class="p-name">Premium</span><span class="p-cost" data-bdt="2500">2,500 BDT</span></div>
+    </div>
+    <a href="#contact" class="btn-link">Request Service</a>
+  </div>
+</div>
 
-      <div class="card service-card">
+  <div class="card-section-title" id="projects" style="margin-top: 80px;">
+    <h2 class="display-title">My Projects</h2>
+    <p>Take a look at the projects I've done so far!</p>
+  </div>
+
+  <div class="projects-container">
+    <div class="service-card">
+      <div class="card-top-content">
         <h3>5 day Forecast DHK</h3>
-        <p>A cool frontend UI project made with Bootstrap and JS.</p>
-        <a href="https://box-the-third.github.io/5dayweather/" class="btn-link">View Project →</a>
+        <p>A cool frontend UI project made with Bootstrap and JS for weather tracking.</p>
       </div>
+      <a href="https://box-the-third.github.io/5dayweather/" class="btn-link">View Project on Github →</a>
+    </div>
 
-      <div class="card service-card">
+    <div class="service-card">
+      <div class="card-top-content">
         <h3>Taker Inc.</h3>
-        <p>A platform that connects Non-Emergency Wheelchair Accessible Vehicle (WAV) providers to patients and drivers
-          in New York.</p>
-        <a href="https://box-the-third.github.io/TakerInc/" class="btn-link">View Project →</a>
+        <p>A platform connecting WAV providers to patients and drivers in New York.</p>
       </div>
+      <a href="https://box-the-third.github.io/TakerInc/" class="btn-link">View Project on Github → →</a>
+    </div>
 
-      <div class="card service-card">
+    <div class="service-card">
+      <div class="card-top-content">
         <h3>BelaCosmetics</h3>
-        <p>An E-commerce platform developed for a Korean Beauty Product Brand [COSRX]</p>
-        <a href="https://box-the-third.github.io/eCommerce-frontend/" class="btn-link">View Project →</a>
+        <p>An E-commerce platform developed for a Korean Beauty Product Brand [COSRX].</p>
       </div>
-
+      <a href="https://box-the-third.github.io/eCommerce-frontend/" class="btn-link">View Project on Github →</a>
+    </div>
+  </div>
+</div>
 
       <div class="card card-contact" id="contact">
         <h2>Get in Touch</h2>
@@ -214,7 +262,7 @@
           <div class="form-group">
             <label for="service-select">Interested In</label>
             <select name="service" id="service-select">
-              <option value="General Inquiry">booking a Free Consultation?</option>
+              <option value="General Inquiry">Free Consultation</option>
               <option value="Digital Literacy">Digital Literacy Training</option>
               <option value="SOP Writing">SOP Writing</option>
               <option value="CV Writing">CV Writing</option>
@@ -222,6 +270,7 @@
               <option value="Portfolio Website">Portfolio Website</option>
             </select>
           </div>
+
           <div class="form-group">
             <label for="message">Message</label>
             <textarea name="message" id="message" rows="4" placeholder="Tell me about your project..."
@@ -240,9 +289,9 @@
 
       </div>
     </div>
-
-
   </main>
+
+
 
   <!--Affiliations-->
   <section id="affiliations" class="py-5">
@@ -287,8 +336,8 @@
 
 
   <footer
-    style="text-align:center; padding: 40px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-subtle);">
-    <p>&copy; 2025 YasEdu. All rights reserved.</p>
+style="background: rgba(78, 174, 181, 0.9); text-align:center; padding: 40px; color: var(--text-main); font-size: 0.85rem; border-top: 1px solid var(--border-subtle);">
+    <p>&copy; 2026 yasbeyondedu. All rights reserved.</p>
   </footer>
 
   <div id="lightbox">
@@ -363,6 +412,72 @@
       if (e.target === lightbox) lightbox.style.display = "none";
     });
   </script>
+
+<script>
+  // Conversion logic based on local rates
+  // 1 SAR = 32.65 BDT
+  // 1 USD = 3.75 SAR = 122.4375 BDT
+  const rates = {
+    SAR: 1 / 32.65,
+    USD: 1 / 122.4375
+  };
+
+  const currencies = ['BDT', 'SAR', 'USD'];
+  let currentIdx = 0;
+
+  function updatePrices() {
+    const priceElements = document.querySelectorAll('.p-cost');
+    
+    // Cycle to next currency
+    currentIdx = (currentIdx + 1) % currencies.length;
+    const targetCurrency = currencies[currentIdx];
+
+    priceElements.forEach(el => {
+      // Step 1: Fade Out
+      el.classList.add('fade-out');
+
+      // Step 2: Wait for fade animation (500ms), then change text
+      setTimeout(() => {
+        const bdtVal = parseFloat(el.getAttribute('data-bdt'));
+        
+        if (targetCurrency === 'BDT') {
+          el.innerText = bdtVal.toLocaleString() + ' BDT';
+        } else {
+          const converted = (bdtVal * rates[targetCurrency]).toFixed(2);
+          el.innerText = converted + ' ' + targetCurrency;
+        }
+
+        // Step 3: Fade Back In
+        el.classList.remove('fade-out');
+      }, 500);
+    });
+  }
+
+  // Change currency every 5 seconds (allows time to read)
+  setInterval(updatePrices, 5000);
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Nahiyan Ibn Ershad",
+  "jobTitle": "Education Counselor & Web Developer",
+  "url": "https://yasbeyondedu.com",
+  "sameAs": [
+    "https://www.linkedin.com/in/nahiyanibnershad/",
+    "https://www.instagram.com/yasbeyondedu/"
+  ],
+  "knowsAbout": [
+    "Education Counseling",
+    "SOP Writing",
+    "CV Writing",
+    "Web Development",
+    "Digital Literacy"
+  ]
+}
+</script>
+
 </body>
 
 </html>

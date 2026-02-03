@@ -1,14 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Check if the device is likely a mobile/touch device or has a small screen
     const isSmallDevice = window.innerWidth <= 768;
-    const isTouchOnly = window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches;
-
-    if (isSmallDevice || isTouchOnly) {
-        return; // Don't initialize trail on small or touch-only devices
-    }
-
-    const trailCount = 50; // Number of trail elements
+    const trailCount = 50; 
     const trails = [];
+    const mainCursor = document.querySelector(".cursor");
     let mouseX = 0, mouseY = 0;
 
     // Create trail elements
@@ -19,18 +13,44 @@ document.addEventListener("DOMContentLoaded", () => {
         trails.push(trail);
     }
 
-    // Update mouse position
+    // Update position
     document.addEventListener("mousemove", (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
+        if(mainCursor) {
+            mainCursor.style.left = `${mouseX}px`;
+            mainCursor.style.top = `${mouseY}px`;
+        }
     });
 
-    // Animate trail
+    // --- MOBILE LOGIC ---
+    // If it's a small screen, hide/show cursor based on card proximity
+    if (isSmallDevice) {
+        const cards = document.querySelectorAll('.service-card, .card');
+        
+        cards.forEach(card => {
+            // When touching/hovering a card, show the cursor
+            card.addEventListener("mouseenter", () => {
+                mainCursor?.classList.add("mobile-active");
+                trails.forEach(t => t.classList.add("mobile-active"));
+            });
+
+            // When leaving the card, hide it again
+            card.addEventListener("mouseleave", () => {
+                mainCursor?.classList.remove("mobile-active");
+                trails.forEach(t => t.classList.remove("mobile-active"));
+            });
+        });
+    }
+
+    // Animation loop (remains the same)
     let index = 0;
     function animate() {
         const trail = trails[index];
         trail.style.left = `${mouseX}px`;
         trail.style.top = `${mouseY}px`;
+        
+        // Only trigger opacity logic if not blocked by CSS
         trail.style.opacity = 1;
 
         setTimeout(() => {
