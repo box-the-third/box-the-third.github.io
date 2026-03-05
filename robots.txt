@@ -1,0 +1,25 @@
+# 2026 Robots Strategy - YAS Beyond Education
+User-agent: *
+Allow: /
+
+# Specifically allow AI search bots for grounding
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Link to your sitemap
+Sitemap: https://box-the-third.github.io/sitemap.xml
+
+
+User-agent: *
+Allow: /
+
+# Help AI models (Gemini, GPT, Claude) find and cite your study abroad info
+User-agent: Google-Extended
+Allow: /
+User-agent: GPTBot
+Allow: /
+
+Sitemap: https://box-the-third.github.io/sitemap.xml
