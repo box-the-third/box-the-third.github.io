@@ -4,50 +4,1200 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="YAS - Beyond Education. Portfolio by Nahiyan." />
-  <title>YAS-beyond education</title>
+  <title>YAS – Beyond Education | Nahiyan Ibn Ershad</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Times+New+Roman&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <script>
-    (function () { if (!window.chatbase || window.chatbase("getState") !== "initialized") { window.chatbase = (...arguments) => { if (!window.chatbase.q) { window.chatbase.q = [] } window.chatbase.q.push(arguments) }; window.chatbase = new Proxy(window.chatbase, { get(target, prop) { if (prop === "q") { return target.q } return (...args) => target(prop, ...args) } }) } const onLoad = function () { const script = document.createElement("script"); script.src = "https://www.chatbase.co/embed.min.js"; script.id = "v1NU2ywoo25ZYj2cWXVxv"; script.domain = "www.chatbase.co"; document.body.appendChild(script) }; if (document.readyState === "complete") { onLoad() } else { window.addEventListener("load", onLoad) } })();
-  </script>
+  <!-- SEO -->
+  <meta name="description" content="YAS – Beyond Education. SOPs, CVs, digital literacy, IELTS training, and portfolio websites by Nahiyan Ibn Ershad." />
+  <meta property="og:title" content="YAS – Beyond Education" />
+  <meta property="og:description" content="Education counseling, SOP writing, CVs, and web development services." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://box-the-third.github.io" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="google-site-verification" content="xhLQyKSVy3nBcgjJc6GLqrqCZSzmyue6Pd-cX8UMhzs" />
   <meta name='impact-site-verification' value='77232650-48bc-4076-a1fb-93c4b2cb9e0b'>
-  <!-- Primary SEO -->
-<title>YAS</title>
-<meta name="description" content="SOPs, CVs, digital literacy, and portfolio websites." />
 
-<!-- Open Graph -->
-<meta property="og:title" content="YAS – Beyond Education" />
-<meta property="og:description" content="Education counseling, SOP writing, CVs, and web development services." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://box-the-third.github.io" />
-<meta property="og:image" content="https://box-the-third.github.io/assets/preview.jpg" />
+  <script>(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})};const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="v1NU2ywoo25ZYj2cWXVxv";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();</script>
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="YAS – Beyond Education" />
-<meta name="twitter:description" content="Helping students succeed globally through education and digital skills." />
+  <style>
+    :root {
+      --ink:        #0D0D0D;
+      --ink-soft:   #1A1A1A;
+      --ink-mid:    #2C2C2C;
+      --surface:    #F5F0E8;
+      --surface-2:  #EDE8DC;
+      --surface-3:  #E2DDD1;
+      --gold:       #21aee5;
+      --gold-light: #70b6e2;
+      --gold-dim:   #6d8eae;
+      --white:      #FDFAF4;
+      --text-body:  #2C2A26;
+      --text-muted: #003171;
+      --text-light: #4e7ba2;
 
-<!-- AEO / AI Search -->
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-<meta name="google-site-verification" content="xhLQyKSVy3nBcgjJc6GLqrqCZSzmyue6Pd-cX8UMhzs" />
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+      --font-mono:    'Space Mono', monospace;
 
+      --radius-sm: 4px;
+      --radius-md: 10px;
+      --radius-lg: 18px;
+      --radius-xl: 28px;
+
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-out: cubic-bezier(0.0, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--surface);
+      color: var(--text-body);
+      font-family: var(--font-body);
+      line-height: 1.65;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    @media (max-width: 768px) {
+      body { cursor: auto; }
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s var(--ease), height 0.2s var(--ease), opacity 0.3s;
+      mix-blend-mode: multiply;
+    }
+    .cursor-dot {
+      position: fixed;
+      width: 5px; height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+    @media (max-width: 768px) {
+      .cursor-ring, .cursor-dot { display: none !important; }
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 18px 0;
+      background: rgba(245, 240, 232, 0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+      transition: all 0.4s var(--ease);
+    }
+    .navbar.scrolled {
+      padding: 12px 0;
+      background: rgba(245, 240, 232, 0.97);
+      box-shadow: 0 2px 30px rgba(0,0,0,0.08);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+    .logo-text span { color: var(--gold); }
+    .logo-img-nav { height: 42px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 22px;
+      background: var(--ink);
+      color: var(--gold) !important;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem !important;
+      letter-spacing: 0.1em !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--ink-mid) !important; transform: translateY(-1px); }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle .bar {
+      width: 24px; height: 2px;
+      background: var(--ink);
+      transition: all 0.3s;
+    }
+
+    @media (max-width: 900px) {
+      .nav-toggle { display: flex; }
+      .nav-inner { padding: 0 24px; }
+      .nav-links {
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        flex-direction: column;
+        background: var(--white);
+        border-bottom: 1px solid rgba(201,168,76,0.2);
+        padding: 28px 24px;
+        gap: 20px;
+        align-items: flex-start;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.4s var(--ease), opacity 0.3s;
+      }
+      .nav-links.active { max-height: 500px; opacity: 1; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,168,76,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 80% at 20% 80%, rgba(13,13,13,0.04) 0%, transparent 60%);
+    }
+    .hero-grid-line {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.2), transparent);
+    }
+    .hero-grid-line:nth-child(1) { left: 25%; }
+    .hero-grid-line:nth-child(2) { left: 50%; }
+    .hero-grid-line:nth-child(3) { left: 75%; }
+
+    .hero-inner {
+      position: relative;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 6vw, 6rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .hero-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold-dim);
+    }
+    .hero-title strong {
+      font-weight: 700;
+      display: block;
+    }
+
+    .hero-typing {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-muted);
+      height: 3rem;
+      margin: 20px 0 36px;
+    }
+    .cursor-blink { 
+      font-weight: 100;
+      animation: blink 1s infinite;
+      color: var(--gold);
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      line-height: 1.75;
+      margin-bottom: 44px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 32px;
+      background: var(--ink);
+      color: var(--gold);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s var(--ease);
+      border: 1px solid var(--ink);
+    }
+    .btn-primary:hover {
+      background: var(--gold);
+      color: var(--ink);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.25);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 32px;
+      background: transparent;
+      color: var(--ink);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--ink-mid);
+      transition: all 0.25s var(--ease);
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold-dim);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 56px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    .stat { }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--gold); }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+    .hero-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      box-shadow: 
+        0 2px 0 rgba(201,168,76,0.3),
+        0 20px 60px rgba(0,0,0,0.10),
+        0 4px 16px rgba(0,0,0,0.06);
+      border: 1px solid rgba(201,168,76,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-light));
+    }
+    .hero-card-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .hero-card-items { list-style: none; }
+    .hero-card-items li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--text-body);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--surface-2);
+    }
+    .hero-card-items li:last-child { border-bottom: none; }
+    .hero-card-items li::before {
+      content: '→';
+      color: var(--gold);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+    .hero-card-cta {
+      margin-top: 28px;
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: var(--ink);
+      color: var(--gold);
+      text-align: center;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .hero-card-cta:hover { background: var(--gold); color: var(--ink); }
+
+    .hero-float-badge {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 90px; height: 90px;
+      background: var(--ink);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      border: 3px solid var(--gold);
+    }
+    .hero-float-badge span:first-child {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .hero-float-badge span:last-child {
+      font-size: 0.55rem;
+      color: var(--surface);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 60px; }
+      .hero-visual { display: none; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 100px 24px 60px; }
+      .hero-stats { flex-wrap: wrap; gap: 24px; }
+    }
+
+    /* ── SECTION SCAFFOLDING ── */
+    section { position: relative; }
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    @media (max-width: 600px) { .section-inner { padding: 0 24px; } }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .section-title em { font-style: italic; color: var(--gold-dim); }
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-top: 12px;
+      line-height: 1.75;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+    }
+
+    /* ── ABOUT SECTION ── */
+    #about {
+      padding: 120px 0;
+      background: var(--white);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 60px;
+    }
+    .about-left { }
+    .about-portrait-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .about-portrait {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      display: block;
+      filter: grayscale(20%);
+    }
+    .about-portrait-frame {
+      position: absolute;
+      inset: -12px;
+      border: 1px solid var(--gold);
+      border-radius: calc(var(--radius-lg) + 4px);
+      pointer-events: none;
+      opacity: 0.4;
+    }
+    .about-portrait-label {
+      position: absolute;
+      bottom: 20px; left: -20px;
+      background: var(--ink);
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+    }
+
+    .about-right { padding-top: 8px; }
+    .about-right p {
+      font-size: 1rem;
+      color: var(--text-body);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .about-right p strong { color: var(--ink); font-weight: 600; }
+    .about-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+    .about-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.2s;
+      padding-bottom: 2px;
+    }
+    .about-link:hover { color: var(--gold-dim); border-bottom-color: var(--gold); }
+
+    .mission-box {
+      margin-top: 60px;
+      padding: 40px;
+      background: var(--ink);
+      border-radius: var(--radius-lg);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+      grid-column: 1 / -1;
+    }
+    .mission-box::before {
+      content: '❝';
+      position: absolute;
+      top: -20px; right: 40px;
+      font-family: var(--font-display);
+      font-size: 10rem;
+      color: rgba(201,168,76,0.08);
+      line-height: 1;
+    }
+    .mission-box-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .mission-box p {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.6;
+      max-width: 760px;
+      color: rgba(253,250,244,0.9);
+    }
+
+    @media (max-width: 860px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-portrait { max-width: 280px; }
+    }
+
+    /* ── SERVICES SECTION ── */
+    #services {
+      padding: 120px 0;
+      background: var(--surface);
+    }
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    /* Currency toggle pill */
+    .currency-toggle {
+      display: inline-flex;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 100px;
+      overflow: hidden;
+      background: var(--white);
+    }
+    .currency-toggle button {
+      padding: 8px 18px;
+      border: none;
+      background: transparent;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .currency-toggle button.active {
+      background: var(--ink);
+      color: var(--gold);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .svc-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.35s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+    .svc-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s var(--ease);
+    }
+    .svc-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.1);
+      border-color: rgba(201,168,76,0.2);
+    }
+    .svc-card:hover::after { transform: scaleX(1); }
+
+    .svc-icon {
+      width: 44px; height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--ink);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-bottom: 24px;
+      flex-shrink: 0;
+    }
+
+    .svc-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .svc-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      flex-grow: 1;
+    }
+
+    .svc-pricing {
+      margin: 24px 0;
+      border-top: 1px solid var(--surface-2);
+      padding-top: 20px;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--surface-2);
+    }
+    .price-row:last-child { border-bottom: none; }
+    .price-tier {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+    .price-val {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--ink);
+      transition: opacity 0.4s;
+    }
+    .price-val.fading { opacity: 0; }
+
+    .svc-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: var(--ink);
+      color: var(--gold);
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-top: auto;
+    }
+    .svc-cta:hover { background: var(--gold); color: var(--ink); }
+    .svc-cta i { font-size: 0.7rem; }
+
+    /* ── PROJECTS SECTION ── */
+    #projects {
+      padding: 120px 0;
+      background: var(--ink);
+      color: var(--white);
+    }
+    #projects .section-title { color: var(--white); }
+    #projects .section-title em { color: var(--gold); }
+    #projects .section-subtitle { color: rgba(253,250,244,0.5); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 60px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .project-tile {
+      background: var(--ink-soft);
+      padding: 48px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s var(--ease);
+      display: flex;
+      flex-direction: column;
+      min-height: 280px;
+    }
+    .project-tile::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .project-tile:hover::before { opacity: 1; }
+    .project-tile:hover { background: var(--ink-mid); }
+
+    .project-num {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      margin-bottom: 20px;
+    }
+    .project-tile h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .project-tile p {
+      font-size: 0.85rem;
+      color: rgba(253,250,244,0.45);
+      line-height: 1.7;
+      flex-grow: 1;
+    }
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      margin-top: 28px;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 14px; }
+
+    @media (max-width: 860px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── AFFILIATIONS ── */
+    #affiliations {
+      padding: 80px 0;
+      background: var(--surface-2);
+      overflow: hidden;
+    }
+    #affiliations .section-inner { text-align: center; }
+    .affil-track {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      animation: marquee 30s linear infinite;
+      width: max-content;
+      margin-top: 40px;
+    }
+    .affil-track img {
+      height: 44px;
+      filter: grayscale(100%);
+      opacity: 0.35;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+    .affil-track img:hover { filter: grayscale(0%); opacity: 0.8; }
+    .affil-overflow { overflow: hidden; width: 100%; }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── CONTACT SECTION ── */
+    #contact {
+      padding: 120px 0;
+      background: var(--white);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-top: 60px;
+      align-items: start;
+    }
+    .contact-left h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .contact-left p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .contact-info-icon {
+      width: 36px; height: 36px;
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-dim);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .contact-info-text { }
+    .contact-info-text strong {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .contact-info-text a, .contact-info-text span {
+      font-size: 0.9rem;
+      color: var(--text-body);
+      text-decoration: none;
+    }
+    .contact-info-text a:hover { color: var(--gold-dim); }
+
+    .social-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 36px;
+    }
+    .social-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-body);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .social-pill:hover {
+      border-color: var(--gold);
+      color: var(--gold-dim);
+      transform: translateY(-2px);
+    }
+    .social-pill i { font-size: 0.9rem; }
+
+    /* Form */
+    .contact-form { }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      background: var(--surface);
+      color: var(--text-body);
+      transition: all 0.2s;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      background: var(--white);
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+    }
+    textarea { resize: vertical; }
+    .form-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--ink);
+      color: var(--gold);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s var(--ease);
+    }
+    .form-submit:hover {
+      background: var(--gold);
+      color: var(--ink);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.25);
+    }
+
+    @media (max-width: 860px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 48px 0;
+      border-top: 1px solid rgba(201,168,76,0.2);
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(253,250,244,0.3);
+      letter-spacing: 0.06em;
+    }
+    .footer-nav {
+      display: flex;
+      gap: 28px;
+    }
+    .footer-nav a {
+      font-size: 0.75rem;
+      color: rgba(253,250,244,0.4);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--gold); }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none; position: fixed; z-index: 10000;
+      inset: 0; background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(8px);
+    }
+    .lightbox-content {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 90%; max-height: 85vh;
+      border-radius: var(--radius-md);
+    }
+    .close-lightbox {
+      position: absolute; top: 24px; right: 32px;
+      font-size: 36px; cursor: pointer; color: var(--white);
+      opacity: 0.7; transition: opacity 0.2s;
+    }
+    .close-lightbox:hover { opacity: 1; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── STUDY ABROAD BAND ── */
+    .study-abroad-band {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--ink) 0%, #1a1610 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .study-abroad-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 100% at 80% 50%, rgba(201,168,76,0.12) 0%, transparent 60%);
+    }
+    .study-abroad-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .study-abroad-inner h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .study-abroad-inner h2 em { font-style: italic; color: var(--gold); }
+    .study-abroad-inner p {
+      font-size: 0.95rem;
+      color: rgba(253,250,244,0.5);
+      margin-top: 10px;
+      max-width: 480px;
+    }
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      background: var(--gold);
+      color: var(--ink);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,168,76,0.3); }
+  </style>
 </head>
 
 <body>
 
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <div class="cursor-dot" id="cursor-dot"></div>
 
-  <nav class="navbar">
-    <div class="container nav-content">
-      <div class="logo">
-        <img src="assets/yasnav.png" alt="YAS Logo" class="logo-img" style="max-width: 100px; height: auto;">
-      </div>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="logo-text">YAS<span>.</span></a>
       <div class="nav-toggle" id="nav-toggle">
         <span class="bar"></span>
         <span class="bar"></span>
@@ -57,455 +1207,517 @@
         <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
         <a href="StudyAbroadPage.html">Study Abroad</a>
-        <a href="assets/Nahiyan_Ibn_Ershad_CV_2026_Riyadh.pdf" class="btn-sm" target="_blank">Check my CV</a>
+        <a href="#contact">Contact</a>
+        <a href="assets/Nahiyan_Ibn_Ershad_CV_2026_Riyadh.pdf" class="nav-cta" target="_blank">
+          View CV <i class="fas fa-arrow-right" style="font-size:0.65rem;"></i>
+        </a>
       </div>
     </div>
   </nav>
 
-  <script>
-    const navToggle = document.getElementById('nav-toggle');
-    const navLinks = document.getElementById('nav-links');
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-line"></div>
+    <div class="hero-grid-line"></div>
+    <div class="hero-grid-line"></div>
 
-    navToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-  </script>
-
-  <header class="hero">
-    <div class="container">
-      <h1 class="display-title">Meet the Founder</h1>
-      <h2 class="typing-container">
-        He is <span id="typed-text"></span><span class="cursor-blink">|</span>
-      </h2>
-
-      <div class="cta-group">
-        <a href="#services" class="btn btn-primary">How can I help?</a>
-        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <div class="bento-grid">
-      <div class="card card-about" id="about">
-        <div class="about-content">
-          <div class="about-text">
-            <h2>About Me</h2>
-            <p>I’m <strong>Nahiyan</strong>, a certified Comp-Sci engineer, certified AI-Powered Instructional Design Professional and 
-              your friendly neighborhood's education counselor. I enjoy creating content, and exploring new ideas that connect creativity with impact.</p>
-            <p>I connect best with people through collaborative projects and tend to blend empathy with design. I care about: <strong>Continuous learning, sustainable growth, and helping others
-                succeed.</strong></p>
-          </div>
-          <div class="about-image">
-            <img src="assets/meman.png" alt="Nahiyan">
-          </div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Riyadh, KSA · Est. 2023</div>
+        <h1 class="hero-title">
+          <em>Meet</em><br>
+          <strong>Nahiyan.</strong>
+        </h1>
+        <div class="hero-typing">
+          He is <span id="typed-text"></span><span class="cursor-blink">|</span>
         </div>
-
-        <div class="d-flex flex-column gap-2 mt-4">
-          <a href="assets/Nahiyan-IbnErshad-1730667985914-Psychometric.pdf" class="btn-link" style="color:black;">My
-            Psychometrics</a>
+        <p class="hero-desc">
+          Certified CS engineer, AI-Powered Instructional Design Professional, and education counselor helping students and professionals grow through smart guidance, digital skills, and standout credentials.
+        </p>
+        <div class="hero-cta">
+          <a href="#services" class="btn-primary">
+            Explore Services <i class="fas fa-arrow-right" style="font-size:0.75rem;"></i>
+          </a>
+          <a href="#contact" class="btn-secondary">Free Consultation</a>
         </div>
-        <br>
-        <div class="d-flex flex-column gap-2 mt-4">
-          <a href="assets/Nahiyan_Ibn_Ershad_CV_2026_Riyadh.pdf" class="btn-link" style="color:black;">My CV</a>
-        </div>
-      </div>
-
-      <div class="card card-about" id="about">
-        <div class="about-content">
-          <div class="about-text">
-            <h2>My Mission</h2>
-            <p>At YAS, the mission is to empower individuals through education and digital skills. I believe that with
-              the right guidance and resources, anyone can unlock their potential and achieve their dreams.</p>
-            <p>Whether you're looking to enhance your study abroad journey, be more proficient digitally, or build a
-              standout portfolio website, I'm here to help you every step of the way.</p>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num">8<span>+</span></div>
+            <div class="stat-label">Services Offered</div>
           </div>
-          <div class="about-image">
-            <img src="assets/unnamed.jpg" alt="Mission Image">
+          <div class="stat">
+            <div class="stat-num">3<span>+</span></div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">5<span>+</span></div>
+            <div class="stat-label">Collaborations</div>
           </div>
         </div>
       </div>
 
-
-  
-  <div class="card-section-title" id="services">
-    <h2 class="display-title">My Services</h2>
-    <p>Practical, hands-on help to build your skills and digital presence.</p>
-  </div>
-
-    <div class="service-card">
-      <div class="card-top-content">
-        <h3>Digital Literacy</h3>
-        <p>I'll train your team in Google Suite, prompt engineering, and more with hands-on modules. The training has an option to include Google and Microsoft Apps, Internet Safety, Portfolio Buildup, Presentation Skills and more.
-Floats your boat? Let's talk.</p>
-      </div>
-      <div class="pricing-list">
-        <div class="price-item"><span class="p-name">Starter</span><span class="p-cost" data-bdt="500">500 BDT</span></div>
-        <div class="price-item"><span class="p-name">Standard</span><span class="p-cost" data-bdt="1250">1,250 BDT</span></div>
-        <div class="price-item"><span class="p-name">Comp.</span><span class="p-cost" data-bdt="2500">2,500 BDT</span></div>
-      </div>
-      <a href="#contact" class="btn-link">Request Service</a>
-    </div>
-
-    <div class="service-card">
-      <div class="card-top-content">
-        <h3>University App & SOP</h3>
-        <p>Applying for your dream university requires a winning SOP (Statement of Purpose).
-We'll brainstorm your academics, create a draft, and polish your statement of purpose to make it truly stand out.
-Let's make your application unforgettable!</p>
-      </div>
-      <div class="pricing-list">
-        <div class="price-item"><span class="p-name">Draft</span><span class="p-cost" data-bdt="1500">1,500 BDT</span></div>
-        <div class="price-item"><span class="p-name">Standard</span><span class="p-cost" data-bdt="2500">2,500 BDT</span></div>
-        <div class="price-item"><span class="p-name">Premium</span><span class="p-cost" data-bdt="4500">4,500 BDT</span></div>
-      </div>
-      <a href="#contact" class="btn-link">Request Service</a>
-    </div>
-
-    <div class="service-card">
-      <div class="card-top-content">
-        <h3>CV Writing</h3>
-        <p>You might already have a good CV, but are you struggling with getting interviews?
-Try our ATS-friendly approach to CV's done for you, I'll of course, consult with you before we add quantifiable metrics and get you recruiter ready for 2026</p>
-      </div>
-      <div class="pricing-list">
-        <div class="price-item"><span class="p-name">Basic</span><span class="p-cost" data-bdt="150">150 BDT</span></div>
-        <div class="price-item"><span class="p-name">Standard</span><span class="p-cost" data-bdt="350">350 BDT</span></div>
-        <div class="price-item"><span class="p-name">Premium</span><span class="p-cost" data-bdt="750">750 BDT</span></div>
-      </div>
-      <a href="#contact" class="btn-link">Request Service</a>
-    </div>
-
-  <div class="service-card">
-    <div class="card-top-content">
-      <h3>IELTS Training</h3>
-      <p>Comprehensive preparation for IELTS with focused strategies on listening, reading, writing, and speaking. Get expert feedback and personalized study plans to achieve your target band score.</p>
-    </div>
-    <div class="pricing-list">
-      <div class="price-item"><span class="p-name">Dip your toes package</span><span class="p-cost" data-bdt="2000">2,000 BDT</span></div>
-      <div class="price-item"><span class="p-name">I'm serious package</span><span class="p-cost" data-bdt="4000">4,000 BDT</span></div>
-      <div class="price-item"><span class="p-name">Premium Package</span><span class="p-cost" data-bdt="7000">7,000 BDT</span></div>
-    </div>
-    <a href="#contact" class="btn-link">Request Service</a>
-  </div>
-
-  <div class="service-card">
-    <div class="card-top-content">
-      <h3>Portfolio Website</h3>
-      <p>Stand out with a custom-built portfolio website. I'll design and develop a responsive, modern site that showcases your work and attracts opportunities.</p>
-    </div>
-    <div class="pricing-list">
-      <div class="price-item"><span class="p-name">Basic</span><span class="p-cost" data-bdt="5000">5,000 BDT</span></div>
-      <div class="price-item"><span class="p-name">Standard</span><span class="p-cost" data-bdt="10000">10,000 BDT</span></div>
-      <div class="price-item"><span class="p-name">Premium</span><span class="p-cost" data-bdt="15000">15,000 BDT</span></div>
-    </div>
-    <a href="#contact" class="btn-link">Request Service</a>
-  </div>
-
-  <div class="service-card">
-    <div class="card-top-content">
-      <h3>Digital Cards</h3>
-      <p>Professional digital business cards and online presence setup. Share your info instantly with QR codes, NFC-enabled cards, and linked digital profiles.</p>
-    </div>
-    <div class="pricing-list">
-      <div class="price-item"><span class="p-name">Basic</span><span class="p-cost" data-bdt="500">500 BDT</span></div>
-      <div class="price-item"><span class="p-name">Standard</span><span class="p-cost" data-bdt="1200">1,200 BDT</span></div>
-      <div class="price-item"><span class="p-name">Premium</span><span class="p-cost" data-bdt="2500">2,500 BDT</span></div>
-    </div>
-    <a href="#contact" class="btn-link">Request Service</a>
-  </div>
-
-  <div class="service-card">
-    <div class="card-top-content">
-      <h3>Content Strategy & Creation</h3>
-      <p>From human psychology and camera confidence to advanced SEO and video editing. I provide a 360° approach to digital storytellin. This covers planning, scripting, thumbnail design, and data-driven campaign analytics to ensure your content actually converts.</p>
-    </div>
-    <div class="pricing-list">
-      <div class="price-item"><span class="p-name">Strategy</span><span class="p-cost" data-bdt="3600">3,600 BDT</span></div>
-      <div class="price-item"><span class="p-name">Production</span><span class="p-cost" data-bdt="7200">7,200 BDT</span></div>
-      <div class="price-item"><span class="p-name">Full Campaign</span><span class="p-cost" data-bdt="15000" >15,000 BDT</span></div>
-    </div>
-    <a href="#contact" class="btn-link">Request Service</a>
-  </div>
-
-  <div class="service-card">
-    <div class="card-top-content">
-      <h3>Strategic Partnership Outreach</h3>
-      <p>AI-powered lead generation targeting your specific niche, geography, and prospect list. I'll identify, qualify, and deliver high-intent leads with personalized outreach strategies tailored to your industry.</p>
-    </div>
-    <div class="pricing-list">
-      <div class="price-item"><span class="p-name">Startup (50 leads)</span><span class="p-cost" data-bdt="5000">5,000 BDT</span></div>
-      <div class="price-item"><span class="p-name">Growth (150 leads)</span><span class="p-cost" data-bdt="12000">12,000 BDT</span></div>
-      <div class="price-item"><span class="p-name">Enterprise (500+ leads)</span><span class="p-cost" data-bdt="30000">30,000 BDT</span></div>
-    </div>
-    <a href="#contact" class="btn-link">Request Service</a>
-  </div>
-
-</div>
-
-  <div class="card-section-title" id="projects" style="margin-top: 80px;">
-    <h2 class="display-title">My Projects</h2>
-    <p>Take a look at the projects I've done so far!</p>
-  </div>
-
-  <div class="projects-container">
-    <div class="service-card">
-      <div class="card-top-content">
-        <h3>5 day Forecast DHK</h3>
-        <p>A cool frontend UI project made with Bootstrap and JS for weather tracking.</p>
-      </div>
-      <a href="https://box-the-third.github.io/5dayweather/" class="btn-link">View Project on Github →</a>
-    </div>
-
-    <div class="service-card">
-      <div class="card-top-content">
-        <h3>Taker Inc.</h3>
-        <p>A platform connecting WAV providers to patients and drivers in New York.</p>
-      </div>
-      <a href="https://box-the-third.github.io/TakerInc/" class="btn-link">View Project on Github → →</a>
-    </div>
-
-    <div class="service-card">
-      <div class="card-top-content">
-        <h3>BelaCosmetics</h3>
-        <p>An E-commerce platform developed for a Korean Beauty Product Brand [COSRX].</p>
-      </div>
-      <a href="https://box-the-third.github.io/eCommerce-frontend/" class="btn-link">View Project on Github →</a>
-    </div>
-  </div>
-</div>
-
-      <div class="card card-contact" id="contact">
-        <h2>Get in Touch</h2>
-        <p>Ready to start? Fill out the form below.</p>
-
-        <form action="https://formspree.io/f/mjkarwza" method="POST">
-          <div class="form-group">
-            <label for="email">Your Email</label>
-            <input type="email" name="email" id="email" placeholder="name@example.com" required>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-label">// Top Services</div>
+          <h3>How can I help you today?</h3>
+          <ul class="hero-card-items">
+            <li>SOP & University Application Writing</li>
+            <li>ATS-Optimized CV Writing</li>
+            <li>IELTS Preparation & Coaching</li>
+            <li>Portfolio Website Development</li>
+            <li>Digital Literacy Training</li>
+            <li>Content Strategy & Creation</li>
+          </ul>
+          <a href="#contact" class="hero-card-cta">Book a Free Consultation</a>
+          <div class="hero-float-badge">
+            <span>SAR</span>
+            <span>& BDT</span>
           </div>
-          <div class="form-group">
-            <label for="service-select">Interested In</label>
-            <select name="service" id="service-select">
-              <option value="General Inquiry">Free Consultation</option>
-              <option value="Digital Literacy">Digital Literacy Training</option>
-              <option value="Study Abroad Counseling">Studying Abroad</option>
-              <option value="SOP Writing">SOP Writing</option>
-              <option value="CV Writing">CV Writing</option>
-              <option value="IELTS">IELTS Training</option>
-              <option value="Portfolio Website">Portfolio Website</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea name="message" id="message" rows="4" placeholder="Speak your mind...trust me, I've been there."
-              required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" style="width:100%">Send a Message!</button>
-        </form>
-        <div class="social-media">
-          <a href="https://www.linkedin.com/in/nahiyanibnershad/" class="social-icon" target="_blank"
-            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com/yasbeyondedu/?g=5" class="social-icon" target="_blank"
-            aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.facebook.com/profile.php?id=61584417686122" class="social-icon" target="_blank"
-            aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        </div>
-
-      </div>
-    </div>
-  </main>
-
-
-
-  <!--Affiliations-->
-  <section id="affiliations" class="py-5">
-    <div class="container text-center">
-      <h2 class="fw-bold mb-4">Trusted by & Collaborated with</h2>
-      <div class="logo-slider">
-        <div class="logos">
-          <img src="assets/global_pathways.webp" alt="Global Pathway Experts" />
-          <img src="assets/british_council.png" alt="British Council" />
-          <img src="assets/guinness.png" alt="Guinness World Record" />
-          <img src="assets/microsoft.png" alt="Microsoft" />
-          <img src="assets/british_council.png" alt="British Council" />
-          <img src="assets/global_pathways.webp" alt="Global Pathway Experts" />
-          <img src="assets/belaface.png" alt="Belaface" />
-          <img src="assets/youthbees.jpg" alt="YouthBees" />
-          <img src="assets/mentors.jpg" alt="Mentors" />
-          <img src="assets/guinness.png" alt="Guinness World Record" />
-          <img src="assets/microsoft.png" alt="Microsoft" />
-          <img src="assets/british_council.png" alt="British Council" />
-          <img src="assets/global_pathways.webp" alt="Global Pathway Experts" />
-          <img src="assets/belaface.png" alt="Belaface" />
-          <img src="assets/youthbees.jpg" alt="YouthBees" />
-          <img src="assets/mentors.jpg" alt="Mentors" />
-          <img src="assets/guinness.png" alt="Guinness World Record" />
-          <img src="assets/microsoft.png" alt="Microsoft" />
-          <img src="assets/british_council.png" alt="British Council" />
-          <img src="assets/global_pathways.webp" alt="Global Pathway Experts" />
-          <img src="assets/belaface.png" alt="Belaface" />
-          <img src="assets/youthbees.jpg" alt="YouthBees" />
-          <img src="assets/mentors.jpg" alt="Mentors" />
-          <img src="assets/guinness.png" alt="Guinness World Record" />
-          <img src="assets/microsoft.png" alt="Microsoft" />
-          <img src="assets/british_council.png" alt="British Council" />
-          <img src="assets/global_pathways.webp" alt="Global Pathway Experts" />
-          <img src="assets/belaface.png" alt="Belaface" />
-          <img src="assets/youthbees.jpg" alt="YouthBees" />
-          <img src="assets/mentors.jpg" alt="Mentors" />
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-eyebrow">About</div>
+      <h2 class="section-title">The person <em>behind</em> the work</h2>
 
-  <footer
-style="background: rgba(78, 174, 181, 0.9); text-align:center; padding: 40px; color: var(--text-main); font-size: 0.85rem; border-top: 1px solid var(--border-subtle);">
-    <p>&copy; 2026 yasbeyondedu. All rights reserved.</p>
+      <div class="about-grid">
+        <div class="about-left reveal">
+          <div class="about-portrait-wrap">
+            <img src="assets/meman.png" alt="Nahiyan Ibn Ershad" class="about-portrait">
+            <div class="about-portrait-frame"></div>
+            <div class="about-portrait-label">Nahiyan · Riyadh, KSA</div>
+          </div>
+        </div>
+
+        <div class="about-right">
+          <div class="section-eyebrow" style="margin-bottom:24px;">Who I Am</div>
+          <p>I'm <strong>Nahiyan Ibn Ershad</strong> — a certified Computer Science engineer, AI-Powered Instructional Design Professional, and education counselor.</p>
+          <p>I enjoy creating content and exploring new ideas that connect creativity with real impact. My approach blends empathy with design, bringing both technical expertise and human intuition to every project.</p>
+          <p>I care deeply about <strong>continuous learning, sustainable growth, and helping others unlock their potential.</strong>Whether that's a student pursuing their dream university or a professional looking to stand out digitally.</p>
+
+          <div class="about-links">
+            <a href="assets/Nahiyan_Ibn_Ershad_CV_2026_Riyadh.pdf" class="about-link" target="_blank">
+              <i class="fas fa-file-alt"></i> Download CV
+            </a>
+            <a href="assets/Nahiyan-IbnErshad-1730667985914-Psychometric.pdf" class="about-link" target="_blank">
+              <i class="fas fa-brain"></i> Psychometrics
+            </a>
+            <a href="https://www.linkedin.com/in/nahiyanibnershad/" class="about-link" target="_blank">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+          </div>
+        </div>
+
+        <div class="mission-box reveal reveal-delay-1">
+          <div class="mission-box-label">// Mission Statement</div>
+          <p>At YAS, the mission is to empower individuals through education and digital skills. With the right guidance, anyone can unlock their potential — whether through a winning university application, a standout CV, or a portfolio that opens doors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="services-header">
+        <div>
+          <div class="section-eyebrow">Services</div>
+          <h2 class="section-title">What I <em>do</em></h2>
+          <p class="section-subtitle">Practical, hands-on help to build your skills, credentials, and digital presence.</p>
+        </div>
+        <div>
+          <div class="currency-toggle" id="currency-toggle">
+            <button class="active" data-currency="BDT">BDT</button>
+            <button data-currency="SAR">SAR</button>
+            <button data-currency="USD">USD</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="services-grid">
+
+        <div class="svc-card reveal">
+          <div class="svc-icon"><i class="fas fa-laptop"></i></div>
+          <h3>Digital Literacy</h3>
+          <p>Train your team in Google Suite, prompt engineering, Microsoft Apps, internet safety, and more — through hands-on modules tailored to your context.</p>
+          <div class="svc-pricing">
+            <div class="price-row"><span class="price-tier">Starter</span><span class="price-val" data-bdt="500">500 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Standard</span><span class="price-val" data-bdt="1250">1,250 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Comprehensive</span><span class="price-val" data-bdt="2500">2,500 BDT</span></div>
+          </div>
+          <a href="#contact" class="svc-cta">Request Service <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="svc-card reveal reveal-delay-1">
+          <div class="svc-icon"><i class="fas fa-university"></i></div>
+          <h3>University App & SOP</h3>
+          <p>A winning Statement of Purpose that makes your application unforgettable. We'll brainstorm, draft, and polish your story together.</p>
+          <div class="svc-pricing">
+            <div class="price-row"><span class="price-tier">Draft</span><span class="price-val" data-bdt="1500">1,500 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Standard</span><span class="price-val" data-bdt="2500">2,500 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Premium</span><span class="price-val" data-bdt="4500">4,500 BDT</span></div>
+          </div>
+          <a href="#contact" class="svc-cta">Request Service <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="svc-card reveal reveal-delay-2">
+          <div class="svc-icon"><i class="fas fa-file-user"></i></div>
+          <h3>CV Writing</h3>
+          <p>ATS-friendly, recruiter-ready CVs with quantifiable metrics. I'll consult with you before building something that gets you interviews in 2026.</p>
+          <div class="svc-pricing">
+            <div class="price-row"><span class="price-tier">Basic</span><span class="price-val" data-bdt="150">150 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Standard</span><span class="price-val" data-bdt="350">350 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Premium</span><span class="price-val" data-bdt="750">750 BDT</span></div>
+          </div>
+          <a href="#contact" class="svc-cta">Request Service <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-icon"><i class="fas fa-headset"></i></div>
+          <h3>IELTS Training</h3>
+          <p>Focused strategies across all four skills — listening, reading, writing, speaking — with expert feedback and personalized study plans for your target band.</p>
+          <div class="svc-pricing">
+            <div class="price-row"><span class="price-tier">Starter Package</span><span class="price-val" data-bdt="2000">2,000 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Serious Package</span><span class="price-val" data-bdt="4000">4,000 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Premium Package</span><span class="price-val" data-bdt="7000">7,000 BDT</span></div>
+          </div>
+          <a href="#contact" class="svc-cta">Request Service <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="svc-card reveal reveal-delay-1">
+          <div class="svc-icon"><i class="fas fa-code"></i></div>
+          <h3>Portfolio Website</h3>
+          <p>Custom-built, responsive, modern sites that showcase your work and attract opportunities. Design + development included.</p>
+          <div class="svc-pricing">
+            <div class="price-row"><span class="price-tier">Basic</span><span class="price-val" data-bdt="5000">5,000 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Standard</span><span class="price-val" data-bdt="10000">10,000 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Premium</span><span class="price-val" data-bdt="15000">15,000 BDT</span></div>
+          </div>
+          <a href="#contact" class="svc-cta">Request Service <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="svc-card reveal reveal-delay-2">
+          <div class="svc-icon"><i class="fas fa-id-card"></i></div>
+          <h3>Digital Cards</h3>
+          <p>Professional digital business cards with QR codes, NFC-enabled profiles, and full online presence setup. Share your info instantly.</p>
+          <div class="svc-pricing">
+            <div class="price-row"><span class="price-tier">Basic</span><span class="price-val" data-bdt="500">500 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Standard</span><span class="price-val" data-bdt="1200">1,200 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Premium</span><span class="price-val" data-bdt="2500">2,500 BDT</span></div>
+          </div>
+          <a href="#contact" class="svc-cta">Request Service <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>Content Strategy & Creation</h3>
+          <p>From camera confidence and SEO to video editing and campaign analytics — a 360° approach to digital storytelling that converts.</p>
+          <div class="svc-pricing">
+            <div class="price-row"><span class="price-tier">Strategy</span><span class="price-val" data-bdt="3600">3,600 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Production</span><span class="price-val" data-bdt="7200">7,200 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Full Campaign</span><span class="price-val" data-bdt="15000">15,000 BDT</span></div>
+          </div>
+          <a href="#contact" class="svc-cta">Request Service <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="svc-card reveal reveal-delay-1">
+          <div class="svc-icon"><i class="fas fa-handshake"></i></div>
+          <h3>Strategic Partnership Outreach</h3>
+          <p>AI-powered lead generation targeting your niche, geography, and prospect list. High-intent leads with personalized outreach strategies.</p>
+          <div class="svc-pricing">
+            <div class="price-row"><span class="price-tier">Startup (50 leads)</span><span class="price-val" data-bdt="5000">5,000 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Growth (150 leads)</span><span class="price-val" data-bdt="12000">12,000 BDT</span></div>
+            <div class="price-row"><span class="price-tier">Enterprise (500+)</span><span class="price-val" data-bdt="30000">30,000 BDT</span></div>
+          </div>
+          <a href="#contact" class="svc-cta">Request Service <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDY ABROAD BAND -->
+  <div class="study-abroad-band">
+    <div class="study-abroad-inner">
+      <div>
+        <h2>Planning to study <em>abroad?</em></h2>
+        <p>Dedicated guidance for UK, Canada, Australia, Germany, and beyond. SOPs, visa counseling, and university selection — all in one place.</p>
+      </div>
+      <a href="StudyAbroadPage.html" class="btn-gold">
+        Explore Study Abroad <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-inner">
+      <div class="section-eyebrow">Projects</div>
+      <h2 class="section-title">Selected <em>work</em></h2>
+      <p class="section-subtitle">A snapshot of recent builds and experiments.</p>
+    </div>
+    <div class="section-inner" style="margin-top:0;">
+      <div class="projects-grid">
+        <div class="project-tile reveal">
+          <div class="project-num">01 / 03</div>
+          <h3>5-Day Forecast DHK</h3>
+          <p>A clean frontend weather UI built with Bootstrap and JavaScript for live Dhaka weather tracking.</p>
+          <a href="https://box-the-third.github.io/5dayweather/" target="_blank" class="project-link">
+            View on GitHub <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="project-tile reveal reveal-delay-1">
+          <div class="project-num">02 / 03</div>
+          <h3>Taker Inc.</h3>
+          <p>A platform connecting WAV providers to patients and drivers across New York — accessibility-first design.</p>
+          <a href="https://box-the-third.github.io/TakerInc/" target="_blank" class="project-link">
+            View on GitHub <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="project-tile reveal reveal-delay-2">
+          <div class="project-num">03 / 03</div>
+          <h3>BelaCosmetics</h3>
+          <p>An e-commerce frontend developed for a Korean beauty brand — product-centric layout with smooth UX.</p>
+          <a href="https://box-the-third.github.io/eCommerce-frontend/" target="_blank" class="project-link">
+            View on GitHub <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AFFILIATIONS -->
+  <section id="affiliations">
+    <div class="section-inner">
+      <div class="section-eyebrow">Trusted By</div>
+      <h2 class="section-title" style="font-size:1.6rem;">Collaborated & affiliated with</h2>
+    </div>
+    <div class="affil-overflow" style="margin-top:40px;">
+      <div class="affil-track" id="affil-track">
+        <img src="assets/global_pathways.webp" alt="Global Pathway Experts">
+        <img src="assets/british_council.png" alt="British Council">
+        <img src="assets/guinness.png" alt="Guinness World Record">
+        <img src="assets/microsoft.png" alt="Microsoft">
+        <img src="assets/belaface.png" alt="Belaface">
+        <img src="assets/youthbees.jpg" alt="YouthBees">
+        <img src="assets/mentors.jpg" alt="Mentors">
+        <!-- duplicated for seamless loop -->
+        <img src="assets/global_pathways.webp" alt="Global Pathway Experts">
+        <img src="assets/british_council.png" alt="British Council">
+        <img src="assets/guinness.png" alt="Guinness World Record">
+        <img src="assets/microsoft.png" alt="Microsoft">
+        <img src="assets/belaface.png" alt="Belaface">
+        <img src="assets/youthbees.jpg" alt="YouthBees">
+        <img src="assets/mentors.jpg" alt="Mentors">
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-eyebrow">Contact</div>
+      <h2 class="section-title">Let's <em>talk</em></h2>
+
+      <div class="contact-grid">
+        <div class="contact-left reveal">
+          <h3>Ready to start something?<br>I'd love to hear from you.</h3>
+          <p>Whether it's a university application, a new CV, or an idea you've been sitting on — reach out and let's figure out how I can help.</p>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-info-text">
+              <strong>Location</strong>
+              <span>Riyadh, Kingdom of Saudi Arabia</span>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fas fa-globe"></i></div>
+            <div class="contact-info-text">
+              <strong>Website</strong>
+              <a href="https://box-the-third.github.io" target="_blank">box-the-third.github.io</a>
+            </div>
+          </div>
+
+          <div class="social-row">
+            <a href="https://www.linkedin.com/in/nahiyanibnershad/" class="social-pill" target="_blank">
+              <i class="fab fa-linkedin-in"></i> LinkedIn
+            </a>
+            <a href="https://www.instagram.com/yasbeyondedu/" class="social-pill" target="_blank">
+              <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61584417686122" class="social-pill" target="_blank">
+              <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-form reveal reveal-delay-1">
+          <form action="https://formspree.io/f/mjkarwza" method="POST">
+            <div class="form-group">
+              <label>Your Email</label>
+              <input type="email" name="email" placeholder="name@example.com" required>
+            </div>
+            <div class="form-group">
+              <label>Interested In</label>
+              <select name="service">
+                <option value="General Inquiry">Free Consultation</option>
+                <option value="Digital Literacy">Digital Literacy Training</option>
+                <option value="Study Abroad Counseling">Studying Abroad</option>
+                <option value="SOP Writing">SOP Writing</option>
+                <option value="CV Writing">CV Writing</option>
+                <option value="IELTS">IELTS Training</option>
+                <option value="Portfolio Website">Portfolio Website</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea name="message" rows="5" placeholder="Tell me what you're working on..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Message <i class="fas fa-paper-plane" style="margin-left:8px;font-size:0.8rem;"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">YAS<span>.</span></div>
+      <div class="footer-copy">&copy; 2026 YAS Beyond Education. All rights reserved.</div>
+      <nav class="footer-nav">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="StudyAbroadPage.html">Study Abroad</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </footer>
 
+  <!-- LIGHTBOX -->
   <div id="lightbox">
     <span class="close-lightbox">&times;</span>
     <img class="lightbox-content" id="lightbox-img">
-    <div id="lightbox-caption" style="color:#fff; text-align:center; margin-top:10px;"></div>
   </div>
 
-  <script src="cursor.js"></script>
-  <script src="cursorTrail.js"></script>
+  <!-- SCRIPTS -->
   <script>
-    // 1. Typing Effect Logic
+    // ── CURSOR
+    const ring = document.getElementById('cursor-ring');
+    const dot  = document.getElementById('cursor-dot');
+    let raf;
+    let tx = 0, ty = 0, cx = 0, cy = 0;
+    document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; dot.style.left = tx+'px'; dot.style.top = ty+'px'; });
+    function animCursor() {
+      cx += (tx - cx) * 0.12;
+      cy += (ty - cy) * 0.12;
+      ring.style.left = cx+'px'; ring.style.top = cy+'px';
+      requestAnimationFrame(animCursor);
+    }
+    animCursor();
+    document.querySelectorAll('a,button,.svc-card').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.width='60px'; ring.style.height='60px'; ring.style.opacity='0.5'; });
+      el.addEventListener('mouseleave', () => { ring.style.width='36px'; ring.style.height='36px'; ring.style.opacity='1'; });
+    });
+
+    // ── NAVBAR SCROLL
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── MOBILE NAV TOGGLE
+    document.getElementById('nav-toggle').addEventListener('click', () => {
+      document.getElementById('nav-links').classList.toggle('active');
+    });
+
+    // ── TYPING EFFECT
     const words = ["an Education Counselor.", "a Web Developer.", "a Designer.", "a Creative Thinker."];
     let i = 0;
-    let timer;
-
     function typingEffect() {
       let word = words[i].split("");
-      var loopTyping = function () {
+      var loopTyping = function() {
         if (word.length > 0) {
           document.getElementById('typed-text').innerHTML += word.shift();
-        } else {
-          setTimeout(deletingEffect, 2000); // Wait before deleting
-          return false;
-        }
-        timer = setTimeout(loopTyping, 100);
+        } else { setTimeout(deletingEffect, 2200); return; }
+        setTimeout(loopTyping, 80);
       };
       loopTyping();
     }
-
     function deletingEffect() {
       let word = words[i].split("");
-      var loopDeleting = function () {
-        if (word.length > 0) {
-          word.pop();
-          document.getElementById('typed-text').innerHTML = word.join("");
-        } else {
-          if (words.length > (i + 1)) { i++; } else { i = 0; }
-          typingEffect();
-          return false;
-        }
-        timer = setTimeout(loopDeleting, 50);
+      var loopDeleting = function() {
+        if (word.length > 0) { word.pop(); document.getElementById('typed-text').innerHTML = word.join(""); }
+        else { i = (i + 1) % words.length; typingEffect(); return; }
+        setTimeout(loopDeleting, 40);
       };
       loopDeleting();
     }
-
-    // Start typing on load
     typingEffect();
 
-    // 2. Lightbox Logic
+    // ── CURRENCY TOGGLE
+    const rates = { BDT: 1, SAR: 1/32.65, USD: 1/122.4375 };
+    let activeCurrency = 'BDT';
+
+    document.querySelectorAll('#currency-toggle button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const currency = btn.dataset.currency;
+        if (currency === activeCurrency) return;
+        activeCurrency = currency;
+
+        document.querySelectorAll('#currency-toggle button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        document.querySelectorAll('.price-val').forEach(el => {
+          el.classList.add('fading');
+          setTimeout(() => {
+            const bdt = parseFloat(el.dataset.bdt);
+            const val = (bdt * rates[currency]).toFixed(currency === 'BDT' ? 0 : 2);
+            const formatted = currency === 'BDT' ? Number(val).toLocaleString() : val;
+            el.textContent = formatted + ' ' + currency;
+            el.classList.remove('fading');
+          }, 400);
+        });
+      });
+    });
+
+    // ── SCROLL REVEAL
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── LIGHTBOX
     const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
-    const imgs = document.querySelectorAll(".gallery-grid img");
-    const closeBtn = document.querySelector(".close-lightbox");
-    const caption = document.getElementById("lightbox-caption");
-
-    imgs.forEach(img => {
-      img.addEventListener("click", () => {
-        lightbox.style.display = "block";
-        lightboxImg.src = img.src;
-        caption.innerText = img.dataset.title || "";
-      });
+    document.querySelectorAll(".gallery-grid img").forEach(img => {
+      img.addEventListener("click", () => { lightbox.style.display = "block"; document.getElementById("lightbox-img").src = img.src; });
     });
-
-    if (closeBtn) {
-      closeBtn.addEventListener("click", () => {
-        lightbox.style.display = "none";
-      });
-    }
-
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) lightbox.style.display = "none";
-    });
+    document.querySelector(".close-lightbox").addEventListener("click", () => lightbox.style.display = "none");
+    lightbox.addEventListener("click", e => { if (e.target === lightbox) lightbox.style.display = "none"; });
   </script>
 
-<script>
-  // Conversion logic based on local rates
-  // 1 SAR = 32.65 BDT
-  // 1 USD = 3.75 SAR = 122.4375 BDT
-  const rates = {
-    SAR: 1 / 32.65,
-    USD: 1 / 122.4375
-  };
-
-  const currencies = ['BDT', 'SAR', 'USD'];
-  let currentIdx = 0;
-
-  function updatePrices() {
-    const priceElements = document.querySelectorAll('.p-cost');
-    
-    // Cycle to next currency
-    currentIdx = (currentIdx + 1) % currencies.length;
-    const targetCurrency = currencies[currentIdx];
-
-    priceElements.forEach(el => {
-      // Step 1: Fade Out
-      el.classList.add('fade-out');
-
-      // Step 2: Wait for fade animation (500ms), then change text
-      setTimeout(() => {
-        const bdtVal = parseFloat(el.getAttribute('data-bdt'));
-        
-        if (targetCurrency === 'BDT') {
-          el.innerText = bdtVal.toLocaleString() + ' BDT';
-        } else {
-          const converted = (bdtVal * rates[targetCurrency]).toFixed(2);
-          el.innerText = converted + ' ' + targetCurrency;
-        }
-
-        // Step 3: Fade Back In
-        el.classList.remove('fade-out');
-      }, 500);
-    });
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nahiyan Ibn Ershad",
+    "jobTitle": "Education Counselor & Web Developer",
+    "url": "https://yasbeyondedu.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/nahiyanibnershad/",
+      "https://www.instagram.com/yasbeyondedu/"
+    ],
+    "knowsAbout": ["Education Counseling","SOP Writing","CV Writing","Web Development","Digital Literacy"]
   }
-
-  // Change currency every 5 seconds (allows time to read)
-  setInterval(updatePrices, 5000);
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Nahiyan Ibn Ershad",
-  "jobTitle": "Education Counselor & Web Developer",
-  "url": "https://yasbeyondedu.com",
-  "sameAs": [
-    "https://www.linkedin.com/in/nahiyanibnershad/",
-    "https://www.instagram.com/yasbeyondedu/"
-  ],
-  "knowsAbout": [
-    "Education Counseling",
-    "SOP Writing",
-    "CV Writing",
-    "Web Development",
-    "Digital Literacy"
-  ]
-}
-</script>
+  </script>
 
 </body>
-
 </html>
