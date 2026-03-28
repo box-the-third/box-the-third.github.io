@@ -1722,11 +1722,13 @@
   }
   </script>
 
-  <!-- Gitignored config — holds the Formspree endpoint, never committed -->
-  <script src="config.js"></script>
-
   <script>
-    // ── CONTACT FORM — fetch submission via config.js endpoint ──
+    // ── CONTACT FORM ──────────────────────────────────────────────────
+    // Formspree form IDs are safe to keep here — they are domain-locked
+    // by Formspree, so submissions only work from your allowed domain.
+    // Your actual email address is never exposed.
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mjkarwza';
+
     const contactForm = document.getElementById('contact-form');
     const submitBtn   = document.getElementById('form-submit-btn');
     const submitIcon  = document.getElementById('submit-icon');
@@ -1736,42 +1738,30 @@
       contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Guard: warn clearly if config.js is missing
-        if (typeof YAS_CONFIG === 'undefined' || !YAS_CONFIG.FORMSPREE_ENDPOINT) {
-          formStatus.style.display  = 'block';
-          formStatus.style.color    = '#c0392b';
-          formStatus.textContent    = 'Configuration missing — please create config.js from config.example.js.';
-          return;
-        }
-
         // Loading state
-        submitBtn.disabled      = true;
-        submitBtn.style.opacity = '0.7';
-        submitIcon.className    = 'fas fa-spinner fa-spin';
+        submitBtn.disabled          = true;
+        submitBtn.style.opacity     = '0.7';
+        submitIcon.className        = 'fas fa-spinner fa-spin';
         submitIcon.style.marginLeft = '8px';
         formStatus.style.display    = 'none';
 
-        const data = new FormData(contactForm);
-
         try {
-          const res = await fetch(YAS_CONFIG.FORMSPREE_ENDPOINT, {
+          const res = await fetch(FORMSPREE_ENDPOINT, {
             method:  'POST',
-            body:    data,
+            body:    new FormData(contactForm),
             headers: { 'Accept': 'application/json' },
           });
 
           if (res.ok) {
-            // Success
-            submitBtn.style.background = 'var(--gold)';
-            submitBtn.style.color      = 'var(--ink)';
-            submitIcon.className       = 'fas fa-check';
+            submitBtn.style.background          = 'var(--gold)';
+            submitBtn.style.color               = 'var(--ink)';
+            submitIcon.className                = 'fas fa-check';
             submitBtn.childNodes[0].textContent = 'Message Sent! ';
-            formStatus.style.display   = 'block';
-            formStatus.style.color     = 'var(--gold-dim)';
-            formStatus.textContent     = "Thanks! I'll get back to you soon.";
+            formStatus.style.display            = 'block';
+            formStatus.style.color              = 'var(--gold-dim)';
+            formStatus.textContent              = "Thanks! I'll get back to you soon.";
             contactForm.reset();
 
-            // Reset button after 4 s
             setTimeout(() => {
               submitBtn.disabled                  = false;
               submitBtn.style.opacity             = '1';
@@ -1785,13 +1775,13 @@
             throw new Error('Server error');
           }
         } catch {
-          submitBtn.disabled      = false;
-          submitBtn.style.opacity = '1';
-          submitIcon.className    = 'fas fa-paper-plane';
+          submitBtn.disabled                  = false;
+          submitBtn.style.opacity             = '1';
+          submitIcon.className                = 'fas fa-paper-plane';
           submitBtn.childNodes[0].textContent = 'Send Message ';
-          formStatus.style.display = 'block';
-          formStatus.style.color   = '#c0392b';
-          formStatus.textContent   = 'Something went wrong — please try again or reach out via LinkedIn.';
+          formStatus.style.display            = 'block';
+          formStatus.style.color              = '#c0392b';
+          formStatus.textContent              = 'Something went wrong — please try again or reach out via LinkedIn.';
         }
       });
     }
