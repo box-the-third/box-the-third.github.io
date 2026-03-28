@@ -1,0 +1,13 @@
+# ── Sensitive config (API keys, endpoints) ──────────────────
+# Copy config.example.js → config.js and fill in your values.
+# NEVER commit config.js
+config.js
+
+# ── OS / editor noise ────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ── Dependency folders ───────────────────────────────────────
+node_modules/
