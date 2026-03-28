@@ -1,4 +1,4 @@
- :root {
+    :root {
       --ink:        #0D0D0D;
       --ink-soft:   #1A1A1A;
       --ink-mid:    #2C2C2C;
@@ -808,6 +808,7 @@
       background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
       opacity: 0;
       transition: opacity 0.35s;
+      pointer-events: none;
     }
     .project-tile:hover::before { opacity: 1; }
     .project-tile:hover { background: var(--ink-mid); }
@@ -845,6 +846,8 @@
       text-decoration: none;
       margin-top: 28px;
       transition: gap 0.2s;
+      position: relative;
+      z-index: 1;
     }
     .project-link:hover { gap: 14px; }
 
@@ -1115,6 +1118,7 @@
       position: absolute;
       inset: 0;
       background: radial-gradient(ellipse 60% 100% at 80% 50%, rgba(201,168,76,0.12) 0%, transparent 60%);
+      pointer-events: none;
     }
     .study-abroad-inner {
       max-width: 1280px;
@@ -1157,5 +1161,10 @@
       transition: all 0.25s;
       flex-shrink: 0;
       white-space: nowrap;
+      position: relative;
+      z-index: 1;
     }
     .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,168,76,0.3); }
+
+
+    
