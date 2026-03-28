@@ -1,0 +1,52 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]          # change to 'master' if that's your default branch
+  workflow_dispatch:          # lets you trigger manually from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Inject secret into config.js ───────────────────────────────
+      # This generates config.js on the Actions runner at deploy time.
+      # The secret is never stored in your repo — only in GitHub Settings.
+      - name: Generate config.js from secret
+        run: |
+          cat > config.js << 'ENDOFFILE'
+          const YAS_CONFIG = {
+            FORMSPREE_ENDPOINT: "PLACEHOLDER",
+          };
+          ENDOFFILE
+          # Replace the placeholder with the real secret value
+          sed -i "s|PLACEHOLDER|${{ secrets.FORMSPREE_ENDPOINT }}|g" config.js
+
+      # ── Upload & deploy to GitHub Pages ───────────────────────────
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'           # uploads entire repo root (adjust if your site is in a subfolder)
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

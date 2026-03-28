@@ -1,5 +1,6 @@
-# ── Sensitive config (API keys, endpoints) ──────────────────
-# Copy config.example.js → config.js and fill in your values.
+# ── Sensitive config (generated at deploy time by GitHub Actions) ──
+# Locally: copy config.example.js → config.js and fill in your values.
+# On GitHub Pages: the Actions workflow generates this from a secret.
 # NEVER commit config.js
 config.js
 
