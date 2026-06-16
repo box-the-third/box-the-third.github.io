@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dashboard | YAS Beyond Education</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/auth.css">
+
+  <style>
+    :root {
+      --navy:       #0A1628;
+      --navy-mid:   #112040;
+      --navy-light: #1B3260;
+      --teal:       #00b2bc;
+      --teal-dim:   #0069b4;
+      --teal-glow:  rgba(14, 59, 239, 0.15);
+      --amber:      #FFBA08;
+      --amber-dim:  rgba(255,186,8,0.12);
+      --white:      #FFFFFF;
+      --off-white:  #F0F4FF;
+      --text:       #CBD8F0;
+      --text-muted: #7A90B8;
+      --border:     rgba(255,255,255,0.08);
+      --card-bg:    rgba(255,255,255,0.04);
+      --card-hover: rgba(255,255,255,0.07);
+
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --r: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy); color: var(--text); font-family: var(--font-body);
+      font-size: 16px; line-height: 1.7; overflow-x: hidden; min-height: 100vh;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+    .bg-orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
+    .bg-orb-1 { width: 600px; height: 600px; background: rgba(0,201,167,0.06); top: -100px; right: -100px; }
+    .bg-orb-2 { width: 500px; height: 500px; background: rgba(255,186,8,0.04); bottom: 20%; left: -150px; }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0;
+      background: rgba(10,22,40,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: var(--font-head); font-size: 1.5rem; font-weight: 800; color: var(--white); text-decoration: none; letter-spacing: -0.03em; }
+    .logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--white); }
+    @media (max-width: 700px) {
+      .nav-inner { padding: 0 20px; }
+      .nav-links { gap: 18px; }
+      .nav-links a:not(.nav-account a) { display: none; }
+    }
+
+    /* FOOTER */
+    footer { background: var(--navy-mid); border-top: 1px solid var(--border); padding: 40px; position: relative; z-index: 1; margin-top: 60px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { font-family: var(--font-head); font-size: 1.5rem; font-weight: 800; color: var(--white); }
+    .footer-logo span { color: var(--teal); }
+    .footer-copy { font-size: 0.8rem; color: var(--text-muted); }
+
+    .skeleton { opacity: .5; }
+  </style>
+</head>
+<body>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">YAS<span>.</span></a>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html#services">Services</a>
+        <a href="StudyAbroadPage.html">Study Abroad</a>
+        <div class="nav-account" id="nav-account-slot"></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dash-wrap">
+    <div class="dash-header">
+      <div>
+        <h1>Your <em>dashboard</em></h1>
+        <p id="dash-greeting">Loading your account...</p>
+      </div>
+      <button class="dash-signout" id="dash-signout">Sign Out</button>
+    </div>
+
+    <div class="dash-grid">
+      <div class="dash-card">
+        <h3>Account</h3>
+        <div id="dash-profile" class="skeleton">
+          <div class="dash-profile-row"><i class="fas fa-user"></i><div><strong>Name</strong><span>—</span></div></div>
+          <div class="dash-profile-row"><i class="fas fa-envelope"></i><div><strong>Email</strong><span>—</span></div></div>
+          <div class="dash-profile-row"><i class="fas fa-calendar"></i><div><strong>Member Since</strong><span>—</span></div></div>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <h3>My Selections</h3>
+        <div id="dash-selections">
+          <div class="dash-empty">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading your selections...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">YAS<span>.</span></div>
+      <div class="footer-copy">© 2026 YAS Beyond Education. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/db.js"></script>
+  <script src="assets/js/auth-ui.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const session = await YASAuth.getSession();
+      if (!session) {
+        // Not signed in — send back to the homepage and open sign-in there.
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const user = session.user;
+      const profile = await YASData.getMyProfile(user.id);
+
+      document.getElementById('dash-greeting').textContent =
+        `Welcome back${profile?.full_name ? ', ' + profile.full_name.split(' ')[0] : ''}.`;
+
+      const memberSince = new Date(user.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      document.getElementById('dash-profile').classList.remove('skeleton');
+      document.getElementById('dash-profile').innerHTML = `
+        <div class="dash-profile-row"><i class="fas fa-user"></i><div><strong>Name</strong><span>${escapeHtml(profile?.full_name || 'Not set')}</span></div></div>
+        <div class="dash-profile-row"><i class="fas fa-envelope"></i><div><strong>Email</strong><span>${escapeHtml(user.email)}</span></div></div>
+        <div class="dash-profile-row"><i class="fas fa-calendar"></i><div><strong>Member Since</strong><span>${memberSince}</span></div></div>
+      `;
+
+      const selections = await YASData.getMySelections(user.id);
+      const container = document.getElementById('dash-selections');
+      if (!selections.length) {
+        container.innerHTML = `
+          <div class="dash-empty">
+            <i class="fas fa-inbox"></i>
+            <p>No selections yet.<br><a href="index.html#services">Browse services</a> to get started.</p>
+          </div>`;
+      } else {
+        container.innerHTML = selections.map(s => `
+          <div class="dash-selection">
+            <div class="dash-selection-info">
+              <strong>${escapeHtml(s.packages?.service_name || 'Service')}</strong>
+              <span>${escapeHtml(s.packages?.tier_label || '')}</span>
+            </div>
+            <div class="dash-selection-meta">
+              <span class="dash-selection-price">৳${Number(s.packages?.price_bdt || 0).toLocaleString()}</span>
+              <span class="dash-badge ${s.status}">${s.status.replace('_',' ')}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('dash-signout').addEventListener('click', () => YASAuth.signOut());
+    });
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str ?? '';
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>

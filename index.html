@@ -54,6 +54,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/auth.css">
 
   <style>
     /* ═══════════════════════════════════════════
@@ -781,6 +782,7 @@
         <a href="#how">Process</a>
         <a href="#about">About</a>
         <a href="#contact" class="nav-cta">Get Started</a>
+        <div class="nav-account" id="nav-account-slot"></div>
       </div>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
         <span class="bar"></span>
@@ -929,7 +931,7 @@
               <span class="tier-price price-val" data-bdt="750">৳750</span>
             </div>
           </div>
-          <a href="#contact" class="svc-cta">Get My CV Done <i class="fas fa-arrow-right"></i></a>
+          <a href="#contact" class="svc-cta" data-package-id="cv_writing_standard">Get My CV Done <i class="fas fa-arrow-right"></i></a>
         </div>
 
         <!-- SOP / University App -->
@@ -951,7 +953,7 @@
               <span class="tier-price price-val" data-bdt="4500">৳4,500</span>
             </div>
           </div>
-          <a href="#contact" class="svc-cta">Start My SOP <i class="fas fa-arrow-right"></i></a>
+          <a href="#contact" class="svc-cta" data-package-id="sop_writing_standard">Start My SOP <i class="fas fa-arrow-right"></i></a>
         </div>
 
         <!-- IELTS Training -->
@@ -973,7 +975,7 @@
               <span class="tier-price price-val" data-bdt="7000">৳7,000</span>
             </div>
           </div>
-          <a href="#contact" class="svc-cta">Book a FREE Session today<i class="fas fa-arrow-right"></i></a>
+          <a href="#contact" class="svc-cta" data-package-id="ielts_training_starter">Book a FREE Session today<i class="fas fa-arrow-right"></i></a>
         </div>
 
         <!-- Digital Literacy -->
@@ -995,7 +997,7 @@
               <span class="tier-price price-val" data-bdt="2500">৳2,500</span>
             </div>
           </div>
-          <a href="#contact" class="svc-cta">Train Your Team<i class="fas fa-arrow-right"></i></a>
+          <a href="#contact" class="svc-cta" data-package-id="digital_literacy_standard">Train Your Team<i class="fas fa-arrow-right"></i></a>
         </div>
 
         <!-- Portfolio Website -->
@@ -1017,7 +1019,7 @@
               <span class="tier-price price-val" data-bdt="15000">৳15,000</span>
             </div>
           </div>
-          <a href="#contact" class="svc-cta">Build My Site <i class="fas fa-arrow-right"></i></a>
+          <a href="#contact" class="svc-cta" data-package-id="portfolio_website_standard">Build My Site <i class="fas fa-arrow-right"></i></a>
         </div>
 
         <!-- Content Strategy -->
@@ -1039,7 +1041,7 @@
               <span class="tier-price price-val" data-bdt="15000">৳15,000</span>
             </div>
           </div>
-          <a href="#contact" class="svc-cta">Grow My Brand<i class="fas fa-arrow-right"></i></a>
+          <a href="#contact" class="svc-cta" data-package-id="content_strategy_production">Grow My Brand<i class="fas fa-arrow-right"></i></a>
         </div>
 
         <!-- Digital Cards -->
@@ -1061,7 +1063,7 @@
               <span class="tier-price price-val" data-bdt="2500">৳2,500</span>
             </div>
           </div>
-          <a href="#contact" class="svc-cta">Get My Card<i class="fas fa-arrow-right"></i></a>
+          <a href="#contact" class="svc-cta" data-package-id="digital_cards_standard">Get My Card<i class="fas fa-arrow-right"></i></a>
         </div>
 
         <!-- Partnership Outreach -->
@@ -1083,7 +1085,7 @@
               <span class="tier-price price-val" data-bdt="30000">৳30,000</span>
             </div>
           </div>
-          <a href="#contact" class="svc-cta">Generate Leads Today<i class="fas fa-arrow-right"></i></a>
+          <a href="#contact" class="svc-cta" data-package-id="partnership_outreach_growth">Generate Leads Today<i class="fas fa-arrow-right"></i></a>
         </div>
 
       </div>
@@ -1706,5 +1708,8 @@
   </script>
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/db.js"></script>
+  <script src="assets/js/auth-ui.js"></script>
 </body>
 </html>
