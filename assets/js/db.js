@@ -4,10 +4,10 @@
 // ════════════════════════════════════════════════════════════════
 
 // 1) Fill these in from: Supabase Dashboard → Project Settings → API
-const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://fssauttfaolebmulqyuz.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzc2F1dHRmYW9sZWJtdWxxeXV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MTQ1NDIsImV4cCI6MjA5NzA5MDU0Mn0.FtUFC8bM5jOB6h_TXuF5G2UEmklWWYQo5KH8EPyCyOI';
 
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabaseClient = window.supabase.createClient(fssauttfaolebmulqyuz.supabase.co, eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzc2F1dHRmYW9sZWJtdWxxeXV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MTQ1NDIsImV4cCI6MjA5NzA5MDU0Mn0.FtUFC8bM5jOB6h_TXuF5G2UEmklWWYQo5KH8EPyCyOI);
 
 // ──────────────────────────────────────────────
 // Auth helpers (used by the nav, modal, and dashboard)
