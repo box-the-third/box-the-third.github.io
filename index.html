@@ -759,6 +759,130 @@
        FADING PRICE ANIMATION
     ═══════════════════════════════════════════ */
     .tier-price.fading { opacity: 0; transition: opacity .2s; }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE & ANTI-OVERFLOW OVERRIDES
+    ═══════════════════════════════════════════ */
+    
+    /* 1. Global Reset for Overflow and Scaling */
+    html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden !important; /* Force hide horizontal scrollbar */
+      position: relative;
+    }
+
+    img, svg, video, canvas, iframe {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Prevent long unbroken text from pushing containers wide */
+    p, h1, h2, h3, h4, a, span {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    /* 2. Container Maximums */
+    .nav-inner, .hero-inner, .section-inner, .payment-grid {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* ═══════════════════════════════════════════
+       LAPTOP / SMALL DESKTOP (max-width: 1024px)
+    ═══════════════════════════════════════════ */
+    @media screen and (max-width: 1024px) {
+      section { padding: 80px 0; }
+      .hero { padding: 120px 0 60px; }
+      
+      /* Collapse heavy grids */
+      .services-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .payment-grid { grid-template-columns: 1fr; gap: 40px; }
+      .steps-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 12px; 
+        background: transparent; 
+      }
+      .step { 
+        border-radius: 16px; 
+        border: 1px solid var(--border); 
+      }
+      
+      /* Restore hero card if hidden on mid-screens */
+      .hero-card { display: block; max-width: 500px; margin: 0 auto; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 50px; }
+      
+      .hero-p { margin: 0 auto 36px auto; }
+      .hero-btns { justify-content: center; }
+      .hero-trust { justify-content: center; }
+    }
+
+    /* ═══════════════════════════════════════════
+       TABLET (max-width: 768px)
+    ═══════════════════════════════════════════ */
+    @media screen and (max-width: 768px) {
+      section { padding: 60px 0; }
+      .hero { padding: 100px 0 50px; }
+      
+      /* Typography Scaling */
+      .hero-h1 { font-size: clamp(2.2rem, 8vw, 3rem); line-height: 1.15; }
+      h2.sec-title { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+      
+      /* Layout Adjustments */
+      .services-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; gap: 16px; }
+      
+      /* Mobile Menu Full Width Adjustments */
+      .nav-links {
+        padding: 24px;
+        align-items: stretch;
+      }
+      .nav-cta {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+      }
+      
+      /* Stack buttons */
+      .hero-btns { flex-direction: column; width: 100%; max-width: 400px; margin: 0 auto 40px auto; }
+      .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+      
+      /* Convert Trust Bar to vertical list to save space */
+      .trust-bar { 
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 16px; 
+        padding: 24px; 
+      }
+      .trust-item { 
+        border-right: none; 
+        border-bottom: 1px solid var(--border); 
+        width: 100%; 
+        padding: 0 0 12px 0; 
+      }
+      .trust-item:last-child { border-bottom: none; padding-bottom: 0; }
+    }
+
+    /* ═══════════════════════════════════════════
+       MOBILE PHONES (max-width: 480px)
+    ═══════════════════════════════════════════ */
+    @media screen and (max-width: 480px) {
+      .hero-trust-num { font-size: 1.5rem; }
+      .svc-card { padding: 20px; }
+      .payment-steps li { flex-direction: column; gap: 8px; }
+      
+      /* Tweak padding for ultra-narrow screens */
+      .nav-inner, .hero-inner, .section-inner, .payment-grid {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
   </style>
 </head>
 
