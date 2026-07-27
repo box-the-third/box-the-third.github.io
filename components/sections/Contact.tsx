@@ -22,7 +22,7 @@ export default function Contact() {
         headers: { Accept: "application/json" },
       });
       if (res.ok) {
-        setStatus({ type: "ok", msg: "Thanks — I’ll get back to you within 24 hours." });
+        setStatus({ type: "ok", msg: "Thanks, I’ll get back to you within 24 hours." });
         form.reset();
       } else {
         setStatus({ type: "err", msg: "Something went wrong. Please email me directly." });
@@ -49,7 +49,7 @@ export default function Contact() {
           <Reveal>
             <p className="contact-lead">
               Have a project, a brand to grow, or an application to nail? Tell me what
-              you’re working on — the first consultation is always free.
+              you’re working on, the first consultation is always free.
             </p>
             <div className="contact-list">
               <div className="contact-row">

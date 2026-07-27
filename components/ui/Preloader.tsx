@@ -67,7 +67,7 @@ export default function Preloader() {
               marginBottom: 24,
             }}
           >
-            {site.name} — Portfolio ’26
+            {site.name}, Portfolio ’26
           </motion.div>
 
           <div

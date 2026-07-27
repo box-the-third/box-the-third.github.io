@@ -81,7 +81,7 @@ export default function Services() {
               Planning to study <em>abroad?</em>
             </h3>
             <p>
-              Dedicated guidance for the UK, Canada, Australia, Germany and beyond —
+              Dedicated guidance for the UK, Canada, Australia, Germany and beyond.
               SOPs, visa counseling and university selection, all in one place.
             </p>
           </div>

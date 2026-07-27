@@ -1,5 +1,5 @@
 // ════════════════════════════════════════════════════════════════
-//  YAS Beyond Education — Auth UI (modal, nav state, CTA hookup)
+//  YAS Beyond Education, Auth UI (modal, nav state, CTA hookup)
 //  Loaded after db.js on every page: <script src="assets/js/auth-ui.js">
 // ════════════════════════════════════════════════════════════════
 
@@ -195,7 +195,7 @@
   // ── Pricing CTA hookup ─────────────────────────────
   // Clicking a package CTA while logged out opens sign-in and queues
   // the selection; clicking while logged in saves it immediately and
-  // sends the buyer straight to their dashboard — no lost steps.
+  // sends the buyer straight to their dashboard, no lost steps.
   function wirePackageCtas() {
     document.querySelectorAll('[data-package-id]').forEach((el) => {
       el.addEventListener('click', async (e) => {

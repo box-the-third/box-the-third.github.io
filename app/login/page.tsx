@@ -69,7 +69,7 @@ export default function LoginPage() {
       // Email confirmation required.
       setStatus({
         kind: "ok",
-        msg: "Account created — check your email to confirm, then sign in.",
+        msg: "Account created, check your email to confirm, then sign in.",
       });
       setTimeout(() => {
         setMode("signin");

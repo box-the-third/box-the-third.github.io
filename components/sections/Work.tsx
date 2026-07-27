@@ -159,7 +159,7 @@ export default function Work() {
                 <img className="lightbox-img" src={cover(active)} alt={active.title} />
               )}
               <div className="lightbox-cap">
-                {active.title} — {active.meta}
+                {active.title}, {active.meta}
               </div>
             </motion.div>
           </motion.div>

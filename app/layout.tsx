@@ -31,8 +31,8 @@ const jb = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Marketing Specialist, Growth Engineer & Creator`,
-    template: `%s — ${site.name}`,
+    default: `${site.name}, Marketing Specialist, Growth Engineer & Creator`,
+    template: `%s, ${site.name}`,
   },
   description: site.intro,
   keywords: [
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: `${site.name} — Marketing Specialist, Growth Engineer & Creator`,
+    title: `${site.name}, Marketing Specialist, Growth Engineer & Creator`,
     description: site.intro,
     url: site.url,
     locale: "en_US",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Marketing, Growth & Creative`,
+    title: `${site.name}, Marketing, Growth & Creative`,
     description: site.intro,
     images: ["/assets/preview.jpg"],
   },

@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════
-//  Global site content — edit copy, links and stats here.
+//  Global site content, edit copy, links and stats here.
 // ═══════════════════════════════════════════════════════════════
 
 export const site = {
@@ -7,14 +7,14 @@ export const site = {
   shortName: "Nahiyan",
   brand: "YAS Beyond Education",
   roles: ["Marketing Specialist", "Growth Engineer", "Frontend Developer", "UGC Creator"],
-  tagline: "I build brands that convert — through content, code and strategy.",
+  tagline: "I build brands that convert, through content, code and strategy.",
   location: "Dhaka, Bangladesh",
   email: "nahiyanibnershad@gmail.com",
   phone: "+8801300984267",
   url: "https://box-the-third.github.io",
 
   intro:
-    "Marketing Specialist & Growth Engineer with a Computer Science background — blending consumer psychology with technical execution to build high-converting campaigns, scale organic reach, and engineer automated workflows that drive revenue.",
+    "Marketing Specialist & Growth Engineer with a Computer Science background, blending consumer psychology with technical execution to build high-converting campaigns, scale organic reach, and engineer automated workflows that drive revenue.",
 
   socials: [
     { label: "Instagram", handle: "@yasbeyondedu", href: "https://www.instagram.com/yasbeyondedu/", icon: "instagram" },
@@ -44,9 +44,9 @@ export const site = {
     "British Council Certified UK Education Counselor",
     "Guinness World Records Holder",
     "HubSpot Digital Marketing Certified",
-    "Microsoft Copilot — AI Prompt Engineer",
-    "IELTS 7.5 — British Council",
-    "1st Runner Up — Hult Prize",
+    "Microsoft Copilot, AI Prompt Engineer",
+    "IELTS 7.5, British Council",
+    "1st Runner Up, Hult Prize",
   ],
 
   // Marquee strip under the hero.
@@ -61,7 +61,7 @@ export const site = {
     "AI Workflows",
   ],
 
-  // Contact form — public Formspree endpoint (same as the legacy site).
+  // Contact form, public Formspree endpoint (same as the legacy site).
   formspreeEndpoint: "https://formspree.io/f/mjkarwza",
 
   cta: {

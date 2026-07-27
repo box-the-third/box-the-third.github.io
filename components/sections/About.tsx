@@ -30,7 +30,7 @@ export default function About() {
               <p>
                 Founder of {site.brand}. From high-converting frontends to UGC video
                 campaigns and AI-assisted automation, I turn strategy into systems that
-                actually move numbers — for students, brands and myself.
+                actually move numbers, for students, brands and myself.
               </p>
             </Reveal>
 

@@ -29,7 +29,7 @@ export function Reveal({
 }
 
 /**
- * Splits text into words and reveals them line-by-line with a mask —
+ * Splits text into words and reveals them line-by-line with a mask,
  * the signature editorial headline animation.
  */
 export function RevealText({

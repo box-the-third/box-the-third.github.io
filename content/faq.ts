@@ -1,6 +1,7 @@
 // ═══════════════════════════════════════════════════════════════
-//  FAQ — edit questions/answers here.
+//  FAQ, edit questions/answers here.
 //  `link` (optional) renders an inline link at the end of an answer.
+//  Answers are kept verbatim in Nahiyan's own words.
 // ═══════════════════════════════════════════════════════════════
 
 export interface FaqItem {
@@ -11,52 +12,52 @@ export interface FaqItem {
 
 export const faqs: FaqItem[] = [
   {
-    q: "Who is this built for?",
-    a: "Students and career professionals who want to stand out with a reliable portfolio that tells their story — built by a human being who understands their value.",
+    q: "Who is this specifically built for?",
+    a: "Students and Career Professionals who want to stand out with a reliable portfolio that tells their story. Built by a human being that understands their value.",
   },
   {
-    q: "Why choose you over every other option?",
-    a: "At the core of almost every platform is a paywall or a subscription designed to keep taking money out of your pocket. I've built this from scratch with zero payment barriers. It's a lifetime service — you only pay once.",
+    q: "Why should they choose me instead of every other option available?",
+    a: "At the core of every page lies a paywall or a subscription system that's designed to take money out of their pocket. I have built my portfolio from scratch with zero payment. This is a lifetime service, meaning they only pay once.",
   },
   {
-    q: "What exactly do I get when I pay you?",
-    a: "You get a guide and a counselor. Every revision of any product you use is always free — meaning I stay until you no longer need me.",
+    q: "What exactly do they get when they pay me?",
+    a: "They get a guide, a counselor, and all revisions of any product they use is always free. Meaning I'll stay until they no longer need me to.",
   },
   {
-    q: "How do I discover, buy and receive the product?",
-    a: "Fill out the contact form and I'll receive your query. I'll reach out over a meet call if necessary, and we'll brainstorm everything together before I get to work.",
+    q: "How will the customer discover, buy and receive my product?",
+    a: "The customer will fill up the contact form, I will receive their query, reach out to them over a meet call if necessary and we'll brainstorm everything before I get to work.",
   },
   {
     q: "Are there any refunds?",
-    a: "There are no refunds. However, because this is a one-time payment, I'll always ensure your needs are fully met.",
+    a: "There will not be any refunds. However, I will always ensure that the needs are fulfilled because this is a one time payment.",
   },
   {
-    q: "How can I be sure my data is safe?",
-    a: "We comply with all data-protection rights, and your information is always protected.",
+    q: "How can I ensure that my data is safe?",
+    a: "We comply with all data protection rights there are and your information is always protected.",
   },
   {
-    q: "Do you help with student visas?",
-    a: "Yes — we help with university and course selection, SOPs, IELTS preparation, visa applications and flight tickets.",
+    q: "Do you help with student visa?",
+    a: "Yes we help with university, course selection, SOP, IELTS Preparation, Visa Application and Flight Tickets.",
   },
   {
-    q: "Can I pay you by bank?",
-    a: "We currently operate on a personal account. Any payment modality and details are shared with you after our initial conversation about your needs.",
+    q: "Can I pay you with bank?",
+    a: "Currently we operate on a personal account, Any modality of payment details will be shared with you after we have the initial conversation of your need.",
   },
   {
-    q: "Do you provide financial or bank support?",
-    a: "We only help students with scholarship essays and full support around that. We don't provide any support regarding finances — but you can always check out local services.",
+    q: "Do you provide bank support?",
+    a: "We only aide students with scholarship essays and full support regarding that, We do not provide any support regarding finances, however you can always check out local services.",
   },
   {
-    q: "Can you guarantee I'll improve my IELTS score?",
-    a: "The first 3 classes are free — if you don't feel an improvement, you can opt out. We guarantee improvement in your speaking and listening, because those are the easiest to train. Reading and writing are 100% down to your own practice.",
+    q: "Can you guarantee that I can improve my IELTS Score?",
+    a: "The first 3 classes are free, if you don't feel an improvement, you can always opt out. We guarantee an improvement in your speaking and listening skills because those are easy to train. For the reading and writing classes, it is 100% up to your practice which will get you the results.",
   },
   {
     q: "What are the AI services for corporate?",
-    a: "We provide intensive AI training for corporate offices to enhance existing workflows. Try our website built specifically for business audits:",
-    link: { label: "al7ain.com", href: "https://www.al7ain.com" },
+    a: "We provide intensive AI training for corporate offices to enhance the current workflow. Try out our website built specifically for business audits on",
+    link: { label: "www.al7ain.com", href: "https://www.al7ain.com" },
   },
   {
     q: "Do you help with domain support?",
-    a: "Yes — we're ready to help you acquire your domain. All costs depend on the domain you want.",
+    a: "We are ready to help acquire your domain, however, all costs will depend on which you want.",
   },
 ];

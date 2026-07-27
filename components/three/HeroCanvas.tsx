@@ -91,7 +91,7 @@ export default function HeroCanvas() {
     >
       <ambientLight intensity={0.35} />
       <directionalLight position={[5, 5, 5]} intensity={1.1} color="#ffffff" />
-      {/* accent rim lights — teal + amber */}
+      {/* accent rim lights, teal + amber */}
       <pointLight position={[-4, 2, 3]} intensity={24} color="#00b2bc" distance={16} />
       <pointLight position={[6, -3, 2]} intensity={18} color="#ffba08" distance={16} />
       <Blob />

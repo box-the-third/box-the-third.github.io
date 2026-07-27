@@ -51,7 +51,7 @@ export default function Hero() {
 
       <div className="hero-top">
         <span>
-          <span className="dot">◍</span> Available for projects — 2026
+          <span className="dot">◍</span> Available for projects, 2026
         </span>
         <span>{site.location}</span>
       </div>

@@ -124,8 +124,12 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 var(--pad) clamp(40px, 7vh, 80px);
+  /* top padding reserves room for the fixed navbar so the headline
+     never rides up underneath it; space-between keeps the meta pinned
+     to the bottom of the viewport. */
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(104px, 15vh, 168px) var(--pad) clamp(36px, 6vh, 76px);
   overflow: hidden;
 }
 .hero-canvas {
@@ -144,9 +148,11 @@
   width: 100%;
 }
 .hero-top {
-  position: absolute;
-  top: clamp(120px, 18vh, 200px);
-  left: 0;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
@@ -162,8 +168,8 @@
 .hero-h1 {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.7rem, 9.2vw, 9.5rem);
-  line-height: 0.9;
+  font-size: clamp(2.4rem, 7.4vw, 7rem);
+  line-height: 0.92;
   letter-spacing: -0.04em;
   text-transform: none;
 }
@@ -217,8 +223,8 @@
 }
 @media (max-width: 860px) {
   .hero-scroll { display: none; }
-  .hero-top { position: static; margin-bottom: 20px; }
-  .hero { justify-content: center; padding-top: 120px; }
+  .hero { justify-content: flex-end; gap: 32px; }
+  .hero-top { order: -1; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -881,7 +887,7 @@
    RESPONSIVE REFINEMENTS
    ═══════════════════════════════════════════════════════════════ */
 
-/* Tablet — normalise the work grid to a clean 2-up. */
+/* Tablet, normalise the work grid to a clean 2-up. */
 @media (min-width: 861px) and (max-width: 1024px) {
   .work-card,
   .work-card.tall {
@@ -956,7 +962,7 @@
   }
 }
 
-/* Very small / older devices — guarantee nothing clips. */
+/* Very small / older devices, guarantee nothing clips. */
 @media (max-width: 360px) {
   :root {
     --pad: 16px;

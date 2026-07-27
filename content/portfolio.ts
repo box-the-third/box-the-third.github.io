@@ -11,7 +11,7 @@
 //  • Design   → set `kind: "design"` and point `cover` at an image
 //               in /public/assets. Opens in a lightbox.
 //
-//  Reorder freely — the first item in each category can be "featured"
+//  Reorder freely, the first item in each category can be "featured"
 //  by setting `featured: true` (renders larger in the grid).
 // ═══════════════════════════════════════════════════════════════
 
@@ -53,7 +53,7 @@ export const work: WorkItem[] = [
   {
     id: "yt-1",
     kind: "youtube",
-    title: "UGC Campaign — Reel Edit",
+    title: "UGC Campaign, Reel Edit",
     meta: "Videography · Global Pathways",
     year: "2025",
     featured: true,
@@ -65,7 +65,7 @@ export const work: WorkItem[] = [
   {
     id: "yt-2",
     kind: "youtube",
-    title: "Brand Story — Short Form",
+    title: "Brand Story, Short Form",
     meta: "Direction · Editing",
     year: "2025",
     tags: ["Story", "Short-form"],
@@ -74,7 +74,7 @@ export const work: WorkItem[] = [
   {
     id: "yt-3",
     kind: "youtube",
-    title: "Explainer — Product Walkthrough",
+    title: "Explainer, Product Walkthrough",
     meta: "Script · Edit",
     year: "2024",
     tags: ["Explainer"],
@@ -85,7 +85,7 @@ export const work: WorkItem[] = [
   {
     id: "ig-1",
     kind: "instagram",
-    title: "Reel — YAS Beyond Education",
+    title: "Reel, YAS Beyond Education",
     meta: "UGC · @yasbeyondedu",
     year: "2025",
     featured: true,
@@ -96,7 +96,7 @@ export const work: WorkItem[] = [
   {
     id: "ig-2",
     kind: "instagram",
-    title: "Reel — Study Abroad Tips",
+    title: "Reel, Study Abroad Tips",
     meta: "Content · @yasbeyondedu",
     year: "2025",
     tags: ["Reel", "Education"],
@@ -106,7 +106,7 @@ export const work: WorkItem[] = [
   {
     id: "ig-3",
     kind: "instagram",
-    title: "Reel — Behind the Scenes",
+    title: "Reel, Behind the Scenes",
     meta: "BTS · @yasbeyondedu",
     year: "2024",
     tags: ["Reel", "BTS"],
@@ -118,7 +118,7 @@ export const work: WorkItem[] = [
   {
     id: "dz-1",
     kind: "design",
-    title: "BelaCosmetics — UI System",
+    title: "BelaCosmetics, UI System",
     meta: "Product UI · Pricing analytics",
     year: "2024",
     featured: true,
@@ -128,7 +128,7 @@ export const work: WorkItem[] = [
   {
     id: "dz-2",
     kind: "design",
-    title: "Baryonn — Brand & Interface",
+    title: "Baryonn, Brand & Interface",
     meta: "Brand · Interface",
     year: "2024",
     tags: ["Brand", "UI"],
@@ -137,7 +137,7 @@ export const work: WorkItem[] = [
   {
     id: "dz-3",
     kind: "design",
-    title: "Search Experience — Dhaka",
+    title: "Search Experience, Dhaka",
     meta: "Product Design",
     year: "2024",
     tags: ["UX", "Product"],
@@ -146,7 +146,7 @@ export const work: WorkItem[] = [
   {
     id: "dz-4",
     kind: "design",
-    title: "SuperDrib — Concept",
+    title: "SuperDrib, Concept",
     meta: "Visual Design",
     year: "2023",
     tags: ["Concept", "Visual"],
