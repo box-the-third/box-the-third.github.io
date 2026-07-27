@@ -32,7 +32,7 @@ const YASAuth = {
 
   async signOut() {
     await supabaseClient.auth.signOut();
-    window.location.href = 'index.html';
+    window.location.href = '/';
   },
 
   // Remembers where the user was heading (e.g. a specific package)

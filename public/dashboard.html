@@ -86,10 +86,10 @@
 
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
-      <a href="index.html" class="logo">YAS<span>.</span></a>
+      <a href="/" class="logo">YAS<span>.</span></a>
       <div class="nav-links" id="nav-links">
-        <a href="index.html#services">Services</a>
-        <a href="StudyAbroadPage.html">Study Abroad</a>
+        <a href="/#services">Services</a>
+        <a href="/StudyAbroadPage.html">Study Abroad</a>
         <div class="nav-account" id="nav-account-slot"></div>
       </div>
     </div>
@@ -140,8 +140,8 @@
     document.addEventListener('DOMContentLoaded', async () => {
       const session = await YASAuth.getSession();
       if (!session) {
-        // Not signed in — send back to the homepage and open sign-in there.
-        window.location.href = 'index.html';
+        // Not signed in — send to the login page.
+        window.location.href = '/login/';
         return;
       }
 
