@@ -11,7 +11,7 @@ export default function About() {
         <div className="about-grid">
           <Reveal className="about-portrait">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/nahiyanbnw.jpg" alt={site.name} loading="lazy" />
+            <img src="/assets/meman.png" alt={site.name} loading="lazy" />
           </Reveal>
 
           <div className="about-body">
@@ -44,6 +44,29 @@ export default function About() {
                 </Reveal>
               ))}
             </div>
+
+            <Reveal delay={0.15}>
+              <div className="about-actions">
+                <a
+                  href="/assets/Nahiyan_Ibn_Ershad_Updated_CV_2026.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn solid"
+                  data-cursor="Open"
+                >
+                  <span>Download CV ↓</span>
+                </a>
+                <a
+                  href="/assets/Nahiyan-IbnErshad-1730667985914-Psychometric.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn"
+                  data-cursor="Open"
+                >
+                  <span>Psychometrics ↗</span>
+                </a>
+              </div>
+            </Reveal>
           </div>
         </div>
 

@@ -3,16 +3,15 @@
 //  ---------------------------------------------------------------
 //  This is the ONE file you edit to manage your portfolio.
 //
-//  • YouTube  → set `kind: "youtube"` and paste the video URL or ID.
+//  • YouTube  : set kind "youtube" and paste the video URL or ID.
 //               The thumbnail is fetched automatically from YouTube.
-//  • Instagram→ set `kind: "instagram"` and paste the reel/post URL.
-//               Add a `cover` image (a screenshot/thumbnail you drop
-//               in /public/assets) because Instagram blocks hotlinking.
-//  • Design   → set `kind: "design"` and point `cover` at an image
-//               in /public/assets. Opens in a lightbox.
+//  • Instagram: set kind "instagram" and paste the reel/post URL.
+//               Add a `cover` image (a screenshot you drop in
+//               /public/assets) because Instagram blocks hotlinking.
+//  • Design   : set kind "design" and point `cover` at an image in
+//               /public/assets. Opens in a lightbox.
 //
-//  Reorder freely, the first item in each category can be "featured"
-//  by setting `featured: true` (renders larger in the grid).
+//  The grid is masonry, so each photo keeps its natural ratio.
 // ═══════════════════════════════════════════════════════════════
 
 export type WorkCategory = "youtube" | "instagram" | "design";
@@ -21,7 +20,7 @@ export interface WorkItem {
   id: string;
   kind: WorkCategory;
   title: string;
-  /** Short role / context line, e.g. "UGC · Global Pathways" */
+  /** Short role / context line, e.g. "Videography, Direction" */
   meta: string;
   year?: string;
   featured?: boolean;
@@ -31,9 +30,9 @@ export interface WorkItem {
   youtube?: string;
   // instagram: paste the full reel/post URL.
   instagram?: string;
-  // design + instagram: image in /public/assets (path starts with /assets/…)
+  // design + instagram: image in /public/assets (spaces URL-encoded as %20)
   cover?: string;
-  // optional external link for a design piece (Behance, Dribbble, live site…)
+  // optional external link for a design piece (Behance, Dribbble, live site)
   link?: string;
 }
 
@@ -44,112 +43,125 @@ export const categories: { id: WorkCategory | "all"; label: string }[] = [
   { id: "design", label: "Design" },
 ];
 
-// ───────────────────────────────────────────────────────────────
-//  ⬇️  PASTE YOUR REAL LINKS HERE. These are placeholders wired to
-//     assets already in your repo so the section looks complete.
-// ───────────────────────────────────────────────────────────────
+const IG = "https://www.instagram.com/yasbeyondedu/";
+
 export const work: WorkItem[] = [
   // ── YouTube ──────────────────────────────────────────────────
   {
     id: "yt-1",
     kind: "youtube",
-    title: "UGC Campaign, Reel Edit",
-    meta: "Videography · Global Pathways",
+    title: "Featured Film",
+    meta: "Videography, Direction",
     year: "2025",
     featured: true,
-    tags: ["UGC", "Editing"],
-    // TODO: replace with your real YouTube URL, e.g.
-    // youtube: "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-    youtube: "https://www.youtube.com/watch?v=ScMzIvxBSi4",
+    tags: ["Video", "Edit"],
+    youtube: "https://youtu.be/EyQnvjdegbc",
   },
   {
     id: "yt-2",
     kind: "youtube",
-    title: "Brand Story, Short Form",
-    meta: "Direction · Editing",
+    title: "Brand Story",
+    meta: "Editing, Motion",
     year: "2025",
-    tags: ["Story", "Short-form"],
-    youtube: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
-  },
-  {
-    id: "yt-3",
-    kind: "youtube",
-    title: "Explainer, Product Walkthrough",
-    meta: "Script · Edit",
-    year: "2024",
-    tags: ["Explainer"],
-    youtube: "https://www.youtube.com/watch?v=ysz5S6PUM-U",
+    tags: ["Video"],
+    youtube: "https://youtu.be/2HP6hwdBweE",
   },
 
   // ── Instagram ────────────────────────────────────────────────
   {
     id: "ig-1",
     kind: "instagram",
-    title: "Reel, YAS Beyond Education",
-    meta: "UGC · @yasbeyondedu",
+    title: "Study Abroad Tips",
+    meta: "Reel, @yasbeyondedu",
     year: "2025",
-    featured: true,
-    tags: ["Reel", "UGC"],
-    instagram: "https://www.instagram.com/yasbeyondedu/",
-    cover: "/assets/video1-thumbnail.jpg",
+    tags: ["Reel", "Education"],
+    instagram: IG,
+    cover: "/assets/reelstudyabroadtipsplaceholder.png",
   },
   {
     id: "ig-2",
     kind: "instagram",
-    title: "Reel, Study Abroad Tips",
-    meta: "Content · @yasbeyondedu",
+    title: "YAS Beyond Reel",
+    meta: "Reel, @yasbeyondedu",
     year: "2025",
-    tags: ["Reel", "Education"],
-    instagram: "https://www.instagram.com/yasbeyondedu/",
-    cover: "/assets/video2-thumbnail.jpg",
+    tags: ["Reel", "UGC"],
+    instagram: IG,
+    cover: "/assets/yasbeyondreelplaceholder.png",
   },
   {
     id: "ig-3",
     kind: "instagram",
-    title: "Reel, Behind the Scenes",
-    meta: "BTS · @yasbeyondedu",
-    year: "2024",
+    title: "On Set",
+    meta: "Reel, @yasbeyondedu",
+    year: "2025",
     tags: ["Reel", "BTS"],
-    instagram: "https://www.instagram.com/yasbeyondedu/",
-    cover: "/assets/video3-thumbnail.jpg",
+    instagram: IG,
+    cover: "/assets/unnamed.jpg",
   },
 
   // ── Design ───────────────────────────────────────────────────
   {
     id: "dz-1",
     kind: "design",
-    title: "BelaCosmetics, UI System",
-    meta: "Product UI · Pricing analytics",
-    year: "2024",
+    title: "Banner Design",
+    meta: "Graphic Design",
+    year: "2025",
     featured: true,
-    tags: ["UI", "Web"],
-    cover: "/assets/BelaCosmetics.png",
+    tags: ["Design"],
+    cover: "/assets/bannerdesign.png",
   },
   {
     id: "dz-2",
     kind: "design",
-    title: "Baryonn, Brand & Interface",
-    meta: "Brand · Interface",
+    title: "Colour Study",
+    meta: "Visual Design",
     year: "2024",
-    tags: ["Brand", "UI"],
-    cover: "/assets/BARYONN.png",
+    tags: ["Visual"],
+    cover: "/assets/colorxx.png",
   },
   {
     id: "dz-3",
     kind: "design",
-    title: "Search Experience, Dhaka",
-    meta: "Product Design",
+    title: "Campaign Visual",
+    meta: "Art Direction",
     year: "2024",
-    tags: ["UX", "Product"],
-    cover: "/assets/SearchScreenDHK.png",
+    tags: ["Editorial"],
+    cover: "/assets/inbound2421744976924578198.jpg",
   },
   {
     id: "dz-4",
     kind: "design",
-    title: "SuperDrib, Concept",
-    meta: "Visual Design",
+    title: "Bruce Lee",
+    meta: "Poster Art",
+    year: "2024",
+    tags: ["Poster"],
+    cover: "/assets/bruce%20Leee.png",
+  },
+  {
+    id: "dz-5",
+    kind: "design",
+    title: "Naruto & Sasuke",
+    meta: "Illustration",
+    year: "2024",
+    tags: ["Illustration"],
+    cover: "/assets/Naruto%20and%20Sasuke.png",
+  },
+  {
+    id: "dz-6",
+    kind: "design",
+    title: "Space",
+    meta: "Concept Art",
     year: "2023",
-    tags: ["Concept", "Visual"],
-    cover: "/assets/SuperDrib.png",
+    tags: ["Concept"],
+    cover: "/assets/space.png",
+  },
+  {
+    id: "dz-7",
+    kind: "design",
+    title: "Box the Third",
+    meta: "Brand Mark",
+    year: "2023",
+    tags: ["Brand"],
+    cover: "/assets/Boxthethirddd.png",
   },
 ];

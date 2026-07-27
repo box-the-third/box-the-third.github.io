@@ -68,24 +68,23 @@ export default function Work() {
           </div>
         </div>
 
-        <motion.div layout className="work-grid">
-          <AnimatePresence mode="popLayout">
+        <div className="work-grid">
+          <AnimatePresence>
             {items.map((item, i) => {
               const cardClass = cn(
                 "work-card",
-                item.featured && "featured",
-                item.kind === "instagram" && "tall"
+                item.kind === "youtube" && "fixed",
+                item.featured && "featured"
               );
               const cursor =
                 item.kind === "design" ? "View" : item.kind === "instagram" ? "Open ↗" : "Play";
               return (
                 <motion.article
                   key={item.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.94 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.94 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.04 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.03 }}
                   className={cardClass}
                   onClick={() => openItem(item)}
                   data-cursor={cursor}
@@ -117,7 +116,7 @@ export default function Work() {
               );
             })}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
 
       {/* Lightbox */}
