@@ -264,38 +264,53 @@
   color: var(--on-accent);
   border-color: var(--accent);
 }
+/* Masonry: columns adapt to width automatically, so every photo keeps
+   its natural aspect ratio with no awkward cropping. */
 .work-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: clamp(16px, 2vw, 28px);
+  column-width: 340px;
+  column-gap: clamp(16px, 2vw, 26px);
+}
+@media (min-width: 1500px) {
+  .work-grid {
+    column-count: 4;
+  }
 }
 .work-card {
   position: relative;
-  grid-column: span 6;
+  display: block;
+  width: 100%;
+  break-inside: avoid;
+  margin: 0 0 clamp(16px, 2vw, 26px);
   border-radius: var(--r);
   overflow: hidden;
   background: var(--bg-3);
-  aspect-ratio: 16 / 10;
   cursor: pointer;
 }
 .work-card.featured {
-  grid-column: span 8;
-  aspect-ratio: 16 / 9;
+  outline: 1px solid var(--accent);
+  outline-offset: -1px;
 }
-.work-card.tall {
-  grid-column: span 4;
-  aspect-ratio: 4 / 5;
-}
+/* natural-ratio media (Instagram + Design) */
 .work-media {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  line-height: 0;
 }
 .work-media img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  display: block;
   object-fit: cover;
   transition: transform 0.7s var(--ease), filter 0.5s;
   filter: brightness(0.82) saturate(1.02);
+}
+/* YouTube: force a clean 16:9 crop so letterbox bars never show */
+.work-card.fixed .work-media {
+  aspect-ratio: 16 / 9;
+}
+.work-card.fixed .work-media img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
 }
 .work-card:hover .work-media img {
   transform: scale(1.06);
@@ -374,15 +389,6 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
-@media (max-width: 860px) {
-  .work-card,
-  .work-card.featured,
-  .work-card.tall {
-    grid-column: span 12;
-    aspect-ratio: 16 / 10;
-  }
-}
-
 /* lightbox / modal */
 .lightbox {
   position: fixed;
@@ -452,7 +458,7 @@
   position: relative;
   border-radius: var(--r);
   overflow: hidden;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 5 / 4;
   background: var(--bg-3);
 }
 .about-portrait img {
@@ -478,6 +484,18 @@
   gap: 2px;
   margin-top: 34px;
   border-top: 1px solid var(--line);
+}
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+@media (max-width: 480px) {
+  .about-actions .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
 }
 .cred {
   display: flex;
@@ -887,17 +905,8 @@
    RESPONSIVE REFINEMENTS
    ═══════════════════════════════════════════════════════════════ */
 
-/* Tablet, normalise the work grid to a clean 2-up. */
+/* Tablet stat row stays 4-up. */
 @media (min-width: 861px) and (max-width: 1024px) {
-  .work-card,
-  .work-card.tall {
-    grid-column: span 6;
-    aspect-ratio: 16 / 11;
-  }
-  .work-card.featured {
-    grid-column: span 12;
-    aspect-ratio: 16 / 8;
-  }
   .stats {
     grid-template-columns: repeat(4, 1fr);
   }
