@@ -1,5 +1,5 @@
 // ════════════════════════════════════════════════════════════════
-//  YAS Beyond Education — Supabase client & auth helper
+//  YAS Beyond Education, Supabase client & auth helper
 //  Loaded on every page via: <script src="assets/js/db.js"></script>
 // ════════════════════════════════════════════════════════════════
 
@@ -68,7 +68,7 @@ const YASData = {
 
   // Records a buyer's choice the moment they click a pricing CTA.
   // If logged out, the click is queued via pending intent and saved
-  // automatically right after they sign in — no re-clicking needed.
+  // automatically right after they sign in, no re-clicking needed.
   async saveSelection(userId, packageId, notes) {
     return supabaseClient
       .from('selections')

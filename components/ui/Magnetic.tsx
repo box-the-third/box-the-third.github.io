@@ -4,7 +4,7 @@ import { useRef, ReactNode } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 /**
- * Wraps a child so it drifts toward the cursor while hovered — the
+ * Wraps a child so it drifts toward the cursor while hovered, the
  * "magnetic" effect used on buttons and nav items.
  */
 export default function Magnetic({

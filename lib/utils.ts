@@ -17,7 +17,7 @@ export function youTubeId(input: string): string {
     const i = parts.findIndex((p) => p === "embed" || p === "shorts");
     if (i !== -1 && parts[i + 1]) return parts[i + 1];
   } catch {
-    /* not a URL — fall through */
+    /* not a URL, fall through */
   }
   return input;
 }

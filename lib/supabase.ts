@@ -2,7 +2,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 // Same project + anon key as the static dashboard (public/assets/js/db.js).
 // IMPORTANT: use the DEFAULT auth storage options so the session is written
-// to `sb-<ref>-auth-token` in localStorage — the exact key the CDN client on
+// to `sb-<ref>-auth-token` in localStorage, the exact key the CDN client on
 // dashboard.html reads. That way a sign-in here is instantly recognised there.
 const SUPABASE_URL = "https://fssauttfaolebmulqyuz.supabase.co";
 const SUPABASE_ANON_KEY =

@@ -108,9 +108,9 @@
       <div class="dash-card">
         <h3>Account</h3>
         <div id="dash-profile" class="skeleton">
-          <div class="dash-profile-row"><i class="fas fa-user"></i><div><strong>Name</strong><span>—</span></div></div>
-          <div class="dash-profile-row"><i class="fas fa-envelope"></i><div><strong>Email</strong><span>—</span></div></div>
-          <div class="dash-profile-row"><i class="fas fa-calendar"></i><div><strong>Member Since</strong><span>—</span></div></div>
+          <div class="dash-profile-row"><i class="fas fa-user"></i><div><strong>Name</strong><span>…</span></div></div>
+          <div class="dash-profile-row"><i class="fas fa-envelope"></i><div><strong>Email</strong><span>…</span></div></div>
+          <div class="dash-profile-row"><i class="fas fa-calendar"></i><div><strong>Member Since</strong><span>…</span></div></div>
         </div>
       </div>
 
@@ -140,7 +140,7 @@
     document.addEventListener('DOMContentLoaded', async () => {
       const session = await YASAuth.getSession();
       if (!session) {
-        // Not signed in — send to the login page.
+        // Not signed in, send to the login page.
         window.location.href = '/login/';
         return;
       }
