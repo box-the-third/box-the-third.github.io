@@ -41,7 +41,7 @@ export default function Navbar() {
               <a href={item.href}>{item.label}</a>
             </Magnetic>
           ))}
-          <a href="/dashboard.html" className="nav-login">
+          <a href="/login/" className="nav-login">
             Client Login
           </a>
         </nav>
@@ -74,7 +74,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="/dashboard.html"
+              href="/login/"
               onClick={() => setOpen(false)}
               style={{ color: "var(--accent)" }}
             >
