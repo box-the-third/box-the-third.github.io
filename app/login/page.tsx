@@ -55,7 +55,12 @@ export default function LoginPage() {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: fullName } },
+      options: {
+        data: { full_name: fullName },
+        // Send the confirmation link back to THIS site's sign-in page
+        // (uses the real origin in prod, so no more localhost links).
+        emailRedirectTo: `${window.location.origin}/login/`,
+      },
     });
     if (error) {
       setStatus({ kind: "err", msg: error.message });
