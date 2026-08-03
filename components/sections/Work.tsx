@@ -10,6 +10,7 @@ const kindLabel: Record<WorkCategory, string> = {
   youtube: "YouTube",
   instagram: "Instagram",
   design: "Design",
+  web: "Live Site",
 };
 
 function cover(item: WorkItem): string {
@@ -27,6 +28,10 @@ export default function Work() {
   );
 
   const openItem = (item: WorkItem) => {
+    if (item.kind === "web" && item.link) {
+      window.open(item.link, "_blank", "noopener,noreferrer");
+      return;
+    }
     if (item.kind === "instagram" && item.instagram) {
       window.open(item.instagram, "_blank", "noopener,noreferrer");
       return;
@@ -69,22 +74,27 @@ export default function Work() {
         </div>
 
         <div className="work-grid">
-          <AnimatePresence>
-            {items.map((item, i) => {
+          {items.map((item, i) => {
               const cardClass = cn(
                 "work-card",
                 item.kind === "youtube" && "fixed",
                 item.featured && "featured"
               );
               const cursor =
-                item.kind === "design" ? "View" : item.kind === "instagram" ? "Open ↗" : "Play";
+                item.kind === "web"
+                  ? "Visit ↗"
+                  : item.kind === "design"
+                    ? "View"
+                    : item.kind === "instagram"
+                      ? "Open ↗"
+                      : "Play";
               return (
                 <motion.article
                   key={item.id}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.03 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-5% 0px" }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: (i % 6) * 0.05 }}
                   className={cardClass}
                   onClick={() => openItem(item)}
                   data-cursor={cursor}
@@ -94,7 +104,7 @@ export default function Work() {
                     <img src={cover(item)} alt={item.title} loading="lazy" />
                   </div>
 
-                  {item.kind !== "design" && (
+                  {(item.kind === "youtube" || item.kind === "instagram") && (
                     <div className="work-play" aria-hidden>
                       <svg width="20" height="22" viewBox="0 0 20 22" fill="currentColor">
                         <path d="M0 0l20 11L0 22z" />
@@ -115,7 +125,6 @@ export default function Work() {
                 </motion.article>
               );
             })}
-          </AnimatePresence>
         </div>
       </div>
 
