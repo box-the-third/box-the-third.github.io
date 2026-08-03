@@ -14,7 +14,7 @@
 //  The grid is masonry, so each photo keeps its natural ratio.
 // ═══════════════════════════════════════════════════════════════
 
-export type WorkCategory = "youtube" | "instagram" | "design";
+export type WorkCategory = "youtube" | "instagram" | "design" | "web";
 
 export interface WorkItem {
   id: string;
@@ -38,6 +38,7 @@ export interface WorkItem {
 
 export const categories: { id: WorkCategory | "all"; label: string }[] = [
   { id: "all", label: "All Work" },
+  { id: "web", label: "Sites" },
   { id: "youtube", label: "YouTube" },
   { id: "instagram", label: "Instagram" },
   { id: "design", label: "Design" },
@@ -65,6 +66,80 @@ export const work: WorkItem[] = [
     year: "2025",
     tags: ["Video"],
     youtube: "https://youtu.be/2HP6hwdBweE",
+  },
+
+  // ── Websites I've built (live) ───────────────────────────────
+  {
+    id: "web-alhainai",
+    kind: "web",
+    title: "Alhain AI",
+    meta: "AI Platform, Frontend",
+    year: "2025",
+    featured: true,
+    tags: ["Next.js", "AI"],
+    link: "https://www.al7ain.com/",
+    cover: "/assets/site_alhainai.jpg",
+  },
+  {
+    id: "web-msw",
+    kind: "web",
+    title: "My Saudi Wellness",
+    meta: "Corporate Wellness, Web",
+    year: "2025",
+    featured: true,
+    tags: ["Web", "Bilingual"],
+    link: "https://box-the-third.github.io/msw/",
+    cover: "/assets/site_msw.jpg",
+  },
+  {
+    id: "web-white",
+    kind: "web",
+    title: "White",
+    meta: "E-commerce, 3D",
+    year: "2025",
+    tags: ["Web", "Three.js"],
+    link: "https://box-the-third.github.io/white/",
+    cover: "/assets/site_white.jpg",
+  },
+  {
+    id: "web-fawtara",
+    kind: "web",
+    title: "Fawtara",
+    meta: "SaaS, Invoicing",
+    year: "2025",
+    tags: ["SaaS", "Web"],
+    link: "https://box-the-third.github.io/fawtara/",
+    cover: "/assets/site_fawtara.jpg",
+  },
+  {
+    id: "web-ecommerce",
+    kind: "web",
+    title: "eCommerce Frontend",
+    meta: "Storefront UI",
+    year: "2024",
+    tags: ["Web", "UI"],
+    link: "https://box-the-third.github.io/eCommerce-frontend/",
+    cover: "/assets/site_ecommerce.jpg",
+  },
+  {
+    id: "web-takerinc",
+    kind: "web",
+    title: "Taker Inc",
+    meta: "Brand Site",
+    year: "2024",
+    tags: ["Web", "Brand"],
+    link: "https://box-the-third.github.io/TakerInc/",
+    cover: "/assets/site_takerinc.jpg",
+  },
+  {
+    id: "web-superdrib",
+    kind: "web",
+    title: "SuperDrib",
+    meta: "Web App",
+    year: "2024",
+    tags: ["Web", "App"],
+    link: "https://box-the-third.github.io/SuperDrib/",
+    cover: "/assets/site_superdrib.jpg",
   },
 
   // ── Instagram ────────────────────────────────────────────────

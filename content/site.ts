@@ -26,7 +26,7 @@ export const site = {
     { label: "Work", href: "#work" },
     { label: "About", href: "#about" },
     { label: "Services", href: "#services" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Free IELTS", href: "#offer" },
     { label: "Contact", href: "#contact" },
   ],
 
