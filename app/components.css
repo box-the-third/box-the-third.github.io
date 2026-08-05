@@ -583,50 +583,108 @@
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 18px;
 }
+/* Off-white cards with teal accents for maximum readability against the
+   dark page, plus a subtle lift + accent-sweep on hover. */
 .svc-card {
   position: relative;
-  border: 1px solid var(--line);
+  isolation: isolate;
+  border: 1px solid rgba(0, 178, 188, 0.22);
   border-radius: var(--r);
-  padding: 30px;
-  background: var(--card);
-  transition: background 0.4s, border-color 0.4s, transform 0.4s var(--ease);
+  padding: 32px 30px;
+  background: #faf9f6;
+  color: #17324a;
+  overflow: hidden;
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease),
+    border-color 0.4s var(--ease);
+  will-change: transform;
+}
+/* teal → amber bar that sweeps across the top on hover */
+.svc-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.55s var(--ease);
+  z-index: 1;
+}
+/* soft teal wash that fades in on hover */
+.svc-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 110% at 100% 0%,
+    rgba(0, 178, 188, 0.12),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.55s var(--ease);
+  pointer-events: none;
+  z-index: 0;
 }
 .svc-card:hover {
-  background: var(--card-hover);
-  border-color: var(--line-strong);
-  transform: translateY(-4px);
+  transform: translateY(-8px);
+  border-color: var(--accent);
+  box-shadow: 0 26px 50px -24px rgba(0, 178, 188, 0.55);
+}
+.svc-card:hover::before {
+  transform: scaleX(1);
+}
+.svc-card:hover::after {
+  opacity: 1;
 }
 .svc-card.featured {
   border-color: var(--accent);
-  background: rgba(0, 178, 188, 0.06);
+  background: linear-gradient(158deg, #ffffff 0%, #e9fbfc 100%);
+}
+.svc-card.featured::before {
+  transform: scaleX(1);
 }
 .svc-badge {
   position: absolute;
   top: -11px;
   left: 30px;
+  z-index: 2;
   background: var(--accent);
-  color: var(--on-accent);
+  color: #faf9f6;
   font-family: var(--font-mono);
   font-size: 0.66rem;
   letter-spacing: 0.1em;
   padding: 5px 12px;
   border-radius: 100px;
+  box-shadow: 0 6px 16px -6px rgba(0, 178, 188, 0.7);
 }
 .svc-card h3 {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.5rem;
   letter-spacing: -0.02em;
+  color: #0a1628;
+  transition: color 0.4s var(--ease);
+}
+.svc-card:hover h3 {
+  color: #007a82;
 }
 .svc-card > p {
-  color: var(--ink-dim);
+  position: relative;
+  z-index: 1;
+  color: #55657c;
   font-size: 0.92rem;
   margin-top: 12px;
   min-height: 66px;
 }
 .svc-tiers {
+  position: relative;
+  z-index: 1;
   margin-top: 22px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(10, 22, 40, 0.12);
 }
 .tier {
   display: flex;
@@ -634,19 +692,22 @@
   justify-content: space-between;
   gap: 16px;
   padding: 13px 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(10, 22, 40, 0.1);
 }
 .tier-label {
   font-size: 0.86rem;
-  color: var(--ink-dim);
+  color: #52627a;
 }
 .tier-price {
   font-family: var(--font-mono);
   font-size: 0.95rem;
-  color: var(--ink);
+  font-weight: 500;
+  color: #0a7c85;
   white-space: nowrap;
 }
 .svc-link {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -655,7 +716,8 @@
   font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--accent);
+  color: #008a93;
+  font-weight: 500;
 }
 .svc-link i {
   transition: transform 0.3s var(--ease);

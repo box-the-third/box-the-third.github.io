@@ -15,7 +15,7 @@ const kindLabel: Record<WorkCategory, string> = {
 
 function cover(item: WorkItem): string {
   if (item.kind === "youtube" && item.youtube) return youTubeThumb(item.youtube);
-  return item.cover || "/assets/work.png";
+  return item.cover || "/assets/work.webp";
 }
 
 export default function Work() {
