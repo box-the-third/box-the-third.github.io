@@ -62,6 +62,12 @@ export default function Cursor() {
     };
   }, []);
 
+  // Only fill into a solid teal disc when there's a label to show
+  // (buttons, cards, CTAs). Plain links/nav items get a hollow ring so
+  // the text underneath stays readable.
+  const solid = label.trim().length > 0;
+  const size = solid ? 74 : active ? 46 : 34;
+
   return (
     <>
       <div
@@ -93,11 +99,11 @@ export default function Cursor() {
           left: 0,
           display: "grid",
           placeItems: "center",
-          width: active ? 78 : 40,
-          height: active ? 78 : 40,
+          width: size,
+          height: size,
           borderRadius: "50%",
-          border: "1px solid var(--line-strong)",
-          background: active ? "var(--accent)" : "transparent",
+          border: `1.5px solid ${solid || active ? "var(--accent)" : "var(--line-strong)"}`,
+          background: solid ? "var(--accent)" : "transparent",
           color: "var(--on-accent)",
           fontFamily: "var(--font-mono)",
           fontSize: 11,
