@@ -11,7 +11,7 @@ export default function About() {
         <div className="about-grid">
           <Reveal className="about-portrait">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/meman.png" alt={site.name} loading="lazy" />
+            <img src="/assets/meman.webp" alt={site.name} loading="lazy" />
           </Reveal>
 
           <div className="about-body">

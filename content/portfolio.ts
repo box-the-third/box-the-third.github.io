@@ -30,7 +30,7 @@ export interface WorkItem {
   youtube?: string;
   // instagram: paste the full reel/post URL.
   instagram?: string;
-  // design + instagram: image in /public/assets (spaces URL-encoded as %20)
+  // design + instagram: optimized image in /public/assets (WebP)
   cover?: string;
   // optional external link for a design piece (Behance, Dribbble, live site)
   link?: string;
@@ -181,7 +181,7 @@ export const work: WorkItem[] = [
     year: "2025",
     tags: ["Reel", "Education"],
     instagram: IG,
-    cover: "/assets/reelstudyabroadtipsplaceholder.png",
+    cover: "/assets/reelstudyabroadtipsplaceholder.webp",
   },
   {
     id: "ig-2",
@@ -191,7 +191,7 @@ export const work: WorkItem[] = [
     year: "2025",
     tags: ["Reel", "UGC"],
     instagram: IG,
-    cover: "/assets/yasbeyondreelplaceholder.png",
+    cover: "/assets/yasbeyondreelplaceholder.webp",
   },
   {
     id: "ig-3",
@@ -201,7 +201,7 @@ export const work: WorkItem[] = [
     year: "2025",
     tags: ["Reel", "BTS"],
     instagram: IG,
-    cover: "/assets/unnamed.jpg",
+    cover: "/assets/unnamed.webp",
   },
 
   // ── Design ───────────────────────────────────────────────────
@@ -213,7 +213,7 @@ export const work: WorkItem[] = [
     year: "2025",
     featured: true,
     tags: ["Design"],
-    cover: "/assets/bannerdesign.png",
+    cover: "/assets/bannerdesign.webp",
   },
   {
     id: "dz-2",
@@ -222,7 +222,7 @@ export const work: WorkItem[] = [
     meta: "Visual Design",
     year: "2024",
     tags: ["Visual"],
-    cover: "/assets/colorxx.png",
+    cover: "/assets/colorxx.webp",
   },
   {
     id: "dz-3",
@@ -231,7 +231,7 @@ export const work: WorkItem[] = [
     meta: "Art Direction",
     year: "2024",
     tags: ["Editorial"],
-    cover: "/assets/inbound2421744976924578198.jpg",
+    cover: "/assets/inbound.webp",
   },
   {
     id: "dz-4",
@@ -240,7 +240,7 @@ export const work: WorkItem[] = [
     meta: "Poster Art",
     year: "2024",
     tags: ["Poster"],
-    cover: "/assets/bruce%20Leee.png",
+    cover: "/assets/bruce-lee.webp",
   },
   {
     id: "dz-5",
@@ -249,7 +249,7 @@ export const work: WorkItem[] = [
     meta: "Illustration",
     year: "2024",
     tags: ["Illustration"],
-    cover: "/assets/Naruto%20and%20Sasuke.png",
+    cover: "/assets/naruto-sasuke.webp",
   },
   {
     id: "dz-6",
@@ -258,7 +258,7 @@ export const work: WorkItem[] = [
     meta: "Concept Art",
     year: "2023",
     tags: ["Concept"],
-    cover: "/assets/space.png",
+    cover: "/assets/space.webp",
   },
   {
     id: "dz-7",
@@ -267,6 +267,6 @@ export const work: WorkItem[] = [
     meta: "Brand Mark",
     year: "2023",
     tags: ["Brand"],
-    cover: "/assets/Boxthethirddd.png",
+    cover: "/assets/boxthethirddd.webp",
   },
 ];

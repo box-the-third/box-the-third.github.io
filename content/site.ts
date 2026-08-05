@@ -64,6 +64,13 @@ export const site = {
   // Contact form, public Formspree endpoint (same as the legacy site).
   formspreeEndpoint: "https://formspree.io/f/mjkarwza",
 
+  // Analytics — paste your IDs here to switch tracking on.
+  // Leave a value empty ("") and that tracker stays off (no scripts load).
+  analytics: {
+    ga4: "", // e.g. "G-XXXXXXXXXX"  (Google Analytics 4 Measurement ID)
+    metaPixel: "", // e.g. "123456789012345"  (Meta/Facebook Pixel ID)
+  },
+
   cta: {
     label: "Start a project",
     href: "#contact",

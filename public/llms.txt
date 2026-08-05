@@ -1,0 +1,43 @@
+# Nahiyan Ibn Ershad
+
+> Marketing Specialist & Growth Engineer based in Dhaka, Bangladesh. Computer
+> Science background, specializing in high-conversion frontend development,
+> AI-assisted content strategy, and marketing automation. Founder of YAS Beyond
+> Education. British Council certified UK education counselor and Guinness World
+> Records holder.
+
+## About
+Nahiyan blends consumer psychology with technical execution to build
+high-performance UGC campaigns, scale organic SEO, and engineer automated
+marketing workflows that drive revenue. He builds websites, produces video
+content, and consults on AI-assisted growth.
+
+## Services
+- CV Writing (ATS-ready, human-built)
+- University Application & SOP writing
+- IELTS Training (first 3 classes free on registration)
+- Content Strategy & Creation (videography, SEO, editing)
+- Portfolio & business websites
+- Digital Literacy and corporate AI training
+- Partnership Outreach and lead generation
+- Study abroad counseling (UK, Canada, Australia, Germany, Korea)
+
+## Selected work (live sites built by Nahiyan)
+- Alhain AI — AI business-automation platform: https://www.al7ain.com/
+- My Saudi Wellness — corporate wellness: https://box-the-third.github.io/msw/
+- White — limited-drop apparel e-commerce: https://box-the-third.github.io/white/
+- Fawtara — bilingual documents & invoicing SaaS: https://box-the-third.github.io/fawtara/
+- Ibda Farida — general contracting (Arabic RTL): https://www.ibdafarida.com/
+- Farzana Sultana — apparel consultant portfolio: https://farzana-apparel.github.io/portfolio/
+- NowfelNation — AI marketing consulting: https://nowfelibnmizan.github.io/NowfelNation/
+
+## Key pages
+- Home / portfolio: https://box-the-third.github.io/
+- Study abroad: https://box-the-third.github.io/StudyAbroadPage.html
+- Client login: https://box-the-third.github.io/login/
+
+## Contact
+- Email: nahiyanibnershad@gmail.com
+- Location: Dhaka, Bangladesh
+- Instagram: https://www.instagram.com/yasbeyondedu/
+- LinkedIn: https://www.linkedin.com/in/nahiyanibnershad/
