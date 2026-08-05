@@ -34,7 +34,7 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 34px;
+  gap: 6px;
 }
 .nav-links a {
   font-family: var(--font-mono);
@@ -42,10 +42,14 @@
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--ink-dim);
-  transition: color 0.3s;
+  padding: 9px 16px;
+  border-radius: 100px;
+  transition: color 0.3s var(--ease), background 0.3s var(--ease);
 }
+/* every nav item lights up into a teal pill on hover */
 .nav-links a:hover {
-  color: var(--ink);
+  color: var(--on-accent);
+  background: var(--accent);
 }
 .nav-login {
   border: 1px solid var(--line-strong);
