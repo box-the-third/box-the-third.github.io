@@ -81,7 +81,7 @@ function Particles({ count = 320 }: { count?: number }) {
   );
 }
 
-export default function HeroCanvas() {
+export default function HeroCanvas({ fogColor = "#0a1628" }: { fogColor?: string }) {
   return (
     <Canvas
       className="hero-canvas"
@@ -96,7 +96,7 @@ export default function HeroCanvas() {
       <pointLight position={[6, -3, 2]} intensity={18} color="#ffba08" distance={16} />
       <Blob />
       <Particles />
-      <fog attach="fog" args={["#0a1628", 6, 15]} />
+      <fog attach="fog" args={[fogColor, 6, 15]} />
     </Canvas>
   );
 }

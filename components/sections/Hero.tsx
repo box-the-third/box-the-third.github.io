@@ -14,6 +14,7 @@ const HeroCanvas = dynamic(() => import("@/components/three/HeroCanvas"), {
 export default function Hero() {
   const [wi, setWi] = useState(0);
   const [ready, setReady] = useState(false);
+  const [fogColor, setFogColor] = useState("#0a1628");
 
   useEffect(() => {
     const id = setInterval(
@@ -21,6 +22,17 @@ export default function Hero() {
       2200
     );
     return () => clearInterval(id);
+  }, []);
+
+  // Match the WebGL fog to the page background so the blob blends in both themes.
+  useEffect(() => {
+    const apply = () => {
+      const t = document.documentElement.getAttribute("data-theme");
+      setFogColor(t === "light" ? "#f3f5fa" : "#0a1628");
+    };
+    apply();
+    window.addEventListener("themechange", apply);
+    return () => window.removeEventListener("themechange", apply);
   }, []);
 
   // Delay text intro until the preloader is gone.
@@ -46,7 +58,7 @@ export default function Hero() {
   return (
     <section className="hero" id="home">
       <div className="hero-canvas">
-        <HeroCanvas />
+        <HeroCanvas fogColor={fogColor} />
       </div>
 
       <div className="hero-top">

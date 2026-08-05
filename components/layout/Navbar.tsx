@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 import Magnetic from "@/components/ui/Magnetic";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,27 +36,31 @@ export default function Navbar() {
           <span>.</span>
         </a>
 
-        <nav className="nav-links">
-          {site.nav.map((item) => (
-            <Magnetic key={item.href} strength={0.25}>
-              <a href={item.href}>{item.label}</a>
-            </Magnetic>
-          ))}
-          <a href="/login/" className="nav-login">
-            Client Login
-          </a>
-        </nav>
+        <div className="nav-right">
+          <nav className="nav-links">
+            {site.nav.map((item) => (
+              <Magnetic key={item.href} strength={0.25}>
+                <a href={item.href}>{item.label}</a>
+              </Magnetic>
+            ))}
+            <a href="/login/" className="nav-login">
+              Client Login
+            </a>
+          </nav>
 
-        <button
-          className={cn("nav-toggle", open && "open")}
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Menu"
-          aria-expanded={open}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+          <ThemeToggle />
+
+          <button
+            className={cn("nav-toggle", open && "open")}
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Menu"
+            aria-expanded={open}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </header>
 
       <AnimatePresence>
