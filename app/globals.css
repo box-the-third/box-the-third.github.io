@@ -2,6 +2,7 @@
    DESIGN TOKENS
    ═══════════════════════════════════════════════════════════════ */
 :root {
+  /* ── Dark theme (default) ── */
   --bg: #0a1628; /* navy */
   --bg-2: #0d1c34;
   --bg-3: #112040; /* navy-mid */
@@ -15,6 +16,12 @@
   --on-accent: #051022; /* dark ink for text on accent */
   --card: rgba(255, 255, 255, 0.035);
   --card-hover: rgba(255, 255, 255, 0.07);
+  --chip-bg: #faf9f6; /* off-white pricing chips */
+  --chip-border: transparent;
+  --nav-scrolled: rgba(10, 22, 40, 0.78);
+  --vignette: rgba(0, 0, 0, 0.55);
+  --vignette-blend: multiply;
+  color-scheme: dark;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
@@ -26,6 +33,36 @@
   --font-display: var(--font-syne), "Syne", sans-serif;
   --font-body: var(--font-outfit), "Outfit", system-ui, sans-serif;
   --font-mono: var(--font-mono-jb), "JetBrains Mono", monospace;
+}
+
+/* ── Light theme ── */
+:root[data-theme="light"] {
+  --bg: #f3f5fa;
+  --bg-2: #ffffff;
+  --bg-3: #e6ebf4;
+  --ink: #0a1628;
+  --ink-dim: #3b4a63;
+  --muted: #667691;
+  --line: rgba(10, 22, 40, 0.12);
+  --line-strong: rgba(10, 22, 40, 0.26);
+  --accent: #00949d; /* slightly deeper teal for contrast on light */
+  --accent-2: #b3780a; /* deeper amber for contrast on light */
+  --on-accent: #ffffff;
+  --card: rgba(10, 22, 40, 0.035);
+  --card-hover: rgba(10, 22, 40, 0.06);
+  --chip-bg: #ffffff;
+  --chip-border: rgba(10, 22, 40, 0.1);
+  --nav-scrolled: rgba(255, 255, 255, 0.82);
+  --vignette: rgba(10, 22, 40, 0.06);
+  --vignette-blend: normal;
+  color-scheme: light;
+}
+
+/* smooth cross-fade when switching themes */
+:root[data-theme] body,
+:root[data-theme] .nav,
+:root[data-theme] .marquee {
+  transition: background-color 0.5s var(--ease), color 0.5s var(--ease);
 }
 
 /* ── reset ─────────────────────────────────────────────────── */
@@ -95,8 +132,8 @@ body::after {
   pointer-events: none;
   z-index: 3;
   background:
-    radial-gradient(120% 120% at 50% 0%, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
-  mix-blend-mode: multiply;
+    radial-gradient(120% 120% at 50% 0%, transparent 55%, var(--vignette) 100%);
+  mix-blend-mode: var(--vignette-blend);
 }
 
 /* ═══════════════════════════════════════════════════════════════
