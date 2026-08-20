@@ -77,7 +77,12 @@ export const metadata: Metadata = {
     "max-image-preview": "large",
     "max-snippet": -1,
   } as Metadata["robots"],
-  verification: { google: "xhLQyKSVy3nBcgjJc6GLqrqCZSzmyue6Pd-cX8UMhzs" },
+  verification: {
+    google: [
+      "xhLQyKSVy3nBcgjJc6GLqrqCZSzmyue6Pd-cX8UMhzs",
+      "4-A312FWmX0qV6cOmVcSnbFz4wNiDPLFVio_6Y78m6s",
+    ],
+  },
 };
 
 export const viewport: Viewport = {
