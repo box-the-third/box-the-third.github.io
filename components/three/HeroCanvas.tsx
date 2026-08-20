@@ -81,7 +81,13 @@ function Particles({ count = 320 }: { count?: number }) {
   );
 }
 
-export default function HeroCanvas({ fogColor = "#0a1628" }: { fogColor?: string }) {
+export default function HeroCanvas({
+  theme = "dark",
+}: {
+  theme?: "dark" | "light";
+}) {
+  const isLight = theme === "light";
+  const fogColor = isLight ? "#f3f5fa" : "#0a1628";
   return (
     <Canvas
       className="hero-canvas"
@@ -91,10 +97,15 @@ export default function HeroCanvas({ fogColor = "#0a1628" }: { fogColor?: string
     >
       <ambientLight intensity={0.35} />
       <directionalLight position={[5, 5, 5]} intensity={1.1} color="#ffffff" />
-      {/* accent rim lights, teal + amber */}
-      <pointLight position={[-4, 2, 3]} intensity={24} color="#00b2bc" distance={16} />
-      <pointLight position={[6, -3, 2]} intensity={18} color="#ffba08" distance={16} />
-      <Blob />
+      {/* accent rim lights, teal + amber (only needed for the blob) */}
+      {!isLight && (
+        <>
+          <pointLight position={[-4, 2, 3]} intensity={24} color="#00b2bc" distance={16} />
+          <pointLight position={[6, -3, 2]} intensity={18} color="#ffba08" distance={16} />
+        </>
+      )}
+      {/* Blob is hidden in light mode so the hero stays clean/transparent */}
+      {!isLight && <Blob />}
       <Particles />
       <fog attach="fog" args={[fogColor, 6, 15]} />
     </Canvas>

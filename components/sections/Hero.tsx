@@ -14,7 +14,7 @@ const HeroCanvas = dynamic(() => import("@/components/three/HeroCanvas"), {
 export default function Hero() {
   const [wi, setWi] = useState(0);
   const [ready, setReady] = useState(false);
-  const [fogColor, setFogColor] = useState("#0a1628");
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
     const id = setInterval(
@@ -24,12 +24,14 @@ export default function Hero() {
     return () => clearInterval(id);
   }, []);
 
-  // Match the WebGL fog to the page background so the blob blends in both themes.
+  // Track the theme so the WebGL hero can adapt (fog + hide the blob on light).
   useEffect(() => {
-    const apply = () => {
-      const t = document.documentElement.getAttribute("data-theme");
-      setFogColor(t === "light" ? "#f3f5fa" : "#0a1628");
-    };
+    const apply = () =>
+      setTheme(
+        document.documentElement.getAttribute("data-theme") === "light"
+          ? "light"
+          : "dark"
+      );
     apply();
     window.addEventListener("themechange", apply);
     return () => window.removeEventListener("themechange", apply);
@@ -58,7 +60,7 @@ export default function Hero() {
   return (
     <section className="hero" id="home">
       <div className="hero-canvas">
-        <HeroCanvas fogColor={fogColor} />
+        <HeroCanvas theme={theme} />
       </div>
 
       <div className="hero-top">
