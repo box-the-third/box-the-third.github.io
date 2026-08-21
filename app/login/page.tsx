@@ -3,17 +3,41 @@
 import { useEffect, useState } from "react";
 import { getSupabase } from "@/lib/supabase";
 import { site } from "@/content/site";
-import Magnetic from "@/components/ui/Magnetic";
+import { legalDocs, LegalDoc } from "@/content/legal";
+import LegalModal from "@/components/ui/LegalModal";
 
 type Mode = "signin" | "signup";
 type Status = { kind: "idle" | "loading" | "ok" | "err"; msg: string };
 
 const DASHBOARD = "/dashboard.html";
+const AGREED_KEY = "yas_legal_agreed";
 
 export default function LoginPage() {
   const [mode, setMode] = useState<Mode>("signin");
   const [status, setStatus] = useState<Status>({ kind: "idle", msg: "" });
   const [checking, setChecking] = useState(true);
+  const [agreed, setAgreed] = useState(false);
+  const [openDoc, setOpenDoc] = useState<LegalDoc | null>(null);
+
+  // Remember agreement so returning users are not asked again.
+  useEffect(() => {
+    try {
+      setAgreed(localStorage.getItem(AGREED_KEY) === "1");
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  const setAgree = (v: boolean) => {
+    setAgreed(v);
+    try {
+      if (v) localStorage.setItem(AGREED_KEY, "1");
+      else localStorage.removeItem(AGREED_KEY);
+    } catch {
+      /* ignore */
+    }
+    if (v && status.kind === "err") setStatus({ kind: "idle", msg: "" });
+  };
 
   // Already signed in? Go straight to the dashboard.
   useEffect(() => {
@@ -37,6 +61,14 @@ export default function LoginPage() {
     const password = String(fd.get("password") || "");
     const fullName = String(fd.get("fullName") || "").trim();
     const supabase = getSupabase();
+
+    if (!agreed) {
+      setStatus({
+        kind: "err",
+        msg: "Please review and agree to the Privacy Policy and Terms of Service to continue.",
+      });
+      return;
+    }
 
     setStatus({ kind: "loading", msg: mode === "signin" ? "Signing in…" : "Creating account…" });
 
@@ -165,23 +197,51 @@ export default function LoginPage() {
               />
             </div>
 
-            <Magnetic>
-              <button
-                type="submit"
-                className="btn solid"
-                style={{ width: "100%", justifyContent: "center" }}
-                disabled={status.kind === "loading"}
-                data-cursor={mode === "signin" ? "Sign in" : "Create"}
-              >
-                <span>
-                  {status.kind === "loading"
-                    ? "Please wait…"
-                    : mode === "signin"
-                      ? "Sign in →"
-                      : "Create account →"}
-                </span>
-              </button>
-            </Magnetic>
+            <label className="consent">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgree(e.target.checked)}
+              />
+              <span className="consent-box" aria-hidden />
+              <span className="consent-text">
+                I have read and agree to the{" "}
+                <button
+                  type="button"
+                  className="consent-link"
+                  onClick={() => setOpenDoc(legalDocs.privacy)}
+                  data-cursor="View"
+                >
+                  Privacy Policy
+                </button>{" "}
+                and{" "}
+                <button
+                  type="button"
+                  className="consent-link"
+                  onClick={() => setOpenDoc(legalDocs.terms)}
+                  data-cursor="View"
+                >
+                  Terms of Service
+                </button>
+                .
+              </span>
+            </label>
+
+            <button
+              type="submit"
+              className="btn solid"
+              style={{ width: "100%", justifyContent: "center" }}
+              disabled={status.kind === "loading" || !agreed}
+              data-cursor={mode === "signin" ? "Sign in" : "Create"}
+            >
+              <span>
+                {status.kind === "loading"
+                  ? "Please wait…"
+                  : mode === "signin"
+                    ? "Sign in →"
+                    : "Create account →"}
+              </span>
+            </button>
 
             <p
               className={`form-status ${
@@ -198,6 +258,15 @@ export default function LoginPage() {
           consultations.
         </p>
       </div>
+
+      <LegalModal
+        doc={openDoc}
+        onClose={() => setOpenDoc(null)}
+        onAgree={() => {
+          setAgree(true);
+          setOpenDoc(null);
+        }}
+      />
     </section>
   );
 }
