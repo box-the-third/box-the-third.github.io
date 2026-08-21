@@ -102,6 +102,16 @@ export const work: WorkItem[] = [
     cover: "/assets/site_white.jpg",
   },
   {
+    id: "web-northstar",
+    kind: "web",
+    title: "Northstar",
+    meta: "Investment App, PWA",
+    year: "2025",
+    tags: ["React", "PWA"],
+    link: "https://box-the-third.github.io/northstar/",
+    cover: "/assets/site_northstar.jpg",
+  },
+  {
     id: "web-ibdafarida",
     kind: "web",
     title: "Ibda Farida",
