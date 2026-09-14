@@ -6,11 +6,13 @@ import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 import Magnetic from "@/components/ui/Magnetic";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import AuthModal from "@/components/ui/AuthModal";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
 
   useEffect(() => {
     let last = 0;
@@ -43,9 +45,13 @@ export default function Navbar() {
                 <a href={item.href}>{item.label}</a>
               </Magnetic>
             ))}
-            <a href="/login/" className="nav-login">
-              Client Login
-            </a>
+            <button
+              className="nav-cta"
+              onClick={() => setAuthOpen(true)}
+              data-cursor="Join"
+            >
+              <span>Create account</span>
+            </button>
           </nav>
 
           <ThemeToggle />
@@ -79,16 +85,21 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="/login/"
-              onClick={() => setOpen(false)}
+              href="#account"
+              onClick={() => {
+                setOpen(false);
+                setAuthOpen(true);
+              }}
               style={{ color: "var(--accent)" }}
             >
               <span>→</span>
-              Client Login
+              Create account
             </a>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
     </>
   );
 }
