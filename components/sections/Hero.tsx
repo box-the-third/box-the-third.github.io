@@ -67,7 +67,6 @@ export default function Hero() {
         <span>
           <span className="dot">◍</span> Available for projects, 2026
         </span>
-        <span>{site.location}</span>
       </div>
 
       <div className="hero-inner">

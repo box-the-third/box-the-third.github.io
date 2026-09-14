@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { work, categories, WorkItem, WorkCategory } from "@/content/portfolio";
+import { work, WorkItem, WorkCategory } from "@/content/portfolio";
 import { youTubeThumb, youTubeEmbed, cn } from "@/lib/utils";
 import { RevealText } from "@/components/ui/Reveal";
 
@@ -13,17 +13,39 @@ const kindLabel: Record<WorkCategory, string> = {
   web: "Live Site",
 };
 
+type FilterId = "all" | "client" | "personal" | WorkCategory;
+
+// Display order in mixed views: client (web) first, then youtube, instagram, design.
+const KIND_ORDER: Record<WorkCategory, number> = {
+  web: 0,
+  youtube: 1,
+  instagram: 2,
+  design: 3,
+};
+
+function inFilter(filter: FilterId, kind: WorkCategory): boolean {
+  if (filter === "all") return true;
+  if (filter === "client") return kind === "web";
+  if (filter === "personal") return kind !== "web";
+  return kind === filter;
+}
+
 function cover(item: WorkItem): string {
   if (item.kind === "youtube" && item.youtube) return youTubeThumb(item.youtube);
   return item.cover || "/assets/work.webp";
 }
 
 export default function Work() {
-  const [filter, setFilter] = useState<WorkCategory | "all">("all");
+  const [filter, setFilter] = useState<FilterId>("all");
   const [active, setActive] = useState<WorkItem | null>(null);
 
   const items = useMemo(
-    () => (filter === "all" ? work : work.filter((w) => w.kind === filter)),
+    () =>
+      work
+        .map((w, i) => ({ w, i }))
+        .filter(({ w }) => inFilter(filter, w.kind))
+        .sort((a, b) => KIND_ORDER[a.w.kind] - KIND_ORDER[b.w.kind] || a.i - b.i)
+        .map(({ w }) => w),
     [filter]
   );
 
@@ -60,16 +82,43 @@ export default function Work() {
           </div>
 
           <div className="work-filters">
-            {categories.map((c) => (
+            <div className="work-filter-row">
               <button
-                key={c.id}
-                className={cn("work-filter", filter === c.id && "active")}
-                onClick={() => setFilter(c.id)}
+                className={cn("work-filter", filter === "all" && "active")}
+                onClick={() => setFilter("all")}
                 data-cursor="Filter"
               >
-                {c.label}
+                All Work
               </button>
-            ))}
+              <button
+                className={cn("work-filter", filter === "client" && "active")}
+                onClick={() => setFilter("client")}
+                data-cursor="Filter"
+              >
+                Client Work
+              </button>
+              <button
+                className={cn("work-filter", filter === "personal" && "active")}
+                onClick={() => setFilter("personal")}
+                data-cursor="Filter"
+              >
+                Personal Work
+              </button>
+            </div>
+
+            <div className="work-filter-row work-subrow">
+              <span className="work-sub-label">Personal</span>
+              {(["youtube", "instagram", "design"] as WorkCategory[]).map((k) => (
+                <button
+                  key={k}
+                  className={cn("work-filter work-subfilter", filter === k && "active")}
+                  onClick={() => setFilter(k)}
+                  data-cursor="Filter"
+                >
+                  {kindLabel[k]}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 

@@ -63,6 +63,34 @@
   color: var(--on-accent) !important;
   border-color: var(--accent);
 }
+/* "Create account" nav button with a left-to-right gradient sweep on hover */
+.nav-cta {
+  border: none;
+  border-radius: 100px;
+  padding: 10px 22px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--on-accent);
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    var(--accent-2) 50%,
+    var(--accent) 100%
+  );
+  background-size: 220% 100%;
+  background-position: 0% 0%;
+  transition: background-position 0.7s var(--ease), box-shadow 0.4s var(--ease),
+    transform 0.3s var(--ease);
+}
+.nav-cta:hover {
+  background-position: 100% 0%;
+  box-shadow: 0 10px 26px -10px rgba(0, 178, 188, 0.65);
+}
+.nav-cta:active {
+  transform: translateY(1px);
+}
 .nav-right {
   display: flex;
   align-items: center;
@@ -263,16 +291,34 @@
    ═══════════════════════════════════════════════════════════════ */
 .work-head {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 30px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
   margin-bottom: 40px;
 }
 .work-filters {
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.work-filter-row {
+  display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  align-items: center;
+}
+.work-sub-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-right: 6px;
+}
+.work-subfilter {
+  padding: 8px 16px;
+  font-size: 0.74rem;
 }
 .work-filter {
   background: transparent;
@@ -1224,6 +1270,78 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   LOGIN CTA (Google sign-in near the top of the body)
+   ═══════════════════════════════════════════════════════════════ */
+.login-cta-section {
+  padding-top: clamp(30px, 5vh, 64px);
+  padding-bottom: clamp(30px, 5vh, 64px);
+}
+.login-cta {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  padding: clamp(28px, 4vw, 52px);
+  background:
+    radial-gradient(120% 150% at 0% 0%, rgba(0, 178, 188, 0.1), transparent 55%),
+    linear-gradient(120deg, rgba(0, 178, 188, 0.06), rgba(13, 28, 52, 0.15));
+}
+.login-cta-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.login-cta-title em {
+  font-style: normal;
+  color: var(--accent);
+}
+.login-cta-sub {
+  color: var(--ink-dim);
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  max-width: 46ch;
+  margin-top: 16px;
+}
+.login-cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+  justify-self: end;
+}
+.login-cta-alt {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-dim);
+  text-align: center;
+  transition: color 0.3s var(--ease);
+}
+.login-cta-alt:hover {
+  color: var(--accent);
+}
+.login-cta-consent {
+  font-size: 0.76rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 2px;
+  text-align: center;
+}
+@media (max-width: 780px) {
+  .login-cta {
+    grid-template-columns: 1fr;
+  }
+  .login-cta-actions {
+    justify-self: stretch;
+    max-width: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    OFFER (free IELTS classes)
    ═══════════════════════════════════════════════════════════════ */
 .offer-section {
@@ -1750,4 +1868,110 @@
     width: 100%;
     justify-content: center;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AUTH MODAL (Create a YAS Account)
+   ═══════════════════════════════════════════════════════════════ */
+.authm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  background: rgba(6, 12, 24, 0.7);
+  backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 40px);
+}
+.authm-card {
+  position: relative;
+  width: min(440px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(30px, 4vw, 42px);
+  text-align: center;
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.6);
+}
+.authm-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-dim);
+  transition: color 0.3s, border-color 0.3s;
+}
+.authm-close:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.authm-logo {
+  width: 150px;
+  height: auto;
+  display: block;
+  margin: 4px auto 20px;
+  border-radius: 12px;
+}
+.authm-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.authm-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.authm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+.authm-form .field {
+  margin-bottom: 0;
+}
+.authm-back {
+  align-self: center;
+  background: none;
+  border: none;
+  color: var(--ink-dim);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 4px;
+  transition: color 0.3s;
+}
+.authm-back:hover {
+  color: var(--accent);
+}
+.authm-switch {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 0.88rem;
+  color: var(--ink-dim);
+}
+.authm-switch button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.authm-legal {
+  margin-top: 16px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.5;
 }
