@@ -19,6 +19,7 @@ const FORMSPREE = "https://formspree.io/f/mjkarwza";
 
 export default function DashboardPage() {
   const [checking, setChecking] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [cart, setCart] = useState<Selection[]>([]);
@@ -65,30 +66,56 @@ export default function DashboardPage() {
     [cartLines]
   );
 
-  // Auth-gate + initial load.
+  // Auth-gate + initial load. Wrapped so `checking` is ALWAYS cleared —
+  // a thrown query or a slow network can never leave the page spinning
+  // forever. A hard timeout is the final safety net.
   useEffect(() => {
     let alive = true;
+
+    const safety = setTimeout(() => {
+      if (alive) setChecking(false);
+    }, 8000);
+
     (async () => {
-      const {
-        data: { session },
-      } = await getSupabase().auth.getSession();
-      if (!session) {
-        window.location.href = "/login/";
-        return;
+      try {
+        const {
+          data: { session },
+        } = await getSupabase().auth.getSession();
+        if (!alive) return;
+        if (!session) {
+          window.location.href = "/login/";
+          return;
+        }
+        setUser(session.user);
+
+        // Load the profile and cart in parallel; a failure in one must not
+        // block the other, and pending items are resolved before the cart read.
+        const [prof, list] = await Promise.all([
+          getProfile(session.user.id).catch(() => null),
+          (async () => {
+            try {
+              await resolvePending(session.user.id);
+            } catch {
+              /* ignore — resolving pre-login adds is best-effort */
+            }
+            return getSelections(session.user.id).catch(() => []);
+          })(),
+        ]);
+        if (!alive) return;
+        setProfile(prof);
+        setCart(list);
+        if (!touched.current) setMessage(buildTemplate(list, prof?.full_name || ""));
+      } catch (e) {
+        console.error("[dashboard] load failed", e);
+        if (alive) setLoadError("We couldn't load your dashboard. Please refresh and try again.");
+      } finally {
+        if (alive) setChecking(false);
       }
-      if (!alive) return;
-      setUser(session.user);
-      const prof = await getProfile(session.user.id);
-      await resolvePending(session.user.id);
-      const list = await getSelections(session.user.id);
-      if (!alive) return;
-      setProfile(prof);
-      setCart(list);
-      if (!touched.current) setMessage(buildTemplate(list, prof?.full_name || ""));
-      setChecking(false);
     })();
+
     return () => {
       alive = false;
+      clearTimeout(safety);
     };
   }, [buildTemplate]);
 
@@ -182,6 +209,11 @@ export default function DashboardPage() {
   return (
     <section className="section" id="dashboard">
       <div className="container">
+        {loadError && (
+          <div className="dash-error" role="alert">
+            {loadError}
+          </div>
+        )}
         <Reveal>
           <div className="dash-top">
             <div>

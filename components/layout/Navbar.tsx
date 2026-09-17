@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -16,6 +17,13 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const [cart, setCart] = useState(0);
+
+  // On the homepage the nav anchors scroll in-page (via Lenis); on any other
+  // route (e.g. /dashboard/) they need a leading "/" so they navigate home
+  // and then jump to the section, instead of doing nothing.
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+  const toHref = (hash: string) => (onHome ? hash : `/${hash}`);
 
   useEffect(() => {
     let last = 0;
@@ -55,7 +63,7 @@ export default function Navbar() {
   return (
     <>
       <header className={cn("nav", scrolled && "scrolled", hidden && "hidden")}>
-        <a href="#home" className="nav-logo" data-cursor="Top">
+        <a href={onHome ? "#home" : "/"} className="nav-logo" data-cursor="Top">
           {site.shortName}
           <span>.</span>
         </a>
@@ -64,7 +72,7 @@ export default function Navbar() {
           <nav className="nav-links">
             {site.nav.map((item) => (
               <Magnetic key={item.href} strength={0.25}>
-                <a href={item.href}>{item.label}</a>
+                <a href={toHref(item.href)}>{item.label}</a>
               </Magnetic>
             ))}
             <button
@@ -116,13 +124,13 @@ export default function Navbar() {
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             {site.nav.map((item, i) => (
-              <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
+              <a key={item.href} href={toHref(item.href)} onClick={() => setOpen(false)}>
                 <span>0{i + 1}</span>
                 {item.label}
               </a>
             ))}
             <a
-              href="#account"
+              href={toHref("#account")}
               onClick={() => {
                 setOpen(false);
                 setAuthOpen(true);

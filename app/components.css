@@ -2298,3 +2298,12 @@
     align-self: stretch;
   }
 }
+.dash-error {
+  background: color-mix(in srgb, #ff7a7a 10%, transparent);
+  border: 1px solid #ff7a7a;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
