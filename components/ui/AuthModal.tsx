@@ -6,7 +6,7 @@ import { getSupabase } from "@/lib/supabase";
 import { legalDocs, LegalDoc } from "@/content/legal";
 import LegalModal from "@/components/ui/LegalModal";
 
-const DASHBOARD = "/dashboard.html";
+const DASHBOARD = "/dashboard/";
 type Status = { kind: "idle" | "loading" | "ok" | "err"; msg: string };
 type Mode = "signup" | "signin";
 type View = "choices" | "email";

@@ -9,7 +9,7 @@ import LegalModal from "@/components/ui/LegalModal";
 type Mode = "signin" | "signup";
 type Status = { kind: "idle" | "loading" | "ok" | "err"; msg: string };
 
-const DASHBOARD = "/dashboard.html";
+const DASHBOARD = "/dashboard/";
 const AGREED_KEY = "yas_legal_agreed";
 
 export default function LoginPage() {

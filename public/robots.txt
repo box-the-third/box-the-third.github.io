@@ -1,7 +1,7 @@
 # box-the-third.github.io — robots
 User-agent: *
 Allow: /
-Disallow: /dashboard.html
+Disallow: /dashboard/
 
 # Allow AI search crawlers to ground and cite this site
 User-agent: GPTBot

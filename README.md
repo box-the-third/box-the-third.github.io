@@ -55,7 +55,6 @@ and publishes `./out` to GitHub Pages. No manual build step required.
 
 ## Preserved legacy pages
 The original static business pages still ship as-is inside `public/`:
-- `/dashboard.html` — Supabase client dashboard
 - `/StudyAbroadPage.html` — study-abroad landing page
 - Auth logic in `public/assets/js/` (Supabase)
 

@@ -185,7 +185,7 @@
       const initials = (session.user.user_metadata?.full_name || session.user.email || '?')
         .trim().charAt(0).toUpperCase();
       slot.innerHTML = `
-        <a href="/dashboard.html" class="nav-account-avatar" title="My Dashboard">${initials}</a>
+        <a href="/dashboard/" class="nav-account-avatar" title="My Dashboard">${initials}</a>
       `;
     } else {
       slot.innerHTML = `<button class="nav-account-btn" onclick="openAuthModal('signin')">Sign In</button>`;
@@ -204,9 +204,9 @@
         const session = await YASAuth.getSession();
         if (session) {
           await YASData.saveSelection(session.user.id, packageId);
-          window.location.href = 'dashboard.html';
+          window.location.href = '/dashboard/';
         } else {
-          YASAuth.setPendingIntent({ type: 'package_selection', packageId, redirectTo: 'dashboard.html' });
+          YASAuth.setPendingIntent({ type: 'package_selection', packageId, redirectTo: '/dashboard/' });
           openAuthModal('signup');
         }
       });

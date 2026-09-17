@@ -7,12 +7,15 @@ import { cn } from "@/lib/utils";
 import Magnetic from "@/components/ui/Magnetic";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import AuthModal from "@/components/ui/AuthModal";
+import { getSupabase } from "@/lib/supabase";
+import { cartCount } from "@/lib/cart";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
+  const [cart, setCart] = useState(0);
 
   useEffect(() => {
     let last = 0;
@@ -29,6 +32,25 @@ export default function Navbar() {
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
+
+  // Let any part of the site open the auth modal (e.g. "add to cart" while logged out).
+  useEffect(() => {
+    const openAuth = () => setAuthOpen(true);
+    window.addEventListener("auth:open", openAuth);
+    return () => window.removeEventListener("auth:open", openAuth);
+  }, []);
+
+  // Keep the cart badge in sync with the visitor's saved selections.
+  useEffect(() => {
+    const refresh = () => cartCount().then(setCart);
+    refresh();
+    window.addEventListener("cart:changed", refresh);
+    const { data: sub } = getSupabase().auth.onAuthStateChange(() => refresh());
+    return () => {
+      window.removeEventListener("cart:changed", refresh);
+      sub.subscription.unsubscribe();
+    };
+  }, []);
 
   return (
     <>
@@ -53,6 +75,21 @@ export default function Navbar() {
               <span>Create account</span>
             </button>
           </nav>
+
+          <a
+            href="/dashboard/"
+            className="nav-cart"
+            aria-label={cart > 0 ? `Cart, ${cart} items` : "Your dashboard"}
+            title="Your cart"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M6 6h15l-1.5 9h-12z" />
+              <path d="M6 6L5 3H2" />
+              <circle cx="9" cy="20" r="1.4" />
+              <circle cx="18" cy="20" r="1.4" />
+            </svg>
+            {cart > 0 && <span className="nav-cart-count">{cart}</span>}
+          </a>
 
           <ThemeToggle />
 
