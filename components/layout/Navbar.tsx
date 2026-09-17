@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import Magnetic from "@/components/ui/Magnetic";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import AuthModal from "@/components/ui/AuthModal";
-import { getSupabase } from "@/lib/supabase";
+import { useAuth } from "@/components/providers/AuthProvider";
 import { cartCount } from "@/lib/cart";
 
 export default function Navbar() {
@@ -17,6 +17,15 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const [cart, setCart] = useState(0);
+  const { session, user } = useAuth();
+
+  // A short, friendly label + initial for the signed-in chip.
+  const displayName =
+    (user?.user_metadata?.full_name as string | undefined) ||
+    user?.email ||
+    "";
+  const firstName = displayName.split(/[\s@]/)[0] || "Account";
+  const initial = (displayName.trim()[0] || "•").toUpperCase();
 
   // On the homepage the nav anchors scroll in-page (via Lenis); on any other
   // route (e.g. /dashboard/) they need a leading "/" so they navigate home
@@ -48,17 +57,14 @@ export default function Navbar() {
     return () => window.removeEventListener("auth:open", openAuth);
   }, []);
 
-  // Keep the cart badge in sync with the visitor's saved selections.
+  // Keep the cart badge in sync with the visitor's saved selections. Re-runs
+  // whenever the session changes (login/logout) and on any cart:changed event.
   useEffect(() => {
-    const refresh = () => cartCount().then(setCart);
+    const refresh = () => cartCount(session).then(setCart);
     refresh();
     window.addEventListener("cart:changed", refresh);
-    const { data: sub } = getSupabase().auth.onAuthStateChange(() => refresh());
-    return () => {
-      window.removeEventListener("cart:changed", refresh);
-      sub.subscription.unsubscribe();
-    };
-  }, []);
+    return () => window.removeEventListener("cart:changed", refresh);
+  }, [session]);
 
   return (
     <>
@@ -75,13 +81,22 @@ export default function Navbar() {
                 <a href={toHref(item.href)}>{item.label}</a>
               </Magnetic>
             ))}
-            <button
-              className="nav-cta"
-              onClick={() => setAuthOpen(true)}
-              data-cursor="Join"
-            >
-              <span>Create account</span>
-            </button>
+            {user ? (
+              <Magnetic strength={0.25}>
+                <a href="/dashboard/" className="nav-account" data-cursor="Dashboard" title="Your dashboard">
+                  <span className="nav-account-dot">{initial}</span>
+                  <span className="nav-account-name">{firstName}</span>
+                </a>
+              </Magnetic>
+            ) : (
+              <button
+                className="nav-cta"
+                onClick={() => setAuthOpen(true)}
+                data-cursor="Join"
+              >
+                <span>Create account</span>
+              </button>
+            )}
           </nav>
 
           <a
@@ -129,17 +144,28 @@ export default function Navbar() {
                 {item.label}
               </a>
             ))}
-            <a
-              href={toHref("#account")}
-              onClick={() => {
-                setOpen(false);
-                setAuthOpen(true);
-              }}
-              style={{ color: "var(--accent)" }}
-            >
-              <span>→</span>
-              Create account
-            </a>
+            {user ? (
+              <a
+                href="/dashboard/"
+                onClick={() => setOpen(false)}
+                style={{ color: "var(--accent)" }}
+              >
+                <span>→</span>
+                Your dashboard
+              </a>
+            ) : (
+              <a
+                href={toHref("#account")}
+                onClick={() => {
+                  setOpen(false);
+                  setAuthOpen(true);
+                }}
+                style={{ color: "var(--accent)" }}
+              >
+                <span>→</span>
+                Create account
+              </a>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

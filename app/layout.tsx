@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Syne, Outfit, JetBrains_Mono } from "next/font/google";
 import { site } from "@/content/site";
 import SmoothScroll from "@/components/providers/SmoothScroll";
+import AuthProvider from "@/components/providers/AuthProvider";
 import Preloader from "@/components/ui/Preloader";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -142,11 +143,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Analytics />
         <Preloader />
-        <SmoothScroll>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </SmoothScroll>
+        <AuthProvider>
+          <SmoothScroll>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </SmoothScroll>
+        </AuthProvider>
       </body>
     </html>
   );

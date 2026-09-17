@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getSupabase } from "@/lib/supabase";
+import { useAuth } from "@/components/providers/AuthProvider";
 import { legalDocs, LegalDoc } from "@/content/legal";
 import LegalModal from "@/components/ui/LegalModal";
 import Magnetic from "@/components/ui/Magnetic";
@@ -11,16 +12,11 @@ const DASHBOARD = "/dashboard/";
 
 /** Prominent Google sign-in near the top of the page body. */
 export default function LoginCTA() {
-  const [signedIn, setSignedIn] = useState(false);
+  const { user } = useAuth();
+  const signedIn = !!user;
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [openDoc, setOpenDoc] = useState<LegalDoc | null>(null);
-
-  useEffect(() => {
-    getSupabase()
-      .auth.getSession()
-      .then(({ data }) => setSignedIn(!!data.session));
-  }, []);
 
   async function google() {
     setBusy(true);
