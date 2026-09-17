@@ -3,6 +3,8 @@
 //  Each service walks the visitor through:
 //    ① how to do it yourself   ② why work with me   ③ pricing
 //  Prices are stored in BDT; the UI converts on the fly.
+//  Each tier `id` matches a row in the Supabase `packages` table so it
+//  can be added to the cart (the `selections` table) from the site.
 //  Copy is kept em-dash free, in Nahiyan's own voice.
 // ═══════════════════════════════════════════════════════════════
 
@@ -25,6 +27,7 @@ export type IconKey =
   | "leads";
 
 export interface Tier {
+  id: string; // matches packages.id in Supabase
   label: string;
   bdt: number;
 }
@@ -65,9 +68,9 @@ export const services: Service[] = [
       "I use the keywords recruiters look for and the metrics that make you stand out.",
     ],
     tiers: [
-      { label: "Basic, 1 Page", bdt: 150 },
-      { label: "Standard, 2 Pages + Cover Letter", bdt: 350 },
-      { label: "Premium, Full Package + LinkedIn", bdt: 750 },
+      { id: "cv_writing_basic", label: "Basic, 1 Page", bdt: 150 },
+      { id: "cv_writing_standard", label: "Standard, 2 Pages + Cover Letter", bdt: 350 },
+      { id: "cv_writing_premium", label: "Premium, Full Package + LinkedIn", bdt: 750 },
     ],
   },
   {
@@ -89,9 +92,9 @@ export const services: Service[] = [
       "Unlimited revisions on the premium tier means we polish until it lands.",
     ],
     tiers: [
-      { label: "Draft, 1 revision", bdt: 1500 },
-      { label: "Standard, 3 revisions", bdt: 2500 },
-      { label: "Premium, Unlimited revisions", bdt: 4500 },
+      { id: "sop_writing_draft", label: "Draft, 1 revision", bdt: 1500 },
+      { id: "sop_writing_standard", label: "Standard, 3 revisions", bdt: 2500 },
+      { id: "sop_writing_premium", label: "Premium, Unlimited revisions", bdt: 4500 },
     ],
   },
   {
@@ -113,9 +116,9 @@ export const services: Service[] = [
       "Speaking and listening improve quickly with the right coaching, and I focus there first.",
     ],
     tiers: [
-      { label: "Starter, 4 sessions", bdt: 2000 },
-      { label: "Serious, 10 sessions", bdt: 4000 },
-      { label: "Premium, 20 sessions + mock tests", bdt: 7000 },
+      { id: "ielts_training_starter", label: "Starter, 4 sessions", bdt: 2000 },
+      { id: "ielts_training_serious", label: "Serious, 10 sessions", bdt: 4000 },
+      { id: "ielts_training_premium", label: "Premium, 20 sessions + mock tests", bdt: 7000 },
     ],
   },
   {
@@ -137,9 +140,9 @@ export const services: Service[] = [
       "You get strategy and production in one place, from concept to posted asset.",
     ],
     tiers: [
-      { label: "Strategy, Roadmap only", bdt: 3600 },
-      { label: "Production, 4 pieces per month", bdt: 7200 },
-      { label: "Full Campaign, Strategy + Production", bdt: 15000 },
+      { id: "content_strategy_strategy", label: "Strategy, Roadmap only", bdt: 3600 },
+      { id: "content_strategy_production", label: "Production, 4 pieces per month", bdt: 7200 },
+      { id: "content_strategy_full_campaign", label: "Full Campaign, Strategy + Production", bdt: 15000 },
     ],
   },
   {
@@ -161,9 +164,9 @@ export const services: Service[] = [
       "This very site, and 10+ others in my work, are proof of the standard you get.",
     ],
     tiers: [
-      { label: "Basic, 3 pages", bdt: 5000 },
-      { label: "Standard, 5 pages + blog", bdt: 10000 },
-      { label: "Premium, Full site + SEO + maintenance", bdt: 15000 },
+      { id: "portfolio_website_basic", label: "Basic, 3 pages", bdt: 5000 },
+      { id: "portfolio_website_standard", label: "Standard, 5 pages + blog", bdt: 10000 },
+      { id: "portfolio_website_premium", label: "Premium, Full site + SEO + maintenance", bdt: 15000 },
     ],
   },
   {
@@ -185,9 +188,9 @@ export const services: Service[] = [
       "You leave with systems you can run yourself, not a dependency on me.",
     ],
     tiers: [
-      { label: "Starter, 1 module", bdt: 500 },
-      { label: "Standard, 3 modules", bdt: 1250 },
-      { label: "Comprehensive, Full curriculum", bdt: 2500 },
+      { id: "digital_literacy_starter", label: "Starter, 1 module", bdt: 500 },
+      { id: "digital_literacy_standard", label: "Standard, 3 modules", bdt: 1250 },
+      { id: "digital_literacy_comprehensive", label: "Comprehensive, Full curriculum", bdt: 2500 },
     ],
   },
   {
@@ -209,9 +212,9 @@ export const services: Service[] = [
       "Built-in analytics show you who is actually engaging with your card.",
     ],
     tiers: [
-      { label: "Basic, QR Card", bdt: 500 },
-      { label: "Standard, NFC + Microsite", bdt: 1200 },
-      { label: "Premium, Full Profile + Analytics", bdt: 2500 },
+      { id: "digital_cards_basic", label: "Basic, QR Card", bdt: 500 },
+      { id: "digital_cards_standard", label: "Standard, NFC + Microsite", bdt: 1200 },
+      { id: "digital_cards_premium", label: "Premium, Full Profile + Analytics", bdt: 2500 },
     ],
   },
   {
@@ -233,9 +236,9 @@ export const services: Service[] = [
       "Outreach is personalized at scale, never spray and pray.",
     ],
     tiers: [
-      { label: "Startup, 50 leads", bdt: 5000 },
-      { label: "Growth, 150 leads", bdt: 12000 },
-      { label: "Enterprise, 500+ leads", bdt: 30000 },
+      { id: "partnership_outreach_startup", label: "Startup, 50 leads", bdt: 5000 },
+      { id: "partnership_outreach_growth", label: "Growth, 150 leads", bdt: 12000 },
+      { id: "partnership_outreach_enterprise", label: "Enterprise, 500+ leads", bdt: 30000 },
     ],
   },
 ];

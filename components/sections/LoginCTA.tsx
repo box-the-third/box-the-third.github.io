@@ -7,7 +7,7 @@ import LegalModal from "@/components/ui/LegalModal";
 import Magnetic from "@/components/ui/Magnetic";
 import { Reveal } from "@/components/ui/Reveal";
 
-const DASHBOARD = "/dashboard.html";
+const DASHBOARD = "/dashboard/";
 
 /** Prominent Google sign-in near the top of the page body. */
 export default function LoginCTA() {

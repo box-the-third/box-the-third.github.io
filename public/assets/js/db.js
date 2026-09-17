@@ -97,6 +97,34 @@ const YASData = {
 
   async updateMyProfile(userId, fields) {
     return supabaseClient.from('profiles').update(fields).eq('id', userId);
+  },
+
+  // Remove a service from the cart.
+  async removeSelection(id) {
+    return supabaseClient.from('selections').delete().eq('id', id);
+  },
+
+  // Add several packages to the cart, skipping any already there.
+  async addSelections(userId, packageIds) {
+    if (!packageIds || !packageIds.length) return { added: 0 };
+    const { data: existing } = await supabaseClient
+      .from('selections').select('package_id').eq('user_id', userId);
+    const have = new Set((existing || []).map(r => r.package_id));
+    const rows = [...new Set(packageIds)]
+      .filter(pid => !have.has(pid))
+      .map(pid => ({ user_id: userId, package_id: pid }));
+    if (!rows.length) return { added: 0 };
+    const { error } = await supabaseClient.from('selections').insert(rows);
+    return { added: error ? 0 : rows.length, error };
+  },
+
+  // Mark the user's open cart items as "contacted" and store their note.
+  async markRequestSent(userId, notes) {
+    return supabaseClient
+      .from('selections')
+      .update({ status: 'contacted', notes: notes || null })
+      .eq('user_id', userId)
+      .eq('status', 'submitted');
   }
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   services,
@@ -10,8 +10,9 @@ import {
   CurrencyCode,
 } from "@/content/services";
 import { cn } from "@/lib/utils";
+import { getSupabase } from "@/lib/supabase";
+import { addToCart } from "@/lib/cart";
 import { Reveal, RevealText } from "@/components/ui/Reveal";
-import Magnetic from "@/components/ui/Magnetic";
 import ServiceIcon from "@/components/ui/ServiceIcon";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -20,11 +21,58 @@ export default function Services() {
   const [openId, setOpenId] = useState<string | null>(services[0].id);
   const [pricingId, setPricingId] = useState<string | null>(null);
   const [cur, setCur] = useState<CurrencyCode>("BDT");
+  const [added, setAdded] = useState<Set<string>>(new Set());
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ msg: string; kind: "ok" | "err" } | null>(null);
+  const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const toggle = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
     setPricingId(null); // pricing always starts collapsed on a fresh open
   };
+
+  // Seed the "added" ticks from the visitor's existing cart (if signed in).
+  useEffect(() => {
+    let alive = true;
+    const load = async () => {
+      const supabase = getSupabase();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (!session || !alive) return;
+      const { data } = await supabase
+        .from("selections")
+        .select("package_id")
+        .eq("user_id", session.user.id);
+      if (data && alive) {
+        setAdded(new Set(data.map((r) => r.package_id).filter(Boolean) as string[]));
+      }
+    };
+    load();
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  const showToast = (msg: string, kind: "ok" | "err" = "ok") => {
+    setToast({ msg, kind });
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    toastTimer.current = setTimeout(() => setToast(null), 2800);
+  };
+
+  async function handleAdd(id: string) {
+    if (busyId) return;
+    setBusyId(id);
+    const res = await addToCart(id);
+    setBusyId(null);
+    if (res.status === "added" || res.status === "exists") {
+      setAdded((prev) => new Set(prev).add(id));
+    }
+    if (res.status === "needs-auth") {
+      window.dispatchEvent(new Event("auth:open"));
+    }
+    showToast(res.message, res.status === "error" ? "err" : "ok");
+  }
 
   return (
     <section className="section" id="services">
@@ -42,7 +90,8 @@ export default function Services() {
             </h2>
             <p className="sec-sub" style={{ marginTop: 18 }}>
               Every service is a walk-through: how to do it yourself, why work with
-              me, and the price. No surprises before you commit.
+              me, and the price. Add a plan to your cart and send your request from
+              the dashboard.
             </p>
           </div>
         </div>
@@ -58,7 +107,6 @@ export default function Services() {
                     className="svc-panel-head"
                     onClick={() => toggle(s.id)}
                     aria-expanded={open}
-                    data-cursor={open ? "Close" : "Open"}
                   >
                     <span className="svc-index">{String(i + 1).padStart(2, "0")}</span>
                     <span className="svc-icon">
@@ -125,7 +173,6 @@ export default function Services() {
                               className={cn("svc-price-btn", showPrice && "active")}
                               onClick={() => setPricingId(showPrice ? null : s.id)}
                               aria-expanded={showPrice}
-                              data-cursor={showPrice ? "Hide" : "Pricing"}
                             >
                               <span className="svc-step-n">03</span>
                               {showPrice ? "Hide pricing" : "See pricing"}
@@ -149,27 +196,44 @@ export default function Services() {
                                           key={c}
                                           className={cn(cur === c && "active")}
                                           onClick={() => setCur(c)}
-                                          data-cursor={c}
                                         >
                                           {c} {currencies[c].symbol}
                                         </button>
                                       ))}
                                     </div>
                                     <div className="svc-tiers2">
-                                      {s.tiers.map((t) => (
-                                        <div className="svc-tier" key={t.label}>
-                                          <span className="svc-tier-label">{t.label}</span>
-                                          <span className="svc-tier-price">
-                                            {formatPrice(t.bdt, cur)}
-                                          </span>
-                                        </div>
-                                      ))}
+                                      {s.tiers.map((t) => {
+                                        const isAdded = added.has(t.id);
+                                        return (
+                                          <div className="svc-tier" key={t.id}>
+                                            <span className="svc-tier-label">{t.label}</span>
+                                            <span className="svc-tier-right">
+                                              <span className="svc-tier-price">
+                                                {formatPrice(t.bdt, cur)}
+                                              </span>
+                                              <button
+                                                className={cn("svc-add", isAdded && "added")}
+                                                onClick={() => handleAdd(t.id)}
+                                                disabled={busyId === t.id}
+                                                aria-label={
+                                                  isAdded
+                                                    ? `${t.label} added to cart`
+                                                    : `Add ${t.label} to cart`
+                                                }
+                                                title={isAdded ? "In your cart" : "Add to cart"}
+                                              >
+                                                {isAdded ? "✓" : "+"}
+                                              </button>
+                                            </span>
+                                          </div>
+                                        );
+                                      })}
                                     </div>
-                                    <Magnetic>
-                                      <a href="#contact" className="btn solid svc-cta" data-cursor="Start">
-                                        <span>{s.cta} →</span>
-                                      </a>
-                                    </Magnetic>
+                                    <p className="svc-cart-note">
+                                      Added plans land in your{" "}
+                                      <a href="/dashboard/">dashboard cart</a>, where you
+                                      can send {s.cta.toLowerCase().startsWith("book") ? "your booking" : "your request"}.
+                                    </p>
                                   </div>
                                 </motion.div>
                               )}
@@ -199,11 +263,26 @@ export default function Services() {
               SOPs, visa counseling and university selection, all in one place.
             </p>
           </div>
-          <a href="/StudyAbroadPage.html" className="btn solid" data-cursor="Explore">
+          <a href="/StudyAbroadPage.html" className="btn solid">
             <span>Explore Study Abroad →</span>
           </a>
         </div>
       </Reveal>
+
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            className={cn("cart-toast", toast.kind)}
+            initial={{ y: 24, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 24, opacity: 0 }}
+            transition={{ duration: 0.3, ease: easeOut }}
+            role="status"
+          >
+            {toast.msg}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

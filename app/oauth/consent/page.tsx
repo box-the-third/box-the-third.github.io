@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getSupabase } from "@/lib/supabase";
 import { site } from "@/content/site";
 
-const DASHBOARD = "/dashboard.html";
+const DASHBOARD = "/dashboard/";
 
 /**
  * OAuth return page. Google (via Supabase) redirects here after consent.

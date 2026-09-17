@@ -101,12 +101,6 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-@media (min-width: 1025px) {
-  body {
-    cursor: none;
-  }
-}
-
 a {
   color: inherit;
   text-decoration: none;
