@@ -1,3 +1,4 @@
+import type { Session } from "@supabase/supabase-js";
 import { getSupabase } from "@/lib/supabase";
 
 // Package ids a guest tried to add before signing in. Resolved on the
@@ -34,19 +35,22 @@ export interface AddResult {
   message: string;
 }
 
-/** Add a package (tier) to the cart = a row in Supabase `selections`. */
-export async function addToCart(packageId: string): Promise<AddResult> {
-  const supabase = getSupabase();
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
+/**
+ * Add a package (tier) to the cart = a row in Supabase `selections`.
+ * The caller passes the current session (from the auth context) so we never
+ * await `getSession()` here — that call can block on the auth lock.
+ */
+export async function addToCart(
+  packageId: string,
+  session: Session | null
+): Promise<AddResult> {
   if (!session) {
     addPending(packageId);
     window.dispatchEvent(new Event("cart:changed"));
     return { status: "needs-auth", message: "Create an account to save your cart." };
   }
 
+  const supabase = getSupabase();
   const { data: existing } = await supabase
     .from("selections")
     .select("id")
@@ -67,13 +71,9 @@ export async function addToCart(packageId: string): Promise<AddResult> {
 }
 
 /** Cart size for the nav badge (selections when signed in, else pending). */
-export async function cartCount(): Promise<number> {
-  const supabase = getSupabase();
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+export async function cartCount(session: Session | null): Promise<number> {
   if (!session) return readPending().length;
-  const { count } = await supabase
+  const { count } = await getSupabase()
     .from("selections")
     .select("id", { count: "exact", head: true })
     .eq("user_id", session.user.id);

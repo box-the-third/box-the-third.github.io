@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getSupabase } from "@/lib/supabase";
+import { useAuth } from "@/components/providers/AuthProvider";
 import { site } from "@/content/site";
 import { legalDocs, LegalDoc } from "@/content/legal";
 import LegalModal from "@/components/ui/LegalModal";
@@ -13,9 +14,10 @@ const DASHBOARD = "/dashboard/";
 const AGREED_KEY = "yas_legal_agreed";
 
 export default function LoginPage() {
+  const { user, loading } = useAuth();
   const [mode, setMode] = useState<Mode>("signin");
   const [status, setStatus] = useState<Status>({ kind: "idle", msg: "" });
-  const [checking, setChecking] = useState(true);
+  const checking = loading; // auth still resolving
   const [agreed, setAgreed] = useState(false);
   const [openDoc, setOpenDoc] = useState<LegalDoc | null>(null);
 
@@ -41,18 +43,8 @@ export default function LoginPage() {
 
   // Already signed in? Go straight to the dashboard.
   useEffect(() => {
-    let cancelled = false;
-    getSupabase()
-      .auth.getSession()
-      .then(({ data }) => {
-        if (cancelled) return;
-        if (data.session) window.location.href = DASHBOARD;
-        else setChecking(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+    if (user) window.location.href = DASHBOARD;
+  }, [user]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

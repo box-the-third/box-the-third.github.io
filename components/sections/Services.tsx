@@ -12,6 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { getSupabase } from "@/lib/supabase";
 import { addToCart } from "@/lib/cart";
+import { useAuth } from "@/components/providers/AuthProvider";
 import { Reveal, RevealText } from "@/components/ui/Reveal";
 import ServiceIcon from "@/components/ui/ServiceIcon";
 
@@ -25,6 +26,7 @@ export default function Services() {
   const [busyId, setBusyId] = useState<string | null>(null);
   const [toast, setToast] = useState<{ msg: string; kind: "ok" | "err" } | null>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { session } = useAuth();
 
   const toggle = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
@@ -33,26 +35,24 @@ export default function Services() {
 
   // Seed the "added" ticks from the visitor's existing cart (if signed in).
   useEffect(() => {
+    if (!session) {
+      setAdded(new Set());
+      return;
+    }
     let alive = true;
-    const load = async () => {
-      const supabase = getSupabase();
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      if (!session || !alive) return;
-      const { data } = await supabase
-        .from("selections")
-        .select("package_id")
-        .eq("user_id", session.user.id);
-      if (data && alive) {
-        setAdded(new Set(data.map((r) => r.package_id).filter(Boolean) as string[]));
-      }
-    };
-    load();
+    getSupabase()
+      .from("selections")
+      .select("package_id")
+      .eq("user_id", session.user.id)
+      .then(({ data }) => {
+        if (data && alive) {
+          setAdded(new Set(data.map((r) => r.package_id).filter(Boolean) as string[]));
+        }
+      });
     return () => {
       alive = false;
     };
-  }, []);
+  }, [session]);
 
   const showToast = (msg: string, kind: "ok" | "err" = "ok") => {
     setToast({ msg, kind });
@@ -63,7 +63,7 @@ export default function Services() {
   async function handleAdd(id: string) {
     if (busyId) return;
     setBusyId(id);
-    const res = await addToCart(id);
+    const res = await addToCart(id, session);
     setBusyId(null);
     if (res.status === "added" || res.status === "exists") {
       setAdded((prev) => new Set(prev).add(id));

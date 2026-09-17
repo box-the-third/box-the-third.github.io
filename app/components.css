@@ -2307,3 +2307,79 @@
   color: var(--ink);
   font-size: 0.95rem;
 }
+
+/* Signed-in indicator in the nav (replaces "Create account" when logged in) */
+.nav-account {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 16px 0 8px;
+  border-radius: 100px;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+.nav-account:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.nav-account-dot {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.nav-account-name {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .nav-account-name { display: none; }
+  .nav-account { padding: 0 6px; }
+}
+
+/* Dashboard "request sent" thank-you state */
+.dash-thankyou {
+  max-width: 760px;
+  text-align: center;
+  padding: 44px 32px;
+}
+.dash-thankyou-mark {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+.dash-thankyou h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.dash-thankyou p {
+  color: var(--muted);
+  max-width: 52ch;
+  margin: 0 auto 26px;
+  line-height: 1.7;
+}

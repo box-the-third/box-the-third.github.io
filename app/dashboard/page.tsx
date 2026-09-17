@@ -1,8 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { User } from "@supabase/supabase-js";
-import { getSupabase } from "@/lib/supabase";
+import { useAuth } from "@/components/providers/AuthProvider";
 import {
   getProfile,
   getSelections,
@@ -18,9 +17,10 @@ const WHATSAPP = "8801300984267";
 const FORMSPREE = "https://formspree.io/f/mjkarwza";
 
 export default function DashboardPage() {
-  const [checking, setChecking] = useState(true);
+  const { user, loading, signOut } = useAuth();
+
+  const [loadingCart, setLoadingCart] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
-  const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [cart, setCart] = useState<Selection[]>([]);
   const [removingId, setRemovingId] = useState<string | null>(null);
@@ -29,8 +29,7 @@ export default function DashboardPage() {
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState<{ kind: "ok" | "err" | ""; msg: string }>({ kind: "", msg: "" });
-  const [confirmed, setConfirmed] = useState(false);
-  const confirmRef = useRef<HTMLDivElement | null>(null);
+  const [sent, setSent] = useState<null | "email" | "whatsapp">(null);
   const touched = useRef(false); // stop clobbering the user's edits on cart refresh
 
   const firstName = profile?.full_name ? profile.full_name.split(" ")[0] : "";
@@ -66,39 +65,26 @@ export default function DashboardPage() {
     [cartLines]
   );
 
-  // Auth-gate + initial load. Wrapped so `checking` is ALWAYS cleared —
-  // a thrown query or a slow network can never leave the page spinning
-  // forever. A hard timeout is the final safety net.
+  // Gate: once auth has resolved, bounce anonymous visitors to sign in.
   useEffect(() => {
+    if (!loading && !user) window.location.href = "/login/";
+  }, [loading, user]);
+
+  // Load the profile + cart once we know who the user is.
+  useEffect(() => {
+    if (!user) return;
     let alive = true;
-
-    const safety = setTimeout(() => {
-      if (alive) setChecking(false);
-    }, 8000);
-
     (async () => {
       try {
-        const {
-          data: { session },
-        } = await getSupabase().auth.getSession();
-        if (!alive) return;
-        if (!session) {
-          window.location.href = "/login/";
-          return;
-        }
-        setUser(session.user);
-
-        // Load the profile and cart in parallel; a failure in one must not
-        // block the other, and pending items are resolved before the cart read.
         const [prof, list] = await Promise.all([
-          getProfile(session.user.id).catch(() => null),
+          getProfile(user.id).catch(() => null),
           (async () => {
             try {
-              await resolvePending(session.user.id);
+              await resolvePending(user.id);
             } catch {
-              /* ignore — resolving pre-login adds is best-effort */
+              /* best-effort */
             }
-            return getSelections(session.user.id).catch(() => []);
+            return getSelections(user.id).catch(() => []);
           })(),
         ]);
         if (!alive) return;
@@ -109,15 +95,13 @@ export default function DashboardPage() {
         console.error("[dashboard] load failed", e);
         if (alive) setLoadError("We couldn't load your dashboard. Please refresh and try again.");
       } finally {
-        if (alive) setChecking(false);
+        if (alive) setLoadingCart(false);
       }
     })();
-
     return () => {
       alive = false;
-      clearTimeout(safety);
     };
-  }, [buildTemplate]);
+  }, [user, buildTemplate]);
 
   async function reloadCart() {
     if (!user) return;
@@ -164,12 +148,8 @@ export default function DashboardPage() {
       if (!res.ok) throw new Error("send failed");
       await markRequestSent(user.id, fullMessage());
       setStatus({ kind: "", msg: "" });
-      setConfirmed(true);
+      setSent("email");
       await reloadCart();
-      setTimeout(
-        () => confirmRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }),
-        60
-      );
     } catch {
       setStatus({
         kind: "err",
@@ -182,21 +162,29 @@ export default function DashboardPage() {
 
   function sendWhatsApp() {
     if (!user) return;
+    if (!message.trim()) {
+      setStatus({ kind: "err", msg: "Please write a short message first." });
+      return;
+    }
     window.open(
       `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(fullMessage())}`,
       "_blank",
       "noopener"
     );
     markRequestSent(user.id, fullMessage());
-    setConfirmed(true);
+    setSent("whatsapp");
+    reloadCart();
   }
 
-  async function signOut() {
-    await getSupabase().auth.signOut();
-    window.location.href = "/";
+  function backToDashboard() {
+    setSent(null);
+    setStatus({ kind: "", msg: "" });
+    touched.current = false;
+    setMessage(buildTemplate(cart, profile?.full_name || ""));
   }
 
-  if (checking) {
+  // Auth still resolving, or the redirect for anonymous users is in flight.
+  if (loading || !user) {
     return (
       <section className="section" id="dashboard">
         <div className="container">
@@ -249,12 +237,12 @@ export default function DashboardPage() {
                 </div>
                 <div className="dash-profile-row">
                   <span className="dash-profile-k">Email</span>
-                  <span className="dash-profile-v">{user?.email}</span>
+                  <span className="dash-profile-v">{user.email}</span>
                 </div>
                 <div className="dash-profile-row">
                   <span className="dash-profile-k">Member since</span>
                   <span className="dash-profile-v">
-                    {user?.created_at
+                    {user.created_at
                       ? new Date(user.created_at).toLocaleDateString("en-US", {
                           month: "long",
                           year: "numeric",
@@ -271,7 +259,9 @@ export default function DashboardPage() {
               <div className="dash-card-label">
                 <span className="svc-step-n">02</span> Your cart
               </div>
-              {cart.length === 0 ? (
+              {loadingCart ? (
+                <div className="dash-empty">Loading your cart…</div>
+              ) : cart.length === 0 ? (
                 <div className="dash-empty">
                   Your cart is empty. <a href="/#services">Browse services</a> to add one.
                 </div>
@@ -310,70 +300,81 @@ export default function DashboardPage() {
 
         <Reveal delay={0.05}>
           <div className="dash-request">
-            {confirmed && (
-              <div className="dash-confirm" ref={confirmRef}>
-                <strong>Request received.</strong> Nahiyan will review it and get back to you
-                via email or WhatsApp within 24 hours. You can keep editing your cart any time.
+            {sent ? (
+              <div className="dash-card dash-thankyou">
+                <div className="dash-thankyou-mark" aria-hidden>
+                  ✓
+                </div>
+                <h3>Thank you{firstName ? `, ${firstName}` : ""}.</h3>
+                <p>
+                  {sent === "whatsapp"
+                    ? "Your request is ready in WhatsApp — hit send there and Nahiyan will get back to you."
+                    : "Your request is on its way."}{" "}
+                  Nahiyan reviews every request personally and replies over email or WhatsApp,
+                  usually within 24 hours.
+                </p>
+                <button className="btn solid" onClick={backToDashboard} data-cursor="Back">
+                  <span>← Back to your dashboard</span>
+                </button>
+              </div>
+            ) : (
+              <div className="dash-card dash-request-card">
+                <div className="dash-card-label">
+                  <span className="svc-step-n">03</span> Send your request
+                </div>
+                <p className="dash-hint">
+                  Tell Nahiyan what you need and why. He reviews every request personally and
+                  replies over email or WhatsApp.
+                </p>
+
+                <div className="field">
+                  <label htmlFor="req-profession">What are you applying for? (optional)</label>
+                  <input
+                    id="req-profession"
+                    value={profession}
+                    onChange={(e) => setProfession(e.target.value)}
+                    placeholder="e.g. Software Engineer role, Master's in the UK"
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="req-message">Your message</label>
+                  <textarea
+                    id="req-message"
+                    value={message}
+                    onChange={(e) => {
+                      touched.current = true;
+                      setMessage(e.target.value);
+                    }}
+                    placeholder="Add a service to your cart, then tell Nahiyan a bit about your goal."
+                    style={{ minHeight: 200 }}
+                  />
+                </div>
+
+                <div className="dash-req-actions">
+                  <button
+                    className="btn solid"
+                    onClick={sendRequest}
+                    disabled={sending}
+                    data-cursor="Send"
+                  >
+                    <span>{sending ? "Sending…" : "Send request →"}</span>
+                  </button>
+                  <button className="btn dash-wa" onClick={sendWhatsApp} data-cursor="WhatsApp">
+                    <span>Send on WhatsApp</span>
+                  </button>
+                  <button
+                    className="dash-reset"
+                    onClick={() => {
+                      touched.current = false;
+                      setMessage(buildTemplate(cart, profile?.full_name || ""));
+                    }}
+                  >
+                    Reset template
+                  </button>
+                </div>
+                {status.msg && <p className={`form-status ${status.kind}`}>{status.msg}</p>}
               </div>
             )}
-            <div className="dash-card dash-request-card">
-              <div className="dash-card-label">
-                <span className="svc-step-n">03</span> Send your request
-              </div>
-              <p className="dash-hint">
-                Tell Nahiyan what you need and why. He reviews every request personally and
-                replies over email or WhatsApp.
-              </p>
-
-              <div className="field">
-                <label htmlFor="req-profession">What are you applying for? (optional)</label>
-                <input
-                  id="req-profession"
-                  value={profession}
-                  onChange={(e) => setProfession(e.target.value)}
-                  placeholder="e.g. Software Engineer role, Master's in the UK"
-                />
-              </div>
-              <div className="field">
-                <label htmlFor="req-message">Your message</label>
-                <textarea
-                  id="req-message"
-                  value={message}
-                  onChange={(e) => {
-                    touched.current = true;
-                    setMessage(e.target.value);
-                  }}
-                  placeholder="Add a service to your cart, then tell Nahiyan a bit about your goal."
-                  style={{ minHeight: 200 }}
-                />
-              </div>
-
-              <div className="dash-req-actions">
-                <button
-                  className="btn solid"
-                  onClick={sendRequest}
-                  disabled={sending}
-                  data-cursor="Send"
-                >
-                  <span>{sending ? "Sending…" : "Send request →"}</span>
-                </button>
-                <button className="btn dash-wa" onClick={sendWhatsApp} data-cursor="WhatsApp">
-                  <span>Send on WhatsApp</span>
-                </button>
-                <button
-                  className="dash-reset"
-                  onClick={() => {
-                    touched.current = false;
-                    setMessage(buildTemplate(cart, profile?.full_name || ""));
-                  }}
-                >
-                  Reset template
-                </button>
-              </div>
-              {status.msg && (
-                <p className={`form-status ${status.kind}`}>{status.msg}</p>
-              )}
-            </div>
           </div>
         </Reveal>
       </div>
