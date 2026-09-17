@@ -16,8 +16,9 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
+  const [acctOpen, setAcctOpen] = useState(false);
   const [cart, setCart] = useState(0);
-  const { session, user } = useAuth();
+  const { session, user, signOut } = useAuth();
 
   // A short, friendly label + initial for the signed-in chip.
   const displayName =
@@ -57,6 +58,21 @@ export default function Navbar() {
     return () => window.removeEventListener("auth:open", openAuth);
   }, []);
 
+  // Close the account dropdown on outside click / Escape.
+  useEffect(() => {
+    if (!acctOpen) return;
+    const onDown = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest(".nav-account-wrap")) setAcctOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setAcctOpen(false);
+    window.addEventListener("mousedown", onDown);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("mousedown", onDown);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [acctOpen]);
+
   // Keep the cart badge in sync with the visitor's saved selections. Re-runs
   // whenever the session changes (login/logout) and on any cart:changed event.
   useEffect(() => {
@@ -82,12 +98,54 @@ export default function Navbar() {
               </Magnetic>
             ))}
             {user ? (
-              <Magnetic strength={0.25}>
-                <a href="/dashboard/" className="nav-account" data-cursor="Dashboard" title="Your dashboard">
+              <div className="nav-account-wrap">
+                <button
+                  className={cn("nav-account", acctOpen && "open")}
+                  onClick={() => setAcctOpen((v) => !v)}
+                  aria-haspopup="menu"
+                  aria-expanded={acctOpen}
+                  data-cursor="Account"
+                  title={firstName}
+                >
                   <span className="nav-account-dot">{initial}</span>
                   <span className="nav-account-name">{firstName}</span>
-                </a>
-              </Magnetic>
+                  <span className={cn("nav-account-caret", acctOpen && "up")} aria-hidden>
+                    ▾
+                  </span>
+                </button>
+                <AnimatePresence>
+                  {acctOpen && (
+                    <motion.div
+                      className="nav-account-menu"
+                      role="menu"
+                      initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <div className="nav-account-head">
+                        Signed in as
+                        <strong>{user.email}</strong>
+                      </div>
+                      <a href="/dashboard/" role="menuitem" onClick={() => setAcctOpen(false)}>
+                        Your dashboard
+                      </a>
+                      <button
+                        type="button"
+                        role="menuitem"
+                        className="nav-account-signout"
+                        onClick={() => {
+                          setAcctOpen(false);
+                          signOut();
+                        }}
+                        data-cursor="Out"
+                      >
+                        Sign out
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ) : (
               <button
                 className="nav-cta"
@@ -145,14 +203,27 @@ export default function Navbar() {
               </a>
             ))}
             {user ? (
-              <a
-                href="/dashboard/"
-                onClick={() => setOpen(false)}
-                style={{ color: "var(--accent)" }}
-              >
-                <span>→</span>
-                Your dashboard
-              </a>
+              <>
+                <a
+                  href="/dashboard/"
+                  onClick={() => setOpen(false)}
+                  style={{ color: "var(--accent)" }}
+                >
+                  <span>→</span>
+                  Your dashboard
+                </a>
+                <a
+                  href="#signout"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpen(false);
+                    signOut();
+                  }}
+                >
+                  <span>⎋</span>
+                  Sign out
+                </a>
+              </>
             ) : (
               <a
                 href={toHref("#account")}
