@@ -70,6 +70,17 @@ export const work: WorkItem[] = [
 
   // ── Websites I've built (live) ───────────────────────────────
   {
+    id: "web-acousticbakery",
+    kind: "web",
+    title: "Acoustic Bakery",
+    meta: "Bakery & Pâtisserie, Riyadh",
+    year: "2026",
+    featured: true,
+    tags: ["Web", "Brand"],
+    link: "https://box-the-third.github.io/acousticbakery/",
+    cover: "/assets/site_acousticbakery.jpg",
+  },
+  {
     id: "web-alhainai",
     kind: "web",
     title: "Alhain AI",
