@@ -14,6 +14,7 @@ import { addToCart } from "@/lib/cart";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { Reveal, RevealText } from "@/components/ui/Reveal";
 import ServiceIcon from "@/components/ui/ServiceIcon";
+import { sfxTransform, unlockAudio } from "@/lib/sfx";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -38,6 +39,8 @@ export default function Services() {
   const { session } = useAuth();
 
   const toggle = (id: string) => {
+    unlockAudio();
+    sfxTransform(openId === id ? "close" : "open");
     setOpenId((prev) => (prev === id ? null : id));
     setPricingId(null); // pricing always starts collapsed on a fresh open
   };
@@ -144,7 +147,15 @@ export default function Services() {
                         transition={{ duration: 0.45, ease: easeOut }}
                         style={{ overflow: "hidden" }}
                       >
-                        <div className="svc-body">
+                        <div
+                          className="svc-body"
+                          onMouseMove={(e) => {
+                            const r = e.currentTarget.getBoundingClientRect();
+                            e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
+                            e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
+                          }}
+                        >
+                          <span className="svc-glow" aria-hidden />
                           <p className="svc-blurb">{s.blurb}</p>
 
                           {STUDIO_AGENT[s.id] && (
@@ -153,7 +164,7 @@ export default function Services() {
                               href={`/studio/#${STUDIO_AGENT[s.id].hash}`}
                               title={`Open the ${STUDIO_AGENT[s.id].label} in Agent Studio`}
                             >
-                              <span aria-hidden>✦</span> Try the {STUDIO_AGENT[s.id].label}
+                              Try the {STUDIO_AGENT[s.id].label}
                               <span aria-hidden>→</span>
                             </a>
                           )}
