@@ -163,3 +163,6 @@ export function sfxTick() {
   const f = 900 + Math.random() * 220;
   play([{ f, to: f * 0.7, d: 0.035, type: "sine", v: 0.025 }]);
 }
+
+/** Soft footstep while Bhodbhar walks. */
+export const sfxFoot = () => play([{ f: 150, to: 70, d: 0.07, type: "sine", v: 0.045 }]);
