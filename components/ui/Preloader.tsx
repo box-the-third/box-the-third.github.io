@@ -8,6 +8,9 @@ import { site } from "@/content/site";
  * Full-screen intro: a counter races 0→100 while the word list cycles,
  * then the panel slides away to reveal the hero.
  */
+// The loading screen keeps the original Syne display face.
+const SYNE = 'var(--font-syne), "Syne", sans-serif';
+
 export default function Preloader() {
   const [count, setCount] = useState(0);
   const [done, setDone] = useState(false);
@@ -83,13 +86,14 @@ export default function Preloader() {
           >
             <span
               className="display"
-              style={{ fontSize: "clamp(1.1rem,3.4vw,2.4rem)", color: "var(--ink-dim)" }}
+              style={{ fontFamily: SYNE, fontSize: "clamp(1.1rem,3.4vw,2.4rem)", color: "var(--ink-dim)" }}
             >
               Loading experience
             </span>
             <span
               className="display"
               style={{
+                fontFamily: SYNE,
                 fontSize: "clamp(2.6rem,12vw,10rem)",
                 color: "var(--ink)",
                 lineHeight: 0.8,

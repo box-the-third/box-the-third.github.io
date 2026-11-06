@@ -11,8 +11,22 @@ const HeroCanvas = dynamic(() => import("@/components/three/HeroCanvas"), {
   ssr: false,
 });
 
+// "Hello" in eight languages; cross-fades every few seconds.
+const GREETINGS = [
+  { t: "Hello", lang: "en", dir: "ltr" },
+  { t: "Hallo", lang: "de", dir: "ltr" },
+  { t: "مرحبا", lang: "ar", dir: "rtl" },
+  { t: "Bonjour", lang: "fr", dir: "ltr" },
+  { t: "안녕하세요", lang: "ko", dir: "ltr" },
+  { t: "হ্যালো", lang: "bn", dir: "ltr" },
+  { t: "你好", lang: "zh", dir: "ltr" },
+  { t: "नमस्ते", lang: "hi", dir: "ltr" },
+] as const;
+
 export default function Hero() {
   const [wi, setWi] = useState(0);
+  const [gi, setGi] = useState(0);
+  const [gShow, setGShow] = useState(true);
   const [ready, setReady] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
 
@@ -22,6 +36,22 @@ export default function Hero() {
       2200
     );
     return () => clearInterval(id);
+  }, []);
+
+  // Fade the greeting out, swap the word, fade back in (CSS opacity transition).
+  useEffect(() => {
+    let swap: ReturnType<typeof setTimeout>;
+    const id = setInterval(() => {
+      setGShow(false);
+      swap = setTimeout(() => {
+        setGi((v) => (v + 1) % GREETINGS.length);
+        setGShow(true);
+      }, 450);
+    }, 2800);
+    return () => {
+      clearInterval(id);
+      clearTimeout(swap);
+    };
   }, []);
 
   // Track the theme so the WebGL hero can adapt (fog + hide the blob on light).
@@ -64,8 +94,15 @@ export default function Hero() {
       </div>
 
       <div className="hero-top">
-        <span>
-          <span className="dot">◍</span> Available for projects, 2026
+        <span className="hero-hello">
+          <span
+            className={"hello-word" + (gShow ? " show" : "")}
+            lang={GREETINGS[gi].lang}
+            dir={GREETINGS[gi].dir}
+            aria-live="off"
+          >
+            {GREETINGS[gi].t}
+          </span>
         </span>
       </div>
 

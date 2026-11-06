@@ -30,7 +30,7 @@
   --pad: clamp(20px, 5vw, 90px);
   --r: 14px;
 
-  --font-display: var(--font-syne), "Syne", sans-serif;
+  --font-display: var(--font-nimbus), "Nimbus Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-body: var(--font-outfit), "Outfit", system-ui, sans-serif;
   --font-mono: var(--font-mono-jb), "JetBrains Mono", monospace;
 }
@@ -243,6 +243,9 @@ body::after {
 .line-mask {
   overflow: hidden;
   display: block;
+  /* room for descenders (g, y, p) so the reveal mask never clips them */
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
 }
 
 /* ═══════════════════════════════════════════════════════════════

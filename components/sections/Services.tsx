@@ -6,7 +6,6 @@ import {
   services,
   currencies,
   formatPrice,
-  minTier,
   CurrencyCode,
 } from "@/content/services";
 import { cn } from "@/lib/utils";
@@ -17,6 +16,16 @@ import { Reveal, RevealText } from "@/components/ui/Reveal";
 import ServiceIcon from "@/components/ui/ServiceIcon";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
+
+// Which Studio agent supports each service (none for IELTS / Digital Literacy).
+const STUDIO_AGENT: Record<string, { hash: string; label: string }> = {
+  cv_writing: { hash: "cv", label: "CV Agent" },
+  sop_writing: { hash: "sop", label: "SOP Agent" },
+  partnership_outreach: { hash: "outreach", label: "Outreach Agent" },
+  portfolio_website: { hash: "handoff", label: "Design Handoff" },
+  digital_cards: { hash: "cards", label: "Photo Cards" },
+  content_strategy: { hash: "social", label: "Social Poster" },
+};
 
 export default function Services() {
   const [openId, setOpenId] = useState<string | null>(services[0].id);
@@ -119,9 +128,6 @@ export default function Services() {
                       </span>
                       <span className="svc-teaser">{s.teaser}</span>
                     </span>
-                    <span className="svc-from">
-                      from {formatPrice(minTier(s.tiers), cur)}
-                    </span>
                     <span className="svc-toggle" aria-hidden>
                       <span />
                       <span />
@@ -139,11 +145,18 @@ export default function Services() {
                         style={{ overflow: "hidden" }}
                       >
                         <div className="svc-body">
-                          <div className="svc-watermark" aria-hidden>
-                            <ServiceIcon name={s.icon} size={240} />
-                          </div>
-
                           <p className="svc-blurb">{s.blurb}</p>
+
+                          {STUDIO_AGENT[s.id] && (
+                            <a
+                              className="svc-agent-link"
+                              href={`/studio/#${STUDIO_AGENT[s.id].hash}`}
+                              title={`Open the ${STUDIO_AGENT[s.id].label} in Agent Studio`}
+                            >
+                              <span aria-hidden>✦</span> Try the {STUDIO_AGENT[s.id].label}
+                              <span aria-hidden>→</span>
+                            </a>
+                          )}
 
                           <div className="svc-cols">
                             <div className="svc-block">
