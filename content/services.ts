@@ -164,9 +164,10 @@ export const services: Service[] = [
       "This very site, and 10+ others in my work, are proof of the standard you get.",
     ],
     tiers: [
-      { id: "portfolio_website_basic", label: "Basic, 3 pages", bdt: 5000 },
-      { id: "portfolio_website_standard", label: "Standard, 5 pages + blog", bdt: 10000 },
-      { id: "portfolio_website_premium", label: "Premium, Full site + SEO + maintenance", bdt: 15000 },
+      // Priced in USD ($650 / $800 / $1,199) at the site's 122.4375 BDT rate.
+      { id: "portfolio_website_basic", label: "Basic, 3 pages", bdt: 79584 },
+      { id: "portfolio_website_standard", label: "Standard, 5 pages + blog", bdt: 97950 },
+      { id: "portfolio_website_premium", label: "Premium, Full site + SEO + unlimited revisions (lifetime service)", bdt: 146803 },
     ],
   },
   {
