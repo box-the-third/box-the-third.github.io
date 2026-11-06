@@ -1,0 +1,110 @@
+{
+  "name": "YAS Social Poster (approval-gated)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "yas-social",
+        "responseMode": "onReceived",
+        "options": { "allowedOrigins": "https://box-the-third.github.io,http://localhost:3000" }
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "yas-social"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [{ "value1": "={{ $json.body.approved }}", "value2": true }]
+        }
+      },
+      "name": "Human approved?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [420, 300]
+    },
+    {
+      "parameters": {
+        "amount": "={{ Math.max(0, (new Date($json.body.scheduleAt || Date.now()).getTime() - Date.now()) / 1000) }}",
+        "unit": "seconds"
+      },
+      "name": "Wait until scheduled time",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [640, 220]
+    },
+    {
+      "parameters": {
+        "jsCode": "const b = $input.first().json.body; return b.platforms.map(p => ({ json: { platform: p, text: b.variants[p], id: b.id } }));"
+      },
+      "name": "Split per platform",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [860, 220]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            { "conditions": { "conditions": [{ "leftValue": "={{ $json.platform }}", "rightValue": "linkedin", "operator": { "type": "string", "operation": "equals" } }] }, "renameOutput": true, "outputKey": "linkedin" },
+            { "conditions": { "conditions": [{ "leftValue": "={{ $json.platform }}", "rightValue": "x", "operator": { "type": "string", "operation": "equals" } }] }, "renameOutput": true, "outputKey": "x" },
+            { "conditions": { "conditions": [{ "leftValue": "={{ $json.platform }}", "rightValue": "facebook", "operator": { "type": "string", "operation": "equals" } }] }, "renameOutput": true, "outputKey": "facebook" },
+            { "conditions": { "conditions": [{ "leftValue": "={{ $json.platform }}", "rightValue": "instagram", "operator": { "type": "string", "operation": "equals" } }] }, "renameOutput": true, "outputKey": "instagram" }
+          ]
+        }
+      },
+      "name": "Route platform",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [1080, 220]
+    },
+    {
+      "parameters": { "person": "YOUR_LINKEDIN_PERSON_ID", "text": "={{ $json.text }}", "additionalFields": {} },
+      "name": "LinkedIn",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [1320, 100],
+      "notes": "Attach your LinkedIn OAuth2 credential inside n8n. Never export credentials into git."
+    },
+    {
+      "parameters": { "text": "={{ $json.text }}", "additionalFields": {} },
+      "name": "X (Twitter)",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [1320, 220],
+      "notes": "Attach your X OAuth2 credential inside n8n."
+    },
+    {
+      "parameters": { "node": "YOUR_FACEBOOK_PAGE_ID", "edge": "feed", "options": { "queryParameters": { "parameter": [{ "name": "message", "value": "={{ $json.text }}" }] } }, "httpRequestMethod": "POST" },
+      "name": "Facebook Page",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [1320, 340],
+      "notes": "Instagram posts via the Graph API need an image URL; add a media step or route to Buffer/Metricool free plans."
+    },
+    {
+      "parameters": { "respondWith": "text", "responseBody": "ignored: not approved" },
+      "name": "Reject unapproved",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [640, 420]
+    }
+  ],
+  "connections": {
+    "Webhook": { "main": [[{ "node": "Human approved?", "type": "main", "index": 0 }]] },
+    "Human approved?": { "main": [[{ "node": "Wait until scheduled time", "type": "main", "index": 0 }], [{ "node": "Reject unapproved", "type": "main", "index": 0 }]] },
+    "Wait until scheduled time": { "main": [[{ "node": "Split per platform", "type": "main", "index": 0 }]] },
+    "Split per platform": { "main": [[{ "node": "Route platform", "type": "main", "index": 0 }]] },
+    "Route platform": {
+      "main": [
+        [{ "node": "LinkedIn", "type": "main", "index": 0 }],
+        [{ "node": "X (Twitter)", "type": "main", "index": 0 }],
+        [{ "node": "Facebook Page", "type": "main", "index": 0 }],
+        []
+      ]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}

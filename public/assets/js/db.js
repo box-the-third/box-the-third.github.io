@@ -3,11 +3,13 @@
 //  Loaded on every page via: <script src="assets/js/db.js"></script>
 // ════════════════════════════════════════════════════════════════
 
-// 1) Fill these in from: Supabase Dashboard → Project Settings → API
-const SUPABASE_URL = 'https://fssauttfaolebmulqyuz.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzc2F1dHRmYW9sZWJtdWxxeXV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MTQ1NDIsImV4cCI6MjA5NzA5MDU0Mn0.FtUFC8bM5jOB6h_TXuF5G2UEmklWWYQo5KH8EPyCyOI';
+// Config is injected at build time into /assets/js/env.js (gitignored; see
+// scripts/gen-env.mjs). No keys are stored in this file.
+const __ENV = window.__YAS_ENV__ || {};
+const SUPABASE_URL = __ENV.SUPABASE_URL;
+const SUPABASE_ANON_KEY = __ENV.SUPABASE_ANON_KEY;
 
-const supabaseClient = window.supabase.createClient('https://fssauttfaolebmulqyuz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzc2F1dHRmYW9sZWJtdWxxeXV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MTQ1NDIsImV4cCI6MjA5NzA5MDU0Mn0.FtUFC8bM5jOB6h_TXuF5G2UEmklWWYQo5KH8EPyCyOI');
+const supabaseClient = window.supabase.createClient(SUPABASE_URL || 'http://supabase.invalid', SUPABASE_ANON_KEY || 'missing');
 
 // ──────────────────────────────────────────────
 // Auth helpers (used by the nav, modal, and dashboard)

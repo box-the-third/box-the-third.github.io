@@ -2,13 +2,15 @@
   "name": "nahiyan-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Personal portfolio of Nahiyan Ibn Ershad — marketing specialist, growth engineer & creator. Next.js + Three.js.",
+  "description": "Personal portfolio of Nahiyan Ibn Ershad â€” marketing specialist, growth engineer & creator. Next.js + Three.js.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "serve": "npx serve out"
+    "serve": "npx serve out",
+    "prebuild": "node scripts/gen-env.mjs",
+    "predev": "node scripts/gen-env.mjs"
   },
   "dependencies": {
     "@react-three/drei": "9.114.3",
@@ -17,12 +19,14 @@
     "framer-motion": "11.11.17",
     "lenis": "1.1.18",
     "next": "14.2.18",
+    "qrcode": "^1.5.4",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "three": "0.169.0"
   },
   "devDependencies": {
     "@types/node": "20.17.6",
+    "@types/qrcode": "^1.5.5",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
     "@types/three": "0.169.0",

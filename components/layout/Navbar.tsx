@@ -33,7 +33,7 @@ export default function Navbar() {
   // and then jump to the section, instead of doing nothing.
   const pathname = usePathname();
   const onHome = pathname === "/";
-  const toHref = (hash: string) => (onHome ? hash : `/${hash}`);
+  const toHref = (hash: string) => (hash.startsWith("/") ? hash : onHome ? hash : `/${hash}`);
 
   useEffect(() => {
     let last = 0;
