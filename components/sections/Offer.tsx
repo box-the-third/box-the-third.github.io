@@ -1,35 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import Magnetic from "@/components/ui/Magnetic";
+import BookingModal from "@/components/ui/BookingModal";
 
 export default function Offer() {
+  const [booking, setBooking] = useState(false);
   return (
     <section className="section offer-section" id="offer">
       <div className="container">
         <Reveal>
           <div className="offer">
             <div className="offer-glow" aria-hidden />
-            <div className="offer-badge">Right now, on registration</div>
 
             <div className="offer-body">
-              <div className="offer-headline">
-                <span className="offer-num">3</span>
-                <div>
-                  <div className="eyebrow" style={{ marginBottom: 14 }}>
-                    Free IELTS Classes
-                  </div>
-                  <h2 className="offer-title">
-                    Your first three classes are <em>completely free.</em>
-                  </h2>
-                </div>
-              </div>
-
-              <p className="offer-sub">
-                Register today and your first three IELTS classes cost nothing. Feel a real
-                improvement in your speaking and listening from day one. If it is not for
-                you, you can opt out any time, no questions asked.
-              </p>
+              <h2 className="offer-title offer-title-one">
+                Book your <em>FREE</em> IELTS session in 5 minutes and get a personalized plan
+              </h2>
+              <p className="offer-line">First 3 classes are completely free.</p>
 
               <div className="offer-cta">
                 <Magnetic>
@@ -38,9 +27,9 @@ export default function Offer() {
                   </a>
                 </Magnetic>
                 <Magnetic>
-                  <a href="#contact" className="btn" data-cursor="Book">
+                  <button type="button" className="btn" data-cursor="Book" onClick={() => setBooking(true)}>
                     <span>Book a session</span>
-                  </a>
+                  </button>
                 </Magnetic>
               </div>
 
@@ -53,6 +42,7 @@ export default function Offer() {
           </div>
         </Reveal>
       </div>
+      <BookingModal open={booking} onClose={() => setBooking(false)} />
     </section>
   );
 }

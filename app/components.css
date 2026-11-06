@@ -225,11 +225,11 @@
   color: var(--accent);
 }
 .hero-h1 {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2.4rem, 7.4vw, 7rem);
-  line-height: 0.92;
-  letter-spacing: -0.04em;
+  font-family: var(--font-nimbus), "Nimbus Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 7.2vw, 6.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
   text-transform: none;
 }
 .hero-h1 .rotate {
@@ -654,7 +654,7 @@
   border: none;
   text-align: left;
   display: grid;
-  grid-template-columns: auto auto 1fr auto auto;
+  grid-template-columns: auto auto 1fr auto;
   align-items: center;
   gap: clamp(14px, 2vw, 26px);
   padding: clamp(22px, 3vw, 30px) 4px;
@@ -758,14 +758,6 @@
   position: relative;
   overflow: hidden;
   padding: 2px 4px 40px 68px;
-}
-.svc-watermark {
-  position: absolute;
-  top: -34px;
-  right: -14px;
-  color: rgba(0, 178, 188, 0.07);
-  pointer-events: none;
-  z-index: 0;
 }
 .svc-blurb {
   position: relative;
@@ -2459,3 +2451,248 @@
 .nav-account-signout {
   color: #ff7a7a !important;
 }
+
+/* Small link from a service to its Agent Studio tool */
+.svc-agent-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 18px;
+  padding: 7px 14px;
+  border-radius: 99px;
+  font: 500 12px var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  position: relative;
+  z-index: 1;
+}
+.svc-agent-link:hover {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  transform: translateY(-1px);
+}
+.svc-agent-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Services accordion: black & white glass.
+   Transparent panels, frosted blur, no teal. Same glass recipe as
+   the dashboard / Studio (see app/dashboard/glass.css).
+   ═══════════════════════════════════════════════════════════════ */
+.svc-list {
+  --accent: var(--ink); /* monochrome: every accent becomes plain ink */
+  --on-accent: var(--bg);
+  --glass-bg: transparent;
+  --glass-bg-hover: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-hi: rgba(255, 255, 255, 0.22);
+  --glass-shadow: 0 20px 50px -22px rgba(0, 0, 0, 0.6);
+  border-top: 0;
+  display: grid;
+  gap: 14px;
+}
+:root[data-theme="light"] .svc-list {
+  --glass-bg: transparent;
+  --glass-bg-hover: rgba(10, 22, 40, 0.03);
+  --glass-border: rgba(10, 22, 40, 0.18);
+  --glass-hi: rgba(255, 255, 255, 0.9);
+  --glass-shadow: 0 20px 50px -26px rgba(10, 22, 40, 0.3);
+}
+.svc-list .svc-panel {
+  position: relative;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  padding: 0 clamp(14px, 2vw, 24px);
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-hi);
+  transition: background 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+.svc-list .svc-panel:hover,
+.svc-list .svc-panel.open {
+  background: var(--glass-bg-hover);
+  border-color: var(--line-strong);
+}
+.svc-list .svc-panel.featured {
+  border-color: var(--line-strong);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .svc-list .svc-panel { background: var(--bg-2); }
+}
+.svc-list .svc-icon { border-color: var(--glass-border); color: var(--ink); }
+.svc-list .svc-panel.open .svc-icon,
+.svc-list .svc-panel-head:hover .svc-icon {
+  background: var(--glass-bg-hover);
+  border-color: var(--ink);
+}
+.svc-list .svc-badge { background: var(--ink); color: var(--bg); }
+.svc-list .svc-step-n { border-color: var(--line-strong); color: var(--ink); }
+.svc-list .svc-block-label,
+.svc-list .svc-steps li::before { color: var(--ink); }
+.svc-list .svc-why li::before { background: var(--ink); }
+.svc-list .svc-price-btn { border-color: var(--glass-border); background: var(--glass-bg); }
+.svc-list .svc-cur { border-color: var(--glass-border); }
+.svc-list .svc-cur button.active { background: var(--ink); color: var(--bg); }
+.svc-list .svc-tier {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--ink);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.svc-list .svc-tier-label { color: var(--ink-dim); }
+.svc-list .svc-tier-price { color: var(--ink); }
+.svc-list .svc-add { border-color: var(--line-strong); color: var(--ink); }
+.svc-list .svc-add:hover:not(:disabled),
+.svc-list .svc-add.added { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.svc-list .svc-cart-note a { color: var(--ink); }
+.svc-list .svc-agent-link {
+  color: var(--ink);
+  border-color: var(--glass-border);
+  background: var(--glass-bg);
+}
+.svc-list .svc-agent-link:hover { background: var(--glass-bg-hover); border-color: var(--ink); }
+@media (max-width: 640px) {
+  .svc-list .svc-body { padding-left: 4px; }
+}
+
+/* Free IELTS offer: single bold line */
+.offer-title-one {
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3.4vw, 2.9rem);
+  line-height: 1.1;
+  max-width: 24ch;
+}
+@media (min-width: 1100px) { .offer-title-one { max-width: none; } }
+.offer-line {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 1.8vw, 1.4rem);
+  color: var(--accent-2);
+  margin: 14px 0 28px;
+}
+
+/* Booking modal (glass) */
+.bk-backdrop { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 16px; background: rgba(5, 10, 20, 0.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); overflow-y: auto; }
+.bk-card { position: relative; width: min(460px, 100%); max-height: 94vh; overflow-y: auto; padding: 26px; border-radius: 24px; background: var(--bg-2); border: 1px solid var(--line-strong); box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.6); color: var(--ink); }
+.bk-card h3 { font: 700 1.35rem var(--font-display); margin: 0 0 16px; padding-right: 30px; }
+.bk-close { position: absolute; top: 14px; right: 16px; background: none; border: 0; color: var(--ink); font-size: 1.6rem; cursor: pointer; }
+.bk-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.bk-nav button { background: none; border: 1px solid var(--line); color: var(--ink); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; }
+.bk-nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+.bk-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.bk-dow { font: 500 0.7rem var(--font-mono); color: var(--muted); text-align: center; padding: 4px 0; }
+.bk-grid button, .bk-times button { background: none; border: 1px solid transparent; color: var(--ink); padding: 8px 0; border-radius: 10px; cursor: pointer; font: 500 0.88rem var(--font-body); }
+.bk-grid button:hover:not(:disabled), .bk-times button:hover { border-color: var(--line-strong); }
+.bk-grid button:disabled { opacity: 0.25; cursor: not-allowed; }
+.bk-grid button.on, .bk-times button.on { background: var(--accent); color: var(--on-accent); }
+.bk-times { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; align-items: center; }
+.bk-times button { border-color: var(--line); padding: 8px 12px; }
+.bk-times small { flex-basis: 100%; color: var(--muted); font-size: 0.75rem; }
+.bk-fields { display: grid; gap: 8px; margin: 16px 0 12px; }
+.bk-fields input { width: 100%; padding: 11px 14px; border-radius: 12px; background: transparent; border: 1px solid var(--line-strong); color: var(--ink); font: 400 0.95rem var(--font-body); }
+.bk-fields input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.bk-submit { width: 100%; justify-content: center; }
+.bk-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.bk-err { color: #f87171; font-size: 0.85rem; }
+.bk-done p { color: var(--ink-dim); margin-bottom: 18px; }
+.bk-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* Keep descenders (g, y, p) from being clipped by the hero line mask */
+.hero-h1 .line-mask { padding-bottom: 0.16em; margin-bottom: -0.16em; }
+
+/* Multilingual "Hello" in the hero kicker */
+.hero-hello { display: inline-flex; align-items: center; gap: 10px; }
+.hero-hello .hello-word {
+  display: inline-block;
+  min-width: 9ch;
+  font-family: var(--font-nimbus), "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3.6vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: 0; /* tracking breaks Arabic/Indic joining */
+  text-transform: none;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+}
+.hero-hello .hello-word.show { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .hero-hello .hello-word { transition: none; } }
+
+/* ═══════════════════════════════════════════════════════════════
+   Services accordion: LIGHT. White panels with black accents,
+   black text, regular (non-bold) weight. Same in dark and light site
+   themes. Overrides the earlier glass block above.
+   ═══════════════════════════════════════════════════════════════ */
+:root .svc-list,
+:root[data-theme="light"] .svc-list {
+  --ink: #0b0b0b;
+  --ink-dim: #2b2b2b;
+  --muted: #5a5a5a;
+  --line: rgba(0, 0, 0, 0.12);
+  --line-strong: rgba(0, 0, 0, 0.28);
+  --accent: #0b0b0b;
+  --on-accent: #ffffff;
+  --glass-bg: #ffffff;
+  --glass-bg-hover: #ffffff;
+  --glass-border: rgba(0, 0, 0, 0.28);
+  --glass-hi: rgba(255, 255, 255, 0);
+  --glass-shadow: 0 14px 36px -22px rgba(0, 0, 0, 0.25);
+  --bg: #ffffff;
+}
+.svc-list .svc-panel {
+  background: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  color: var(--ink);
+}
+.svc-list .svc-panel:hover,
+.svc-list .svc-panel.open {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.5);
+}
+.svc-list .svc-icon { color: var(--accent); border-color: rgba(0, 0, 0, 0.35); background: #fff; }
+.svc-list .svc-panel.open .svc-icon,
+.svc-list .svc-panel-head:hover .svc-icon { background: rgba(0, 0, 0, 0.12); border-color: var(--accent); }
+.svc-list .svc-badge { background: var(--accent); color: #fff; font-weight: 400; }
+.svc-list .svc-step-n { color: var(--accent); border-color: rgba(0, 0, 0, 0.45); }
+.svc-list .svc-block-label,
+.svc-list .svc-steps li::before { color: var(--accent); }
+.svc-list .svc-why li::before { background: var(--accent); }
+.svc-list .svc-price-btn { background: #fff; border-color: rgba(0, 0, 0, 0.4); color: var(--ink); }
+.svc-list .svc-price-btn:hover, .svc-list .svc-price-btn.active { border-color: var(--accent); color: var(--accent); }
+.svc-list .svc-cur { border-color: rgba(0, 0, 0, 0.3); background: #fff; }
+.svc-list .svc-cur button { color: var(--ink-dim); }
+.svc-list .svc-cur button.active { background: var(--accent); color: #fff; }
+.svc-list .svc-tier { background: #fff; border-color: rgba(0, 0, 0, 0.25); color: var(--ink); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.svc-list .svc-tier-label { color: var(--ink-dim); }
+.svc-list .svc-tier-price { color: #0b0b0b; font-weight: 400; }
+.svc-list .svc-add { border-color: rgba(0, 0, 0, 0.5); color: var(--accent); background: transparent; }
+.svc-list .svc-add:hover:not(:disabled), .svc-list .svc-add.added { background: var(--accent); border-color: var(--accent); color: #fff; }
+.svc-list .svc-cart-note a { color: var(--accent); }
+.svc-list .svc-agent-link { color: var(--accent); background: #fff; border-color: rgba(0, 0, 0, 0.45); }
+.svc-list .svc-agent-link:hover { background: rgba(0, 0, 0, 0.12); border-color: var(--accent); }
+.svc-list .svc-panel-head:hover .svc-verb,
+.svc-list .svc-panel.open .svc-verb { color: var(--ink); }
+.svc-list .svc-panel-head:hover .svc-index,
+.svc-list .svc-panel.open .svc-index,
+.svc-list .svc-panel.open .svc-toggle { color: var(--accent); }
+
+/* Regular weight throughout (Nimbus Sans Regular), no bold */
+.svc-list .svc-verb,
+.svc-list .svc-blurb,
+.svc-list .svc-from,
+.svc-list .svc-teaser,
+.svc-list .svc-block-label,
+.svc-list .svc-price-btn,
+.svc-list .svc-agent-link { font-weight: 400; }
+.svc-list .svc-verb { letter-spacing: -0.02em; }
