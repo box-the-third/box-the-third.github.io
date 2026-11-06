@@ -100,9 +100,9 @@ insert into public.packages (id, service_key, service_name, tier_key, tier_label
   ('digital_literacy_standard',     'digital_literacy',     'Digital Literacy',            'standard',      'Standard — 3 modules',                    1250,  'Train Your Team',        11),
   ('digital_literacy_comprehensive','digital_literacy',     'Digital Literacy',            'comprehensive', 'Comprehensive — Full curriculum',         2500,  'Train Your Team',        12),
 
-  ('portfolio_website_basic',       'portfolio_website',    'Portfolio Website',           'basic',         'Basic — 3 pages',                         5000,  'Build My Site',          13),
-  ('portfolio_website_standard',    'portfolio_website',    'Portfolio Website',           'standard',      'Standard — 5 pages + blog',               10000, 'Build My Site',          14),
-  ('portfolio_website_premium',     'portfolio_website',    'Portfolio Website',           'premium',       'Premium — Full site + SEO + maintenance', 15000, 'Build My Site',          15),
+  ('portfolio_website_basic',       'portfolio_website',    'Portfolio Website',           'basic',         'Basic — 3 pages',                         79584,  'Build My Site',          13),
+  ('portfolio_website_standard',    'portfolio_website',    'Portfolio Website',           'standard',      'Standard — 5 pages + blog',               97950,  'Build My Site',          14),
+  ('portfolio_website_premium',     'portfolio_website',    'Portfolio Website',           'premium',       'Premium — Full site + SEO + unlimited revisions (lifetime service)', 146803, 'Build My Site',          15),
 
   ('content_strategy_strategy',     'content_strategy',     'Content Strategy & Creation', 'strategy',      'Strategy — Roadmap only',                 3600,  'Grow My Brand',          16),
   ('content_strategy_production',   'content_strategy',     'Content Strategy & Creation', 'production',    'Production — 4 pieces/month',             7200,  'Grow My Brand',          17),

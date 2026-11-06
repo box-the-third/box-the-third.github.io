@@ -12,7 +12,7 @@ const OFFERS = [
   { id: "cv", name: "CV Standard", sar: 40, rate: 0.12 },
   { id: "sop", name: "SOP Standard", sar: 150, rate: 0.06 },
   { id: "out", name: "Outreach 50 leads", sar: 160, rate: 0.04 },
-  { id: "site", name: "Portfolio Website", sar: 320, rate: 0.03 },
+  { id: "site", name: "Portfolio Website", sar: 2438, rate: 0.03 },
   { id: "content", name: "Content Production", sar: 230, rate: 0.03 },
   { id: "retainer", name: "Growth Retainer", sar: 1500, rate: 0.01 },
 ];
