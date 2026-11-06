@@ -8,8 +8,7 @@ import { site } from "@/content/site";
  * Full-screen intro: a counter races 0→100 while the word list cycles,
  * then the panel slides away to reveal the hero.
  */
-// The loading screen keeps the original Syne display face.
-const SYNE = 'var(--font-syne), "Syne", sans-serif';
+const SYNE = "var(--font-display)";
 
 export default function Preloader() {
   const [count, setCount] = useState(0);

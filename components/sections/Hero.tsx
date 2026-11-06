@@ -11,7 +11,7 @@ const HeroCanvas = dynamic(() => import("@/components/three/HeroCanvas"), {
   ssr: false,
 });
 
-// "Hello" in eight languages; cross-fades every few seconds.
+// "Hello" in many languages; cross-fades every few seconds.
 const GREETINGS = [
   { t: "Hello", lang: "en", dir: "ltr" },
   { t: "Hallo", lang: "de", dir: "ltr" },
@@ -21,6 +21,20 @@ const GREETINGS = [
   { t: "হ্যালো", lang: "bn", dir: "ltr" },
   { t: "你好", lang: "zh", dir: "ltr" },
   { t: "नमस्ते", lang: "hi", dir: "ltr" },
+  { t: "Hola", lang: "es", dir: "ltr" },
+  { t: "Ciao", lang: "it", dir: "ltr" },
+  { t: "こんにちは", lang: "ja", dir: "ltr" },
+  { t: "Olá", lang: "pt", dir: "ltr" },
+  { t: "Привет", lang: "ru", dir: "ltr" },
+  { t: "Merhaba", lang: "tr", dir: "ltr" },
+  { t: "سلام", lang: "ur", dir: "rtl" },
+  { t: "Γειά σου", lang: "el", dir: "ltr" },
+  { t: "שלום", lang: "he", dir: "rtl" },
+  { t: "สวัสดี", lang: "th", dir: "ltr" },
+  { t: "வணக்கம்", lang: "ta", dir: "ltr" },
+  { t: "Jambo", lang: "sw", dir: "ltr" },
+  { t: "Halo", lang: "id", dir: "ltr" },
+  { t: "Xin chào", lang: "vi", dir: "ltr" },
 ] as const;
 
 export default function Hero() {
@@ -119,11 +133,12 @@ export default function Hero() {
             </motion.span>
           </span>
           <span className="line-mask">
-            <motion.span
-              style={{ display: "flex", gap: "0.3em", alignItems: "baseline", flexWrap: "wrap" }}
-              variants={line}
-            >
-              that convert with{" "}
+            <motion.span style={{ display: "block" }} variants={line}>
+              that convert with
+            </motion.span>
+          </span>
+          <span className="line-mask">
+            <motion.span style={{ display: "block" }} variants={line}>
               <span
                 className="rotate"
                 style={{ position: "relative", display: "inline-block", minWidth: "5ch" }}

@@ -225,11 +225,11 @@
   color: var(--accent);
 }
 .hero-h1 {
-  font-family: var(--font-nimbus), "Nimbus Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--font-unbounded), "Unbounded", "Helvetica Neue", Arial, sans-serif;
   font-weight: 700;
-  font-size: clamp(2.4rem, 7.2vw, 6.8rem);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  font-size: clamp(2rem, 5.6vw, 5.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
   text-transform: none;
 }
 .hero-h1 .rotate {
@@ -2610,14 +2610,16 @@
 .hero-h1 .line-mask { padding-bottom: 0.16em; margin-bottom: -0.16em; }
 
 /* Multilingual "Hello" in the hero kicker */
-.hero-hello { display: inline-flex; align-items: center; gap: 10px; }
+.hero-top { justify-content: center; text-align: center; }
+.hero-hello { display: flex; width: 100%; align-items: center; justify-content: center; gap: 10px; min-height: 1.3em; font-size: clamp(2.6rem, 8vw, 6.5rem); }
 .hero-hello .hello-word {
-  display: inline-block;
-  min-width: 9ch;
-  font-family: var(--font-nimbus), "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-unbounded), "Unbounded", "Noto Sans", Arial, sans-serif;
   font-weight: 700;
-  font-size: clamp(1.8rem, 3.6vw, 3rem);
-  line-height: 1.1;
+  font-size: 1em;
+  line-height: 1.2;
   letter-spacing: 0; /* tracking breaks Arabic/Indic joining */
   text-transform: none;
   color: var(--ink);
