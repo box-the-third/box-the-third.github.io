@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Syne, Outfit, JetBrains_Mono } from "next/font/google";
-import localFont from "next/font/local";
+import { Unbounded, Outfit, JetBrains_Mono } from "next/font/google";
 import { site } from "@/content/site";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import AuthProvider from "@/components/providers/AuthProvider";
@@ -11,11 +10,11 @@ import Analytics from "@/components/Analytics";
 import "./globals.css";
 import "./components.css";
 
-// Syne is kept only for the loading screen.
-const syne = Syne({
+// Display face for hero, titles, logo and loader: wide, rounded Unbounded.
+const unbounded = Unbounded({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-syne",
+  weight: ["500", "700"],
+  variable: "--font-unbounded",
   display: "swap",
 });
 const outfit = Outfit({
@@ -23,17 +22,6 @@ const outfit = Outfit({
   weight: ["300", "400", "500", "600"],
   variable: "--font-outfit",
   display: "swap",
-});
-// Hero headline: URW Nimbus Sans (open-source Helvetica metric clone), self-hosted.
-// Source: github.com/ArtifexSoftware/urw-base35-fonts (AGPL + font exception, see app/fonts/URW-LICENSE.txt).
-const nimbus = localFont({
-  src: [
-    { path: "./fonts/NimbusSans-Regular.otf", weight: "400", style: "normal" },
-    { path: "./fonts/NimbusSans-Bold.otf", weight: "700", style: "normal" },
-  ],
-  variable: "--font-nimbus",
-  display: "swap",
-  fallback: ["Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
 });
 const jb = JetBrains_Mono({
   subsets: ["latin"],
@@ -145,7 +133,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${outfit.variable} ${jb.variable} ${nimbus.variable}`}
+      className={`${unbounded.variable} ${outfit.variable} ${jb.variable}`}
       suppressHydrationWarning
     >
       <body>

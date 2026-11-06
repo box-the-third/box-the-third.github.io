@@ -30,7 +30,7 @@
   --pad: clamp(20px, 5vw, 90px);
   --r: 14px;
 
-  --font-display: var(--font-nimbus), "Nimbus Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: var(--font-unbounded), "Unbounded", "Helvetica Neue", Arial, sans-serif;
   --font-body: var(--font-outfit), "Outfit", system-ui, sans-serif;
   --font-mono: var(--font-mono-jb), "JetBrains Mono", monospace;
 }
