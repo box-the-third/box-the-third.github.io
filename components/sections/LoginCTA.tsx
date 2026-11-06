@@ -66,7 +66,7 @@ export default function LoginCTA() {
                   <>You&rsquo;re signed in.</>
                 ) : (
                   <>
-                    Your project hub, <em>all in one place.</em>
+                    Your boring things, <em>organized neatly.</em>
                   </>
                 )}
               </h2>

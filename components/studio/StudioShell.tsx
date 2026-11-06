@@ -43,10 +43,20 @@ function Body({ view }: { view: View }) {
   }
 }
 
+// Soft light that follows the cursor over a card (consumed by studio.css via --mx/--my).
+const light = (e: React.MouseEvent<HTMLElement>) => {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
+  e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
+};
+const unlight = (e: React.MouseEvent<HTMLElement>) => {
+  e.currentTarget.style.setProperty("--mx", "-999px");
+};
+
 export default function StudioShell() {
   const { user, loading } = useAuth();
   const [view, setView] = useState<View>("cv");
-  const [game, setGame] = useState<GameState>(getGame());
+  const [game, setGame] = useState<GameState>({ xp: 0, streak: 0, lastDay: "", runs: {}, badges: [] }); // real value loaded in the effect below (avoids a hydration mismatch)
   const [toast, setToast] = useState("");
   const [online, setOnline] = useState(true);
   const [queued, setQueued] = useState(0);
@@ -103,7 +113,7 @@ export default function StudioShell() {
             <h1>Ten agents. One workspace.</h1>
             <p className="st-sub">{loading ? "…" : user ? "Everything you make syncs to your account." : "Guest mode: work is saved on this device. Sign in to sync across devices."}</p>
           </div>
-          <div className="glass-card st-xp" aria-label="progress">
+          <div className="glass-card st-xp" aria-label="progress" onMouseMove={light} onMouseLeave={unlight}>
             <div className="st-row"><b>Level {lvl}</b><span>{game.xp} XP</span><span>streak {game.streak}d</span></div>
             <div className="st-bar"><i style={{ width: `${Math.min(100, (game.xp / nxt) * 100)}%` }} /></div>
             <div className="st-badges">{game.badges.map((b) => <span key={b} className="st-chip">{BADGES[b].label}</span>)}</div>
@@ -118,8 +128,8 @@ export default function StudioShell() {
         )}
 
         <nav className="st-grid" aria-label="Agents">
-          {AGENTS.map((a) => (
-            <button key={a.id} className={`glass-card st-agent tone-${a.tone} ${view === a.id ? "on" : ""}`} onClick={() => go(a.id)} aria-pressed={view === a.id}>
+          {AGENTS.map((a, i) => (
+            <button key={a.id} className={`glass-card st-agent tone-${a.tone} ${view === a.id ? "on" : ""}`} onClick={() => go(a.id)} aria-pressed={view === a.id} onMouseMove={light} onMouseLeave={unlight} style={{ "--i": i } as React.CSSProperties}>
               <span className="st-ico"><Icon d={a.icon} /></span>
               <b>{a.name}</b>
               <small>{a.tagline}</small>
@@ -132,7 +142,7 @@ export default function StudioShell() {
           <button className={`st-btn ${view === "privacy" ? "" : "ghost"}`} onClick={() => go("privacy")}>Privacy and data</button>
         </div>
 
-        <motion.section key={view} className="glass-card st-panel" initial={{ opacity: 0.4, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22 }}>
+        <motion.section key={view} className="glass-card st-panel" onMouseMove={light} onMouseLeave={unlight} initial={{ opacity: 0.4, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22 }}>
           <h2>{cur?.name ?? (view === "plan" ? "Revenue planner" : "Privacy and data")}</h2>
           <Body view={view} />
           {cur && <FeedbackBox agent={cur.id} />}
