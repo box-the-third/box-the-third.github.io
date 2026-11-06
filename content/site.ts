@@ -24,6 +24,7 @@ export const site = {
 
   nav: [
     { label: "Work", href: "#work" },
+    { label: "Studio", href: "/studio/" },
     { label: "About", href: "#about" },
     { label: "Services", href: "#services" },
     { label: "Free IELTS", href: "#offer" },

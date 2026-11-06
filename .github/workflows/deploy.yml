@@ -37,6 +37,10 @@ jobs:
 
       - name: Build static export
         run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_N8N_WEBHOOK: ${{ vars.NEXT_PUBLIC_N8N_WEBHOOK }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

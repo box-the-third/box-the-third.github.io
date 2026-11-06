@@ -18,3 +18,12 @@ node_modules/
 out/
 next-env.d.ts
 *.tsbuildinfo
+
+# ── Secrets ──────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+public/assets/js/env.js
+supabase/.temp/
+supabase/functions/.env
+automation/n8n/credentials*.json
