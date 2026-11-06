@@ -4,6 +4,7 @@ import { site } from "@/content/site";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import AuthProvider from "@/components/providers/AuthProvider";
 import Preloader from "@/components/ui/Preloader";
+import Guide from "@/components/ui/Guide";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Analytics from "@/components/Analytics";
@@ -144,6 +145,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Analytics />
         <Preloader />
+        <Guide />
         <AuthProvider>
           <SmoothScroll>
             <Navbar />
