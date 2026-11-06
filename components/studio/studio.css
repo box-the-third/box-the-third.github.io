@@ -98,3 +98,125 @@
   #cv-paper { position: absolute; left: 0; top: 0; box-shadow: none; zoom: 1 !important; }
   @page { size: A4; margin: 0; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Studio: black & white, interactive (matches the services accordion)
+   White cards, black text and accents, regular weight, cursor light,
+   pan-in on load, hover focus. Selected agent flips to black.
+   ═══════════════════════════════════════════════════════════════ */
+.studio .glass-card,
+.studio .st-tabs {
+  --ink: #0b0b0b;
+  --ink-dim: #2b2b2b;
+  --muted: #5a5a5a;
+  --line: rgba(0, 0, 0, 0.12);
+  --line-strong: rgba(0, 0, 0, 0.28);
+  --accent: #0b0b0b;
+  --accent-2: #0b0b0b;
+  --on-accent: #ffffff;
+  --glass-bg: #ffffff;
+  --glass-bg-hover: #ffffff;
+  --glass-border: rgba(0, 0, 0, 0.28);
+  --glass-hi: rgba(255, 255, 255, 0);
+  --mx: -999px;
+  --my: -999px;
+}
+.studio .glass-card,
+.studio .glass-card:hover {
+  background:
+    radial-gradient(260px circle at var(--mx) var(--my), rgba(0, 0, 0, 0.085), rgba(0, 0, 0, 0.025) 45%, transparent 72%),
+    #ffffff;
+  border-color: rgba(0, 0, 0, 0.28);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 14px 36px -22px rgba(0, 0, 0, 0.35);
+  color: var(--ink);
+}
+.studio .glass-card:hover { border-color: rgba(0, 0, 0, 0.55); }
+
+/* agent cards */
+.studio .st-agent { transition: transform 0.35s var(--ease), border-color 0.3s, background-color 0.3s, box-shadow 0.35s var(--ease); }
+.studio .st-agent b { font-weight: 400; letter-spacing: -0.01em; transition: transform 0.35s var(--ease), letter-spacing 0.35s var(--ease); }
+.studio .st-agent small { transition: transform 0.35s var(--ease) 0.03s; }
+.studio .st-agent:hover { transform: translateY(-4px) scale(1.015); box-shadow: 0 22px 44px -24px rgba(0, 0, 0, 0.55); }
+.studio .st-agent:hover b { transform: translateX(4px); letter-spacing: 0; }
+.studio .st-agent:hover small { transform: translateX(4px); }
+.studio .st-ico,
+.studio .st-agent.tone-amber .st-ico,
+.studio .st-agent.tone-violet .st-ico,
+.studio .st-agent.tone-emerald .st-ico {
+  color: #0b0b0b;
+  background: rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s var(--ease), background 0.3s, color 0.3s;
+}
+.studio .st-agent:hover .st-ico { transform: rotate(-8deg) scale(1.1); background: #0b0b0b; color: #fff; }
+.studio .st-agent em { color: var(--muted); }
+
+/* selected agent: inverted */
+.studio .st-agent.on,
+.studio .st-agent.on:hover {
+  --ink: #fff;
+  --ink-dim: rgba(255, 255, 255, 0.78);
+  --muted: rgba(255, 255, 255, 0.62);
+  --accent: #fff;
+  background:
+    radial-gradient(260px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04) 45%, transparent 72%),
+    #0b0b0b;
+  border-color: #fff;
+  box-shadow: 0 0 0 1px #fff, 0 18px 40px -20px rgba(0, 0, 0, 0.7);
+}
+.studio .st-agent.on .st-ico,
+.studio .st-agent.on:hover .st-ico { background: rgba(255, 255, 255, 0.16); color: #fff; }
+
+/* XP card + progress bar */
+.studio .st-bar i { background: #0b0b0b; }
+.studio .st-xp b { font-weight: 500; }
+
+/* tab buttons sit on the page, so give them their own white/black look */
+.studio .st-tabs .st-btn { background: #0b0b0b; color: #fff; border-color: #fff; font-weight: 500; }
+.studio .st-tabs .st-btn.ghost { background: #fff; color: #0b0b0b; border-color: rgba(0, 0, 0, 0.28); }
+.studio .st-tabs .st-btn:hover:not(:disabled) { transform: translateY(-2px) scale(1.04); }
+
+/* buttons inside cards */
+.studio .glass-card .st-btn { font-weight: 500; transition: transform 0.3s var(--ease), background 0.25s, border-color 0.25s; }
+.studio .glass-card .st-btn:hover:not(:disabled) { transform: translateY(-2px) scale(1.04); }
+.studio .glass-card .st-btn.ghost:hover:not(:disabled) { background: rgba(0, 0, 0, 0.08); border-color: #0b0b0b; }
+.studio .st-chip { background: #fff; }
+.studio input:focus, .studio textarea:focus, .studio select:focus { outline-color: #0b0b0b; }
+.studio input, .studio textarea, .studio select { transition: border-color 0.25s, box-shadow 0.25s; }
+.studio input:hover, .studio textarea:hover, .studio select:hover { border-color: #0b0b0b; }
+
+/* panel: regular weight + pan-in when an agent opens */
+.studio .st-panel h2 { font-weight: 400; letter-spacing: -0.02em; }
+@keyframes st-pan-l { from { opacity: 0; transform: translateX(-30px); filter: blur(5px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes st-pan-r { from { opacity: 0; transform: translateX(30px); filter: blur(5px); } to { opacity: 1; transform: none; filter: blur(0); } }
+/* backwards fill only, so hover transforms keep working afterwards */
+.studio .st-panel h2 { animation: st-pan-l 0.6s var(--ease) 0.05s backwards; }
+.studio .st-split > :first-child,
+.studio .st-cv > :first-child { animation: st-pan-l 0.65s var(--ease) 0.15s backwards; }
+.studio .st-split > :last-child,
+.studio .st-cv > :last-child { animation: st-pan-r 0.65s var(--ease) 0.25s backwards; }
+.studio .st-form > *,
+.studio .st-cv-ed > * { animation: st-pan-l 0.55s var(--ease) backwards; }
+.studio .st-form > *:nth-child(1), .studio .st-cv-ed > *:nth-child(1) { animation-delay: 0.2s; }
+.studio .st-form > *:nth-child(2), .studio .st-cv-ed > *:nth-child(2) { animation-delay: 0.27s; }
+.studio .st-form > *:nth-child(3), .studio .st-cv-ed > *:nth-child(3) { animation-delay: 0.34s; }
+.studio .st-form > *:nth-child(4), .studio .st-cv-ed > *:nth-child(4) { animation-delay: 0.41s; }
+.studio .st-form > *:nth-child(n + 5), .studio .st-cv-ed > *:nth-child(n + 5) { animation-delay: 0.48s; }
+/* agent grid cascades in on first load */
+.studio .st-agent { animation: st-pan-l 0.6s var(--ease) calc(var(--i, 0) * 55ms) backwards; }
+
+/* hover focus on rows and fields */
+.studio .st-li, .studio .st-slotrow, .studio .st-post, .studio .st-steps li { transition: transform 0.3s var(--ease), opacity 0.3s, border-color 0.3s; }
+.studio .st-li:hover, .studio .st-slotrow:hover, .studio .st-post:hover { transform: translateX(6px); border-color: #0b0b0b; }
+.studio .st-steps:hover li:not(:hover) { opacity: 0.45; }
+.studio .st-steps li:hover { transform: translateX(6px); }
+.studio .st-field > span { transition: letter-spacing 0.3s var(--ease), color 0.3s; }
+.studio .st-field:hover > span, .studio .st-field:focus-within > span { letter-spacing: 0.1em; color: #0b0b0b; }
+.studio .st-h { transition: letter-spacing 0.3s var(--ease); }
+.studio .st-h:hover { letter-spacing: 0.16em; }
+
+.studio .st-toast { background: #fff; color: #0b0b0b; border: 1px solid #0b0b0b; }
+@media (prefers-reduced-motion: reduce) {
+  .studio * { animation: none !important; }
+}
