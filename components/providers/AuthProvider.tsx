@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { Session, User } from "@supabase/supabase-js";
 import { getSupabase } from "@/lib/supabase";
+import { setGuest } from "@/lib/guest";
 
 interface AuthState {
   session: Session | null;
@@ -51,6 +52,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   }, []);
 
   const signOut = async () => {
+    setGuest(false); // signing out lands on the welcome gate again
     try {
       await getSupabase().auth.signOut();
     } catch {

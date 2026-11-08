@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { isMuted, quietFor, setMuted, sfxClick, sfxDone, sfxFoot, sfxPip, sfxStep, sfxTick, unlockAudio } from "@/lib/sfx";
 import PipFace from "@/components/ui/PipFace";
+import { signInWithGoogle } from "@/lib/oauth";
 
 // WebGL is client-only; the 2D face is the fallback if WebGL is unavailable.
 const Bhodbhar3D = dynamic(() => import("@/components/three/Bhodbhar3D"), { ssr: false });
@@ -101,6 +102,17 @@ export default function Guide() {
   const pathname = usePathname();
   const [ready, setReady] = useState(false);
   const [open, setOpen] = useState(false); // speech bubble (idle / section tour)
+  const [nudge, setNudge] = useState(false); // guest reached for a member feature
+  // alive: runs with the scroll, hangs off the navbar, wanders off when idle
+  const [scrolling, setScrolling] = useState(false);
+  const [look, setLook] = useState(0); // head pitch: -1 up, 1 down
+  const [gaze, setGaze] = useState(0); // head yaw while hanging
+  const [hang, setHang] = useState(false);
+  const [air, setAir] = useState(false);
+  const [hopKey, setHopKey] = useState(0);
+  const life = useRef({ state: "idle" as "idle" | "jump" | "hang" | "away", lastAct: 0, lastHang: 0, awaySince: 0 });
+  const lifeTimers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const live = useRef<{ [k: string]: any }>({}); // latest render's values for long-lived listeners
   const [step, setStep] = useState(0);
   const [seen, setSeen] = useState(true);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -166,8 +178,7 @@ export default function Guide() {
   useEffect(() => {
     const already = readSeen();
     setSeen(already);
-    const show = () => {
-      setReady(true);
+    const greet = () => {
       if (greeted.current || window.location.pathname !== "/") return;
       greeted.current = true;
       timer.current = setTimeout(() => {
@@ -175,19 +186,42 @@ export default function Guide() {
         if (already) autoClose.current = setTimeout(() => setOpen(false), 8000);
       }, 900);
     };
+    const show = () => {
+      setReady(true);
+      // The welcome gate (sign in / continue without email) comes first; greet after it.
+      if (document.documentElement.hasAttribute("data-gate")) {
+        window.addEventListener("gate:done", greet, { once: true });
+      } else greet();
+    };
     window.addEventListener("preloader:done", show, { once: true });
     const safety = setTimeout(show, 14000);
     return () => {
       window.removeEventListener("preloader:done", show);
+      window.removeEventListener("gate:done", greet);
       clearTimeout(safety);
       if (timer.current) clearTimeout(timer.current);
       if (autoClose.current) clearTimeout(autoClose.current);
     };
   }, []);
 
+  // A guest reached for a member feature: ask them to sign in.
+  useEffect(() => {
+    const onNudge = () => {
+      if (mode === "nav") return;
+      keepOpen();
+      sfxPip();
+      setOpen(false);
+      setNudge(true);
+    };
+    window.addEventListener("guide:signin", onNudge);
+    return () => window.removeEventListener("guide:signin", onNudge);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode]);
+
   // Moving to another page closes any open bubble / tour.
   useEffect(() => {
     setOpen(false);
+    setNudge(false);
     setStep(0);
     endNav(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -372,6 +406,155 @@ export default function Guide() {
     setOpen(true);
   };
 
+  // ---- alive: hop onto the navbar, wander off, run with the scroll
+  const clearLife = () => {
+    lifeTimers.current.forEach(clearTimeout);
+    lifeTimers.current = [];
+  };
+  const later = (fn: () => void, ms: number) => {
+    lifeTimers.current.push(setTimeout(fn, ms));
+  };
+  // a jump: straight-line travel (CSS transition) plus an arc (CSS animation)
+  const hopTo = (target: { x: number; y: number }, d: number, after?: () => void) => {
+    if (walkTimer.current) clearTimeout(walkTimer.current);
+    curPos.current = target;
+    setDur(d);
+    setHopKey((k) => k + 1);
+    setAir(true);
+    setPos(target);
+    sfxStep();
+    walkTimer.current = setTimeout(() => {
+      setAir(false);
+      after?.();
+    }, d * 1000 + 40);
+  };
+  const dropHang = () => {
+    clearLife();
+    setHang(false);
+    setGaze(0);
+    setLook(0);
+    const spot = live.current.idle;
+    if (!spot) return;
+    life.current.state = "jump";
+    hopTo(spot, 0.7, () => {
+      setPos(null);
+      life.current.state = "idle";
+    });
+  };
+  const startHang = (el: HTMLElement) => {
+    const L = live.current;
+    const nav = document.querySelector("header.nav");
+    if (!nav || !L.idle) return;
+    const nb = nav.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const cx = r.left + r.width / 2;
+    const side = cx > vw / 2 ? -1 : 1; // hang beside the button, toward the screen centre
+    const x = clamp(cx + side * (r.width / 2 + L.size.w * 0.45) - L.size.w / 2, 8, vw - L.size.w - 8);
+    const y = Math.min(nb.bottom, r.bottom + 10) - 0.403 * L.size.h; // hands land just under the button's edge
+    life.current.state = "jump";
+    life.current.lastHang = Date.now();
+    hopTo({ x, y }, 0.65, () => {
+      life.current.state = "hang";
+      setHang(true);
+      setGaze(-side); // peek at the button...
+      setLook(-0.7);
+      later(() => {
+        setGaze(0); // ...then at the user
+        setLook(0.2);
+      }, 3200);
+      later(dropHang, 6400);
+    });
+  };
+  const goAway = () => {
+    const L = live.current;
+    if (!L.idle) return;
+    life.current.state = "away";
+    life.current.awaySince = Date.now();
+    walkTo({ x: window.innerWidth + 40, y: L.idle.y });
+    later(comeBack, 14000);
+  };
+  function comeBack() {
+    if (life.current.state !== "away") return;
+    clearLife();
+    const spot = live.current.idle;
+    if (!spot) return;
+    walkTo(spot, () => {
+      setPos(null);
+      life.current.state = "idle";
+    });
+    life.current.state = "jump"; // busy until he is home
+  }
+
+  live.current = { idle, size, dropHang, startHang, goAway, comeBack, busy: open || nudge || mode !== "none", atRest: pos === null };
+
+  useEffect(() => {
+    if (!ready) return;
+    const reducedMotion = () => reduced.current;
+    life.current.lastAct = Date.now();
+    const act = () => {
+      life.current.lastAct = Date.now();
+      if (life.current.state === "away" && Date.now() - life.current.awaySince > 6000) live.current.comeBack();
+    };
+    let lastY = window.scrollY;
+    let calm: ReturnType<typeof setTimeout> | null = null;
+    const onScroll = () => {
+      act();
+      const y = window.scrollY;
+      const d = y - lastY;
+      lastY = y;
+      const L = live.current;
+      if (reducedMotion()) return;
+      if (life.current.state === "hang") L.dropHang();
+      if (life.current.state !== "idle" || L.busy || !L.atRest) return;
+      setScrolling(true);
+      if (Math.abs(d) > 1) setLook(d > 0 ? 0.55 : -0.55);
+      if (calm) clearTimeout(calm);
+      calm = setTimeout(() => {
+        setScrolling(false);
+        setLook(0);
+      }, 180);
+    };
+    const onNav = (e: Event) => {
+      act();
+      if (reducedMotion()) return;
+      const el = (e.target as HTMLElement | null)?.closest?.("header.nav a, header.nav button") as HTMLElement | null;
+      const L = live.current;
+      if (!el || life.current.state !== "idle" || L.busy || !L.atRest) return;
+      if (Date.now() - life.current.lastHang < 15000) return;
+      if (document.querySelector("header.nav.hidden")) return;
+      L.startHang(el);
+    };
+    const idleTimer = setInterval(() => {
+      const L = live.current;
+      if (reducedMotion() || life.current.state !== "idle" || L.busy || !L.atRest) return;
+      if (Date.now() - life.current.lastAct > 25000) L.goAway();
+    }, 1000);
+    const evs = ["pointermove", "keydown", "wheel", "touchstart"] as const;
+    evs.forEach((n) => window.addEventListener(n, act, { passive: true }));
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("pointerover", onNav, { passive: true });
+    window.addEventListener("pointerdown", onNav, { passive: true });
+    return () => {
+      evs.forEach((n) => window.removeEventListener(n, act));
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("pointerover", onNav);
+      window.removeEventListener("pointerdown", onNav);
+      clearInterval(idleTimer);
+      if (calm) clearTimeout(calm);
+      clearLife();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready]);
+
+  // A bubble, nudge or tour takes priority: drop off the navbar / come back from wandering.
+  useEffect(() => {
+    if (!(open || nudge || mode !== "none")) return;
+    if (life.current.state === "hang") live.current.dropHang();
+    else if (life.current.state === "away") live.current.comeBack();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, nudge, mode]);
+
   if (!ready) return null;
 
   const home = pathname === "/";
@@ -388,7 +571,7 @@ export default function Guide() {
   const at = pos ?? idle;
   const touring = mode === "nav";
   const curItem = items[ni];
-  const talking = open || (touring && arrived);
+  const talking = open || nudge || (touring && arrived);
 
   // nav-tour bubble position (under the character, kept inside the viewport)
   const vw = typeof window === "undefined" ? 1200 : window.innerWidth;
@@ -431,7 +614,14 @@ export default function Guide() {
           onClick={() => {
             if (touring) return;
             unlockAudio();
-            if (open) {
+            if (life.current.state === "hang") {
+              dropHang();
+              return;
+            }
+            if (nudge) {
+              sfxPip();
+              setNudge(false);
+            } else if (open) {
               sfxPip();
               markSeen();
               setSeen(true);
@@ -448,20 +638,29 @@ export default function Guide() {
           aria-label={open ? "Close the guide" : "Ask Temu Bhodbhar for a tour"}
           title={touring ? "Temu Bhodbhar" : open ? "Close" : "Hi! I'm Temu Bhodbhar. Click me for a tour"}
         >
-          {use3d ? (
-            <Bhodbhar3D
-              width={size.w}
-              height={size.h}
-              walking={walking}
-              facing={facing}
-              talking={talking}
-              onFail={() => setUse3d(false)}
-            />
-          ) : (
-            <div className="pip-char-inner" style={{ width: size.w, height: size.h }}>
-              <PipFace />
-            </div>
-          )}
+          <span
+            className={"b3d-hop" + (air ? (hopKey % 2 ? " arc-a" : " arc-b") : "")}
+            style={{ animationDuration: `${dur}s` }}
+          >
+            {use3d ? (
+              <Bhodbhar3D
+                width={size.w}
+                height={size.h}
+                walking={walking || scrolling}
+                facing={scrolling && !walking ? -1 : facing}
+                talking={talking}
+                hang={hang}
+                air={air}
+                gaze={gaze}
+                look={look}
+                onFail={() => setUse3d(false)}
+              />
+            ) : (
+              <div className="pip-char-inner" style={{ width: size.w, height: size.h }}>
+                <PipFace />
+              </div>
+            )}
+          </span>
         </button>
       )}
 
@@ -525,7 +724,40 @@ export default function Guide() {
       {/* idle corner: bubble + mute + the empty slot the character stands on */}
       <div className="pip-wrap" role="complementary" aria-label="Page guide">
         <AnimatePresence>
-          {open && !touring && (
+          {nudge && !touring && (
+            <motion.div
+              key="nudge"
+              className="pip-bubble"
+              initial={{ opacity: 0, y: 12, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 8, scale: 0.96 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              role="dialog"
+              aria-label="Sign in to enjoy the services"
+            >
+              <button className="pip-x" onClick={() => setNudge(false)} aria-label="Close">
+                ×
+              </button>
+              <p className="pip-text">
+                Psst! 👋 That one is for members. Sign in to enjoy the services: track orders, book consultations and save your cart.
+              </p>
+              <div className="pip-actions">
+                <button
+                  className="pip-btn solid"
+                  onClick={async () => {
+                    sfxClick();
+                    const e = await signInWithGoogle();
+                    if (e) window.location.href = "/login/";
+                  }}
+                >
+                  Continue with Google
+                </button>
+                <a className="pip-btn" href="/login/">Use email</a>
+                <button className="pip-btn" onClick={() => setNudge(false)}>Not now</button>
+              </div>
+            </motion.div>
+          )}
+          {open && !touring && !nudge && (
             <motion.div
               key="bubble"
               className="pip-bubble"
@@ -607,7 +839,7 @@ export default function Guide() {
 
         <button
           className="pip-mute"
-          style={{ left: size.w + 2 }}
+          style={{ right: size.w + 2 }}
           onClick={() => {
             unlockAudio();
             const m = !mute;
