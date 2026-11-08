@@ -3094,3 +3094,35 @@
   .pip-char-inner { animation: none; }
   .tour-spot { transition: none; animation: none; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   WELCOME GATE (first thing a signed-out visitor sees)
+   ═══════════════════════════════════════════════════════════════ */
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 945;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 48px);
+  overflow-y: auto;
+  background:
+    radial-gradient(90% 70% at 20% 10%, rgba(0, 178, 188, 0.14), transparent 60%),
+    var(--bg);
+}
+.gate-card {
+  width: min(1040px, 100%);
+  background-color: var(--bg-2);
+}
+.gate-email {
+  justify-content: center;
+  text-align: center;
+}
+.gate-skip {
+  background: none;
+  border: 0;
+  padding: 6px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { isMuted, quietFor, setMuted, sfxClick, sfxDone, sfxFoot, sfxPip, sfxStep, sfxTick, unlockAudio } from "@/lib/sfx";
 import PipFace from "@/components/ui/PipFace";
+import { signInWithGoogle } from "@/lib/oauth";
 
 // WebGL is client-only; the 2D face is the fallback if WebGL is unavailable.
 const Bhodbhar3D = dynamic(() => import("@/components/three/Bhodbhar3D"), { ssr: false });
@@ -101,6 +102,7 @@ export default function Guide() {
   const pathname = usePathname();
   const [ready, setReady] = useState(false);
   const [open, setOpen] = useState(false); // speech bubble (idle / section tour)
+  const [nudge, setNudge] = useState(false); // guest reached for a member feature
   const [step, setStep] = useState(0);
   const [seen, setSeen] = useState(true);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -166,8 +168,7 @@ export default function Guide() {
   useEffect(() => {
     const already = readSeen();
     setSeen(already);
-    const show = () => {
-      setReady(true);
+    const greet = () => {
       if (greeted.current || window.location.pathname !== "/") return;
       greeted.current = true;
       timer.current = setTimeout(() => {
@@ -175,19 +176,42 @@ export default function Guide() {
         if (already) autoClose.current = setTimeout(() => setOpen(false), 8000);
       }, 900);
     };
+    const show = () => {
+      setReady(true);
+      // The welcome gate (sign in / continue without email) comes first; greet after it.
+      if (document.documentElement.hasAttribute("data-gate")) {
+        window.addEventListener("gate:done", greet, { once: true });
+      } else greet();
+    };
     window.addEventListener("preloader:done", show, { once: true });
     const safety = setTimeout(show, 14000);
     return () => {
       window.removeEventListener("preloader:done", show);
+      window.removeEventListener("gate:done", greet);
       clearTimeout(safety);
       if (timer.current) clearTimeout(timer.current);
       if (autoClose.current) clearTimeout(autoClose.current);
     };
   }, []);
 
+  // A guest reached for a member feature: ask them to sign in.
+  useEffect(() => {
+    const onNudge = () => {
+      if (mode === "nav") return;
+      keepOpen();
+      sfxPip();
+      setOpen(false);
+      setNudge(true);
+    };
+    window.addEventListener("guide:signin", onNudge);
+    return () => window.removeEventListener("guide:signin", onNudge);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode]);
+
   // Moving to another page closes any open bubble / tour.
   useEffect(() => {
     setOpen(false);
+    setNudge(false);
     setStep(0);
     endNav(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -388,7 +412,7 @@ export default function Guide() {
   const at = pos ?? idle;
   const touring = mode === "nav";
   const curItem = items[ni];
-  const talking = open || (touring && arrived);
+  const talking = open || nudge || (touring && arrived);
 
   // nav-tour bubble position (under the character, kept inside the viewport)
   const vw = typeof window === "undefined" ? 1200 : window.innerWidth;
@@ -431,7 +455,10 @@ export default function Guide() {
           onClick={() => {
             if (touring) return;
             unlockAudio();
-            if (open) {
+            if (nudge) {
+              sfxPip();
+              setNudge(false);
+            } else if (open) {
               sfxPip();
               markSeen();
               setSeen(true);
@@ -525,7 +552,40 @@ export default function Guide() {
       {/* idle corner: bubble + mute + the empty slot the character stands on */}
       <div className="pip-wrap" role="complementary" aria-label="Page guide">
         <AnimatePresence>
-          {open && !touring && (
+          {nudge && !touring && (
+            <motion.div
+              key="nudge"
+              className="pip-bubble"
+              initial={{ opacity: 0, y: 12, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 8, scale: 0.96 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              role="dialog"
+              aria-label="Sign in to enjoy the services"
+            >
+              <button className="pip-x" onClick={() => setNudge(false)} aria-label="Close">
+                ×
+              </button>
+              <p className="pip-text">
+                Psst! 👋 That one is for members. Sign in to enjoy the services: track orders, book consultations and save your cart.
+              </p>
+              <div className="pip-actions">
+                <button
+                  className="pip-btn solid"
+                  onClick={async () => {
+                    sfxClick();
+                    const e = await signInWithGoogle();
+                    if (e) window.location.href = "/login/";
+                  }}
+                >
+                  Continue with Google
+                </button>
+                <a className="pip-btn" href="/login/">Use email</a>
+                <button className="pip-btn" onClick={() => setNudge(false)}>Not now</button>
+              </div>
+            </motion.div>
+          )}
+          {open && !touring && !nudge && (
             <motion.div
               key="bubble"
               className="pip-bubble"
