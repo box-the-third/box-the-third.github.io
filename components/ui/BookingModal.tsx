@@ -68,7 +68,7 @@ export default function BookingModal({ open, onClose }: { open: boolean; onClose
   }
 
   return createPortal(
-    <div className="bk-backdrop" onMouseDown={(e) => e.target === e.currentTarget && onClose()} role="dialog" aria-modal="true" aria-label="Book a free IELTS session">
+    <div className="bk-backdrop" data-lenis-prevent onMouseDown={(e) => e.target === e.currentTarget && onClose()} role="dialog" aria-modal="true" aria-label="Book a free IELTS session">
       <div className="bk-card">
         <button className="bk-close" onClick={onClose} aria-label="Close">×</button>
         {state === "done" ? (
@@ -83,6 +83,8 @@ export default function BookingModal({ open, onClose }: { open: boolean; onClose
         ) : (
           <form onSubmit={submit}>
             <h3>Book your free IELTS session</h3>
+            <div className="bk-layout">
+            <div className="bk-left">
             <div className="bk-cal">
               <div className="bk-nav">
                 <button type="button" disabled={!canPrev} onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() - 1, 1))} aria-label="Previous month">‹</button>
@@ -107,16 +109,20 @@ export default function BookingModal({ open, onClose }: { open: boolean; onClose
                 <small>{TZ}</small>
               </div>
             )}
+            </div>
+            <div className="bk-right">
             <div className="bk-fields">
               <input required placeholder="Your name" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} />
               <input required type="email" placeholder="Email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} />
-              <input placeholder="WhatsApp / phone (optional)" value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} />
-              <input placeholder="Target band (optional)" value={f.goal} onChange={(e) => setF({ ...f, goal: e.target.value })} />
+              <input placeholder="WhatsApp" value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} />
+              <input placeholder="Target band" value={f.goal} onChange={(e) => setF({ ...f, goal: e.target.value })} />
             </div>
             {state === "err" && <p className="bk-err">Could not send. Please try again or WhatsApp {site.phone}.</p>}
             <button className="btn solid bk-submit" type="submit" disabled={!valid || state === "sending"}>
               <span>{state === "sending" ? "Sending…" : "Confirm booking"}</span>
             </button>
+            </div>
+            </div>
           </form>
         )}
       </div>

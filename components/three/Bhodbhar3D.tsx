@@ -16,6 +16,14 @@ export type Bhodbhar3DProps = {
   walking: boolean;
   facing: number;
   talking: boolean;
+  /** Dead hang: arms up gripping an edge, body limp and swaying. */
+  hang?: boolean;
+  /** Mid-jump: arms thrown up, legs tucked. */
+  air?: boolean;
+  /** Head turn while hanging: -1 looks screen-left, 1 screen-right. */
+  gaze?: number;
+  /** Head pitch: -1 looks up, 1 looks down. */
+  look?: number;
   onFail?: () => void;
 };
 
@@ -205,10 +213,10 @@ function buildModel() {
   return { root, head, torso, legL, legR, armL, armR, eyes };
 }
 
-export default function Bhodbhar3D({ width, height, walking, facing, talking, onFail }: Bhodbhar3DProps) {
+export default function Bhodbhar3D({ width, height, walking, facing, talking, hang = false, air = false, gaze = 0, look = 0, onFail }: Bhodbhar3DProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const propsRef = useRef({ walking, facing, talking });
-  propsRef.current = { walking, facing, talking };
+  const propsRef = useRef({ walking, facing, talking, hang, air, gaze, look });
+  propsRef.current = { walking, facing, talking, hang, air, gaze, look };
   const apiRef = useRef<{ resize: (w: number, h: number) => void } | null>(null);
 
   useEffect(() => {
@@ -261,6 +269,10 @@ export default function Bhodbhar3D({ width, height, walking, facing, talking, on
     let phase = 0;
     let amp = 0;
     let rotY = 0;
+    let hangK = 0;
+    let airK = 0;
+    let headYaw = 0;
+    let headPitch = 0;
     let nextBlink = 2.5;
     let blinkT = -1;
 
@@ -275,29 +287,44 @@ export default function Bhodbhar3D({ width, height, walking, facing, talking, on
       const p = propsRef.current;
       // idle ticks at ~30fps to stay light; walking/talking run at full rate
       acc += dt;
-      if (!p.walking && !p.talking && acc < 1 / 30) return;
+      if (!p.walking && !p.talking && !p.hang && !p.air && acc < 1 / 30) return;
       const step = acc;
       acc = 0;
       t += step;
 
       amp += ((p.walking ? 1 : 0) - amp) * Math.min(1, step * 9);
+      hangK += ((p.hang ? 1 : 0) - hangK) * Math.min(1, step * 10);
+      airK += ((p.air ? 1 : 0) - airK) * Math.min(1, step * 12);
+      const up = Math.max(hangK, airK); // arms overhead
       phase += step * 10 * (0.3 + amp);
-      const swing = Math.sin(phase) * amp;
-      m.legL.rotation.x = swing * 0.75;
-      m.legR.rotation.x = -swing * 0.75;
+      const swing = Math.sin(phase) * amp * (1 - up);
+      // legs: walk swing, a slow dangle while hanging, tucked in mid-jump
+      const dangle = Math.sin(t * 1.7) * 0.14 * hangK;
+      m.legL.rotation.x = swing * 0.75 + dangle - 0.55 * airK;
+      m.legR.rotation.x = -swing * 0.75 - dangle * 0.8 - 0.55 * airK;
+      // arms: walk swing, or thrown up and out (the grip)
       m.armL.rotation.x = -swing * 0.65;
       m.armR.rotation.x = swing * 0.65;
+      m.armL.rotation.z = -2.75 * up;
+      m.armR.rotation.z = 2.75 * up;
       m.root.position.y = Math.abs(Math.sin(phase)) * 0.1 * amp;
+      m.root.rotation.z = Math.sin(t * 1.3) * 0.05 * hangK;
 
       // turn toward travel direction; slight turn toward viewer's reading side when talking
       const targetRot = p.walking ? p.facing * 0.95 : p.talking ? 0.12 : 0;
       rotY += (targetRot - rotY) * Math.min(1, step * 8);
       m.root.rotation.y = rotY;
 
-      // idle life: breathing, head bob, nods while talking
+      // idle life: breathing, head bob, nods while talking, a slow look-around when standing
+      const standing = !p.walking && !p.talking && hangK < 0.05 && airK < 0.05;
+      const wander = standing ? Math.sin(t * 0.55) * Math.sin(t * 0.21) * 0.45 : 0;
+      const nod = p.talking && !p.walking ? Math.sin(t * 9) * 0.05 : 0;
+      headYaw += (p.gaze * 0.8 * hangK + wander - headYaw) * Math.min(1, step * 6);
+      headPitch += (p.look * 0.4 + nod - headPitch) * Math.min(1, step * 6);
       m.torso.scale.y = 1 + Math.sin(t * 2) * 0.014;
       m.head.position.y = 1.95 + Math.sin(t * 2.2) * 0.018 + (p.talking && !p.walking ? Math.sin(t * 9) * 0.02 : 0);
-      m.head.rotation.x = p.talking && !p.walking ? Math.sin(t * 9) * 0.05 : 0;
+      m.head.rotation.x = headPitch;
+      m.head.rotation.y = headYaw;
 
       // blink
       if (blinkT < 0 && t > nextBlink) blinkT = 0;
