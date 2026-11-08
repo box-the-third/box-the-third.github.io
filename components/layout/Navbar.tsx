@@ -91,6 +91,15 @@ export default function Navbar() {
         </a>
 
         <div className="nav-right">
+          <a
+            href={site.cv}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-cv"
+            data-cursor="Open"
+          >
+            CV <span aria-hidden>↓</span>
+          </a>
           <nav className="nav-links">
             {site.nav.map((item) => (
               <Magnetic key={item.href} strength={0.25}>

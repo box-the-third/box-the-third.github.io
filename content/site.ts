@@ -12,6 +12,7 @@ export const site = {
   email: "nahiyanibnershad@gmail.com",
   phone: "+8801300984267",
   url: "https://box-the-third.github.io",
+  cv: "/assets/Nahiyan_TCS_2026.pdf",
 
   intro:
     "Marketing Specialist & Growth Engineer with a Computer Science background, blending consumer psychology with technical execution to build high-converting campaigns, scale organic reach, and engineer automated workflows that drive revenue.",

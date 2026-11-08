@@ -91,6 +91,25 @@
 .nav-cta:active {
   transform: translateY(1px);
 }
+.nav-cv {
+  border: 1px solid var(--accent);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+.nav-cv:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+@media (max-width: 520px) {
+  .nav-cv { padding: 6px 12px; font-size: 0.72rem; }
+}
 .nav-right {
   display: flex;
   align-items: center;
