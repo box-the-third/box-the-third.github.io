@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/content/site";
+import { courses } from "@/content/courses";
 import { cn } from "@/lib/utils";
 import Magnetic from "@/components/ui/Magnetic";
 import ThemeToggle from "@/components/ui/ThemeToggle";
@@ -106,6 +107,23 @@ export default function Navbar() {
                 <a href={toHref(item.href)}>{item.label}</a>
               </Magnetic>
             ))}
+            <div className="nav-dd">
+              <a href="/courses/" className="nav-dd-label" data-cursor="Open">
+                Courses
+                <span className="nav-dd-caret" aria-hidden>▾</span>
+              </a>
+              <div className="nav-dd-menu" role="menu">
+                {courses.map((c) => (
+                  <a key={c.slug} href={`/courses/${c.slug}/`} role="menuitem">
+                    <b>{c.label}</b>
+                    <small>{c.blurb}</small>
+                  </a>
+                ))}
+                <a href="/courses/" className="nav-dd-all" role="menuitem">
+                  All courses →
+                </a>
+              </div>
+            </div>
             {user ? (
               <div className="nav-account-wrap">
                 <button
@@ -209,6 +227,21 @@ export default function Navbar() {
               <a key={item.href} href={toHref(item.href)} onClick={() => setOpen(false)}>
                 <span>0{i + 1}</span>
                 {item.label}
+              </a>
+            ))}
+            <a href="/courses/" onClick={() => setOpen(false)}>
+              <span>0{site.nav.length + 1}</span>
+              Courses
+            </a>
+            {courses.map((c) => (
+              <a
+                key={c.slug}
+                href={`/courses/${c.slug}/`}
+                onClick={() => setOpen(false)}
+                className="mobile-sub"
+              >
+                <span>↳</span>
+                {c.label}
               </a>
             ))}
             {user ? (
