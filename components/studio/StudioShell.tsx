@@ -11,6 +11,7 @@ import { pullItems, syncOutbox } from "@/lib/studio/data";
 import { supabaseAnonKey, supabaseConfigured, supabaseUrl } from "@/lib/supabase";
 import { Icon } from "./ui";
 import { FeedbackBox, PrivacyPanel, RevenuePlanner } from "./Panels";
+import { TutorialPanel } from "./Tutorial";
 import { flushApprovedOnLogin } from "./agents/SocialAgents";
 import "@/app/dashboard/glass.css";
 import "./studio.css";
@@ -24,7 +25,7 @@ const Cards = dynamic(() => import("./agents/CardsAgent"), { ssr: false });
 const Social = dynamic(() => import("./agents/SocialAgents").then((m) => m.SocialAgent), { ssr: false });
 const Approval = dynamic(() => import("./agents/SocialAgents").then((m) => m.ApprovalAgent), { ssr: false });
 
-type View = AgentId | "plan" | "privacy";
+type View = AgentId | "plan" | "privacy" | "tutorial";
 
 function Body({ view }: { view: View }) {
   switch (view) {
@@ -39,6 +40,7 @@ function Body({ view }: { view: View }) {
     case "approval": return <Approval />;
     case "cards": return <Cards />;
     case "plan": return <RevenuePlanner />;
+    case "tutorial": return <TutorialPanel />;
     default: return <PrivacyPanel />;
   }
 }
@@ -65,7 +67,7 @@ export default function StudioShell() {
   useEffect(() => {
     const read = () => {
       const h = window.location.hash.slice(1) as View;
-      if ([...AGENTS.map((a) => a.id), "plan", "privacy"].includes(h)) setView(h);
+      if ([...AGENTS.map((a) => a.id), "plan", "privacy", "tutorial"].includes(h)) setView(h);
     };
     read();
     setGame(getGame());
@@ -139,11 +141,12 @@ export default function StudioShell() {
         </nav>
         <div className="st-tabs">
           <button className={`st-btn ${view === "plan" ? "" : "ghost"}`} onClick={() => go("plan")}>Revenue planner</button>
+          <button className={`st-btn ${view === "tutorial" ? "" : "ghost"}`} onClick={() => go("tutorial")}>Build tutorial</button>
           <button className={`st-btn ${view === "privacy" ? "" : "ghost"}`} onClick={() => go("privacy")}>Privacy and data</button>
         </div>
 
         <motion.section key={view} className="glass-card st-panel" onMouseMove={light} onMouseLeave={unlight} initial={{ opacity: 0.4, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22 }}>
-          <h2>{cur?.name ?? (view === "plan" ? "Revenue planner" : "Privacy and data")}</h2>
+          <h2>{cur?.name ?? (view === "plan" ? "Revenue planner" : view === "tutorial" ? "Social Autopilot — build tutorial" : "Privacy and data")}</h2>
           <Body view={view} />
           {cur && <FeedbackBox agent={cur.id} />}
         </motion.section>
