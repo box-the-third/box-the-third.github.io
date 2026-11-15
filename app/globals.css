@@ -79,6 +79,15 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+/* The layout is designed to read best a touch zoomed-out. Match ~80% browser
+   zoom on laptops and up (more breathing room, less "zoomed-in" feel), while
+   leaving phones and tablets at their native size. */
+@media (min-width: 1024px) {
+  :root {
+    zoom: 0.8;
+  }
+}
+
 /* Lenis smooth-scroll: let JS drive the scroll. */
 html.lenis,
 html.lenis body {

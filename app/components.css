@@ -3160,3 +3160,60 @@
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   NAV: Courses dropdown
+   ═══════════════════════════════════════════════════════════════ */
+.nav-dd { position: relative; }
+.nav-dd-label { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+.nav-dd-caret { font-size: 0.62em; transition: transform 0.25s var(--ease); }
+.nav-dd:hover .nav-dd-caret,
+.nav-dd:focus-within .nav-dd-caret { transform: rotate(180deg); }
+/* invisible bridge so the menu doesn't close in the gap below the label */
+.nav-dd::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
+.nav-dd-menu {
+  position: absolute; top: 100%; right: 0; left: auto; transform: translateY(10px);
+  width: 320px; max-width: min(320px, calc(100vw - 32px)); padding: 8px; border-radius: 16px;
+  background: var(--bg-2); border: 1px solid var(--line);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  display: grid; gap: 2px; z-index: 1200;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0.2s;
+}
+.nav-dd:hover .nav-dd-menu,
+.nav-dd:focus-within .nav-dd-menu {
+  opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(6px);
+}
+.nav-dd-menu a {
+  display: grid; gap: 3px; padding: 11px 13px; border-radius: 11px;
+  text-transform: none; letter-spacing: 0;
+}
+.nav-dd-menu a:hover { background: var(--card-hover); }
+.nav-dd-menu a b { font: 600 0.95rem var(--font-body); color: var(--ink); }
+.nav-dd-menu a small { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
+.nav-dd-all {
+  font: 500 0.78rem var(--font-mono) !important; color: var(--accent) !important;
+  border-top: 1px solid var(--line); margin-top: 4px; border-radius: 0 0 11px 11px !important;
+}
+.mobile-menu a.mobile-sub { padding-left: 26px; opacity: 0.78; }
+.mobile-menu a.mobile-sub span { color: var(--muted); }
+
+/* ═══════════════════════════════════════════════════════════════
+   COURSES index (/courses)
+   ═══════════════════════════════════════════════════════════════ */
+.course-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px; margin-top: clamp(40px, 6vh, 60px);
+}
+.course-card {
+  display: flex; flex-direction: column; gap: 12px; padding: 28px;
+  border-radius: 20px; background: var(--card); border: 1px solid var(--line);
+  transition: transform 0.4s var(--ease), border-color 0.3s, background 0.3s;
+}
+.course-card:hover { transform: translateY(-4px); border-color: var(--accent); background: var(--card-hover); }
+.course-tag { font: 500 0.7rem var(--font-mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); }
+.course-title { font: 800 1.5rem var(--font-display); letter-spacing: -0.02em; color: var(--ink); }
+.course-blurb { color: var(--muted); font-size: 0.95rem; line-height: 1.6; flex: 1; }
+.course-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--line); }
+.course-meta { font: 500 0.75rem var(--font-mono); color: var(--muted); }
+.course-go { font: 600 0.9rem var(--font-body); color: var(--accent); }
