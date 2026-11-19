@@ -48,7 +48,7 @@ export default function About() {
             <Reveal delay={0.15}>
               <div className="about-actions">
                 <a
-                  href="/assets/Nahiyan_TCS_2026.pdf"
+                  href={site.cv}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn solid"
