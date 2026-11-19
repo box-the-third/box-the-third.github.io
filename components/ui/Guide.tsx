@@ -7,6 +7,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { isMuted, quietFor, setMuted, sfxClick, sfxDone, sfxFoot, sfxPip, sfxStep, sfxTick, unlockAudio } from "@/lib/sfx";
 import PipFace from "@/components/ui/PipFace";
 import { signInWithGoogle } from "@/lib/oauth";
+import { askPip, type PipReply } from "@/lib/pip/ask";
+import { site } from "@/content/site";
 
 // WebGL is client-only; the 2D face is the fallback if WebGL is unavailable.
 const Bhodbhar3D = dynamic(() => import("@/components/three/Bhodbhar3D"), { ssr: false });
@@ -19,7 +21,17 @@ const Bhodbhar3D = dynamic(() => import("@/components/three/Bhodbhar3D"), { ssr:
  * - Home page, narrow screens: a section-by-section tour (the nav is a hamburger there).
  * - First-ever visit offers the tour; return visits get a short "welcome back".
  * - Other pages: click him for quick links.
+ * - Anyone can ask him a question: he answers from the page content (in the browser), and
+ *   hands out Nahiyan's email and WhatsApp link when he doesn't know.
  */
+
+type ChatMsg = { from: "you" | "pip"; text: string; links?: PipReply["links"] };
+const CHAT_HELLO: ChatMsg = {
+  from: "pip",
+  text: "Ask me anything about this site: services, prices, the free IELTS classes, the Studio or how to reach Nahiyan.",
+};
+// Links that leave the page (new tab) vs. links within the site (close the chat).
+const isExternal = (href: string) => /^(https?:|mailto:)/.test(href) || href.endsWith(".pdf") || href.endsWith(".html");
 
 type Step = { target?: string; text: string; cta?: { label: string; href: string } };
 
@@ -122,6 +134,14 @@ export default function Guide() {
   };
   const [mute, setMute] = useState(false);
 
+  // --- Q&A chat
+  const [asking, setAsking] = useState(false);
+  const [thread, setThread] = useState<ChatMsg[]>([CHAT_HELLO]);
+  const [draft, setDraft] = useState("");
+  const [thinking, setThinking] = useState(false);
+  const threadRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
   // --- 3D character + nav tour state
   const slotRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 120, h: 166 });
@@ -211,6 +231,7 @@ export default function Guide() {
       keepOpen();
       sfxPip();
       setOpen(false);
+      setAsking(false);
       setNudge(true);
     };
     window.addEventListener("guide:signin", onNudge);
@@ -222,6 +243,7 @@ export default function Guide() {
   useEffect(() => {
     setOpen(false);
     setNudge(false);
+    setAsking(false);
     setStep(0);
     endNav(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -406,6 +428,33 @@ export default function Guide() {
     setOpen(true);
   };
 
+  const openChat = () => {
+    keepOpen();
+    sfxPip();
+    markSeen();
+    setSeen(true);
+    setOpen(false);
+    setNudge(false);
+    setAsking(true);
+    setTimeout(() => inputRef.current?.focus(), 320);
+  };
+
+  const sendQuestion = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = draft.trim();
+    if (!q || thinking) return;
+    sfxClick();
+    setDraft("");
+    setThread((t) => [...t, { from: "you" as const, text: q }]);
+    setThinking(true);
+    await new Promise((res) => setTimeout(res, 450)); // a beat of "thinking" feels natural
+    const r = askPip(q);
+    setThinking(false);
+    sfxPip();
+    setThread((t) => [...t, { from: "pip" as const, text: r.text, links: r.links }].slice(-30));
+    setTimeout(() => inputRef.current?.focus(), 30);
+  };
+
   // ---- alive: hop onto the navbar, wander off, run with the scroll
   const clearLife = () => {
     lifeTimers.current.forEach(clearTimeout);
@@ -486,7 +535,7 @@ export default function Guide() {
     life.current.state = "jump"; // busy until he is home
   }
 
-  live.current = { idle, size, dropHang, startHang, goAway, comeBack, busy: open || nudge || mode !== "none", atRest: pos === null };
+  live.current = { idle, size, dropHang, startHang, goAway, comeBack, busy: open || nudge || asking || mode !== "none", atRest: pos === null };
 
   useEffect(() => {
     if (!ready) return;
@@ -549,11 +598,17 @@ export default function Guide() {
 
   // A bubble, nudge or tour takes priority: drop off the navbar / come back from wandering.
   useEffect(() => {
-    if (!(open || nudge || mode !== "none")) return;
+    if (!(open || nudge || asking || mode !== "none")) return;
     if (life.current.state === "hang") live.current.dropHang();
     else if (life.current.state === "away") live.current.comeBack();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, nudge, mode]);
+  }, [open, nudge, asking, mode]);
+
+  // Keep the newest chat message in view.
+  useEffect(() => {
+    const el = threadRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [thread, thinking, asking]);
 
   if (!ready) return null;
 
@@ -571,7 +626,7 @@ export default function Guide() {
   const at = pos ?? idle;
   const touring = mode === "nav";
   const curItem = items[ni];
-  const talking = open || nudge || (touring && arrived);
+  const talking = open || nudge || (asking && !thinking) || (touring && arrived);
 
   // nav-tour bubble position (under the character, kept inside the viewport)
   const vw = typeof window === "undefined" ? 1200 : window.innerWidth;
@@ -621,6 +676,9 @@ export default function Guide() {
             if (nudge) {
               sfxPip();
               setNudge(false);
+            } else if (asking) {
+              sfxPip();
+              setAsking(false);
             } else if (open) {
               sfxPip();
               markSeen();
@@ -635,8 +693,8 @@ export default function Guide() {
             transform: `translate3d(${at.x}px, ${at.y}px, 0)`,
             transitionDuration: `${reduced.current ? 0 : dur}s`,
           }}
-          aria-label={open ? "Close the guide" : "Ask Temu Bhodbhar for a tour"}
-          title={touring ? "Temu Bhodbhar" : open ? "Close" : "Hi! I'm Temu Bhodbhar. Click me for a tour"}
+          aria-label={open || asking ? "Close the guide" : "Ask Temu Bhodbhar a question or for a tour"}
+          title={touring ? "Temu Bhodbhar" : open || asking ? "Close" : "Hi! I'm Temu Bhodbhar. Click me for a tour or ask me anything"}
         >
           <span
             className={"b3d-hop" + (air ? (hopKey % 2 ? " arc-a" : " arc-b") : "")}
@@ -757,7 +815,74 @@ export default function Guide() {
               </div>
             </motion.div>
           )}
-          {open && !touring && !nudge && (
+          {asking && !touring && !nudge && (
+            <motion.div
+              key="chat"
+              className="pip-bubble pip-chat"
+              initial={{ opacity: 0, y: 12, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 8, scale: 0.96 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              role="dialog"
+              aria-label="Ask Temu Bhodbhar"
+            >
+              <button className="pip-x" onClick={() => setAsking(false)} aria-label="Close chat">
+                ×
+              </button>
+              <div className="tour-tag">Ask Temu Bhodbhar</div>
+              <div className="pip-thread" ref={threadRef} data-lenis-prevent aria-live="polite">
+                {thread.map((m, i) => (
+                  <div key={i} className={`pip-msg ${m.from}`}>
+                    {m.text}
+                    {m.links && m.links.length > 0 && (
+                      <span className="pip-msg-links">
+                        {m.links.map((l) =>
+                          isExternal(l.href) ? (
+                            <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">
+                              {l.label}
+                            </a>
+                          ) : (
+                            <a key={l.href} href={l.href} onClick={() => setAsking(false)}>
+                              {l.label}
+                            </a>
+                          )
+                        )}
+                      </span>
+                    )}
+                  </div>
+                ))}
+                {thinking && (
+                  <div className="pip-msg pip pip-typing" role="status" aria-label="Temu Bhodbhar is thinking">
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                )}
+              </div>
+              <form className="pip-form" onSubmit={sendQuestion}>
+                <input
+                  ref={inputRef}
+                  className="pip-input"
+                  value={draft}
+                  onChange={(e) => setDraft(e.target.value)}
+                  placeholder="Type your question…"
+                  maxLength={400}
+                  aria-label="Your question"
+                  disabled={thinking}
+                />
+                <button className="pip-btn solid" type="submit" disabled={thinking || !draft.trim()}>
+                  Ask
+                </button>
+              </form>
+              <p className="pip-note">
+                Want a person?{" "}
+                <a href={`https://wa.me/${site.phone.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer">
+                  Message Nahiyan on WhatsApp
+                </a>
+              </p>
+            </motion.div>
+          )}
+          {open && !touring && !nudge && !asking && (
             <motion.div
               key="bubble"
               className="pip-bubble"
@@ -795,7 +920,8 @@ export default function Guide() {
               <div className="pip-actions">
                 {intro && !home ? (
                   <>
-                    <a className="pip-btn solid" href="/">Home</a>
+                    <button className="pip-btn solid" onClick={openChat}>Ask me</button>
+                    <a className="pip-btn" href="/">Home</a>
                     <a className="pip-btn" href="/studio/">Studio</a>
                     <a className="pip-btn" href="/#services">Services</a>
                     <a className="pip-btn" href="/#contact">Contact</a>
@@ -804,6 +930,9 @@ export default function Guide() {
                   <>
                     <button className="pip-btn solid" onClick={start}>
                       {seen ? "Tour again" : "Show me around"}
+                    </button>
+                    <button className="pip-btn" onClick={openChat}>
+                      Ask a question
                     </button>
                     <button className="pip-btn" onClick={finish}>
                       {seen ? "I'm good" : "No thanks"}
