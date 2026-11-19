@@ -12,6 +12,7 @@ import {
   Selection,
 } from "@/lib/dashboard";
 import { Reveal } from "@/components/ui/Reveal";
+import { formatPrice } from "@/content/services";
 import { AnimatePresence, motion } from "framer-motion";
 import StatsCard, {
   BagIcon,
@@ -275,7 +276,7 @@ export default function DashboardPage() {
               </span>
               <span className="dash-cart-meta">
                 <span className="dash-cart-price">
-                  ৳{Number(s.packages?.price_bdt || 0).toLocaleString()}
+                  {formatPrice(Number(s.packages?.price_bdt || 0), "USD")}
                 </span>
                 <span className={`dash-badge ${s.status}`}>{s.status.replace(/_/g, " ")}</span>
                 <button
@@ -443,8 +444,8 @@ export default function DashboardPage() {
                   />
                   <StatsCard
                     title="Cart total"
-                    value={loadingCart ? "…" : `৳${totalBdt.toLocaleString()}`}
-                    note="BDT, before discounts"
+                    value={loadingCart ? "…" : formatPrice(totalBdt, "USD")}
+                    note="USD, before discounts"
                     icon={<CoinIcon />}
                     tone="amber"
                   />
