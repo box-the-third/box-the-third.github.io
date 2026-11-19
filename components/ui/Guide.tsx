@@ -12,6 +12,7 @@ import { site } from "@/content/site";
 
 // WebGL is client-only; the 2D face is the fallback if WebGL is unavailable.
 const Bhodbhar3D = dynamic(() => import("@/components/three/Bhodbhar3D"), { ssr: false });
+const FistBump = dynamic(() => import("@/components/ui/FistBump"), { ssr: false });
 
 /**
  * Temu Bhodbhar (code name Pip): the site's lifelong companion, now in 3D.
@@ -21,6 +22,8 @@ const Bhodbhar3D = dynamic(() => import("@/components/three/Bhodbhar3D"), { ssr:
  * - Home page, narrow screens: a section-by-section tour (the nav is a hamburger there).
  * - First-ever visit offers the tour; return visits get a short "welcome back".
  * - Other pages: click him for quick links.
+ * - When someone picks a service he sprints over for a fist bump that unlocks 5% off
+ *   (FistBump.tsx), a small win that nudges them to finish their request.
  * - Anyone can ask him a question: he answers from the page content (in the browser), and
  *   hands out Nahiyan's email and WhatsApp link when he doesn't know.
  */
@@ -133,6 +136,10 @@ export default function Guide() {
     if (autoClose.current) clearTimeout(autoClose.current);
   };
   const [mute, setMute] = useState(false);
+
+  // --- fist bump (fired by "pip:fistbump" after someone picks a service)
+  const [bumpScene, setBumpScene] = useState<{ service?: string } | null>(null);
+  const pendingBump = useRef<{ service?: string } | null>(null);
 
   // --- Q&A chat
   const [asking, setAsking] = useState(false);
@@ -535,7 +542,7 @@ export default function Guide() {
     life.current.state = "jump"; // busy until he is home
   }
 
-  live.current = { idle, size, dropHang, startHang, goAway, comeBack, busy: open || nudge || asking || mode !== "none", atRest: pos === null };
+  live.current = { idle, size, dropHang, startHang, goAway, comeBack, busy: open || nudge || asking || !!bumpScene || mode !== "none", atRest: pos === null };
 
   useEffect(() => {
     if (!ready) return;
@@ -604,6 +611,41 @@ export default function Guide() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, nudge, asking, mode]);
 
+  // Fist bump: queue it until he's on screen, then clear the stage and run.
+  useEffect(() => {
+    const onBump = (e: Event) => {
+      pendingBump.current = (e as CustomEvent<{ service?: string }>).detail ?? {};
+      if (ready && idle) startBump();
+    };
+    window.addEventListener("pip:fistbump", onBump);
+    return () => window.removeEventListener("pip:fistbump", onBump);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, idle, mode]);
+  useEffect(() => {
+    if (ready && idle && pendingBump.current) {
+      const id = setTimeout(startBump, 700);
+      return () => clearTimeout(id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, idle]);
+  function startBump() {
+    const next = pendingBump.current;
+    if (!next || bumpScene || mode === "nav") return;
+    pendingBump.current = null;
+    clearLife();
+    if (walkTimer.current) clearTimeout(walkTimer.current);
+    setHang(false);
+    setAir(false);
+    setWalking(false);
+    setPos(null);
+    if (idle) curPos.current = idle;
+    life.current.state = "idle";
+    setOpen(false);
+    setNudge(false);
+    setAsking(false);
+    setBumpScene(next);
+  }
+
   // Keep the newest chat message in view.
   useEffect(() => {
     const el = threadRef.current;
@@ -615,9 +657,9 @@ export default function Guide() {
   const home = pathname === "/";
   const s: Step =
     step === 0 && !home
-      ? { text: "Hi, it's Temu Bhodbhar! 👋 Need a hand? Jump somewhere:" }
+      ? { text: "Hi, it's Temu Bhodbhar! 👋 Ask me anything, or jump somewhere:" }
       : step === 0 && seen
-        ? { text: "Welcome back! 👋 I'm always here if you want the tour or a hand finding something." }
+        ? { text: "Welcome back! 👋 Ask me anything about the site, or take the tour again." }
         : STEPS[step];
   const last = step === STEPS.length - 1;
   const intro = step === 0;
@@ -685,16 +727,17 @@ export default function Guide() {
               setSeen(true);
               setOpen(false);
               setStep(0);
-            } else askAgain();
+            } else openChat();
           }}
           style={{
             width: size.w,
             height: size.h,
             transform: `translate3d(${at.x}px, ${at.y}px, 0)`,
             transitionDuration: `${reduced.current ? 0 : dur}s`,
+            visibility: bumpScene ? "hidden" : undefined,
           }}
-          aria-label={open || asking ? "Close the guide" : "Ask Temu Bhodbhar a question or for a tour"}
-          title={touring ? "Temu Bhodbhar" : open || asking ? "Close" : "Hi! I'm Temu Bhodbhar. Click me for a tour or ask me anything"}
+          aria-label={open || asking ? "Close the guide" : "Chat with Temu Bhodbhar"}
+          title={touring ? "Temu Bhodbhar" : open || asking ? "Close" : "Hi! I'm Temu Bhodbhar. Click me to chat"}
         >
           <span
             className={"b3d-hop" + (air ? (hopKey % 2 ? " arc-a" : " arc-b") : "")}
@@ -779,6 +822,14 @@ export default function Guide() {
         )}
       </AnimatePresence>
 
+      {bumpScene && idle && (
+        <FistBump
+          from={{ x: idle.x, y: idle.y, w: size.w, h: size.h }}
+          service={bumpScene.service}
+          onDone={() => setBumpScene(null)}
+        />
+      )}
+
       {/* idle corner: bubble + mute + the empty slot the character stands on */}
       <div className="pip-wrap" role="complementary" aria-label="Page guide">
         <AnimatePresence>
@@ -829,7 +880,21 @@ export default function Guide() {
               <button className="pip-x" onClick={() => setAsking(false)} aria-label="Close chat">
                 ×
               </button>
-              <div className="tour-tag">Ask Temu Bhodbhar</div>
+              <div className="pip-chat-head">
+                <div className="tour-tag">Ask Temu Bhodbhar</div>
+                {home && (
+                  <button
+                    className="pip-tourlink"
+                    onClick={() => {
+                      setAsking(false);
+                      setOpen(true);
+                      start();
+                    }}
+                  >
+                    Take the tour
+                  </button>
+                )}
+              </div>
               <div className="pip-thread" ref={threadRef} data-lenis-prevent aria-live="polite">
                 {thread.map((m, i) => (
                   <div key={i} className={`pip-msg ${m.from}`}>
@@ -928,12 +993,25 @@ export default function Guide() {
                   </>
                 ) : intro ? (
                   <>
-                    <button className="pip-btn solid" onClick={start}>
-                      {seen ? "Tour again" : "Show me around"}
-                    </button>
-                    <button className="pip-btn" onClick={openChat}>
-                      Ask a question
-                    </button>
+                    {seen ? (
+                      <>
+                        <button className="pip-btn solid" onClick={openChat}>
+                          Ask me anything
+                        </button>
+                        <button className="pip-btn" onClick={start}>
+                          Tour again
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button className="pip-btn solid" onClick={start}>
+                          Show me around
+                        </button>
+                        <button className="pip-btn" onClick={openChat}>
+                          Ask a question
+                        </button>
+                      </>
+                    )}
                     <button className="pip-btn" onClick={finish}>
                       {seen ? "I'm good" : "No thanks"}
                     </button>
@@ -966,6 +1044,11 @@ export default function Guide() {
           )}
         </AnimatePresence>
 
+        {!asking && !open && !nudge && !touring && !bumpScene && (
+          <button className="pip-askpill" style={{ right: size.w + 2 }} onClick={openChat} aria-label="Chat with Temu Bhodbhar">
+            💬 Ask me
+          </button>
+        )}
         <button
           className="pip-mute"
           style={{ right: size.w + 2 }}

@@ -80,11 +80,52 @@
 .st-paper h4 { font: 700 13px "Times New Roman", serif; text-transform: uppercase; letter-spacing: .04em; margin: 14px 0 5px; }
 .cvp-main h4 { color: var(--acc); border-bottom: 1px solid #bfc7cc; padding-bottom: 3px; }
 .cvp-side p, .cvp-main p { margin: 0 0 4px; } .cvp-job { margin-bottom: 10px; } .cvp-dates { color: #555f66; font-size: 11px; } .cvp-main ul { margin: 4px 0 0 16px; padding: 0; }
-.st-invoice { width: 794px; min-height: 900px; background: #fff; color: #111; padding: 40px; font: 13px/1.5 Arial, sans-serif; box-shadow: 0 18px 50px rgba(0,0,0,.35); }
-.st-invoice header { display: flex; justify-content: space-between; border-bottom: 2px solid #0a1628; padding-bottom: 12px; } .st-invoice h3 { margin: 0; font-size: 26px; } .st-invoice small { font-size: 15px; color: #555; margin-left: 8px; }
-.inv-parties { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
-.st-invoice table { width: 100%; border-collapse: collapse; } .st-invoice th, .st-invoice td { padding: 8px; border-bottom: 1px solid #ddd; text-align: left; } .st-invoice th { background: #f1f4f9; }
-.inv-tot { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 20px; } .inv-tot dl { display: grid; grid-template-columns: auto auto; gap: 4px 20px; margin: 0; } .inv-tot dd { margin: 0; text-align: right; } .inv-notes { margin-top: 30px; color: #555; }
+/* Invoice sheet: A4 proportions (794 x 1123 px at 96 dpi), always light like real paper */
+.st-invoice {
+  --i-ink: #0f172a; --i-muted: #64748b; --i-line: #e2e8f0; --i-soft: #f8fafc; --i-accent: #0a1628;
+  display: flex; flex-direction: column;
+  width: 794px; min-height: 1123px; padding: 56px 60px 40px;
+  background: #fff; color: var(--i-ink);
+  font: 13px/1.55 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 18px 50px rgba(0,0,0,.35);
+}
+.st-invoice * { box-sizing: border-box; }
+.inv-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding-bottom: 26px; border-bottom: 3px solid var(--i-accent); }
+.inv-brand { font-size: 22px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
+.inv-sub { margin-top: 4px; color: var(--i-muted); font-size: 12px; }
+.inv-title { text-align: right; }
+.inv-title h3 { margin: 0; font-size: 26px; font-weight: 300; letter-spacing: .14em; text-transform: uppercase; color: var(--i-accent); line-height: 1.1; }
+.inv-ar { margin-top: 4px; font-size: 14px; color: var(--i-muted); }
+.inv-label { display: block; margin-bottom: 6px; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--i-muted); }
+.inv-meta { display: flex; justify-content: space-between; gap: 32px; margin: 30px 0 34px; }
+.inv-billto { display: flex; flex-direction: column; gap: 2px; }
+.inv-billto strong { font-size: 15px; font-weight: 600; }
+.inv-billto span:not(.inv-label) { color: var(--i-muted); font-size: 12px; }
+.inv-facts { display: grid; grid-template-columns: auto auto; gap: 5px 22px; margin: 0; align-content: start; }
+.inv-facts dt { color: var(--i-muted); }
+.inv-facts dd { margin: 0; text-align: right; font-weight: 600; }
+.inv-table { width: 100%; border-collapse: collapse; }
+.inv-table th { padding: 10px 12px; background: var(--i-accent); color: #fff; font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-align: left; }
+.inv-table td { padding: 12px; border-bottom: 1px solid var(--i-line); vertical-align: top; }
+.inv-table tbody tr:nth-child(even) td { background: var(--i-soft); }
+.inv-table .num { text-align: right; white-space: nowrap; }
+.inv-table .c-idx { width: 36px; color: var(--i-muted); }
+.inv-table tr { break-inside: avoid; }
+.inv-bottom { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; margin-top: 26px; break-inside: avoid; }
+.inv-qr { display: flex; align-items: center; gap: 12px; color: var(--i-muted); font-size: 11px; line-height: 1.4; }
+.inv-qr img { display: block; border: 1px solid var(--i-line); padding: 4px; background: #fff; }
+.inv-sum { width: 290px; margin: 0; }
+.inv-sum > div { display: flex; justify-content: space-between; padding: 7px 12px; }
+.inv-sum dt { color: var(--i-muted); }
+.inv-sum dd { margin: 0; font-weight: 600; }
+.inv-sum .inv-due { margin-top: 6px; padding: 12px; background: var(--i-accent); color: #fff; }
+.inv-sum .inv-due dt { color: #fff; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; font-size: 11.5px; align-self: center; }
+.inv-sum .inv-due dd { font-size: 17px; font-weight: 700; }
+.inv-notes { margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--i-line); break-inside: avoid; }
+.inv-notes p { margin: 0; color: #334155; white-space: pre-line; }
+.inv-foot { display: flex; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 18px; border-top: 1px solid var(--i-line); color: var(--i-muted); font-size: 11px; }
+#inv-print { display: none; }
 
 @media (max-width: 900px) {
   .st-split, .st-cv { grid-template-columns: 1fr; }
@@ -93,10 +134,20 @@
 @media (prefers-reduced-motion: reduce) { .st-agent, .st-btn, .st-bar i, .st-toast { transition: none; } }
 
 @media print {
-  body * { visibility: hidden !important; }
-  #cv-paper, #cv-paper * { visibility: visible !important; }
-  #cv-paper { position: absolute; left: 0; top: 0; box-shadow: none; zoom: 1 !important; }
   @page { size: A4; margin: 0; }
+  /* CV agent */
+  html:not(.print-invoice) body * { visibility: hidden !important; }
+  html:not(.print-invoice) #cv-paper, html:not(.print-invoice) #cv-paper * { visibility: visible !important; }
+  html:not(.print-invoice) #cv-paper { position: absolute; left: 0; top: 0; box-shadow: none; zoom: 1 !important; }
+  /* Invoice agent: print only the body-level copy, so the rest of the page can't add blank pages */
+  html.print-invoice, html.print-invoice body { height: auto !important; min-height: 0 !important; overflow: visible !important; background: #fff !important; margin: 0 !important; padding: 0 !important; }
+  html.print-invoice body > *:not(#inv-print) { display: none !important; }
+  html.print-invoice #inv-print { display: block !important; }
+  html.print-invoice #inv-print .st-invoice {
+    width: 210mm; min-height: 287mm; padding: 16mm 16mm 12mm;
+    box-shadow: none; zoom: 1 !important;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════

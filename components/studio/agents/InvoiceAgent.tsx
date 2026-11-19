@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import QRCode from "qrcode";
 import { money, totals, zatcaTlv, type Line } from "@/lib/studio/zatca";
 import { saveItem } from "@/lib/studio/data";
@@ -18,9 +19,95 @@ const blank = (): Inv => ({
   currency: "SAR", vatRate: 15, items: [{ description: "Service", quantity: 1, unitPrice: 0 }], notes: "Thank you for your business.",
 });
 
+type Totals = ReturnType<typeof totals>;
+
+/** The invoice itself. Rendered twice: as the on-screen preview and as a print-only copy. */
+function InvoiceSheet({ inv, t, qr }: { inv: Inv; t: Totals; qr: string }) {
+  const date = new Date(inv.date).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+  return (
+    <div className="st-invoice">
+      <header className="inv-head">
+        <div>
+          <div className="inv-brand">{inv.seller || "Your business name"}</div>
+          {inv.sellerVat && <div className="inv-sub">VAT No. {inv.sellerVat}</div>}
+        </div>
+        <div className="inv-title">
+          <h3>Tax Invoice</h3>
+          <div className="inv-ar" lang="ar" dir="rtl">فاتورة ضريبية</div>
+        </div>
+      </header>
+
+      <section className="inv-meta">
+        <div className="inv-billto">
+          <span className="inv-label">Bill to</span>
+          <strong>{inv.buyer || "Client name"}</strong>
+          {inv.buyerVat && <span>VAT No. {inv.buyerVat}</span>}
+        </div>
+        <dl className="inv-facts">
+          <dt>Invoice no.</dt><dd>{inv.no}</dd>
+          <dt>Issue date</dt><dd>{date}</dd>
+          <dt>Currency</dt><dd>{inv.currency}</dd>
+        </dl>
+      </section>
+
+      <table className="inv-table">
+        <thead>
+          <tr><th className="c-idx">#</th><th>Description</th><th className="num">Qty</th><th className="num">Unit price</th><th className="num">Amount</th></tr>
+        </thead>
+        <tbody>
+          {inv.items.map((l, i) => (
+            <tr key={i}>
+              <td className="c-idx">{i + 1}</td>
+              <td>{l.description || "—"}</td>
+              <td className="num">{l.quantity}</td>
+              <td className="num">{money(l.unitPrice, inv.currency)}</td>
+              <td className="num">{money(l.quantity * l.unitPrice, inv.currency)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <section className="inv-bottom">
+        <div className="inv-qr">
+          {qr && /* eslint-disable-next-line @next/next/no-img-element */ <img src={qr} alt="ZATCA e-invoice QR code" width={104} height={104} />}
+          <span>Scan to verify<br />ZATCA e-invoice QR</span>
+        </div>
+        <dl className="inv-sum">
+          <div><dt>Subtotal</dt><dd>{money(t.subtotal, inv.currency)}</dd></div>
+          <div><dt>VAT ({inv.vatRate}%)</dt><dd>{money(t.vat, inv.currency)}</dd></div>
+          <div className="inv-due"><dt>Total due</dt><dd>{money(t.total, inv.currency)}</dd></div>
+        </dl>
+      </section>
+
+      {inv.notes && (
+        <section className="inv-notes">
+          <span className="inv-label">Notes</span>
+          <p>{inv.notes}</p>
+        </section>
+      )}
+
+      <footer className="inv-foot">
+        <span>{inv.seller || "Your business name"}{inv.sellerVat && ` · VAT No. ${inv.sellerVat}`}</span>
+        <span>{inv.no}</span>
+      </footer>
+    </div>
+  );
+}
+
+/** Print only the invoice: the print-only copy sits directly under <body>, so nothing else takes up pages. */
+const printInvoice = () => {
+  const root = document.documentElement;
+  const done = () => root.classList.remove("print-invoice");
+  root.classList.add("print-invoice");
+  window.addEventListener("afterprint", done, { once: true });
+  window.print();
+};
+
 export default function InvoiceAgent() {
   const [inv, setInv] = useState<Inv>(blank);
   const [qr, setQr] = useState("");
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const uid = useUid();
   const award = useAward("invoice");
   useEffect(() => { setInv(store.read<Inv>(KEY, blank())); }, []);
@@ -63,35 +150,15 @@ export default function InvoiceAgent() {
         <Field label="Notes"><textarea rows={2} value={inv.notes} onChange={(e) => upd({ notes: e.target.value })} /></Field>
         <div className="st-row">
           <button className="st-btn" onClick={save}>Issue and save</button>
-          <button className="st-btn ghost" onClick={() => window.print()}>Print / PDF</button>
+          <button className="st-btn ghost" onClick={printInvoice}>Print / PDF</button>
           <button className="st-btn ghost" onClick={() => upd({ ...blank(), seller: inv.seller, sellerVat: inv.sellerVat })}>New</button>
         </div>
       </div>
 
       <div className="st-paper-wrap">
-        <div id="cv-paper" className="st-invoice">
-          <header><h3>Tax Invoice <small>فاتورة ضريبية</small></h3><div>{inv.no}<br />{new Date(inv.date).toLocaleDateString("en-GB")}</div></header>
-          <div className="inv-parties">
-            <div><b>Seller</b><br />{inv.seller || "—"}<br />VAT {inv.sellerVat || "—"}</div>
-            <div><b>Client</b><br />{inv.buyer || "—"}<br />{inv.buyerVat && `VAT ${inv.buyerVat}`}</div>
-          </div>
-          <table>
-            <thead><tr><th>Description</th><th>Qty</th><th>Unit</th><th>Total</th></tr></thead>
-            <tbody>{inv.items.map((l, i) => (
-              <tr key={i}><td>{l.description}</td><td>{l.quantity}</td><td>{money(l.unitPrice, inv.currency)}</td><td>{money(l.quantity * l.unitPrice, inv.currency)}</td></tr>
-            ))}</tbody>
-          </table>
-          <div className="inv-tot">
-            <div>{qr && /* eslint-disable-next-line @next/next/no-img-element */ <img src={qr} alt="ZATCA QR" width={120} height={120} />}</div>
-            <dl>
-              <dt>Subtotal</dt><dd>{money(t.subtotal, inv.currency)}</dd>
-              <dt>VAT ({inv.vatRate}%)</dt><dd>{money(t.vat, inv.currency)}</dd>
-              <dt><b>Total</b></dt><dd><b>{money(t.total, inv.currency)}</b></dd>
-            </dl>
-          </div>
-          <p className="inv-notes">{inv.notes}</p>
-        </div>
+        <InvoiceSheet inv={inv} t={t} qr={qr} />
       </div>
+      {mounted && createPortal(<div id="inv-print"><InvoiceSheet inv={inv} t={t} qr={qr} /></div>, document.body)}
     </div>
   );
 }

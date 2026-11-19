@@ -166,3 +166,49 @@ export function sfxTick() {
 
 /** Soft footstep while Bhodbhar walks. */
 export const sfxFoot = () => play([{ f: 150, to: 70, d: 0.07, type: "sine", v: 0.045 }]);
+
+/** Short burst of filtered noise: the raw material for steps, skids and taps. */
+function noiseHit(opts: { d: number; type: BiquadFilterType; f: number; to?: number; q?: number; v: number; t?: number }) {
+  if (muted) return;
+  const a = ac();
+  if (!a || a.state !== "running") return;
+  const len = Math.max(1, Math.floor(a.sampleRate * opts.d));
+  const buf = a.createBuffer(1, len, a.sampleRate);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.2); // sharp attack, fast decay
+  const src = a.createBufferSource();
+  src.buffer = buf;
+  const flt = a.createBiquadFilter();
+  flt.type = opts.type;
+  flt.Q.value = opts.q ?? 0.8;
+  const start = a.currentTime + (opts.t ?? 0);
+  flt.frequency.setValueAtTime(opts.f, start);
+  if (opts.to) flt.frequency.exponentialRampToValueAtTime(opts.to, start + opts.d);
+  const g = a.createGain();
+  g.gain.value = opts.v;
+  src.connect(flt).connect(g).connect(a.destination);
+  src.start(start);
+}
+
+let stepAlt = false;
+/**
+ * One running footstep: a muffled heel thud plus a light shoe scuff.
+ * `near` (0..1) makes it louder and fuller as he runs toward you. Feet alternate a touch in pitch.
+ */
+export function sfxRunStep(near = 0.5) {
+  stepAlt = !stepAlt;
+  const k = 0.35 + 0.65 * Math.max(0, Math.min(1, near));
+  const jit = 0.9 + Math.random() * 0.2;
+  noiseHit({ d: 0.07, type: "lowpass", f: 520 * jit * (stepAlt ? 1 : 0.88), q: 0.7, v: 0.55 * k });
+  noiseHit({ d: 0.035, type: "bandpass", f: 2600 * jit, q: 1.1, v: 0.07 * k, t: 0.006 });
+  play([{ f: (stepAlt ? 105 : 95) * jit, to: 48, d: 0.08, type: "sine", v: 0.09 * k }]);
+}
+
+/** Shoes skidding to a stop. */
+export const sfxSkid = () => noiseHit({ d: 0.26, type: "bandpass", f: 3200, to: 900, q: 1.6, v: 0.22 });
+
+/** The fist bump itself: a small, soft knuckle tap. */
+export function sfxTap() {
+  noiseHit({ d: 0.03, type: "bandpass", f: 1900, q: 1.3, v: 0.5 });
+  play([{ f: 230, to: 120, d: 0.07, type: "sine", v: 0.11 }]);
+}
