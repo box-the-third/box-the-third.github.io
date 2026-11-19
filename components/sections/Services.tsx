@@ -11,6 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import { getSupabase } from "@/lib/supabase";
 import { addToCart } from "@/lib/cart";
+import { requestFistBump } from "@/lib/perks";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { Reveal, RevealText } from "@/components/ui/Reveal";
 import ServiceIcon from "@/components/ui/ServiceIcon";
@@ -80,6 +81,7 @@ export default function Services() {
     if (res.status === "added" || res.status === "exists") {
       setAdded((prev) => new Set(prev).add(id));
     }
+    if (res.status === "added") requestFistBump(services.find((s) => s.tiers.some((t) => t.id === id))?.verb);
     if (res.status === "needs-auth") {
       window.dispatchEvent(new Event("auth:open"));
     }

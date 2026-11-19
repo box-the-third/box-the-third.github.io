@@ -13,6 +13,7 @@ import {
 } from "@/lib/dashboard";
 import { Reveal } from "@/components/ui/Reveal";
 import { formatPrice } from "@/content/services";
+import { BUMP, markBumpUsed, requestFistBump, useBumpActive } from "@/lib/perks";
 import { AnimatePresence, motion } from "framer-motion";
 import StatsCard, {
   BagIcon,
@@ -53,6 +54,13 @@ export default function DashboardPage() {
   const [sent, setSent] = useState<null | "email" | "whatsapp">(null);
   const [tab, setTab] = useState<Tab>("home");
   const touched = useRef(false); // stop clobbering the user's edits on cart refresh
+  const bump = useBumpActive(); // 5% fist-bump discount, unlocked by Temu Bhodbhar
+
+  // Deep link: /dashboard/?tab=request (Temu Bhodbhar's "Finish my request" button).
+  useEffect(() => {
+    const t = new URLSearchParams(window.location.search).get("tab");
+    if (t && TABS.some((x) => x.id === t)) setTab(t as Tab);
+  }, []);
 
   const firstName = profile?.full_name ? profile.full_name.split(" ")[0] : "";
 
@@ -102,7 +110,8 @@ export default function DashboardPage() {
           getProfile(user.id).catch(() => null),
           (async () => {
             try {
-              await resolvePending(user.id);
+              // Plans picked before signing up just landed in the account: time for the fist bump.
+              if ((await resolvePending(user.id)) > 0) requestFistBump();
             } catch {
               /* best-effort */
             }
@@ -141,7 +150,11 @@ export default function DashboardPage() {
   }
 
   function fullMessage() {
-    return (profession.trim() ? `Applying for: ${profession.trim()}\n\n` : "") + message.trim();
+    return (
+      (profession.trim() ? `Applying for: ${profession.trim()}\n\n` : "") +
+      message.trim() +
+      (bump ? `\n\nFist-bump discount: ${BUMP.pct}% off (code ${BUMP.code})` : "")
+    );
   }
 
   async function sendRequest() {
@@ -160,6 +173,7 @@ export default function DashboardPage() {
     fd.append("_subject", `New service request from ${profile?.full_name || user.email}`);
     fd.append("cart", cartLines(cart));
     fd.append("message", fullMessage());
+    if (bump) fd.append("discount", `${BUMP.pct}% fist-bump discount (${BUMP.code})`);
 
     try {
       const res = await fetch(FORMSPREE, {
@@ -169,6 +183,7 @@ export default function DashboardPage() {
       });
       if (!res.ok) throw new Error("send failed");
       await markRequestSent(user.id, fullMessage());
+      markBumpUsed();
       setStatus({ kind: "", msg: "" });
       setSent("email");
       await reloadCart();
@@ -194,6 +209,7 @@ export default function DashboardPage() {
       "noopener"
     );
     markRequestSent(user.id, fullMessage());
+    markBumpUsed();
     setSent("whatsapp");
     reloadCart();
   }
@@ -208,6 +224,9 @@ export default function DashboardPage() {
 
   // Derived numbers for the stat tiles.
   const totalBdt = cart.reduce((n, s) => n + Number(s.packages?.price_bdt || 0), 0);
+  // The discount applies to what's still waiting to be requested.
+  const openBdt = cart.filter((s) => s.status === "submitted").reduce((n, s) => n + Number(s.packages?.price_bdt || 0), 0);
+  const discountBdt = bump ? (openBdt * BUMP.pct) / 100 : 0;
   const awaiting = cart.filter((s) => s.status === "submitted").length;
   const contacted = cart.filter((s) => s.status === "contacted").length;
 
@@ -293,6 +312,12 @@ export default function DashboardPage() {
           ))}
         </ul>
       )}
+      {discountBdt > 0 && (
+        <div className="dash-bump">
+          <span>👊 Fist-bump discount, {BUMP.pct}% off</span>
+          <strong>−{formatPrice(discountBdt, "USD")}</strong>
+        </div>
+      )}
       {cart.length > 0 && tab === "cart" && (
         <button className="btn solid glass-cta" onClick={() => setTab("request")} data-cursor="Next">
           <span>Send request →</span>
@@ -323,6 +348,12 @@ export default function DashboardPage() {
       <div className="dash-card-label">
         <span className="svc-step-n">03</span> Send your request
       </div>
+      {discountBdt > 0 && (
+        <p className="dash-bump-note">
+          👊 Your {BUMP.pct}% fist-bump discount is locked in. Send this request to use it: you&apos;ll
+          save {formatPrice(discountBdt, "USD")}.
+        </p>
+      )}
       <p className="dash-hint">
         Tell Nahiyan what you need and why. He reviews every request personally and replies over
         email or WhatsApp.
@@ -444,8 +475,8 @@ export default function DashboardPage() {
                   />
                   <StatsCard
                     title="Cart total"
-                    value={loadingCart ? "…" : formatPrice(totalBdt, "USD")}
-                    note="USD, before discounts"
+                    value={loadingCart ? "…" : formatPrice(totalBdt - discountBdt, "USD")}
+                    note={discountBdt > 0 ? `USD, ${BUMP.pct}% fist-bump discount applied` : "USD, before discounts"}
                     icon={<CoinIcon />}
                     tone="amber"
                   />

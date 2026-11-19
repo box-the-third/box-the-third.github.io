@@ -46,10 +46,10 @@ export async function removeSelection(id: string): Promise<void> {
   await getSupabase().from("selections").delete().eq("id", id);
 }
 
-/** Move any pre-login "pending" adds into Supabase, skipping duplicates. */
-export async function resolvePending(userId: string): Promise<void> {
+/** Move any pre-login "pending" adds into Supabase, skipping duplicates. Returns how many were added. */
+export async function resolvePending(userId: string): Promise<number> {
   const pending = readPending();
-  if (!pending.length) return;
+  if (!pending.length) return 0;
   const supabase = getSupabase();
   const { data: existing } = await supabase
     .from("selections")
@@ -59,12 +59,17 @@ export async function resolvePending(userId: string): Promise<void> {
   const rows = [...new Set(pending)]
     .filter((pid) => !have.has(pid))
     .map((pid) => ({ user_id: userId, package_id: pid }));
-  if (rows.length) await supabase.from("selections").insert(rows);
+  let added = 0;
+  if (rows.length) {
+    const { error } = await supabase.from("selections").insert(rows);
+    if (!error) added = rows.length;
+  }
   try {
     localStorage.removeItem("yas_pending_cart");
   } catch {
     /* ignore */
   }
+  return added;
 }
 
 /** Mark the user's open cart items as "contacted" and store their note. */

@@ -24,6 +24,14 @@ export type Bhodbhar3DProps = {
   gaze?: number;
   /** Head pitch: -1 looks up, 1 looks down. */
   look?: number;
+  /** Sprint instead of walk: faster cadence, pumping arms, forward lean, airborne bounce. */
+  run?: boolean;
+  /** Hold the right fist out toward the viewer for a fist bump. */
+  bump?: boolean;
+  /** Increment to play the bump impact (fist recoils, body rocks back). */
+  hit?: number;
+  /** While bumping: the fist's position in canvas pixels, so a hit target can sit on it. */
+  onFist?: (x: number, y: number) => void;
   onFail?: () => void;
 };
 
@@ -120,7 +128,11 @@ function buildModel() {
     g.position.set(side * 0.54, 1.3, 0);
     g.add(mesh(new THREE.CapsuleGeometry(0.125, 0.4, 6, 14), navy, 0, -0.3, 0));
     g.add(mesh(new THREE.CylinderGeometry(0.115, 0.115, 0.06, 16), white, 0, -0.56, 0));
-    g.add(mesh(new THREE.SphereGeometry(0.135, 16, 14), skin, 0, -0.68, 0));
+    const hand = mesh(new THREE.SphereGeometry(0.135, 16, 14), skin, 0, -0.68, 0);
+    hand.name = "hand";
+    g.add(hand);
+    // knuckles: a little ridge so the hand reads as a fist when it's pointed at you
+    for (const kx of [-0.06, 0, 0.06]) hand.add(mesh(new THREE.SphereGeometry(0.048, 10, 8), skin, kx, -0.11, 0.05));
     if (side === -1) {
       const band = mesh(new THREE.TorusGeometry(0.128, 0.03, 10, 24), gold, 0, -0.5, 0);
       band.rotation.x = Math.PI / 2;
@@ -210,13 +222,18 @@ function buildModel() {
   head.add(hornL, hornR);
 
   root.add(head);
-  return { root, head, torso, legL, legR, armL, armR, eyes };
+  root.rotation.order = "YXZ"; // lean (x) happens after turning (y), so "forward" is always the travel direction
+  const fist = armL.getObjectByName("hand") as THREE.Object3D; // the character's right hand (viewer's left)
+  return { root, head, torso, legL, legR, armL, armR, eyes, fist };
 }
 
-export default function Bhodbhar3D({ width, height, walking, facing, talking, hang = false, air = false, gaze = 0, look = 0, onFail }: Bhodbhar3DProps) {
+export default function Bhodbhar3D({
+  width, height, walking, facing, talking, hang = false, air = false, gaze = 0, look = 0,
+  run = false, bump = false, hit = 0, onFist, onFail,
+}: Bhodbhar3DProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const propsRef = useRef({ walking, facing, talking, hang, air, gaze, look });
-  propsRef.current = { walking, facing, talking, hang, air, gaze, look };
+  const propsRef = useRef({ walking, facing, talking, hang, air, gaze, look, run, bump, hit, onFist, width, height });
+  propsRef.current = { walking, facing, talking, hang, air, gaze, look, run, bump, hit, onFist, width, height };
   const apiRef = useRef<{ resize: (w: number, h: number) => void } | null>(null);
 
   useEffect(() => {
@@ -275,6 +292,12 @@ export default function Bhodbhar3D({ width, height, walking, facing, talking, ha
     let headPitch = 0;
     let nextBlink = 2.5;
     let blinkT = -1;
+    let runK = 0;
+    let bumpK = 0;
+    let recoil = 0;
+    let lastHit = propsRef.current.hit;
+    let fistTick = 0;
+    const fistV = new THREE.Vector3();
 
     const frame = (now: number) => {
       raf = requestAnimationFrame(frame);
@@ -287,7 +310,7 @@ export default function Bhodbhar3D({ width, height, walking, facing, talking, ha
       const p = propsRef.current;
       // idle ticks at ~30fps to stay light; walking/talking run at full rate
       acc += dt;
-      if (!p.walking && !p.talking && !p.hang && !p.air && acc < 1 / 30) return;
+      if (!p.walking && !p.talking && !p.hang && !p.air && !p.bump && recoil < 0.01 && acc < 1 / 30) return;
       const step = acc;
       acc = 0;
       t += step;
@@ -295,23 +318,38 @@ export default function Bhodbhar3D({ width, height, walking, facing, talking, ha
       amp += ((p.walking ? 1 : 0) - amp) * Math.min(1, step * 9);
       hangK += ((p.hang ? 1 : 0) - hangK) * Math.min(1, step * 10);
       airK += ((p.air ? 1 : 0) - airK) * Math.min(1, step * 12);
+      runK += ((p.run && p.walking ? 1 : 0) - runK) * Math.min(1, step * 8);
+      bumpK += ((p.bump ? 1 : 0) - bumpK) * Math.min(1, step * 11);
+      if (p.hit !== lastHit) {
+        lastHit = p.hit;
+        recoil = 1;
+      }
+      recoil = Math.max(0, recoil - step * 3.2);
+      const kick = Math.sin(Math.min(1, recoil) * Math.PI) * recoil; // quick out-and-back pulse
       const up = Math.max(hangK, airK); // arms overhead
-      phase += step * 10 * (0.3 + amp);
-      const swing = Math.sin(phase) * amp * (1 - up);
-      // legs: walk swing, a slow dangle while hanging, tucked in mid-jump
+      // sprint: faster cadence, wider stride, arms pump hard
+      phase += step * (10 + 7 * runK) * (0.3 + amp);
+      const swing = Math.sin(phase) * amp * (1 - up) * (1 - bumpK);
+      // legs: walk/run swing, a slow dangle while hanging, tucked in mid-jump
       const dangle = Math.sin(t * 1.7) * 0.14 * hangK;
-      m.legL.rotation.x = swing * 0.75 + dangle - 0.55 * airK;
-      m.legR.rotation.x = -swing * 0.75 - dangle * 0.8 - 0.55 * airK;
-      // arms: walk swing, or thrown up and out (the grip)
-      m.armL.rotation.x = -swing * 0.65;
-      m.armR.rotation.x = swing * 0.65;
-      m.armL.rotation.z = -2.75 * up;
-      m.armR.rotation.z = 2.75 * up;
-      m.root.position.y = Math.abs(Math.sin(phase)) * 0.1 * amp;
+      const stride = 0.75 + 0.3 * runK;
+      m.legL.rotation.x = swing * stride + dangle - 0.55 * airK;
+      m.legR.rotation.x = -swing * stride - dangle * 0.8 - 0.55 * airK;
+      // arms: swing (pumping when running), thrown up (grip / cheer), or a fist held out to the viewer
+      const pump = 0.65 + 0.45 * runK;
+      m.armL.rotation.x = -swing * pump * (1 - bumpK) + (-1.3 + kick * 0.45) * bumpK;
+      m.armR.rotation.x = swing * pump;
+      m.armL.rotation.z = -2.75 * up * (1 - bumpK) - 0.32 * bumpK - 0.12 * runK * (1 - bumpK);
+      m.fist.scale.setScalar(1 + 0.45 * bumpK); // a fist held out toward you looks bigger
+      m.armR.rotation.z = 2.75 * up + 0.12 * runK;
+      // bounce (a real flight phase when sprinting) and forward lean
+      m.root.position.y = Math.abs(Math.sin(phase)) * (0.1 + 0.12 * runK) * amp;
+      m.root.position.z = -kick * 0.25;
+      m.root.rotation.x = 0.17 * runK - kick * 0.12 + 0.04 * bumpK;
       m.root.rotation.z = Math.sin(t * 1.3) * 0.05 * hangK;
 
       // turn toward travel direction; slight turn toward viewer's reading side when talking
-      const targetRot = p.walking ? p.facing * 0.95 : p.talking ? 0.12 : 0;
+      const targetRot = p.walking ? p.facing * 0.95 : p.talking && !p.bump ? 0.12 : 0;
       rotY += (targetRot - rotY) * Math.min(1, step * 8);
       m.root.rotation.y = rotY;
 
@@ -320,7 +358,7 @@ export default function Bhodbhar3D({ width, height, walking, facing, talking, ha
       const wander = standing ? Math.sin(t * 0.55) * Math.sin(t * 0.21) * 0.45 : 0;
       const nod = p.talking && !p.walking ? Math.sin(t * 9) * 0.05 : 0;
       headYaw += (p.gaze * 0.8 * hangK + wander - headYaw) * Math.min(1, step * 6);
-      headPitch += (p.look * 0.4 + nod - headPitch) * Math.min(1, step * 6);
+      headPitch += (p.look * 0.4 + nod - kick * 0.18 - headPitch) * Math.min(1, step * 6);
       m.torso.scale.y = 1 + Math.sin(t * 2) * 0.014;
       m.head.position.y = 1.95 + Math.sin(t * 2.2) * 0.018 + (p.talking && !p.walking ? Math.sin(t * 9) * 0.02 : 0);
       m.head.rotation.x = headPitch;
@@ -340,6 +378,13 @@ export default function Bhodbhar3D({ width, height, walking, facing, talking, ha
       }
 
       renderer.render(scene, camera);
+
+      // report where the fist is, so the page can put a tap target on it
+      if (p.onFist && bumpK > 0.6 && (fistTick += step) > 0.08) {
+        fistTick = 0;
+        m.fist.getWorldPosition(fistV).project(camera);
+        p.onFist(((fistV.x + 1) / 2) * p.width, ((1 - fistV.y) / 2) * p.height);
+      }
     };
     raf = requestAnimationFrame(frame);
 
