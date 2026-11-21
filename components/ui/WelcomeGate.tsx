@@ -117,7 +117,7 @@ export default function WelcomeGate() {
           <a href="/login/" className="oauth-btn lc-btn gate-email" data-cursor="Email">
             Create an account with email →
           </a>
-          <button className="login-cta-alt gate-skip" onClick={asGuest} data-cursor="Skip">
+          <button className="oauth-btn lc-btn gate-skip" onClick={asGuest} data-cursor="Skip">
             Continue without email
           </button>
           <p className="login-cta-consent">

@@ -25,7 +25,7 @@ const Check = () => (
 
 /** Premium monochrome sign-in card near the top of the page body. */
 export default function LoginCTA() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const signedIn = !!user;
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -90,7 +90,7 @@ export default function LoginCTA() {
             </div>
 
             <div className="login-cta-actions">
-              {signedIn ? (
+              {loading ? null : signedIn ? (
                 <Magnetic>
                   <a href={DASHBOARD} className="oauth-btn lc-btn" data-cursor="Open">
                     Go to dashboard →

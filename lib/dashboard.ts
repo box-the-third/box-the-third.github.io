@@ -46,8 +46,17 @@ export async function removeSelection(id: string): Promise<void> {
   await getSupabase().from("selections").delete().eq("id", id);
 }
 
-/** Move any pre-login "pending" adds into Supabase, skipping duplicates. Returns how many were added. */
-export async function resolvePending(userId: string): Promise<number> {
+/**
+ * Move any pre-login "pending" adds into Supabase, skipping duplicates. Returns how many were added.
+ * Single-flight: concurrent callers (navbar + dashboard) share one run, so nothing is inserted twice.
+ */
+let resolving: Promise<number> | null = null;
+export function resolvePending(userId: string): Promise<number> {
+  if (!resolving) resolving = doResolvePending(userId).finally(() => (resolving = null));
+  return resolving;
+}
+
+async function doResolvePending(userId: string): Promise<number> {
   const pending = readPending();
   if (!pending.length) return 0;
   const supabase = getSupabase();

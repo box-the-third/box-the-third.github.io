@@ -40,8 +40,10 @@ export const markBumpUsed = () => {
 };
 
 /** Ask Temu Bhodbhar to run over for the fist bump (only if it hasn't happened on this device). */
+let requested = false;
 export function requestFistBump(service?: string) {
-  if (readBump()) return;
+  if (readBump() || requested) return;
+  requested = true;
   window.dispatchEvent(new CustomEvent("pip:fistbump", { detail: { service } }));
 }
 
