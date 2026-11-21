@@ -38,7 +38,7 @@ export default function Footer() {
             <div style={{ marginTop: 12 }}>
               © {year} {site.name}
               <br />
-              Built with Next.js + Three.js · {site.location}
+              {site.location}
             </div>
           </div>
         </div>

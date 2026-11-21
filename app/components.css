@@ -34,15 +34,16 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 2px;
 }
 .nav-links a {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: calc(0.8rem + 2px);
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--ink-dim);
-  padding: 9px 16px;
+  padding: 9px 11px;
   border-radius: 100px;
   transition: color 0.3s var(--ease), background 0.3s var(--ease);
 }
@@ -63,30 +64,22 @@
   color: var(--on-accent) !important;
   border-color: var(--accent);
 }
-/* "Create account" nav button with a left-to-right gradient sweep on hover */
+/* "Create account" nav button: plain white with black text */
 .nav-cta {
-  border: none;
+  border: 1px solid #0b0b0b;
   border-radius: 100px;
   padding: 10px 22px;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: calc(0.8rem + 2px);
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--on-accent);
-  background: linear-gradient(
-    90deg,
-    var(--accent) 0%,
-    var(--accent-2) 50%,
-    var(--accent) 100%
-  );
-  background-size: 220% 100%;
-  background-position: 0% 0%;
-  transition: background-position 0.7s var(--ease), box-shadow 0.4s var(--ease),
-    transform 0.3s var(--ease);
+  white-space: nowrap;
+  color: #0b0b0b;
+  background: #ffffff;
+  transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
 }
 .nav-cta:hover {
-  background-position: 100% 0%;
-  box-shadow: 0 10px 26px -10px rgba(0, 178, 188, 0.65);
+  box-shadow: 0 8px 22px -10px rgba(0, 0, 0, 0.55);
 }
 .nav-cta:active {
   transform: translateY(1px);
@@ -168,24 +161,27 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
   padding: var(--pad);
+  overflow-y: auto;
 }
 .mobile-menu a {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2.4rem, 12vw, 4.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 6.5vw, 2.1rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  padding: 4px 0;
 }
 .mobile-menu a span {
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.9rem;
-  margin-right: 14px;
+  font-size: 0.72rem;
+  margin-right: 12px;
   vertical-align: super;
 }
-@media (max-width: 860px) {
+/* The full nav needs ~1200px at its current size; below that the hamburger menu takes over. */
+@media (max-width: 1199px) {
   .nav-links {
     display: none;
   }
@@ -371,17 +367,30 @@
     column-count: 4;
   }
 }
-.work-card {
-  position: relative;
+.work-cell {
   display: block;
   width: 100%;
   break-inside: avoid;
   margin: 0 0 clamp(16px, 2vw, 26px);
+  will-change: transform, clip-path;
+}
+.work-card {
+  position: relative;
+  display: block;
+  width: 100%;
   border-radius: var(--r);
   overflow: hidden;
   background: var(--bg-3);
   cursor: pointer;
+  transform-style: preserve-3d;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: box-shadow 0.5s var(--ease);
 }
+.work-card:hover { box-shadow: 0 30px 60px -28px rgba(0, 0, 0, 0.7); }
+/* parallax layer: a little taller than the frame so the drift never shows an edge */
+.work-parallax { position: relative; transform-origin: 50% 50%; will-change: transform; }
+.work-card.fixed .work-parallax { position: absolute; inset: 0; }
+.work-glare { position: absolute; inset: 0; z-index: 4; pointer-events: none; mix-blend-mode: soft-light; }
 .work-card.featured {
   outline: 1px solid var(--accent);
   outline-offset: -1px;
@@ -3241,12 +3250,8 @@
   text-align: center;
 }
 .gate-skip {
-  background: none;
-  border: 0;
-  padding: 6px;
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  justify-content: center;
+  text-align: center;
 }
 
 /* ═══════════════════════════════════════════════════════════════

@@ -10,7 +10,7 @@ import {
 } from "@/content/services";
 import { cn } from "@/lib/utils";
 import { getSupabase } from "@/lib/supabase";
-import { addToCart } from "@/lib/cart";
+import { addToCart, readPending } from "@/lib/cart";
 import { requestFistBump } from "@/lib/perks";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { Reveal, RevealText } from "@/components/ui/Reveal";
@@ -48,22 +48,27 @@ export default function Services() {
 
   // Seed the "added" ticks from the visitor's existing cart (if signed in).
   useEffect(() => {
-    if (!session) {
-      setAdded(new Set());
-      return;
-    }
     let alive = true;
-    getSupabase()
-      .from("selections")
-      .select("package_id")
-      .eq("user_id", session.user.id)
-      .then(({ data }) => {
-        if (data && alive) {
-          setAdded(new Set(data.map((r) => r.package_id).filter(Boolean) as string[]));
-        }
-      });
+    const sync = () => {
+      if (!session) {
+        setAdded(new Set(readPending())); // picks saved before signing in
+        return;
+      }
+      getSupabase()
+        .from("selections")
+        .select("package_id")
+        .eq("user_id", session.user.id)
+        .then(({ data }) => {
+          if (data && alive) {
+            setAdded(new Set(data.map((r) => r.package_id).filter(Boolean) as string[]));
+          }
+        });
+    };
+    sync();
+    window.addEventListener("cart:changed", sync);
     return () => {
       alive = false;
+      window.removeEventListener("cart:changed", sync);
     };
   }, [session]);
 
@@ -78,7 +83,7 @@ export default function Services() {
     setBusyId(id);
     const res = await addToCart(id, session);
     setBusyId(null);
-    if (res.status === "added" || res.status === "exists") {
+    if (res.status === "added" || res.status === "exists" || res.status === "needs-auth") {
       setAdded((prev) => new Set(prev).add(id));
     }
     if (res.status === "added") requestFistBump(services.find((s) => s.tiers.some((t) => t.id === id))?.verb);

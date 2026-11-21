@@ -4,9 +4,12 @@ import { useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import Magnetic from "@/components/ui/Magnetic";
 import BookingModal from "@/components/ui/BookingModal";
+import { useAuth } from "@/components/providers/AuthProvider";
 
 export default function Offer() {
   const [booking, setBooking] = useState(false);
+  const { user, loading } = useAuth();
+  const showRegister = !loading && !user; // signed-in visitors never see "Register"
   return (
     <section className="section offer-section" id="offer">
       <div className="container">
@@ -21,13 +24,15 @@ export default function Offer() {
               <p className="offer-line">First 3 classes are completely free.</p>
 
               <div className="offer-cta">
+                {showRegister && (
+                  <Magnetic>
+                    <a href="/login/" className="btn solid" data-cursor="Register">
+                      <span>Register free →</span>
+                    </a>
+                  </Magnetic>
+                )}
                 <Magnetic>
-                  <a href="/login/" className="btn solid" data-cursor="Register">
-                    <span>Register free →</span>
-                  </a>
-                </Magnetic>
-                <Magnetic>
-                  <button type="button" className="btn" data-cursor="Book" onClick={() => setBooking(true)}>
+                  <button type="button" className={showRegister ? "btn" : "btn solid"} data-cursor="Book" onClick={() => setBooking(true)}>
                     <span>Book a session</span>
                   </button>
                 </Magnetic>

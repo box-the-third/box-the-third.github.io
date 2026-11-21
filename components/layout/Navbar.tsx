@@ -10,7 +10,9 @@ import Magnetic from "@/components/ui/Magnetic";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import AuthModal from "@/components/ui/AuthModal";
 import { useAuth } from "@/components/providers/AuthProvider";
-import { cartCount } from "@/lib/cart";
+import { cartCount, readPending } from "@/lib/cart";
+import { resolvePending } from "@/lib/dashboard";
+import { requestFistBump } from "@/lib/perks";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -19,7 +21,7 @@ export default function Navbar() {
   const [authOpen, setAuthOpen] = useState(false);
   const [acctOpen, setAcctOpen] = useState(false);
   const [cart, setCart] = useState(0);
-  const { session, user, signOut } = useAuth();
+  const { session, user, loading, signOut } = useAuth();
 
   // A short, friendly label + initial for the signed-in chip.
   const displayName =
@@ -78,7 +80,20 @@ export default function Navbar() {
   // whenever the session changes (login/logout) and on any cart:changed event.
   useEffect(() => {
     const refresh = () => cartCount(session).then(setCart);
-    refresh();
+    (async () => {
+      // Plans picked before signing in: move them into the account on whatever page they land.
+      if (session && readPending().length) {
+        try {
+          if ((await resolvePending(session.user.id)) > 0) {
+            window.dispatchEvent(new Event("cart:changed"));
+            requestFistBump();
+          }
+        } catch {
+          /* the dashboard retries */
+        }
+      }
+      refresh();
+    })();
     window.addEventListener("cart:changed", refresh);
     return () => window.removeEventListener("cart:changed", refresh);
   }, [session]);
@@ -173,7 +188,7 @@ export default function Navbar() {
                   )}
                 </AnimatePresence>
               </div>
-            ) : (
+            ) : loading ? null : (
               <button
                 className="nav-cta"
                 onClick={() => setAuthOpen(true)}
@@ -266,7 +281,7 @@ export default function Navbar() {
                   Sign out
                 </a>
               </>
-            ) : (
+            ) : loading ? null : (
               <a
                 href={toHref("#account")}
                 onClick={() => {

@@ -9,7 +9,6 @@ const MEMBER_ONLY = [
   'a[href^="/studio"]',
   'a[href^="/dashboard"]',
   ".nav-cart",
-  ".svc-add",
   "#offer .btn",
   '#contact button[type="submit"]',
 ].join(",");

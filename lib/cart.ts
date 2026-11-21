@@ -47,7 +47,7 @@ export async function addToCart(
   if (!session) {
     addPending(packageId);
     window.dispatchEvent(new Event("cart:changed"));
-    return { status: "needs-auth", message: "Create an account to save your cart." };
+    return { status: "needs-auth", message: "Saved! Create an account and it'll be waiting in your cart." };
   }
 
   const supabase = getSupabase();
