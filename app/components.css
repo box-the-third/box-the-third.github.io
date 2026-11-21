@@ -3280,6 +3280,7 @@
 .nav-dd-menu a {
   display: grid; gap: 3px; padding: 11px 13px; border-radius: 11px;
   text-transform: none; letter-spacing: 0;
+  white-space: normal; /* nav labels don't wrap, but course descriptions must */
 }
 .nav-dd-menu a:hover { background: var(--card-hover); }
 .nav-dd-menu a b { font: 600 0.95rem var(--font-body); color: var(--ink); }
